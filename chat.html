@@ -279,10 +279,8 @@
     </div>
 
     <script>
-        // API配置 - 注意：生产环境应该通过后端代理，避免Token暴露
-        const API_URL = 'https://s98st93z8d.coze.site/stream_run';
-        const API_TOKEN = 'eyJhbGciOiJSUzI1NiIsImtpZCI6ImU4MmE0YjNkLWQzNTctNDgwZC05ZDIwLWEyNjk1MThiYzI0MyJ9.eyJpc3MiOiJodHRwczovL2FwaS5jb3plLmNuIiwiYXVkIjpbImhwQlk2S05Fd2FGUnBJYlNHWktlbnBpMGM1Q2xFaHJMIl0sImV4cCI6ODIxMDI2Njg3Njc5OSwiaWF0IjoxNzc2MDExMDE2LCJzdWIiOiJzcGlmZmU6Ly9hcGkuY296ZS5jbi93b3JrbG9hZF9pZGVudGl0eS9pZDo3NjI3ODg1MzM1NjU3MDU0MjM0Iiwic3JjIjoiaW5ib3VuZF9hdXRoX2FjY2Vzc190b2tlbl9pZDo3NjI3OTA5MjMyNTM2MzIyMDgyIn0.fY6UnjX9h09j749TzE65xwGxdA5sfOFapOfh2mEcSnU8Y2FCVkzkN5Cq8PqURH7RPOGJigTnddqfsj5cxTnEyQlsX3y1yXh51Z8i_7kj7i1Osk3A4rjBXN8aKaVTah_XxwmheKKRb00c5z-6Q7Qt_ZIBVba15sBlUMtIlefTmw2SIrR7ziA7cnJeuhQy-COCm1pdBYifMEU7a9hfq7XF4YgZWhKkrjFQMad1F1qCd1HXrmdz_dY62rlWwrf-ePflMyoEAYNp1ACXwkWqrCEmfP1jeqO8xek8uhJy02KKrzL_ftSVrHXJqTe8ZnSGe8t9mARXKlMBNXJ5Vjq4TVnhTw';
-        const PROJECT_ID = '7627880092177301550';
+        // 使用我们自己的API代理
+        const API_URL = '/api/chat';
         
         let sessionId = 'chat_' + Date.now();
         let isLoading = false;
@@ -333,64 +331,32 @@
                 const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${API_TOKEN}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        content: {
-                            query: {
-                                prompt: [{
-                                    type: 'text',
-                                    content: { text: message }
-                                }]
-                            }
-                        },
-                        type: 'query',
-                        session_id: sessionId,
-                        project_id: PROJECT_ID
+                        message: message,
+                        sessionId: sessionId
                     })
                 });
 
                 removeTypingIndicator();
 
                 if (!response.ok) {
-                    throw new Error('API请求失败: ' + response.status);
+                    throw new Error('请求失败');
                 }
 
-                // 读取流式响应
-                const reader = response.body.getReader();
-                const decoder = new TextDecoder();
-                let result = '';
+                const data = await response.json();
 
-                while (true) {
-                    const { done, value } = await reader.read();
-                    if (done) break;
-                    
-                    const chunk = decoder.decode(value, { stream: true });
-                    const lines = chunk.split('\n');
-                    
-                    for (const line of lines) {
-                        if (line.startsWith('data:')) {
-                            try {
-                                const data = JSON.parse(line.slice(5));
-                                if (data.content) {
-                                    result = data.content;
-                                }
-                            } catch (e) {}
-                        }
-                    }
-                }
-
-                if (result) {
-                    addMessage(result, false);
+                if (data.success && data.content) {
+                    addMessage(data.content, false);
                 } else {
-                    addMessage('嘎...网络有点问题，稍后再试试？', false);
+                    addMessage('嘎...小鸦好像走神了，再试一次？', false);
                 }
 
             } catch (error) {
                 removeTypingIndicator();
-                console.error('API调用错误:', error);
-                addMessage('嘎...出错了。可能是跨域问题，需要后端代理才能正常使用。', false);
+                console.error('错误:', error);
+                addMessage('嘎...网络有点问题，稍后再试试？', false);
             } finally {
                 isLoading = false;
                 document.getElementById('sendBtn').disabled = false;
