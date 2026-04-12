@@ -1,10 +1,8 @@
 export default async function handler(req, res) {
-    // 设置CORS头
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    // 处理预检请求
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
     }
@@ -45,10 +43,11 @@ export default async function handler(req, res) {
             return res.status(response.status).json({ error: 'API请求失败' });
         }
 
-        // 读取流式响应
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let result = '';
+        let tokenCost = null;
+        let errorMsg = null;
 
         while (true) {
             const { done, value } = await reader.read();
@@ -61,17 +60,34 @@ export default async function handler(req, res) {
                 if (line.startsWith('data:')) {
                     try {
                         const data = JSON.parse(line.slice(5));
-                        if (data.content) {
-                            result = data.content;
+                        
+                        // 拼接 answer 增量内容
+                        if (data.type === 'answer' && data.content?.answer) {
+                            result += data.content.answer;
+                        }
+                        
+                        // 获取 message_end 的 token 统计
+                        if (data.type === 'message_end' && data.content?.message_end) {
+                            tokenCost = data.content.message_end.token_cost;
+                        }
+                        
+                        // 处理错误
+                        if (data.type === 'error' && data.content?.error) {
+                            errorMsg = data.content.error.error_msg;
                         }
                     } catch (e) {}
                 }
             }
         }
 
+        if (errorMsg) {
+            return res.status(500).json({ error: errorMsg });
+        }
+
         return res.status(200).json({ 
             success: true, 
-            content: result || '嘎...小鸦暂时没想好说什么'
+            content: result || '嘎...小鸦暂时没想好说什么',
+            tokenCost: tokenCost
         });
 
     } catch (error) {
