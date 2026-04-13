@@ -124,22 +124,52 @@
         }
 
         .message-content {
-            max-width: 70%;
-            padding: 12px 16px;
-            border-radius: 18px;
-            font-size: 15px;
-            line-height: 1.5;
+            position: relative;
         }
+
+        .message-time {
+            font-size: 11px;
+            color: #5a6a8a;
+            margin-top: 4px;
+            text-align: right;
+        }
+
+        .message.user .message-time {
+            text-align: left;
+        }
+
 
         .message.bot .message-content {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
         }
 
-        .message.user .message-content {
-            background: linear-gradient(135deg, #4a4a4a, #333);
-            border: 1px solid #555;
+        .message-time {
+            font-size: 11px;
+            color: #5a6a8a;
+            margin-top: 4px;
+            text-align: right;
         }
+
+        .message.user .message-time {
+            text-align: left;
+        }
+
+
+        .message.user .message-content {
+            position: relative;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #5a6a8a;
+            margin-top: 4px;
+            text-align: right;
+        }
+
+        .message.user .message-time {
+            text-align: left;
+        }
+
 
         .typing-indicator {
             display: flex;
@@ -296,9 +326,11 @@
             const messagesDiv = document.getElementById('chatMessages');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
             messageDiv.innerHTML = `
                 <div class="message-avatar">${isUser ? '👤' : '🦅'}</div>
-                <div class="message-content">${content}</div>
+                <div class="message-content">${content}<div class="message-time">${timeStr}</div></div>
             `;
             messagesDiv.appendChild(messageDiv);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
