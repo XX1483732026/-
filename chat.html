@@ -242,7 +242,9 @@
         .chat-input:focus {
             border-color: #888;
             background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(136, 136, 136, 0.1);
         }
+
 
         .chat-input::placeholder {
             color: #8892b0;
@@ -302,6 +304,19 @@
             background: rgba(255, 255, 255, 0.15);
             color: #fff;
         }
+        @media (max-width: 480px) {
+            .chat-input {
+                font-size: 16px; /* 防止iOS自动缩放 */
+            }
+            .quick-btn {
+                font-size: 12px;
+                padding: 8px 14px;
+            }
+            .message-content {
+                max-width: 80%;
+            }
+        }
+
     </style>
 </head>
 <body>
