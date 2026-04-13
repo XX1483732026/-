@@ -962,6 +962,7 @@
                 currentResult = resultPool[resultIndex];
                 
                 console.log('选中结果：', currentResult);
+                // 保存测试结果到localStorage供聊天页面使用                localStorage.setItem('xingxingya_test_result', JSON.stringify({                    type: currentResult.type,                    desc: currentResult.desc,                    advice: currentResult.advice,                    score: totalScore,                    zone: zoneText                }));
 
                 // 填充结果页面
                 document.getElementById('resultEmoji').innerHTML = '<img src="' + currentResult.image + '" alt="' + currentResult.type + '" style="max-width: 200px; border-radius: 20px;">';
@@ -1074,6 +1075,7 @@
         copyTextBtn.onclick = copyText;
         downloadImgBtn.onclick = downloadImage;
         retryBtn.onclick = retryQuiz;
+        
         confirmDownloadBtn.onclick = confirmDownload;
         closePreviewBtn.onclick = closePreview;
 
