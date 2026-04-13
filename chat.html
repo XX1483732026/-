@@ -231,15 +231,22 @@
         }
 
         .quick-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            padding: 8px 16px;
-            color: #8892b0;
+            background: linear-gradient(135deg, rgba(74, 74, 74, 0.4), rgba(45, 45, 45, 0.4));
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 10px 18px;
+            color: #a8b2d1;
             font-size: 13px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
+
+        .quick-btn:hover {
+            background: linear-gradient(135deg, rgba(74, 74, 74, 0.6), rgba(45, 45, 45, 0.6));
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
 
         .quick-btn:hover {
             background: rgba(255, 255, 255, 0.15);
@@ -267,9 +274,9 @@
 
         <div class="chat-input-area">
             <div class="quick-actions">
-                <button class="quick-btn" onclick="sendQuickMessage('我最近心情不好')">我最近心情不好</button>
-                <button class="quick-btn" onclick="sendQuickMessage('我想做测试')">我想做测试</button>
-                <button class="quick-btn" onclick="sendQuickMessage('我很难受')">我很难受</button>
+                <button class="quick-btn" onclick="sendQuickMessage('今天有点emo')">今天有点emo</button>
+                <button class="quick-btn" onclick="sendQuickMessage('去做个测试？')">去做个测试？</button>
+                <button class="quick-btn" onclick="sendQuickMessage('心里堵得慌')">心里堵得慌</button>
             </div>
             <div class="input-wrapper">
                 <input type="text" class="chat-input" id="chatInput" placeholder="和小鸦聊聊..." onkeypress="handleKeyPress(event)">
