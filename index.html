@@ -84,6 +84,34 @@
             border-color: #888;
         }
 
+        .chat-entry-btn {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 32px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #ccd6f6;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 16px;
+        }
+
+        .chat-entry-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(100, 100, 100, 0.3);
+            border-color: #888;
+        }
+
         .features {
             margin-top: 50px;
             display: flex;
@@ -597,6 +625,7 @@
             <h1 class="main-title">醒醒鸦</h1>
             <p class="subtitle">嘎 —— 别装了，测测你现在的真实状态</p>
             <button class="start-btn" id="startBtn">开始测试</button>
+            <a href="chat.html" class="chat-entry-btn">和小鸦聊天 💬</a>
             <div class="features">
                 <div class="feature">
                     <div class="feature-icon">⚡</div>
