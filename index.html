@@ -349,6 +349,21 @@
             color: #8892b0;
         }
 
+        .page-transition {
+            animation: pageSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes pageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         .quiz-page {
             display: none;
             animation: fadeIn 0.5s ease;
