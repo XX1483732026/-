@@ -41,7 +41,26 @@
             font-size: 64px;
             margin-bottom: 16px;
             animation: crowNod 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
         }
+
+        .logo-brand {
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-brand::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            border-radius: 2px;
+        }
+
 
         @keyframes crowNod {
             0%, 100% { transform: rotate(0deg); }
