@@ -37,6 +37,42 @@
             animation: fadeIn 0.8s ease;
         }
 
+        .chat-bubble {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 12px;
+            text-decoration: none;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            animation: bubbleBounce 2s ease-in-out infinite;
+        }
+
+        .chat-bubble:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid rgba(255, 255, 255, 0.95);
+        }
+
+        @keyframes bubbleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
         .logo {
             width: 120px;
             height: 120px;
@@ -606,11 +642,14 @@
     <div class="container">
         <!-- 开始页面 -->
         <div class="start-page" id="startPage">
+            <a href="chat.html" class="chat-bubble">
+                <span>嘎~ 来和我聊聊吧 💬</span>
+            </a>
             <div class="logo"><img src="mengya.png" alt="小鸦" class="logo-img"></div>
             <h1 class="main-title">醒醒鸦</h1>
             <p class="subtitle">嘎 —— 别装了，测测你现在的真实状态</p>
             <button class="start-btn" id="startBtn">开始测试</button>
-            <a href="chat.html" class="chat-link">💬 找小鸦聊聊</a>
+            
             <div class="features">
                 <div class="feature">
                     <div class="feature-icon">⚡</div>
