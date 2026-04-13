@@ -1272,6 +1272,17 @@
                 document.getElementById('imgAdvice').innerHTML = currentResult.advice;
                 
                 console.log('结果页面填充完成');
+                
+                // 存储测试结果到 localStorage
+                var testResult = {
+                    type: currentResult.type,
+                    emoji: currentResult.emoji,
+                    score: totalScore,
+                    zone: zoneText,
+                    timestamp: Date.now()
+                };
+                localStorage.setItem("xingxingya_test_result", JSON.stringify(testResult));
+                console.log("测试结果已存储:", testResult);
             } catch (error) {
                 console.error('显示结果时出错：', error);
                 alert('显示结果时出错：' + error.message);

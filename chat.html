@@ -357,7 +357,8 @@
         const API_URL = '/api/chat';
         
         let sessionId = 'chat_' + Date.now();
-        let isLoading = false;
+        let testResult = null; // 存储测试结果
+        let hasSentContext = false; // 是否已发送上下文
 
         function addMessage(content, isUser) {
             const messagesDiv = document.getElementById('chatMessages');
@@ -409,7 +410,20 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
+                    let requestBody = {
+                        message: message,
+                        sessionId: sessionId
+                    };
+
+                    // 首次消息携带测试结果作为上下文
+                    if (testResult && !hasSentContext) {
+                        requestBody.testResult = testResult;
+                        requestBody.hasContext = true;
+                        hasSentContext = true;
+                        console.log("首次消息携带测试结果:", testResult);
+                    }
+
+                    body: JSON.stringify(requestBody
                         message: message,
                         sessionId: sessionId
                     })

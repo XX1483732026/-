@@ -16,7 +16,39 @@ export default async function handler(req, res) {
     const PROJECT_ID = '7627880092177301550';
 
     try {
-        const { message, sessionId } = req.body;
+        const { message, sessionId, testResult, hasContext } = req.body;
+
+        // 构建请求体
+        let requestBody = {
+            content: {
+                query: {
+                    prompt: [{
+                        type: 'text',
+                        content: { text: message }
+                    }]
+                }
+            },
+            type: 'query',
+            session_id: sessionId || 'chat_' + Date.now(),
+            project_id: PROJECT_ID
+        };
+
+        // 如果有测试结果，添加到上下文
+        if (testResult && hasContext) {
+            const contextMessage = `【用户刚完成了精神状态测试】
+测试结果：${testResult.emoji} ${testResult.type}
+精神状态指数：${testResult.score} / 60
+所属区域：${testResult.zone}
+
+请在聊天时根据这个测试结果，给予用户更针对性的心理支持和建议。用户可能需要被理解和陪伴。`;
+
+            // 添加到 additional_messages
+            requestBody.content.query.additional_messages = [{
+                role: 'user',
+                content: contextMessage,
+                content_type: 'text'
+            }];
+        }
 
         const response = await fetch(API_URL, {
             method: 'POST',
@@ -24,19 +56,7 @@ export default async function handler(req, res) {
                 'Authorization': `Bearer ${API_TOKEN}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                content: {
-                    query: {
-                        prompt: [{
-                            type: 'text',
-                            content: { text: message }
-                        }]
-                    }
-                },
-                type: 'query',
-                session_id: sessionId || 'chat_' + Date.now(),
-                project_id: PROJECT_ID
-            })
+            body: JSON.stringify(requestBody)
         });
 
         if (!response.ok) {
