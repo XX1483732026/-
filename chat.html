@@ -360,6 +360,14 @@
         let testResult = null; // 存储测试结果
         let hasSentContext = false; // 是否已发送上下文
 
+        // 读取测试结果
+        var storedResult = localStorage.getItem("xingxingya_test_result");
+        if (storedResult) {
+            testResult = JSON.parse(storedResult);
+            console.log("读取到测试结果:", testResult);
+        }
+        console.log("醒醒鸦聊天已加载完成");
+
         function addMessage(content, isUser) {
             const messagesDiv = document.getElementById('chatMessages');
             const messageDiv = document.createElement('div');
@@ -405,28 +413,25 @@
             addTypingIndicator();
 
             try {
+                let requestBody = {
+                    message: message,
+                    sessionId: sessionId
+                };
+
+                // 首次消息携带测试结果作为上下文
+                if (testResult && !hasSentContext) {
+                    requestBody.testResult = testResult;
+                    requestBody.hasContext = true;
+                    hasSentContext = true;
+                    console.log("首次消息携带测试结果:", testResult);
+                }
+
                 const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    let requestBody = {
-                        message: message,
-                        sessionId: sessionId
-                    };
-
-                    // 首次消息携带测试结果作为上下文
-                    if (testResult && !hasSentContext) {
-                        requestBody.testResult = testResult;
-                        requestBody.hasContext = true;
-                        hasSentContext = true;
-                        console.log("首次消息携带测试结果:", testResult);
-                    }
-
-                    body: JSON.stringify(requestBody
-                        message: message,
-                        sessionId: sessionId
-                    })
+                    body: JSON.stringify(requestBody)
                 });
 
                 removeTypingIndicator();
@@ -469,12 +474,12 @@
             sessionId = "chat_" + Date.now();
         }
 
-
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
                 sendMessage();
             }
         }
+    
     </script>
 </body>
 </html>
