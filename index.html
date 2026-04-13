@@ -1032,6 +1032,16 @@
             { text: "如果要对现在的自己说一句话，你会说？", options: [{ text: "继续加油，你挺棒的！💪", score: 3 }, { text: "还可以再努力一点点 📈", score: 2 }, { text: "醒醒啊！！！🚨", score: 1 }] }
         ];
 
+        // 随机打乱题目顺序
+        function shuffleQuestions() {
+            for (var i = questions.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = questions[i];
+                questions[i] = questions[j];
+                questions[j] = temp;
+            }
+        }
+
         // 乌鸦主题人格结果
         var results = {
             awake: [
@@ -1118,6 +1128,16 @@
         var currentQuestion = 0;
         var totalScore = 0;
         var answers = [];
+
+        // 随机打乱题目顺序
+        function shuffleQuestions() {
+            for (var i = questions.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = questions[i];
+                questions[i] = questions[j];
+                questions[j] = temp;
+            }
+        }
         var currentResult = null;
         var generatedImageBlob = null;
         var isTransitioning = false; // 防止重复点击
@@ -1144,17 +1164,38 @@
 
         // ========== 核心函数 ==========
         function startQuiz() {
+            shuffleQuestions(); // 随机打乱题目
             startPage.classList.add('hidden');
             quizPage.style.display = 'block';
             currentQuestion = 0;
             totalScore = 0;
             answers = [];
+
+        // 随机打乱题目顺序
+        function shuffleQuestions() {
+            for (var i = questions.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = questions[i];
+                questions[i] = questions[j];
+                questions[j] = temp;
+            }
+        }
             isTransitioning = false;
             showQuestion();
         }
 
         function showQuestion() {
             var question = questions[currentQuestion];
+
+        // 随机打乱题目顺序
+        function shuffleQuestions() {
+            for (var i = questions.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = questions[i];
+                questions[i] = questions[j];
+                questions[j] = temp;
+            }
+        }
             questionCounter.textContent = '第 ' + (currentQuestion + 1) + ' 题 / 共 ' + questions.length + ' 题';
             progressFill.style.width = ((currentQuestion) / questions.length * 100) + '%';
             questionText.textContent = question.text;
@@ -1164,6 +1205,16 @@
             for (var i = 0; i < question.options.length; i++) {
                 (function(index) {
                     var option = question.options[index];
+
+        // 随机打乱题目顺序
+        function shuffleQuestions() {
+            for (var i = questions.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = questions[i];
+                questions[i] = questions[j];
+                questions[j] = temp;
+            }
+        }
                     var optionEl = document.createElement('div');
                     optionEl.className = 'option';
                     if (answers[currentQuestion] !== undefined && answers[currentQuestion].answer === index) {
@@ -1275,6 +1326,16 @@
                 // 随机选择一个结果
                 var resultIndex = Math.floor(Math.random() * resultPool.length);
                 currentResult = resultPool[resultIndex];
+
+        // 随机打乱题目顺序
+        function shuffleQuestions() {
+            for (var i = questions.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = questions[i];
+                questions[i] = questions[j];
+                questions[j] = temp;
+            }
+        }
                 
                 console.log('选中结果：', currentResult);
 
@@ -1388,6 +1449,16 @@
             currentQuestion = 0;
             totalScore = 0;
             answers = [];
+
+        // 随机打乱题目顺序
+        function shuffleQuestions() {
+            for (var i = questions.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = questions[i];
+                questions[i] = questions[j];
+                questions[j] = temp;
+            }
+        }
             currentResult = null;
             generatedImageBlob = null;
             isTransitioning = false;
