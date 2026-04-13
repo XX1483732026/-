@@ -426,13 +426,13 @@
                 if (data.success && data.content) {
                     addMessage(data.content, false);
                 } else {
-                    addMessage('嘎...小鸦好像走神了，再试一次？', false);
+                    addMessage('❌ 小鸦走神了，再试一次？', false);
                 }
 
             } catch (error) {
                 removeTypingIndicator();
                 console.error('错误:', error);
-                addMessage('嘎...网络有点问题，稍后再试试？', false);
+                addMessage('❌ 网络开小差了，换个姿势再试？', false);
             } finally {
                 isLoading = false;
                 document.getElementById('sendBtn').disabled = false;
