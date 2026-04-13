@@ -359,6 +359,7 @@
         let sessionId = 'chat_' + Date.now();
         let testResult = null; // 存储测试结果
         let hasSentContext = false; // 是否已发送上下文
+        let isLoading = false; // 发送状态
 
         // 读取测试结果
         var storedResult = localStorage.getItem("xingxingya_test_result");
@@ -472,6 +473,7 @@
                 </div>
             `;
             sessionId = "chat_" + Date.now();
+            document.getElementById("chatInput").value = "";
         }
 
         function handleKeyPress(event) {
