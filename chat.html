@@ -52,6 +52,26 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
+        .clear-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #8892b0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .clear-btn:hover {
+            background: rgba(255, 100, 100, 0.2);
+            color: #ff6b6b;
+        }
+
         .bot-avatar {
             width: 44px;
             height: 44px;
@@ -287,6 +307,8 @@
 <body>
     <div class="chat-header">
         <button class="back-btn" onclick="window.location.href='/'">←</button>
+        <div style="flex: 1;"></div>
+        <button class="clear-btn" onclick="clearChat()" title="清空对话">🗑️</button>
         <div class="bot-avatar">🦅</div>
         <div class="bot-info">
             <h1>小鸦</h1>
@@ -406,6 +428,18 @@
             document.getElementById('chatInput').value = message;
             sendMessage();
         }
+
+        function clearChat() {
+            const messagesDiv = document.getElementById("chatMessages");
+            messagesDiv.innerHTML = `
+                <div class="message bot">
+                    <div class="message-avatar">🦅</div>
+                    <div class="message-content">嘎——对话清空了。有啥想聊的继续说。<div class="message-time">` + new Date().getHours().toString().padStart(2, "0") + ":" + new Date().getMinutes().toString().padStart(2, "0") + `</div></div>
+                </div>
+            `;
+            sessionId = "chat_" + Date.now();
+        }
+
 
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
