@@ -13,7 +13,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #2d2d44 100%);
@@ -21,7 +20,6 @@
             color: #fff;
             overflow-x: hidden;
         }
-
         .container {
             max-width: 480px;
             margin: 0 auto;
@@ -31,18 +29,15 @@
             flex-direction: column;
             justify-content: center;
         }
-
         .start-page {
             text-align: center;
             animation: fadeIn 0.8s ease;
         }
-
         .chat-bubble {            position: absolute;            top: -45px;            right: -70px;            background: rgba(255, 255, 255, 0.95);            color: #333;            padding: 10px 16px;            border-radius: 16px;            font-size: 13px;            text-decoration: none;            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);            transition: all 0.3s ease;            white-space: nowrap;            z-index: 10;        }        .chat-bubble:hover {            transform: scale(1.05);            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);        }        .chat-bubble::after {            content: '';            position: absolute;            bottom: -6px;            left: 15px;            border-left: 6px solid transparent;            border-right: 6px solid transparent;            border-top: 8px solid rgba(255, 255, 255, 0.95);        }
         @keyframes bubbleBounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-5px); }
         }
-
         .logo {
             width: 120px;
             height: 120px;
@@ -50,19 +45,16 @@
             animation: crowNod 3s ease-in-out infinite;
             position: relative;
         }
-
         .logo-img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
-
         @keyframes crowNod {
             0%, 100% { transform: rotate(0deg); }
             25% { transform: rotate(-5deg); }
             75% { transform: rotate(5deg); }
         }
-
         .main-title {
             font-size: 42px;
             font-weight: 700;
@@ -72,13 +64,11 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .subtitle {
             font-size: 16px;
             color: #8892b0;
             margin-bottom: 40px;
         }
-
         .start-btn {
             background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
             border: 2px solid #666;
@@ -91,10 +81,8 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
-
         .start-btn:hover {
         }
-
         .chat-link {
             display: inline-block;
             margin-top: 16px;
@@ -106,7 +94,6 @@
             border-radius: 25px;
             transition: all 0.3s ease;
         }
-
         .chat-link:hover {
             color: #fff;
             border-color: #888;
@@ -115,7 +102,6 @@
             box-shadow: 0 6px 20px rgba(100, 100, 100, 0.3);
             border-color: #888;
         }
-
         .result-chat {
             display: block;
             margin-top: 20px;
@@ -125,33 +111,27 @@
             background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
             border: 1px solid #555;
         }
-
         .features {
             margin-top: 50px;
             display: flex;
             justify-content: center;
             gap: 30px;
         }
-
         .feature {
             text-align: center;
         }
-
         .feature-icon {
             font-size: 24px;
             margin-bottom: 8px;
         }
-
         .feature-text {
             font-size: 12px;
             color: #8892b0;
         }
-
         .quiz-page {
             display: none;
             animation: fadeIn 0.5s ease;
         }
-
         .progress-bar {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
@@ -159,21 +139,18 @@
             margin-bottom: 30px;
             overflow: hidden;
         }
-
         .progress-fill {
             background: linear-gradient(90deg, #666, #999, #ccc);
             height: 100%;
             border-radius: 10px;
             transition: width 0.3s ease;
         }
-
         .question-counter {
             text-align: center;
             font-size: 14px;
             color: #8892b0;
             margin-bottom: 20px;
         }
-
         .question-card {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
@@ -181,7 +158,6 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         .question-text {
             font-size: 18px;
             font-weight: 500;
@@ -189,13 +165,11 @@
             margin-bottom: 30px;
             text-align: center;
         }
-
         .options {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
-
         .option {
             background: rgba(255, 255, 255, 0.08);
             border: 2px solid rgba(255, 255, 255, 0.1);
@@ -206,25 +180,21 @@
             font-size: 15px;
             text-align: center;
         }
-
         .option:hover {
             background: rgba(100, 100, 100, 0.3);
             border-color: #888;
             transform: translateX(5px);
         }
-
         .option.selected {
             background: linear-gradient(135deg, rgba(100, 100, 100, 0.4), rgba(150, 150, 150, 0.3));
             border-color: #aaa;
         }
-
         .nav-buttons {
             display: flex;
             justify-content: space-between;
             margin-top: 24px;
             gap: 12px;
         }
-
         .nav-btn {
             flex: 1;
             padding: 12px 20px;
@@ -234,40 +204,33 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .nav-btn.prev {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: #8892b0;
         }
-
         .nav-btn.prev:hover:not(:disabled) {
             background: rgba(255, 255, 255, 0.15);
             color: #fff;
         }
-
         .nav-btn.prev:disabled {
             opacity: 0.3;
             cursor: not-allowed;
         }
-
         .nav-btn.submit {
             background: linear-gradient(135deg, #555, #333);
             border: 2px solid #666;
             color: #fff;
         }
-
         .nav-btn.submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(100, 100, 100, 0.3);
         }
-
         .result-page {
             display: none;
             text-align: center;
             animation: fadeIn 0.8s ease;
         }
-
         .result-card {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 24px;
@@ -276,18 +239,15 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             margin-bottom: 20px;
         }
-
         .result-emoji {
             font-size: 72px;
             margin-bottom: 16px;
             animation: crowBounce 2s ease-in-out infinite;
         }
-
         @keyframes crowBounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
         }
-
         .result-type {
             font-size: 28px;
             font-weight: 700;
@@ -298,72 +258,60 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
-        /* 备用：如果渐变文字不支持，显示白色 */
         @supports not (-webkit-background-clip: text) {
             .result-type {
                 -webkit-text-fill-color: #fff;
                 color: #fff;
             }
         }
-
         .result-desc {
             font-size: 15px;
             line-height: 1.8;
             color: #ccd6f6;
             margin-bottom: 24px;
         }
-
         .score-section {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 20px;
             margin-bottom: 20px;
         }
-
         .score-label {
             font-size: 12px;
             color: #8892b0;
             margin-bottom: 8px;
         }
-
         .score-value {
             font-size: 24px;
             font-weight: 700;
             color: #fff;
         }
-
         .score-zone {
             font-size: 14px;
             color: #8892b0;
             margin-top: 4px;
         }
-
         .advice-section {
             background: rgba(100, 100, 100, 0.15);
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 20px;
         }
-
         .advice-title {
             font-size: 14px;
             font-weight: 600;
             color: #bbb;
             margin-bottom: 8px;
         }
-
         .advice-text {
             font-size: 14px;
             color: #ccd6f6;
             line-height: 1.6;
         }
-
         .action-buttons {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
-
         .share-btn {
             background: linear-gradient(135deg, #555, #333);
             border: 2px solid #666;
@@ -375,12 +323,10 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .share-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(100, 100, 100, 0.3);
         }
-
         .share-options {
             display: none;
             flex-direction: column;
@@ -388,11 +334,9 @@
             margin-top: 12px;
             animation: slideUp 0.3s ease;
         }
-
         .share-options.show {
             display: flex;
         }
-
         .share-option-btn {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -403,12 +347,10 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .share-option-btn:hover {
             background: rgba(255, 255, 255, 0.15);
             border-color: rgba(255, 255, 255, 0.3);
         }
-
         .retry-btn {
             background: transparent;
             border: 2px solid rgba(255, 255, 255, 0.2);
@@ -419,18 +361,15 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .retry-btn:hover {
             border-color: rgba(255, 255, 255, 0.4);
             color: #fff;
         }
-
         .footer-tip {
             margin-top: 30px;
             font-size: 12px;
             color: #5a6a8a;
         }
-
         .image-preview-overlay {
             display: none;
             position: fixed;
@@ -445,11 +384,9 @@
             flex-direction: column;
             padding: 20px;
         }
-
         .image-preview-overlay.show {
             display: flex;
         }
-
         .image-preview-container {
             max-width: 400px;
             width: 100%;
@@ -457,12 +394,10 @@
             border-radius: 16px;
             overflow: hidden;
         }
-
         .image-preview-container img {
             width: 100%;
             display: block;
         }
-
         .image-preview-actions {
             display: flex;
             gap: 12px;
@@ -470,7 +405,6 @@
             width: 100%;
             max-width: 400px;
         }
-
         .image-preview-actions button {
             flex: 1;
             padding: 12px;
@@ -480,19 +414,16 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .download-btn {
             background: linear-gradient(135deg, #555, #333);
             border: 2px solid #666;
             color: #fff;
         }
-
         .close-preview-btn {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: #8892b0;
         }
-
         .result-image-container {
             position: fixed;
             left: -9999px;
@@ -504,13 +435,15 @@
             color: #fff;
             text-align: center;
         }
-
         .result-image-container .img-emoji {
             font-size: 80px;
             margin-bottom: 16px;
         }
-
-        .result-image-container .img-type {
+                .result-image-container .img-type {
+            background: linear-gradient(90deg, #8b8b8b, #d4d4d4, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-size: 32px;
             font-weight: 700;
             margin-bottom: 20px;
@@ -519,7 +452,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .result-image-container .img-desc {
             font-size: 14px;
             line-height: 1.8;
@@ -527,52 +459,44 @@
             margin-bottom: 24px;
             padding: 0 10px;
         }
-
         .result-image-container .score-box {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 16px;
         }
-
         .result-image-container .score-num {
             font-size: 28px;
             font-weight: 700;
             color: #bbb;
         }
-
         .result-image-container .score-zone-text {
             font-size: 14px;
             color: #8892b0;
             margin-top: 4px;
         }
-
         .result-image-container .advice-box {
             background: rgba(100, 100, 100, 0.15);
             border-radius: 12px;
             padding: 14px;
             margin-bottom: 24px;
         }
-
         .result-image-container .advice-title-text {
             font-size: 13px;
             font-weight: 600;
             color: #bbb;
             margin-bottom: 6px;
         }
-
         .result-image-container .advice-content {
             font-size: 13px;
             color: #ccd6f6;
         }
-
         .result-image-container .img-footer {
             font-size: 12px;
             color: #5a6a8a;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 16px;
         }
-
         .result-image-container .logo-text {
             font-size: 18px;
             font-weight: 700;
@@ -581,7 +505,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -592,7 +515,6 @@
                 transform: translateY(0);
             }
         }
-
         @keyframes slideUp {
             from {
                 opacity: 0;
@@ -603,7 +525,6 @@
                 transform: translateY(0);
             }
         }
-
         .hidden {
             display: none !important;
         }
@@ -611,7 +532,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- 开始页面 -->
         <div class="start-page" id="startPage">
             <div class="logo">
                 <img src="mengya.png" alt="小鸦" class="logo-img" onclick="location.href='chat.html'" style="cursor: pointer;">
@@ -620,7 +540,6 @@
             <h1 class="main-title">醒醒鸦</h1>
             <p class="subtitle">嘎 —— 别装了，测测你现在的真实状态</p>
             <button class="start-btn" id="startBtn">开始测试</button>
-            
             <div class="features">
                 <div class="feature">
                     <div class="feature-icon">⚡</div>
@@ -636,8 +555,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- 答题页面 -->
         <div class="quiz-page" id="quizPage">
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
@@ -651,8 +568,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- 结果页面 -->
         <div class="result-page" id="resultPage">
             <div class="result-card">
                 <div class="result-emoji" id="resultEmoji"></div>
@@ -680,8 +595,6 @@
             <div class="footer-tip">关注「醒醒鸦」公众号 · 嘎嘎陪你每一天</div>
         </div>
     </div>
-
-    <!-- 图片预览弹窗 -->
     <div class="image-preview-overlay" id="imagePreviewOverlay">
         <div class="image-preview-container" id="imagePreviewContainer"></div>
         <div class="image-preview-actions">
@@ -689,8 +602,6 @@
             <button class="close-preview-btn" id="closePreviewBtn">关闭</button>
         </div>
     </div>
-
-    <!-- 用于生成图片的隐藏容器 -->
     <div class="result-image-container" id="resultImageContainer">
         <div class="img-emoji" id="imgEmoji"></div>
         <div class="img-type" id="imgType"></div>
@@ -708,10 +619,7 @@
             <div style="margin-top: 6px;">xingxingya.com</div>
         </div>
     </div>
-
-    <!-- html2canvas 库 -->
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    
     <script>
         // ========== 数据定义 ==========
         var questions = [
@@ -736,7 +644,6 @@
             { text: "你最近经常出现的情绪是？", options: [{ text: "平静、满足、开心 😌", score: 3 }, { text: "焦虑、疲惫、无聊 😫", score: 2 }, { text: "麻木、虚无、无所谓 😶", score: 1 }] },
             { text: "如果要对现在的自己说一句话，你会说？", options: [{ text: "继续加油，你挺棒的！💪", score: 3 }, { text: "还可以再努力一点点 📈", score: 2 }, { text: "醒醒啊！！！🚨", score: 1 }] }
         ];
-
         // 乌鸦主题人格结果
         var results = {
             awake: [
@@ -818,7 +725,6 @@
                 }
             ]
         };
-
         // ========== 状态变量 ==========
         var currentQuestion = 0;
         var totalScore = 0;
@@ -826,7 +732,6 @@
         var currentResult = null;
         var generatedImageBlob = null;
         var isTransitioning = false; // 防止重复点击
-
         // ========== DOM 元素获取 ==========
         var startPage = document.getElementById('startPage');
         var quizPage = document.getElementById('quizPage');
@@ -846,7 +751,6 @@
         var imagePreviewContainer = document.getElementById('imagePreviewContainer');
         var confirmDownloadBtn = document.getElementById('confirmDownloadBtn');
         var closePreviewBtn = document.getElementById('closePreviewBtn');
-
         // ========== 核心函数 ==========
         function startQuiz() {
             startPage.classList.add('hidden');
@@ -857,15 +761,12 @@
             isTransitioning = false;
             showQuestion();
         }
-
         function showQuestion() {
             var question = questions[currentQuestion];
             questionCounter.textContent = '第 ' + (currentQuestion + 1) + ' 题 / 共 ' + questions.length + ' 题';
             progressFill.style.width = ((currentQuestion) / questions.length * 100) + '%';
             questionText.textContent = question.text;
-
             optionsContainer.innerHTML = '';
-
             for (var i = 0; i < question.options.length; i++) {
                 (function(index) {
                     var option = question.options[index];
@@ -881,33 +782,26 @@
                     optionsContainer.appendChild(optionEl);
                 })(i);
             }
-
             updateNavButtons();
         }
-
         function updateNavButtons() {
             prevBtn.disabled = currentQuestion === 0;
         }
-
         function selectOption(index, score) {
             // 防止重复点击
             if (isTransitioning) {
                 return;
             }
-            
             var options = document.querySelectorAll('.option');
             for (var i = 0; i < options.length; i++) {
                 options[i].classList.remove('selected');
             }
             options[index].classList.add('selected');
-            
             // 记录答案
             answers[currentQuestion] = { answer: index, score: score };
             console.log('第' + (currentQuestion + 1) + '题答案已记录：', answers[currentQuestion]);
-            
             // 更新按钮状态
             updateNavButtons();
-            
             // 判断是否是最后一题
             if (currentQuestion === questions.length - 1) {
                 // 最后一题答完，自动跳结果页
@@ -926,14 +820,12 @@
                 }, 400);
             }
         }
-
         function prevQuestion() {
             if (currentQuestion > 0) {
                 currentQuestion--;
                 showQuestion();
             }
         }
-
         function showResult() {
             try {
                 // 先检查是否所有题目都答了
@@ -944,11 +836,9 @@
                         answers[i] = { answer: 0, score: 2 };
                     }
                 }
-                
                 quizPage.style.display = 'none';
                 resultPage.style.display = 'block';
                 progressFill.style.width = '100%';
-
                 // 计算总分
                 totalScore = 0;
                 for (var i = 0; i < answers.length; i++) {
@@ -956,9 +846,7 @@
                         totalScore += answers[i].score;
                     }
                 }
-                
                 console.log('答题完成，总分：' + totalScore + '，答案数量：' + answers.length);
-
                 // 确定分区
                 var zone, zoneText, resultPool;
                 if (totalScore >= 51) {
@@ -974,16 +862,12 @@
                     zoneText = '🌑 深渊蛰伏区';
                     resultPool = results.asleep;
                 }
-                
                 console.log('分区：' + zone + '，结果池数量：' + resultPool.length);
-
                 // 随机选择一个结果
                 var resultIndex = Math.floor(Math.random() * resultPool.length);
                 currentResult = resultPool[resultIndex];
-                
                 console.log('选中结果：', currentResult);
                 // 保存测试结果到localStorage供聊天页面使用                localStorage.setItem('xingxingya_test_result', JSON.stringify({                    type: currentResult.type,                    desc: currentResult.desc,                    advice: currentResult.advice,                    score: totalScore,                    zone: zoneText                }));
-
                 // 填充结果页面
                 document.getElementById('resultEmoji').innerHTML = '<img src="' + currentResult.image + '" alt="' + currentResult.type + '" style="max-width: 200px; border-radius: 20px;">';
                 document.getElementById('resultType').innerHTML = currentResult.type;
@@ -991,7 +875,6 @@
                 document.getElementById('scoreValue').innerHTML = totalScore + ' / 60';
                 document.getElementById('scoreZone').innerHTML = zoneText;
                 document.getElementById('adviceText').innerHTML = currentResult.advice;
-
                 // 填充图片容器
                 document.getElementById('imgEmoji').innerHTML = '<img src="' + currentResult.image + '" alt="' + currentResult.type + '" style="max-width: 300px; border-radius: 20px;">';
                 document.getElementById('imgType').innerHTML = currentResult.type;
@@ -999,21 +882,17 @@
                 document.getElementById('imgScore').innerHTML = totalScore + ' / 60';
                 document.getElementById('imgZone').innerHTML = zoneText;
                 document.getElementById('imgAdvice').innerHTML = currentResult.advice;
-                
                 console.log('结果页面填充完成');
             } catch (error) {
                 console.error('显示结果时出错：', error);
                 alert('显示结果时出错：' + error.message);
             }
         }
-
         function toggleShareOptions() {
             shareOptions.classList.toggle('show');
         }
-
         function copyText() {
             var shareText = '我测出来是「' + currentResult.type + '」！\n精神状态指数：' + totalScore + ' / 60\n' + document.getElementById('scoreZone').textContent + '\n\n嘎 —— 来测测你是什么鸦！\nxingxingya.com';
-
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(shareText).then(function() {
                     alert('✅ 已复制到剪贴板！\n嘎嘎 ~ 粘贴到朋友圈分享吧~');
@@ -1024,7 +903,6 @@
                 fallbackCopy(shareText);
             }
         }
-
         function fallbackCopy(text) {
             var textarea = document.createElement('textarea');
             textarea.value = text;
@@ -1034,11 +912,9 @@
             document.body.removeChild(textarea);
             alert('✅ 已复制到剪贴板！\n嘎嘎 ~ 粘贴到朋友圈分享吧~');
         }
-
         function downloadImage() {
             shareOptions.classList.remove('show');
             var container = document.getElementById('resultImageContainer');
-
             if (typeof html2canvas !== 'undefined') {
                 html2canvas(container, {
                     backgroundColor: null,
@@ -1061,7 +937,6 @@
                 alert('图片生成库加载失败，请刷新页面重试');
             }
         }
-
         function confirmDownload() {
             if (generatedImageBlob) {
                 var link = document.createElement('a');
@@ -1071,11 +946,9 @@
                 closePreview();
             }
         }
-
         function closePreview() {
             imagePreviewOverlay.classList.remove('show');
         }
-
         function retryQuiz() {
             resultPage.style.display = 'none';
             startPage.classList.remove('hidden');
@@ -1087,7 +960,6 @@
             generatedImageBlob = null;
             isTransitioning = false;
         }
-
         // ========== 事件绑定 ==========
         startBtn.onclick = startQuiz;
         prevBtn.onclick = prevQuestion;
@@ -1095,10 +967,8 @@
         copyTextBtn.onclick = copyText;
         downloadImgBtn.onclick = downloadImage;
         retryBtn.onclick = retryQuiz;
-        
         confirmDownloadBtn.onclick = confirmDownload;
         closePreviewBtn.onclick = closePreview;
-
         console.log('醒醒鸦测试已加载完成 · 嘎嘎');
     </script>
 </body>
