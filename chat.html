@@ -324,7 +324,7 @@
         <button class="back-btn" onclick="window.location.href='/'">←</button>
         <div style="flex: 1;"></div>
         <button class="clear-btn" onclick="clearChat()" title="清空对话">🗑️</button>
-        <div class="bot-avatar">🦅</div>
+        <div class="bot-avatar"><img src='mengya.png' style='width:28px;height:28px;border-radius:50%;'></div>
         <div class="bot-info">
             <h1>小鸦</h1>
             <p>毒舌又暖心的鸦鸦助手</p>
@@ -334,7 +334,7 @@
     <div class="chat-container">
         <div class="chat-messages" id="chatMessages">
             <div class="message bot">
-                <div class="message-avatar">🦅</div>
+                <div class="message-avatar"><img src='mengya.png' style='width:28px;height:28px;border-radius:50%;'></div>
                 <div class="message-content">嘎——来了？有什么想唠的，说说呗。心情不好、想吐槽、还是就是无聊想找人扯两句，小鸦都接着。</div>
             </div>
         </div>
@@ -376,7 +376,7 @@
             const now = new Date();
             const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
             messageDiv.innerHTML = `
-                <div class="message-avatar">${isUser ? '👤' : '🦅'}</div>
+                <div class="message-avatar">${isUser ? '👤' : '<img src='mengya.png' style='width:28px;height:28px;border-radius:50%;'>'}</div>
                 <div class="message-content">${content}<div class="message-time">${timeStr}</div></div>
             `;
             messagesDiv.appendChild(messageDiv);
@@ -389,7 +389,7 @@
             typingDiv.className = 'message bot typing';
             typingDiv.id = 'typingIndicator';
             typingDiv.innerHTML = `
-                <div class="message-avatar">🦅</div>
+                <div class="message-avatar"><img src='mengya.png' style='width:28px;height:28px;border-radius:50%;'></div>
                 <div class="typing-indicator"><span></span><span></span><span></span></div>
             `;
             messagesDiv.appendChild(typingDiv);
@@ -468,7 +468,7 @@
             const messagesDiv = document.getElementById("chatMessages");
             messagesDiv.innerHTML = `
                 <div class="message bot">
-                    <div class="message-avatar">🦅</div>
+                    <div class="message-avatar"><img src='mengya.png' style='width:28px;height:28px;border-radius:50%;'></div>
                     <div class="message-content">嘎——对话清空了。有啥想聊的继续说。<div class="message-time">` + new Date().getHours().toString().padStart(2, "0") + ":" + new Date().getMinutes().toString().padStart(2, "0") + `</div></div>
                 </div>
             `;
