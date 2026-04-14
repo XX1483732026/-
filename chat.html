@@ -352,7 +352,7 @@
         </div>
     </div>
 
-    <script>
+<script>
         // 使用我们自己的API代理
         const API_URL = '/api/chat';
         
@@ -360,6 +360,17 @@
         let testResult = null; // 存储测试结果
         let hasSentContext = false; // 是否已发送上下文
         let isLoading = false; // 发送状态
+
+        // 页面加载时强制重置状态
+        window.addEventListener('load', function() {
+            console.log('页面加载完成，重置状态');
+            isLoading = false;
+            const sendBtn = document.getElementById('sendBtn');
+            if (sendBtn) {
+                sendBtn.disabled = false;
+                console.log('发送按钮已启用');
+            }
+        });
 
         // 读取测试结果
         var storedResult = localStorage.getItem("xingxingya_test_result");
