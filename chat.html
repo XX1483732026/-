@@ -347,7 +347,7 @@
             </div>
             <div class="input-wrapper">
                 <input type="text" class="chat-input" id="chatInput" placeholder="和小鸦聊聊..." onkeypress="handleKeyPress(event)">
-                <button class="send-btn" id="sendBtn" onclick="sendMessage()">→</button>
+                <button class="send-btn" id="sendBtn" onclick="console.log('发送按钮被点击'); sendMessage()">→</button>
             </div>
         </div>
     </div>
@@ -449,6 +449,7 @@
         }
 
         async function sendMessage() {
+            console.log('sendMessage被调用, isLoading:', isLoading);
             const input = document.getElementById('chatInput');
             const message = input.value.trim();
             if (!message || isLoading) return;
