@@ -367,6 +367,42 @@
             testResult = JSON.parse(storedResult);
             console.log("读取到测试结果:", testResult);
         }
+        
+        // 加载聊天历史
+        function loadChatHistory() {
+            const history = localStorage.getItem('xingxingya_chat_history');
+            if (history) {
+                const messages = JSON.parse(history);
+                messages.forEach(msg => {
+                    addMessageToDOM(msg.content, msg.isUser);
+                });
+            }
+        }
+        
+        function addMessageToDOM(content, isUser) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${isUser ? '👤' : '<img src="mengya.png" style="width:28px;height:28px;border-radius:50%;">'}</div>
+                <div class="message-content">${content}<div class="message-time">${timeStr}</div></div>
+            `;
+            messagesDiv.appendChild(messageDiv);
+        }
+        
+        function saveMessage(content, isUser) {
+            const history = JSON.parse(localStorage.getItem('xingxingya_chat_history') || '[]');
+            history.push({ content, isUser, time: Date.now() });
+            // 只保留最近50条
+            if (history.length > 50) history.shift();
+            localStorage.setItem('xingxingya_chat_history', JSON.stringify(history));
+        }
+        
+        // 页面加载时恢复历史
+        loadChatHistory();
+
         console.log("醒醒鸦聊天已加载完成");
 
         function addMessage(content, isUser) {
@@ -408,6 +444,7 @@
 
             input.value = '';
             addMessage(message, true);
+            saveMessage(message, true);
             
             isLoading = true;
             document.getElementById('sendBtn').disabled = true;
