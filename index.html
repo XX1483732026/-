@@ -669,6 +669,22 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
         }
+        .close-toast {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            transition: color 0.2s ease;
+        }
+        .close-toast:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
         .offline-toast.show {
             display: flex;
         }
@@ -710,6 +726,7 @@
 <body>
     <!-- 离线提示 -->
     <div class="offline-toast" id="offlineToast">
+        <button class="close-toast" onclick="hideOfflineToast()">×</button>
         <span class="offline-icon">🐦‍⬛</span>
         <span class="offline-text">小鸦飞去找网络了<span class="dots">...</span></span>
         <button class="reconnect-btn" onclick="location.reload()">重新连接</button>

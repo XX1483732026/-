@@ -298,6 +298,22 @@
             transition: transform 0.3s ease;
             box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
         }
+        .close-toast {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            transition: color 0.2s ease;
+        }
+        .close-toast:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
         .offline-toast.show {
             transform: translateY(0);
         }
