@@ -620,7 +620,7 @@
     <div class="container">
         <div class="start-page" id="startPage">
             <div class="logo">
-                <img src="mengya.jpg" alt="小鸦" class="logo-img" onclick="location.href='chat.html'" style="cursor: pointer;">
+                <img src="mengya.png" alt="小鸦" class="logo-img" onclick="location.href='chat.html'" style="cursor: pointer;">
                 <a href="chat.html" class="chat-bubble">嘎~点击我和我聊天哟</a>
             </div>
             <h1 class="main-title">醒醒鸦</h1>
