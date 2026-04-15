@@ -316,6 +316,22 @@
             color: #ccd6f6;
             margin-bottom: 24px;
         }
+        .explore-link {
+            display: inline-block;
+            margin-top: 16px;
+            margin-bottom: 24px;
+            padding: 12px 28px;
+            font-size: 14px;
+            color: #fff;
+            text-decoration: none;
+            background: linear-gradient(135deg, #8b6b9a, #6b5b95);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        .explore-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(107, 91, 149, 0.5);
+        }
         .score-section {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 20px;
@@ -644,6 +660,7 @@
                 <div class="result-emoji" id="resultEmoji"></div>
                 <div class="result-type" id="resultType"></div>
                 <div class="result-desc" id="resultDesc"></div>
+                <a href="community.html" class="explore-link" id="exploreLink">🔍 探索详情</a>
                 <div class="score-section">
                     <div class="score-label">精神状态指数</div>
                     <div class="score-value" id="scoreValue"></div>
