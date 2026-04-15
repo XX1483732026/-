@@ -654,51 +654,64 @@
         .offline-toast {
             display: none;
             position: fixed;
-            top: 60px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            background: rgba(220, 53, 69, 0.95);
+            transform: translate(-50%, -50%);
+            background: rgba(26, 26, 46, 0.95);
             color: #fff;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 14px;
+            padding: 24px 32px;
+            border-radius: 16px;
+            font-size: 16px;
             z-index: 10000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             align-items: center;
             gap: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
         .offline-toast.show {
             display: flex;
         }
-        .offline-toast::before {
-            content: '';
-            position: absolute;
-            top: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-bottom: 8px solid rgba(220, 53, 69, 0.95);
+        .offline-icon {
+            font-size: 28px;
+            animation: fly 1s ease-in-out infinite;
+        }
+        @keyframes fly {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(10deg); }
+        }
+        .offline-text {
+            font-weight: 500;
+        }
+        .dots {
+            animation: blink 1.5s infinite;
+        }
+        @keyframes blink {
+            0%, 20% { opacity: 0; }
+            50% { opacity: 1; }
         }
         .reconnect-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
             color: #fff;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 12px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
         .reconnect-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
         }
     </style>
 </head>
 <body>
     <!-- 离线提示 -->
     <div class="offline-toast" id="offlineToast">
-        网络连接已断开，请检查网络设置
+        <span class="offline-icon">🐦‍⬛</span>
+        <span class="offline-text">小鸦飞去找网络了<span class="dots">...</span></span>
         <button class="reconnect-btn" onclick="location.reload()">重新连接</button>
     </div>
     <div class="container">
