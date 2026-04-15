@@ -4,7 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <link rel="preload" href="mengya.png" as="image">
+    <link rel="preload" href="mengya.png" as="image" type="image/png">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "醒醒鸦 · 鸦格TI",
+        "description": "精神状态自检测试，2分钟20道题，发现你的真实精神状态",
+        "url": "https://xingxingya.com",
+        "image": "https://xingxingya.com/mengya.png",
+        "applicationCategory": "EntertainmentApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        }
+    }
+    </script>
     <link rel="icon" type="image/png" href="mengya.png">
     <link rel="apple-touch-icon" href="mengya.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,11 +46,6 @@
     <meta name="twitter:description" content="嘎~ 别装了，测测你现在的真实鸦格！">
 
     <title>醒醒鸦 · 鸦格TI</title>
-    <link rel="icon" type="image/png" href="mengya.png">
-    <link rel="apple-touch-icon" href="mengya.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="icon" type="image/png" href="mengya.png">
-    <link rel="apple-touch-icon" href="mengya.png">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -61,10 +74,33 @@
             text-align: center;
             animation: fadeIn 0.8s ease;
         }
-        .chat-bubble {            position: absolute;            top: -45px;            right: -70px;            background: rgba(255, 255, 255, 0.95);            color: #333;            padding: 10px 16px;            border-radius: 16px;            font-size: 13px;            text-decoration: none;            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);            transition: all 0.3s ease;            white-space: nowrap;            z-index: 10;        }        .chat-bubble:hover {            transform: scale(1.05);            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);        }        .chat-bubble::after {            content: '';            position: absolute;            bottom: -6px;            left: 15px;            border-left: 6px solid transparent;            border-right: 6px solid transparent;            border-top: 8px solid rgba(255, 255, 255, 0.95);        }
-        @keyframes bubbleBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        .chat-bubble {
+            position: absolute;
+            top: -45px;
+            right: -70px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 10px 16px;
+            border-radius: 16px;
+            font-size: 13px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            z-index: 10;
+        }
+        .chat-bubble:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        .chat-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 15px;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid rgba(255, 255, 255, 0.95);
         }
         .logo {
             width: 120px;
@@ -109,8 +145,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
-        .start-btn:hover {
-        }
+
         .chat-link {
             display: inline-block;
             margin-top: 16px;
@@ -163,6 +198,26 @@
         .quiz-page {
             display: none;
             animation: fadeIn 0.5s ease;
+            position: relative;
+        }
+        .back-home-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #8892b0;
+            padding: 8px 16px;
+            font-size: 13px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        .back-home-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.3);
         }
         .progress-bar {
             background: rgba(255, 255, 255, 0.1);
@@ -501,10 +556,6 @@
             margin-bottom: 16px;
         }
                 .result-image-container .img-type {
-            background: linear-gradient(90deg, #8b8b8b, #d4d4d4, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             font-size: 32px;
             font-weight: 700;
             margin-bottom: 20px;
@@ -576,20 +627,6 @@
             color: #8892b0;
         }
 
-        .result-image-container .img-footer {
-            font-size: 12px;
-            color: #5a6a8a;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 16px;
-        }
-        .result-image-container .logo-text {
-            font-size: 18px;
-            font-weight: 700;
-            background: linear-gradient(90deg, #aaa, #ddd, #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -642,6 +679,7 @@
             <a href="community.html" class="chat-link">鸦格社区——来探索小鸦的不同鸦格吧</a>
         </div>
         <div class="quiz-page" id="quizPage">
+            <button class="back-home-btn" id="backHomeBtn" title="返回首页">← 退出</button>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
@@ -854,6 +892,7 @@
         var imagePreviewContainer = document.getElementById('imagePreviewContainer');
         var confirmDownloadBtn = document.getElementById('confirmDownloadBtn');
         var closePreviewBtn = document.getElementById('closePreviewBtn');
+        var backHomeBtn = document.getElementById('backHomeBtn');
         // ========== 核心函数 ==========
         function startQuiz() {
             startPage.classList.add('hidden');
@@ -1063,6 +1102,19 @@
             generatedImageBlob = null;
             isTransitioning = false;
         }
+        // 返回首页，重置测试状态
+        function resetToHome() {
+            if (confirm('确定要退出测试吗？')) {
+                quizPage.style.display = 'none';
+                startPage.classList.remove('hidden');
+                currentQuestion = 0;
+                totalScore = 0;
+                answers = [];
+                isTransitioning = false;
+                // 重置进度
+                progressFill.style.width = '0%';
+            }
+        }
         // ========== 事件绑定 ==========
         startBtn.onclick = startQuiz;
         prevBtn.onclick = prevQuestion;
@@ -1072,6 +1124,7 @@
         retryBtn.onclick = retryQuiz;
         confirmDownloadBtn.onclick = confirmDownload;
         closePreviewBtn.onclick = closePreview;
+        backHomeBtn.onclick = resetToHome;
         console.log('醒醒鸦测试已加载完成 · 嘎嘎');
     </script>
 </body>
