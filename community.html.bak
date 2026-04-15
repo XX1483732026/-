@@ -236,12 +236,7 @@
                 <!-- 振翅高飞鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_振翅高飞鸦.jpg" 
-                         data-src="yages/鸦格_振翅高飞鸦.jpg" 
-                         alt="振翅高飞鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="this.style.filter='blur(2px)'; var hd=new Image(); hd.src=this.dataset.src; hd.onload=function(){ this.src=hd.src; this.style.filter='none'; }.bind(this);">
+                        <img src="yages/鸦格_振翅高飞鸦.jpg" alt="振翅高飞鸦" class="yage-img">
                     </div>
                     <div class="yage-info">
                         <div class="yage-name">🌟 振翅高飞鸦</div>
@@ -256,12 +251,7 @@
                 <!-- 巡天智者鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_巡天智者鸦.jpg" 
-                         data-src="yages/鸦格_巡天智者鸦.jpg" 
-                         alt="巡天智者鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="this.style.filter='blur(2px)'; var hd=new Image(); hd.src=this.dataset.src; hd.onload=function(){ this.src=hd.src; this.style.filter='none'; }.bind(this);">
+                        <img src="yages/鸦格_巡天智者鸦.jpg" alt="巡天智者鸦" class="yage-img">
                     </div>
                     <div class="yage-info">
                         <div class="yage-name">🔭 巡天智者鸦</div>
@@ -276,12 +266,7 @@
                 <!-- 蹲枝观望鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_蹲枝观望鸦.jpg" 
-                         data-src="yages/鸦格_蹲枝观望鸦.jpg" 
-                         alt="蹲枝观望鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="this.style.filter='blur(2px)'; var hd=new Image(); hd.src=this.dataset.src; hd.onload=function(){ this.src=hd.src; this.style.filter='none'; }.bind(this);">
+                        <img src="yages/鸦格_蹲枝观望鸦.jpg" alt="蹲枝观望鸦" class="yage-img">
                     </div>
                     <div class="yage-info">
                         <div class="yage-name">🪹 蹲枝观望鸦</div>
@@ -296,12 +281,7 @@
                 <!-- 迷雾盘旋鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_迷雾盘旋鸦.jpg" 
-                         data-src="yages/鸦格_迷雾盘旋鸦.jpg" 
-                         alt="迷雾盘旋鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="this.style.filter='blur(2px)'; var hd=new Image(); hd.src=this.dataset.src; hd.onload=function(){ this.src=hd.src; this.style.filter='none'; }.bind(this);">
+                        <img src="yages/鸦格_迷雾盘旋鸦.jpg" alt="迷雾盘旋鸦" class="yage-img">
                     </div>
                     <div class="yage-info">
                         <div class="yage-name">🌫️ 迷雾盘旋鸦</div>
@@ -316,12 +296,7 @@
                 <!-- 折翼停飞鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_折翼停飞鸦.jpg" 
-                         data-src="yages/鸦格_折翼停飞鸦.jpg" 
-                         alt="折翼停飞鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="this.style.filter='blur(2px)'; var hd=new Image(); hd.src=this.dataset.src; hd.onload=function(){ this.src=hd.src; this.style.filter='none'; }.bind(this);">
+                        <img src="yages/鸦格_折翼停飞鸦.jpg" alt="折翼停飞鸦" class="yage-img">
                     </div>
                     <div class="yage-info">
                         <div class="yage-name">🩹 折翼停飞鸦</div>
@@ -336,12 +311,7 @@
                 <!-- 脱毛换羽鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_脱毛换羽鸦.jpg" 
-                         data-src="yages/鸦格_脱毛换羽鸦.jpg" 
-                         alt="脱毛换羽鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="this.style.filter='blur(2px)'; var hd=new Image(); hd.src=this.dataset.src; hd.onload=function(){ this.src=hd.src; this.style.filter='none'; }.bind(this);">
+                        <img src="yages/鸦格_脱毛换羽鸦.jpg" alt="脱毛换羽鸦" class="yage-img">
                     </div>
                     <div class="yage-info">
                         <div class="yage-name">🪶 脱毛换羽鸦</div>
@@ -356,12 +326,7 @@
                 <!-- 漩涡坠落鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_漩涡坠落鸦.jpg" 
-                         data-src="yages/鸦格_漩涡坠落鸦.jpg" 
-                         alt="漩涡坠落鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="this.style.filter='blur(2px)'; var hd=new Image(); hd.src=this.dataset.src; hd.onload=function(){ this.src=hd.src; this.style.filter='none'; }.bind(this);">
+                        <img src="yages/鸦格_漩涡坠落鸦.jpg" alt="漩涡坠落鸦" class="yage-img">
                     </div>
                     <div class="yage-info">
                         <div class="yage-name">🌀 漩涡坠落鸦</div>
@@ -376,12 +341,7 @@
                 <!-- 洞穴隐居鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_洞穴隐居鸦.jpg" 
-                         data-src="yages/鸦格_洞穴隐居鸦.jpg" 
-                         alt="洞穴隐居鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="this.style.filter='blur(2px)'; var hd=new Image(); hd.src=this.dataset.src; hd.onload=function(){ this.src=hd.src; this.style.filter='none'; }.bind(this);">
+                        <img src="yages/鸦格_洞穴隐居鸦.jpg" alt="洞穴隐居鸦" class="yage-img">
                     </div>
                     <div class="yage-info">
                         <div class="yage-name">🕳️ 洞穴隐居鸦</div>
@@ -396,12 +356,7 @@
                 <!-- 夜游梦呓鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_夜游梦呓鸦.jpg" 
-                         data-src="yages/鸦格_夜游梦呓鸦.jpg" 
-                         alt="夜游梦呓鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="this.style.filter='blur(2px)'; var hd=new Image(); hd.src=this.dataset.src; hd.onload=function(){ this.src=hd.src; this.style.filter='none'; }.bind(this);">
+                        <img src="yages/鸦格_夜游梦呓鸦.jpg" alt="夜游梦呓鸦" class="yage-img">
                     </div>
                     <div class="yage-info">
                         <div class="yage-name">🌙 夜游梦呓鸦</div>
@@ -416,12 +371,7 @@
                 <!-- 失声静默鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_失声静默鸦.jpg" 
-                         data-src="yages/鸦格_失声静默鸦.jpg" 
-                         alt="失声静默鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="this.style.filter='blur(2px)'; var hd=new Image(); hd.src=this.dataset.src; hd.onload=function(){ this.src=hd.src; this.style.filter='none'; }.bind(this);">
+                        <img src="yages/鸦格_失声静默鸦.jpg" alt="失声静默鸦" class="yage-img">
                     </div>
                     <div class="yage-info">
                         <div class="yage-name">🤫 失声静默鸦</div>
@@ -436,12 +386,7 @@
                 <!-- 假寐装傻鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_假寐装傻鸦.jpg" 
-                         data-src="yages/鸦格_假寐装傻鸦.jpg" 
-                         alt="假寐装傻鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="this.style.filter='blur(2px)'; var hd=new Image(); hd.src=this.dataset.src; hd.onload=function(){ this.src=hd.src; this.style.filter='none'; }.bind(this);">
+                        <img src="yages/鸦格_假寐装傻鸦.jpg" alt="假寐装傻鸦" class="yage-img">
                     </div>
                     <div class="yage-info">
                         <div class="yage-name">😴 假寐装傻鸦</div>
@@ -456,12 +401,7 @@
                 <!-- 伪装讨喜鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_伪装讨喜鸦.jpg" 
-                         data-src="yages/鸦格_伪装讨喜鸦.jpg" 
-                         alt="伪装讨喜鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="this.style.filter='blur(2px)'; var hd=new Image(); hd.src=this.dataset.src; hd.onload=function(){ this.src=hd.src; this.style.filter='none'; }.bind(this);">
+                        <img src="yages/鸦格_伪装讨喜鸦.jpg" alt="伪装讨喜鸦" class="yage-img">
                     </div>
                     <div class="yage-info">
                         <div class="yage-name">🥰 伪装讨喜鸦</div>
