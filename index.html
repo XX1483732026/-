@@ -653,6 +653,11 @@
     </style>
 </head>
 <body>
+    <!-- 离线提示 -->
+    <div class="offline-toast" id="offlineToast">
+        网络连接已断开，请检查网络设置
+        <button class="reconnect-btn" onclick="location.reload()">重新连接</button>
+    </div>
     <div class="container">
         <div class="start-page" id="startPage">
             <div class="logo">
@@ -717,7 +722,12 @@
                 </div>
                 <button class="retry-btn" id="retryBtn">🔄 重新测试</button>
             </div>
-            <div class="footer-tip">关注「醒醒鸦」公众号 · 嘎嘎陪你每一天</div>
+            <div class="footer-tip">
+                <div>关注「醒醒鸦」公众号 · 嘎嘎陪你每一天</div>
+                <div class="footer-links">
+                    <a href="about.html">关于我们</a> · <a href="privacy.html">隐私政策</a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="image-preview-overlay" id="imagePreviewOverlay">
@@ -1034,7 +1044,7 @@
             shareOptions.classList.toggle('show');
         }
         function copyText() {
-            var shareText = '我测出来是「' + currentResult.type + '」！\n精神状态指数：' + totalScore + ' / 60\n' + document.getElementById('scoreZone').textContent + '\n\n嘎 —— 来测测你是什么鸦！\nxingxingya.com';
+            var shareText = '我的真实鸦格是「' + currentResult.type + '」！来测测你现在的真实鸦格吧～ xingxingya.com';
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(shareText).then(function() {
                     alert('✅ 已复制到剪贴板！\n嘎嘎 ~ 粘贴到朋友圈分享吧~');
@@ -1126,6 +1136,35 @@
         closePreviewBtn.onclick = closePreview;
         backHomeBtn.onclick = resetToHome;
         console.log('醒醒鸦测试已加载完成 · 嘎嘎');
+
+        // ========== 离线提示功能 ==========
+        function showOfflineToast() {
+            var toast = document.getElementById('offlineToast');
+            if (toast) {
+                toast.classList.add('show');
+            }
+        }
+        
+        function hideOfflineToast() {
+            var toast = document.getElementById('offlineToast');
+            if (toast) {
+                toast.classList.remove('show');
+            }
+        }
+        
+        // 监听网络状态变化
+        window.addEventListener('online', function() {
+            hideOfflineToast();
+        });
+        
+        window.addEventListener('offline', function() {
+            showOfflineToast();
+        });
+        
+        // 页面加载时检查初始网络状态
+        if (!navigator.onLine) {
+            showOfflineToast();
+        }
     </script>
 </body>
 </html>
