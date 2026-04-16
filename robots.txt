@@ -1,3 +1,20 @@
 User-agent: *
 Allow: /
+
+# 禁止抓取敏感目录和文件
+Disallow: /api/
+Disallow: /backups/
+Disallow: /tmp/
+Disallow: /.git/
+Disallow: /*.bak
+
+# 允许搜索引擎访问主要页面
+Allow: /index.html
+Allow: /chat.html
+Allow: /community.html
+Allow: /about.html
+Allow: /privacy.html
+Allow: /sitemap.xml
+Allow: /robots.txt
+
 Sitemap: https://xingxingya.com/sitemap.xml
