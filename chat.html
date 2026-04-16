@@ -496,12 +496,14 @@
                     addMessage(data.content, false);
                 } else {
                     addMessage('❌ 小鸦走神了，再试一次？', false);
+                    showToast('小鸦走神了，请重试', false);
                 }
 
             } catch (error) {
                 removeTypingIndicator();
                 console.error('错误:', error);
                 addMessage('❌ 网络开小差了，换个姿势再试？', false);
+                showToast('网络开小差了，请检查网络后重试', false);
             } finally {
                 isLoading = false;
                 document.getElementById('sendBtn').disabled = false;
@@ -525,8 +527,20 @@
             document.getElementById("chatInput").value = "";
         }
 
+        // 显示 Toast 提示
+        function showToast(message, isSuccess = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast' + (isSuccess ? ' success' : '');
+            toast.classList.add('show');
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
+                event.preventDefault();
                 sendMessage();
             }
         }
@@ -591,6 +605,33 @@
         .chat-container {
             padding-bottom: 70px;
         }
+        /* Toast 提示样式 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: rgba(255, 80, 80, 0.95);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            z-index: 1001;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            max-width: 90%;
+            text-align: center;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        .toast.success {
+            background: rgba(80, 200, 80, 0.95);
+        }
     </style>
+    <!-- Toast 提示容器 -->
+    <div id="toast" class="toast"></div>
 </body>
 </html>
