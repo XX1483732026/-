@@ -934,6 +934,10 @@
             ]
         };
         // ========== 状态变量 ==========
+        // currentQuestion: 当前题目索引（0-19）
+        // totalScore: 累计得分（每题1-3分，最高60分）
+        // answers: 用户答案数组，记录每题的选项索引和得分
+        // currentResult: 当前测试结果对象（包含type、desc、advice等）
         var currentQuestion = 0;
         var totalScore = 0;
         var answers = [];
@@ -1110,7 +1114,7 @@
                 console.log('结果页面填充完成');
             } catch (error) {
                 console.error('显示结果时出错：', error);
-                alert('显示结果时出错：' + error.message);
+                alert('😢 显示结果时遇到了问题，请刷新页面重试~');
             }
         }
         function toggleShareOptions() {

@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>隐私政策 · 醒醒鸦</title>
+    <!-- 社交分享SEO优化 -->
+    <meta name="description" content="醒醒鸦隐私政策，了解我们如何收集、使用和保护您的个人信息，您的隐私安全是我们的首要责任。">
+    <meta property="og:title" content="隐私政策 · 醒醒鸦">
+    <meta property="og:description" content="醒醒鸦隐私政策，了解我们如何收集、使用和保护您的个人信息，您的隐私安全是我们的首要责任。">
+    <meta property="og:image" content="https://xingxingya.com/mengya.png">
+    <meta property="og:url" content="https://xingxingya.com/privacy.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="醒醒鸦">
     <link rel="icon" type="image/png" href="mengya.png">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -329,6 +337,65 @@
         }
         .offline-toast .reconnect-btn:hover {
             background: rgba(255,255,255,0.3);
+        }
+    </style>
+    </style>
+    <!-- 底部导航栏 -->
+    <div class="footer-nav">
+        <a href="index.html" class="footer-nav-item">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">首页</span>
+        </a>
+        <a href="chat.html" class="footer-nav-item">
+            <span class="nav-icon">💬</span>
+            <span class="nav-label">聊天</span>
+        </a>
+        <a href="community.html" class="footer-nav-item">
+            <span class="nav-icon">📋</span>
+            <span class="nav-label">社区</span>
+        </a>
+        <a href="about.html" class="footer-nav-item">
+            <span class="nav-icon">📖</span>
+            <span class="nav-label">关于</span>
+        </a>
+    </div>
+    <style>
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(13, 13, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 100;
+        }
+        .footer-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #8892b0;
+            padding: 4px 12px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        .footer-nav-item:hover, .footer-nav-item.active {
+            color: #fff;
+            background: rgba(255,255,255,0.1);
+        }
+        .nav-icon {
+            font-size: 20px;
+        }
+        .nav-label {
+            font-size: 11px;
+            margin-top: 2px;
+        }
+        .container {
+            padding-bottom: 80px;
         }
     </style>
 </body>
