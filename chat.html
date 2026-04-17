@@ -492,9 +492,11 @@
 
                 const data = await response.json();
 
-                if (data.success && data.content) {
-                    addMessage(data.content, false);
-                    saveMessage(data.content, false);
+                // 兼容两种API返回格式：{ success: true, content: "xxx" } 或 { content: "xxx" }
+                const replyContent = data.content || data.response || data.message;
+                if (replyContent) {
+                    addMessage(replyContent, false);
+                    saveMessage(replyContent, false);
                 } else {
                     addMessage('❌ 小鸦走神了，再试一次？', false);
                     showToast('小鸦走神了，请重试', false);
