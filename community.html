@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>鸦格社区 · 醒醒鸦</title>
+    <meta name="description" content="鸦格社区 - 发现你此刻的心境状态，12种乌鸦人格图鉴">
+    <meta name="keywords" content="鸦格,乌鸦人格,心境测试,心理测试,醒醒鸦">
+    <meta property="og:title" content="鸦格社区 · 醒醒鸦">
+    <meta property="og:description" content="发现你此刻的心境状态，12种乌鸦人格图鉴">
+    <meta property="og:image" content="https://xingxingya.com/logo.png">
+    <meta property="og:url" content="https://xingxingya.com/community.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="icon" type="image/png" href="mengya.png">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -201,15 +211,46 @@
             color: #888;
             text-decoration: none;
         }
+        /* 装饰元素 - 使用transform优化渲染性能 */
         .decoration {
             position: fixed;
             pointer-events: none;
             opacity: 0.1;
             font-size: 100px;
+            will-change: transform;
         }
-        .decoration-1 { top: 10%; left: 5%; }
-        .decoration-2 { top: 50%; right: 5%; }
-        .decoration-3 { bottom: 20%; left: 10%; }
+        .decoration-1 { top: 10%; left: 5%; transform: translateZ(0); }
+        .decoration-2 { top: 50%; right: 5%; transform: translateZ(0); }
+        .decoration-3 { bottom: 20%; left: 10%; transform: translateZ(0); }
+    
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(107,91,149,0.9), rgba(139,123,171,0.9));
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
     </style>
 </head>
 <body>
@@ -232,9 +273,9 @@
     <div class="section">
         <div class="container">
             <h2 class="section-title"><span>12种鸦格图鉴</span></h2>
-            <div class="yage-grid">
+            <div class="yage-grid" role="feed" aria-label="鸦格图鉴">
                 <!-- 振翅高飞鸦 -->
-                <div class="yage-card">
+                <div class="yage-card" role="article">
                     <div class="yage-img-wrapper">
                         <img src="yages/thumbs/鸦格_振翅高飞鸦.jpg" 
                          data-src="yages/鸦格_振翅高飞鸦.jpg" 
@@ -254,7 +295,7 @@
                 </div>
                 
                 <!-- 巡天智者鸦 -->
-                <div class="yage-card">
+                <div class="yage-card" role="article">
                     <div class="yage-img-wrapper">
                         <img src="yages/thumbs/鸦格_巡天智者鸦.jpg" 
                          data-src="yages/鸦格_巡天智者鸦.jpg" 
@@ -274,7 +315,7 @@
                 </div>
                 
                 <!-- 蹲枝观望鸦 -->
-                <div class="yage-card">
+                <div class="yage-card" role="article">
                     <div class="yage-img-wrapper">
                         <img src="yages/thumbs/鸦格_蹲枝观望鸦.jpg" 
                          data-src="yages/鸦格_蹲枝观望鸦.jpg" 
@@ -294,7 +335,7 @@
                 </div>
                 
                 <!-- 迷雾盘旋鸦 -->
-                <div class="yage-card">
+                <div class="yage-card" role="article">
                     <div class="yage-img-wrapper">
                         <img src="yages/thumbs/鸦格_迷雾盘旋鸦.jpg" 
                          data-src="yages/鸦格_迷雾盘旋鸦.jpg" 
@@ -314,7 +355,7 @@
                 </div>
                 
                 <!-- 折翼停飞鸦 -->
-                <div class="yage-card">
+                <div class="yage-card" role="article">
                     <div class="yage-img-wrapper">
                         <img src="yages/thumbs/鸦格_折翼停飞鸦.jpg" 
                          data-src="yages/鸦格_折翼停飞鸦.jpg" 
@@ -334,7 +375,7 @@
                 </div>
                 
                 <!-- 脱毛换羽鸦 -->
-                <div class="yage-card">
+                <div class="yage-card" role="article">
                     <div class="yage-img-wrapper">
                         <img src="yages/thumbs/鸦格_脱毛换羽鸦.jpg" 
                          data-src="yages/鸦格_脱毛换羽鸦.jpg" 
@@ -354,7 +395,7 @@
                 </div>
                 
                 <!-- 漩涡坠落鸦 -->
-                <div class="yage-card">
+                <div class="yage-card" role="article">
                     <div class="yage-img-wrapper">
                         <img src="yages/thumbs/鸦格_漩涡坠落鸦.jpg" 
                          data-src="yages/鸦格_漩涡坠落鸦.jpg" 
@@ -374,7 +415,7 @@
                 </div>
                 
                 <!-- 洞穴隐居鸦 -->
-                <div class="yage-card">
+                <div class="yage-card" role="article">
                     <div class="yage-img-wrapper">
                         <img src="yages/thumbs/鸦格_洞穴隐居鸦.jpg" 
                          data-src="yages/鸦格_洞穴隐居鸦.jpg" 
@@ -394,7 +435,7 @@
                 </div>
                 
                 <!-- 夜游梦呓鸦 -->
-                <div class="yage-card">
+                <div class="yage-card" role="article">
                     <div class="yage-img-wrapper">
                         <img src="yages/thumbs/鸦格_夜游梦呓鸦.jpg" 
                          data-src="yages/鸦格_夜游梦呓鸦.jpg" 
@@ -414,7 +455,7 @@
                 </div>
                 
                 <!-- 失声静默鸦 -->
-                <div class="yage-card">
+                <div class="yage-card" role="article">
                     <div class="yage-img-wrapper">
                         <img src="yages/thumbs/鸦格_失声静默鸦.jpg" 
                          data-src="yages/鸦格_失声静默鸦.jpg" 
@@ -434,7 +475,7 @@
                 </div>
                 
                 <!-- 假寐装傻鸦 -->
-                <div class="yage-card">
+                <div class="yage-card" role="article">
                     <div class="yage-img-wrapper">
                         <img src="yages/thumbs/鸦格_假寐装傻鸦.jpg" 
                          data-src="yages/鸦格_假寐装傻鸦.jpg" 
@@ -454,7 +495,7 @@
                 </div>
                 
                 <!-- 伪装讨喜鸦 -->
-                <div class="yage-card">
+                <div class="yage-card" role="article">
                     <div class="yage-img-wrapper">
                         <img src="yages/thumbs/鸦格_伪装讨喜鸦.jpg" 
                          data-src="yages/鸦格_伪装讨喜鸦.jpg" 
@@ -546,6 +587,35 @@
         .offline-toast .reconnect-btn:hover {
             background: rgba(255,255,255,0.3);
         }
+    
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(107,91,149,0.9), rgba(139,123,171,0.9));
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
     </style>
     
     <script>
@@ -614,6 +684,39 @@
         .community-container {
             padding-bottom: 80px;
         }
+    
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(107,91,149,0.9), rgba(139,123,171,0.9));
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
     </style>
-</body>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="back-to-top" onclick="scrollToTop()" aria-label="返回顶部">↑</button>
+
+    </body>
 </html>

@@ -704,7 +704,132 @@
         .lazy-image.loaded {
             opacity: 1;
         }
+    
+        /* 键盘导航焦点样式 */
+        .option:focus {
+            outline: none;
+            background: rgba(100, 100, 100, 0.4);
+            border-color: #aaa;
+            box-shadow: 0 0 0 3px rgba(170, 170, 170, 0.3);
+        }
+        .option.keyboard-nav {
+            border-color: #888;
+            transform: scale(1.02);
+        }
+
+    
+        /* 加载状态 */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(13, 13, 26, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .loading-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .loading-overlay .crow-icon {
+            font-size: 60px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+        .loading-overlay p {
+            margin-top: 20px;
+            color: #b8b8d0;
+            font-size: 16px;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+    
+        /* 美化的错误提示 */
+        .error-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: linear-gradient(135deg, rgba(139,69,69,0.95), rgba(180,80,80,0.95));
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 25px;
+            font-size: 14px;
+            z-index: 1003;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(139,69,69,0.4);
+            max-width: 90%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .error-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        .error-toast .error-icon {
+            font-size: 18px;
+        }
+
     </style>
+    <link rel="manifest" href="manifest.json">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "醒醒鸦",
+        "description": "精神状态自检，12种乌鸦人格测试",
+        "url": "https://xingxingya.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://xingxingya.com/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    
+        // 显示/隐藏加载状态
+        function showLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) overlay.classList.add('show');
+        }
+        function hideLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) overlay.classList.remove('show');
+        }
+        // 在提交测试时显示加载
+        function submitQuiz() {
+            showLoading();
+            // 原有的提交逻辑继续执行
+        }
+
+    
+        // 显示错误提示
+        function showError(message) {
+            const errorToast = document.getElementById('errorToast');
+            if (errorToast) {
+                errorToast.querySelector('.error-text').textContent = message;
+                errorToast.classList.add('show');
+                setTimeout(function() {
+                    errorToast.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+    </script>
+
 </head>
 <body>
     <div class="container">
@@ -742,12 +867,12 @@
 
         <!-- 答题页面 -->
         <div class="quiz-page" id="quizPage">
-            <div class="progress-bar">
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
             <div class="question-counter" id="questionCounter">第 1 题 / 共 20 题</div>
-            <div class="question-card">
-                <div class="question-text" id="questionText"></div>
+            <div class="question-card" role="group" aria-labelledby="questionLabel">
+                <div class="question-text" id="questionText" aria-labelledby="questionLabel"></div>
                 <div class="options" id="optionsContainer"></div>
                 <div class="nav-buttons">
                     <button class="nav-btn prev" id="prevBtn">← 上一题</button>
@@ -817,7 +942,36 @@
     </div>
 
     <!-- html2canvas 库 -->
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js">
+        // 显示/隐藏加载状态
+        function showLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) overlay.classList.add('show');
+        }
+        function hideLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) overlay.classList.remove('show');
+        }
+        // 在提交测试时显示加载
+        function submitQuiz() {
+            showLoading();
+            // 原有的提交逻辑继续执行
+        }
+
+    
+        // 显示错误提示
+        function showError(message) {
+            const errorToast = document.getElementById('errorToast');
+            if (errorToast) {
+                errorToast.querySelector('.error-text').textContent = message;
+                errorToast.classList.add('show');
+                setTimeout(function() {
+                    errorToast.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+    </script>
     
     <script>
         // ========== 数据定义 ==========
@@ -1369,6 +1523,49 @@
         });
 
         console.log('醒醒鸦测试已加载完成 · 嘎嘎');
+    
+        // 显示/隐藏加载状态
+        function showLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) overlay.classList.add('show');
+        }
+        function hideLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) overlay.classList.remove('show');
+        }
+        // 在提交测试时显示加载
+        function submitQuiz() {
+            showLoading();
+            // 原有的提交逻辑继续执行
+        }
+
+    
+        // 显示错误提示
+        function showError(message) {
+            const errorToast = document.getElementById('errorToast');
+            if (errorToast) {
+                errorToast.querySelector('.error-text').textContent = message;
+                errorToast.classList.add('show');
+                setTimeout(function() {
+                    errorToast.classList.remove('show');
+                }, 3000);
+            }
+        }
+
     </script>
-</body>
+
+    <!-- 加载状态 -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <span class="crow-icon">🪶</span>
+        <p>小鸦在努力思考中...</p>
+    </div>
+
+    
+    <!-- 错误提示 -->
+    <div id="errorToast" class="error-toast">
+        <span class="error-icon">⚠️</span>
+        <span class="error-text"></span>
+    </div>
+
+    </body>
 </html>

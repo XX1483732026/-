@@ -4,7 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>和小鸦聊天 · 醒醒鸦</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="description" content="和醒醒鸦小鸦聊天，倾诉心事、获取陪伴。小鸦会飞走又飞回来，等你戳~">
+    <meta name="keywords" content="醒醒鸦,AI聊天,心理咨询,情绪陪伴,小鸦">
+    <meta property="og:title" content="和小鸦聊天 · 醒醒鸦">
+    <meta property="og:description" content="和醒醒鸦小鸦聊天，倾诉心事、获取陪伴">
+    <meta property="og:image" content="https://xingxingya.com/logo.png">
+    <meta property="og:url" content="https://xingxingya.com/chat.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="logo.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -147,49 +159,11 @@
             position: relative;
         }
 
-        .message-time {
-            font-size: 11px;
-            color: #5a6a8a;
-            margin-top: 4px;
-            text-align: right;
-        }
+        
 
         .message.user .message-time {
             text-align: left;
         }
-
-
-        .message.bot .message-content {
-            position: relative;
-        }
-
-        .message-time {
-            font-size: 11px;
-            color: #5a6a8a;
-            margin-top: 4px;
-            text-align: right;
-        }
-
-        .message.user .message-time {
-            text-align: left;
-        }
-
-
-        .message.user .message-content {
-            position: relative;
-        }
-
-        .message-time {
-            font-size: 11px;
-            color: #5a6a8a;
-            margin-top: 4px;
-            text-align: right;
-        }
-
-        .message.user .message-time {
-            text-align: left;
-        }
-
 
         .typing-indicator {
             display: flex;
@@ -317,6 +291,60 @@
             }
         }
 
+    
+        /* 离线提示动画 */
+        .offline-toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(26, 26, 46, 0.98);
+            border: 1px solid rgba(255, 200, 220, 0.3);
+            border-radius: 24px;
+            padding: 32px 40px;
+            text-align: center;
+            z-index: 1002;
+            opacity: 0;
+            display: none;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        .offline-toast.show {
+            display: block;
+            animation: offlineAppear 0.4s ease forwards;
+        }
+        @keyframes offlineAppear {
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        .offline-toast .crow-icon {
+            font-size: 48px;
+            animation: fly 1.5s ease-in-out infinite;
+            display: block;
+            margin-bottom: 16px;
+        }
+        @keyframes fly {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        .offline-toast p {
+            color: #b8b8d0;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+        .offline-toast .close-btn {
+            background: linear-gradient(135deg, #6b5b95, #8b7bab);
+            border: none;
+            color: #fff;
+            padding: 10px 28px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .offline-toast .close-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(107, 91, 149, 0.4);
+        }
+
     </style>
 </head>
 <body>
@@ -332,8 +360,8 @@
     </div>
 
     <div class="chat-container">
-        <div class="chat-messages" id="chatMessages">
-            <div class="message bot">
+        <div class="chat-messages" role="log" aria-live="polite" aria-label="聊天消息" id="chatMessages">
+            <div class="message bot" role="article" aria-label="小鸦的消息">
                 <div class="message-avatar"><img src="mengya.png" style="width:28px;height:28px;border-radius:50%;"></div>
                 <div class="message-content">嘎——来了？有什么想唠的，说说呗。心情不好、想吐槽、还是就是无聊想找人扯两句，小鸦都接着。</div>
             </div>
@@ -346,8 +374,8 @@
                 <button class="quick-btn" onclick="sendQuickMessage('心里堵得慌')">心里堵得慌</button>
             </div>
             <div class="input-wrapper">
-                <input type="text" class="chat-input" id="chatInput" placeholder="和小鸦聊聊..." onkeypress="handleKeyPress(event)">
-                <button class="send-btn" id="sendBtn" onclick="console.log('发送按钮被点击'); sendMessage()">→</button>
+                <input type="text" class="chat-input" id="chatInput" aria-label="输入消息" placeholder="和小鸦聊聊..." onkeypress="handleKeyPress(event)">
+                <button class="send-btn" id="sendBtn" aria-label="发送消息" role="button" onclick="console.log('发送按钮被点击'); sendMessage()">→</button>
             </div>
         </div>
     </div>
@@ -521,7 +549,7 @@
         function clearChat() {
             const messagesDiv = document.getElementById("chatMessages");
             messagesDiv.innerHTML = `
-                <div class="message bot">
+                <div class="message bot" role="article" aria-label="小鸦的消息">
                     <div class="message-avatar"><img src="mengya.png" style="width:28px;height:28px;border-radius:50%;"></div>
                     <div class="message-content">嘎——对话清空了。有啥想聊的继续说。<div class="message-time">` + new Date().getHours().toString().padStart(2, "0") + ":" + new Date().getMinutes().toString().padStart(2, "0") + `</div></div>
                 </div>
@@ -614,27 +642,99 @@
             top: 20px;
             left: 50%;
             transform: translateX(-50%) translateY(-100px);
-            background: rgba(255, 80, 80, 0.95);
+            background: linear-gradient(135deg, rgba(180,80,80,0.95), rgba(220,100,100,0.95));
             color: #fff;
-            padding: 12px 24px;
+            padding: 14px 28px;
             border-radius: 25px;
             font-size: 14px;
             z-index: 1001;
             opacity: 0;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(180,80,80,0.4);
             max-width: 90%;
             text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .toast::before {
+            content: '⚠️';
+            font-size: 16px;
         }
         .toast.show {
             transform: translateX(-50%) translateY(0);
             opacity: 1;
         }
         .toast.success {
-            background: rgba(80, 200, 80, 0.95);
+            background: linear-gradient(135deg, rgba(80,180,80,0.95), rgba(100,200,100,0.95));
         }
+        .toast.success::before {
+            content: '✨';
+        }
+    
+        /* 离线提示动画 */
+        .offline-toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(26, 26, 46, 0.98);
+            border: 1px solid rgba(255, 200, 220, 0.3);
+            border-radius: 24px;
+            padding: 32px 40px;
+            text-align: center;
+            z-index: 1002;
+            opacity: 0;
+            display: none;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        .offline-toast.show {
+            display: block;
+            animation: offlineAppear 0.4s ease forwards;
+        }
+        @keyframes offlineAppear {
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        .offline-toast .crow-icon {
+            font-size: 48px;
+            animation: fly 1.5s ease-in-out infinite;
+            display: block;
+            margin-bottom: 16px;
+        }
+        @keyframes fly {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        .offline-toast p {
+            color: #b8b8d0;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+        .offline-toast .close-btn {
+            background: linear-gradient(135deg, #6b5b95, #8b7bab);
+            border: none;
+            color: #fff;
+            padding: 10px 28px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .offline-toast .close-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(107, 91, 149, 0.4);
+        }
+
     </style>
     <!-- Toast 提示容器 -->
     <div id="toast" class="toast"></div>
-</body>
+
+    <!-- 离线提示弹窗 -->
+    <div id="offlineToast" class="offline-toast">
+        <span class="crow-icon">🪶</span>
+        <p>小鸦飞走了，等网络恢复再来戳我~</p>
+        <button class="close-btn" onclick="closeOfflineToast()">好的</button>
+    </div>
+
+    </body>
 </html>

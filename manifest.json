@@ -1,0 +1,25 @@
+{
+  "name": "醒醒鸦",
+  "short_name": "醒醒鸦",
+  "description": "精神状态自检，12种乌鸦人格测试",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#6b5b95",
+  "icons": [
+    {
+      "src": "favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": [
+    "entertainment",
+    "lifestyle"
+  ]
+}
