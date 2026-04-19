@@ -16,16 +16,33 @@ export default async function handler(req, res) {
     const PROJECT_ID = '7627880092177301550';
 
     try {
-        const { message, sessionId, testResult, hasContext } = req.body;
+        const { message, sessionId, testResult, hasContext, images } = req.body;
 
-        // 构建请求体
+        // 构建prompt，支持文字+图片
+        let prompt = [];
+        
+        // 添加文字
+        if (message) {
+            prompt.push({
+                type: 'text',
+                content: { text: message }
+            });
+        }
+        
+        // 添加图片（Base64）
+        if (images && images.length > 0) {
+            for (const imgData of images) {
+                prompt.push({
+                    type: 'image',
+                    content: { url: imgData }
+                });
+            }
+        }
+
         let requestBody = {
             content: {
                 query: {
-                    prompt: [{
-                        type: 'text',
-                        content: { text: message }
-                    }]
+                    prompt: prompt
                 }
             },
             type: 'query',
@@ -33,16 +50,12 @@ export default async function handler(req, res) {
             project_id: PROJECT_ID
         };
 
-        // 如果有测试结果，添加到上下文
         if (testResult && hasContext) {
             const contextMessage = `【用户刚完成了精神状态测试】
 测试结果：${testResult.emoji} ${testResult.type}
 精神状态指数：${testResult.score} / 60
 所属区域：${testResult.zone}
-
-请在聊天时根据这个测试结果，给予用户更针对性的心理支持和建议。用户可能需要被理解和陪伴。`;
-
-            // 添加到 additional_messages
+请在聊天时根据这个测试结果，给予用户更针对性的心理支持和建议。`;
             requestBody.content.query.additional_messages = [{
                 role: 'user',
                 content: contextMessage,
@@ -66,6 +79,7 @@ export default async function handler(req, res) {
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let result = '';
+        let images = [];  // AI回复的图片
         let tokenCost = null;
         let errorMsg = null;
 
@@ -81,17 +95,37 @@ export default async function handler(req, res) {
                     try {
                         const data = JSON.parse(line.slice(5));
                         
-                        // 拼接 answer 增量内容
+                        // 文本内容
                         if (data.type === 'answer' && data.content?.answer) {
                             result += data.content.answer;
                         }
                         
-                        // 获取 message_end 的 token 统计
+                        // 图片消息 - 多种格式兼容
+                        if (data.type === 'image' && data.content?.image_url) {
+                            const url = typeof data.content.image_url === 'string' 
+                                ? data.content.image_url 
+                                : data.content.image_url?.url;
+                            if (url) images.push(url);
+                        }
+                        
+                        if (data.type === 'generate_image_success' && data.content?.image_url) {
+                            const url = typeof data.content.image_url === 'string' 
+                                ? data.content.image_url 
+                                : data.content.image_url?.url;
+                            if (url) images.push(url);
+                        }
+                        
+                        if (data.type === 'conversation_message' && data.content?.message?.content_type === 'image') {
+                            const url = data.content.message.content?.url;
+                            if (url) images.push(url);
+                        }
+                        
+                        // token统计
                         if (data.type === 'message_end' && data.content?.message_end) {
                             tokenCost = data.content.message_end.token_cost;
                         }
                         
-                        // 处理错误
+                        // 错误处理
                         if (data.type === 'error' && data.content?.error) {
                             errorMsg = data.content.error.error_msg;
                         }
@@ -107,6 +141,7 @@ export default async function handler(req, res) {
         return res.status(200).json({ 
             success: true, 
             content: result || '嘎...小鸦暂时没想好说什么',
+            images: images,
             tokenCost: tokenCost
         });
 
