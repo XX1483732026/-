@@ -184,8 +184,10 @@ function showResult() {
         currentResult = yages[yageName];
         var zoneText = getZoneText(currentResult.zone);
         
-        // 构建维度得分显示
-        var dimensionText = '⚡' + scores.电量 + ' · 💭' + scores.情绪 + ' · 🏃' + scores.行动 + ' · 🔗' + scores.连接;
+        // 获取分区样式类
+        var zoneClass = 'awake';
+        if (currentResult.zone === '假寐区') zoneClass = 'blurry';
+        if (currentResult.zone === '沉睡区') zoneClass = 'asleep';
         
         // 保存到localStorage供聊天页面使用
         localStorage.setItem('xingxingya_test_result', JSON.stringify({
@@ -197,8 +199,7 @@ function showResult() {
             score: scores,
             levels: levels,
             zone: zoneText,
-            suitable: currentResult.suitable,
-            dimension: dimensionText
+            suitable: currentResult.suitable
         }));
         
         // 填充结果页面
@@ -206,26 +207,71 @@ function showResult() {
         document.getElementById('resultType').textContent = yageName;
         document.getElementById('resultDesc').textContent = currentResult.desc;
         
-        // 维度得分展示
-        var scoreValueEl = document.getElementById('scoreValue');
+        // 分区标签（放大版）
         var scoreZoneEl = document.getElementById('scoreZone');
-        if (scoreValueEl) scoreValueEl.innerHTML = dimensionText;
-        if (scoreZoneEl) scoreZoneEl.textContent = zoneText;
+        if (scoreZoneEl) {
+            scoreZoneEl.className = 'result-zone ' + zoneClass;
+            scoreZoneEl.textContent = zoneText;
+        }
         
-        // 适合做什么
+        // 指针式维度进度条
+        var scoreValueEl = document.getElementById('scoreValue');
+        if (scoreValueEl) {
+            var dimensionIcons = { '电量': '⚡', '情绪': '💭', '行动': '🏃', '连接': '🔗' };
+            var gaugeHtml = '<div class="dimension-gauges">';
+            gaugeHtml += '<div class="score-label">📊 心境状态指数</div>';
+            
+            for (var dim in scores) {
+                if (scores.hasOwnProperty(dim)) {
+                    var score = scores[dim];
+                    var pos = ((score - 5) / 10) * 100; // 5分→0%, 15分→100%
+                    gaugeHtml += 
+                        '<div class="dimension-gauge">' +
+                            '<div class="gauge-header">' +
+                                '<span class="gauge-label">' + dimensionIcons[dim] + ' ' + dim + '</span>' +
+                                '<span class="gauge-score">' + score + '分</span>' +
+                            '</div>' +
+                            '<div class="gauge-bar">' +
+                                '<div class="gauge-track">' +
+                                    '<div class="gauge-segment low"></div>' +
+                                    '<div class="gauge-segment mid"></div>' +
+                                    '<div class="gauge-segment high"></div>' +
+                                '</div>' +
+                                '<div class="gauge-pointer" style="left: ' + pos + '%"></div>' +
+                            '</div>' +
+                            '<div class="gauge-labels">' +
+                                '<span>低</span><span>中</span><span>高</span>' +
+                            '</div>' +
+                        '</div>';
+                }
+            }
+            gaugeHtml += '</div>';
+            scoreValueEl.innerHTML = gaugeHtml;
+        }
+        
+        // 适合做什么 + 按钮
         var adviceTextEl = document.getElementById('adviceText');
         if (adviceTextEl) {
-            adviceTextEl.innerHTML = '<div style="margin-bottom:12px;">' + currentResult.quote + '</div>' +
-                '<div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:12px;margin-top:8px;">' +
-                '<div style="font-size:12px;color:#8892b0;margin-bottom:6px;">🎯 适合做什么</div>' +
-                '<div>' + currentResult.suitable + '</div></div>';
+            adviceTextEl.innerHTML = 
+                '<div class="yage-quote" style="background:rgba(100,100,100,0.15);border-radius:12px;padding:14px 16px;margin-bottom:16px;border-left:3px solid rgba(255,255,255,0.2);">' +
+                    '<div style="font-size:12px;color:#8892b0;margin-bottom:6px;">🐦‍⬛ 鸦鸦有话说</div>' +
+                    '<div style="font-size:14px;color:#fff;">' + currentResult.quote + '</div>' +
+                '</div>' +
+                '<div style="margin-bottom:16px;">' +
+                    '<div style="font-size:12px;color:#8892b0;margin-bottom:8px;">🎯 适合做什么</div>' +
+                    '<div style="font-size:14px;color:#ccd6f6;">' + currentResult.suitable + '</div>' +
+                '</div>' +
+                '<div class="result-buttons">' +
+                    '<a href="community.html" class="explore-link">🔍 探索详情</a>' +
+                    '<a href="chat.html" class="chat-link-btn">💬 找小鸦聊聊</a>' +
+                '</div>';
         }
         
         // 填充图片容器
         document.getElementById('imgEmoji').textContent = currentResult.emoji;
         document.getElementById('imgType').textContent = yageName;
         document.getElementById('imgDesc').textContent = currentResult.desc;
-        document.getElementById('imgScore').innerHTML = dimensionText;
+        document.getElementById('imgScore').innerHTML = '⚡' + scores.电量 + ' · 💭' + scores.情绪 + ' · 🏃' + scores.行动 + ' · 🔗' + scores.连接;
         document.getElementById('imgZone').textContent = zoneText;
         document.getElementById('imgAdvice').innerHTML = '<div>' + currentResult.quote + '</div>' +
             '<div style="margin-top:8px;border-top:1px solid rgba(255,255,255,0.1);padding-top:8px;">' +
