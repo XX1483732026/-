@@ -100,6 +100,83 @@
             font-size: 13px;
             margin-bottom: 16px;
         }
+        /* 小鸦的故事版块 */
+        .story-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            padding: 28px 24px;
+            margin-bottom: 32px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .story-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .story-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .story-desc {
+            color: #8892b0;
+            font-size: 14px;
+        }
+        .story-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .story-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        .story-cover {
+            position: relative;
+            width: 80px;
+            height: 112px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .story-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .story-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .story-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .story-info p {
+            font-size: 13px;
+            color: #8892b0;
+        }
         .intro-card a {
             display: inline-block;
             padding: 12px 28px;
@@ -480,6 +557,24 @@
         </div>
     </div>
 
+    <!-- 小鸦的故事版块 -->
+    <div class="story-section">
+        <div class="story-header">
+            <h2>📖 小鸦的故事</h2>
+            <p class="story-desc">治愈系绘本，陪你度过每一个情绪时刻</p>
+        </div>
+        <div class="story-card" onclick="openStoryViewer()">
+            <div class="story-cover">
+                <img src="../绘本/小鸦的云朵心事/page_01.jpg" alt="小鸦的云朵心事" loading="lazy">
+                <div class="story-play-btn">▶</div>
+            </div>
+            <div class="story-info">
+                <h3>小鸦的云朵心事</h3>
+                <p>22页治愈系绘本</p>
+            </div>
+        </div>
+    </div>
+
     <!-- 品牌签名 -->
     <div class="footer">
         <p>🐦‍⬛ 醒醒鸦 · 了解此刻的你</p>
@@ -604,6 +699,11 @@
 
         // 初始化
         init();
+
+        // 打开故事阅读器
+        function openStoryViewer() {
+            window.location.href = 'story.html';
+        }
     </script>
 </body>
 </html>
