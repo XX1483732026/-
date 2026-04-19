@@ -15,11 +15,7 @@
     <meta name="robots" content="index, follow">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #2d2d44 100%);
@@ -28,258 +24,296 @@
         }
         .header {
             text-align: center;
-            padding: 50px 20px 40px;
-            position: relative;
-        }
-        .mascot {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 20px;
-            animation: bounce 2s ease-in-out infinite;
-        }
-        .mascot img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            padding: 40px 20px 30px;
         }
         .header h1 {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
             background: linear-gradient(90deg, #8b8b8b, #d4d4d4, #ffffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
         .header p {
             color: #8892b0;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-        .nav-links {
-            margin-top: 24px;
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        .nav-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 28px;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            border: 1px solid rgba(255,255,255,0.15);
-        }
-        .nav-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
-        }
-        .nav-link.primary {
-            background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
-            border: 2px solid #666;
-        }
-        .nav-link.primary:hover {
-            background: linear-gradient(135deg, #5a5a5a, #3d3d3d);
-            box-shadow: 0 6px 20px rgba(100, 100, 100, 0.4);
-        }
-        .intro-section {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-            border-radius: 24px;
-            padding: 40px;
-            margin: 0 auto 40px;
-            max-width: 800px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .intro-section h2 {
-            font-size: 28px;
-            margin-bottom: 16px;
-            background: linear-gradient(90deg, #aaa, #ddd, #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .intro-section p {
-            color: #8892b0;
-            line-height: 1.8;
-            font-size: 15px;
+            font-size: 14px;
         }
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 0 20px 80px;
+            padding: 0 16px 100px;
         }
-        .zone-section {
-            margin-bottom: 60px;
-        }
-        .zone-header {
+        /* 简介区 */
+        .intro-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
             text-align: center;
-            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .zone-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 8px;
+        .intro-card p {
+            color: #8892b0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .intro-card a {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
+            border: 1px solid #555;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .intro-card a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(100,100,100,0.4);
+        }
+        /* 分区标题 */
+        .zone-section { margin-bottom: 32px; }
+        .zone-header {
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        .zone-title.awake {
-            background: linear-gradient(90deg, #ffd700, #ffed4a, #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .zone-emoji { font-size: 24px; }
+        .zone-name {
+            font-size: 20px;
+            font-weight: 600;
         }
-        .zone-title.blurry {
-            background: linear-gradient(90deg, #a0a0c0, #c0c0d8, #e0e0f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .zone-name.awake { color: #ffd700; }
+        .zone-name.blurry { color: #a0a0c0; }
+        .zone-name.asleep { color: #6a6a8a; }
+        .zone-count {
+            font-size: 12px;
+            color: #5a6a8a;
+            margin-left: auto;
         }
-        .zone-title.asleep {
-            background: linear-gradient(90deg, #4a4a6a, #6a6a8a, #8a8aaa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .zone-desc {
-            color: #6b7c93;
-            font-size: 14px;
-        }
+        /* 卡片网格 */
         .yage-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
         }
+        /* 精简卡片 */
         .yage-card {
-            background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-            border-radius: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.4s ease;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         .yage-card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-4px);
             border-color: rgba(255,255,255,0.2);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
         }
-        .yage-img-wrapper {
+        .yage-card:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+        .yage-img-area {
             position: relative;
-            background: linear-gradient(135deg, #2a2a4a, #1a1a3a);
-            padding: 30px;
+            height: 100px;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 200px;
+            background: linear-gradient(135deg, #2a2a4a, #1a1a3a);
         }
-        .yage-emoji-large {
-            font-size: 100px;
-            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+        .yage-emoji {
+            font-size: 56px;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
         }
-        .zone-badge {
+        .zone-tag {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
+            top: 8px;
+            right: 8px;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 11px;
             font-weight: 500;
         }
-        .zone-badge.awake {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 237, 74, 0.2));
-            border: 1px solid rgba(255, 215, 0, 0.5);
+        .zone-tag.awake {
+            background: rgba(255,215,0,0.2);
+            border: 1px solid rgba(255,215,0,0.4);
             color: #ffd700;
         }
-        .zone-badge.blurry {
-            background: linear-gradient(135deg, rgba(160, 160, 192, 0.3), rgba(192, 192, 216, 0.2));
-            border: 1px solid rgba(160, 160, 192, 0.5);
+        .zone-tag.blurry {
+            background: rgba(160,160,192,0.2);
+            border: 1px solid rgba(160,160,192,0.4);
             color: #a0a0c0;
         }
-        .zone-badge.asleep {
-            background: linear-gradient(135deg, rgba(74, 74, 106, 0.3), rgba(106, 106, 138, 0.2));
-            border: 1px solid rgba(74, 74, 106, 0.5);
+        .zone-tag.asleep {
+            background: rgba(74,74,106,0.2);
+            border: 1px solid rgba(74,74,106,0.4);
             color: #6a6a8a;
         }
         .yage-info {
-            padding: 24px;
+            padding: 12px;
+            text-align: center;
         }
         .yage-name {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #fff;
-        }
-        .yage-dimension {
-            font-size: 12px;
-            color: #8892b0;
-            margin-bottom: 12px;
-            padding: 6px 10px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            display: inline-block;
-        }
-        .yage-desc {
             font-size: 14px;
-            line-height: 1.7;
-            color: #ccd6f6;
-            margin-bottom: 16px;
-        }
-        .yage-quote {
-            background: rgba(100, 100, 100, 0.15);
-            border-radius: 12px;
-            padding: 14px 16px;
-            margin-bottom: 12px;
-            border-left: 3px solid rgba(255,255,255,0.2);
-        }
-        .quote-label {
-            font-size: 11px;
-            color: #8892b0;
+            font-weight: 600;
+            color: #fff;
             margin-bottom: 6px;
         }
-        .quote-text {
-            font-size: 13px;
-            color: #fff;
-            font-style: italic;
+        .yage-dimension {
+            font-size: 11px;
+            color: #8892b0;
+            line-height: 1.4;
         }
-        .yage-suitable {
+        /* 弹窗 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-overlay.show { display: flex; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #2d2d44);
+            border-radius: 24px;
+            max-width: 400px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .modal-header {
+            position: relative;
+            padding: 40px 20px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #2a2a4a, #1a1a3a);
+        }
+        .modal-emoji {
+            font-size: 80px;
+            margin-bottom: 12px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .modal-close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .modal-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .modal-zone {
+            font-size: 14px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .modal-zone.awake { background: rgba(255,215,0,0.2); color: #ffd700; }
+        .modal-zone.blurry { background: rgba(160,160,192,0.2); color: #a0a0c0; }
+        .modal-zone.asleep { background: rgba(74,74,106,0.2); color: #6a6a8a; }
+        .modal-body {
+            padding: 20px;
+        }
+        .modal-section {
+            margin-bottom: 20px;
+        }
+        .modal-label {
+            font-size: 12px;
+            color: #8892b0;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+        }
+        .modal-dimension {
             font-size: 13px;
-            color: #8892b0;
+            color: #ccd6f6;
+            background: rgba(255,255,255,0.05);
+            padding: 10px 14px;
+            border-radius: 10px;
         }
-        .suitable-icon {
-            font-size: 16px;
+        .modal-desc {
+            font-size: 14px;
+            color: #ccd6f6;
+            line-height: 1.7;
         }
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: #5a6a8a;
-            font-size: 13px;
-        }
-        .footer a {
-            color: #8892b0;
-            text-decoration: none;
-        }
-        .footer a:hover {
+        .modal-quote {
+            background: rgba(100,100,100,0.15);
+            border-radius: 12px;
+            padding: 14px 16px;
+            border-left: 3px solid rgba(255,255,255,0.2);
+            font-style: italic;
             color: #fff;
+            line-height: 1.6;
         }
-        /* 底部导航栏 */
+        .modal-suitable {
+            font-size: 14px;
+            color: #ccd6f6;
+            line-height: 1.6;
+        }
+        .modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .modal-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
+            border: 1px solid #555;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(100,100,100,0.4);
+        }
+        /* 底部导航 */
         .footer-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(13, 13, 26, 0.95);
+            background: rgba(13,13,26,0.95);
             backdrop-filter: blur(10px);
             border-top: 1px solid rgba(255,255,255,0.1);
             display: flex;
@@ -301,378 +335,87 @@
             color: #fff;
             background: rgba(255,255,255,0.1);
         }
-        .nav-icon {
-            font-size: 20px;
-        }
-        .nav-label {
-            font-size: 11px;
-            margin-top: 2px;
-        }
-        /* 离线提示 */
-        .offline-toast {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(26, 26, 46, 0.95);
-            color: #fff;
-            padding: 24px 32px;
-            border-radius: 16px;
-            font-size: 16px;
-            z-index: 10000;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            align-items: center;
-            gap: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-        .offline-toast.show {
-            display: flex;
-        }
-        .offline-icon {
-            font-size: 28px;
-            animation: fly 1s ease-in-out infinite;
-        }
-        @keyframes fly {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(10deg); }
-        }
-        .reconnect-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: #fff;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        .close-toast {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 24px;
-            cursor: pointer;
-        }
+        .nav-icon { font-size: 20px; }
+        .nav-label { font-size: 11px; margin-top: 2px; }
     </style>
 </head>
 <body>
-    <!-- 离线提示 -->
-    <div class="offline-toast" id="offlineToast">
-        <button class="close-toast" onclick="hideOfflineToast()">×</button>
-        <span class="offline-icon">🐦‍⬛</span>
-        <span>小鸦飞去找网络了...</span>
-        <button class="reconnect-btn" onclick="location.reload()">重新连接</button>
-    </div>
-
     <div class="header">
-        <div class="mascot">
-            <img src="mengya.png" alt="小鸦">
-        </div>
         <h1>鸦格社区</h1>
-        <p>心境如云，不定义，只看见<br>每一种心境，都是此刻真实的你</p>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link primary">🏠 测测你的鸦格</a>
-            <a href="chat.html" class="nav-link">💬 和小鸦聊天</a>
-        </div>
+        <p>心境如云，不定义，只看见</p>
     </div>
 
     <div class="container">
-        <div class="intro-section">
-            <h2>什么是鸦格？</h2>
-            <p>鸦格是醒醒鸦的12种心境状态，通过4个维度（电量、情绪、行动、连接）<br>计算出你此刻的精神状态。不是标签，是当下真实的你。</p>
+        <div class="intro-card">
+            <p>12种鸦格状态，通过4个维度（电量、情绪、行动、连接）<br>计算出你此刻的精神状态。点击卡片查看详情~</p>
+            <a href="index.html">🏠 测测你的鸦格</a>
         </div>
 
-        <!-- ========== 清醒区 ========== -->
-        <div class="zone-section">
+        <!-- 清醒区 -->
+        <div class="zone-section" id="zone-awake">
             <div class="zone-header">
-                <div class="zone-title awake">🌅 清醒区</div>
-                <div class="zone-desc">电量充沛，状态在线，掌控感满满</div>
+                <span class="zone-emoji">🌅</span>
+                <span class="zone-name awake">清醒区</span>
+                <span class="zone-count">3种鸦格</span>
             </div>
-            <div class="yage-grid">
-                <!-- 巡天智者鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <div class="zone-badge awake">🌅 清醒区</div>
-                        <div class="yage-emoji-large">🦅</div>
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">巡天智者鸦</div>
-                        <div class="yage-dimension">电量高 + 情绪高/中 + 连接高/中</div>
-                        <div class="yage-desc">此刻的你，像一只盘旋在高空中的鸦，看得见地面的拥堵，也看得见远方的旷野。你没有被忙碌淹没，也没有被焦虑吞噬。</div>
-                        <div class="yage-quote">
-                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
-                            <div class="quote-text">清醒不是冷漠，是看透后依然选择认真生活。</div>
-                        </div>
-                        <div class="yage-suitable">
-                            <span class="suitable-icon">🎯</span>
-                            <span>适合：做重要决策、处理复杂问题、深度交流</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 待机隐士鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <div class="zone-badge awake">🌅 清醒区</div>
-                        <div class="yage-emoji-large">🦅</div>
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">待机隐士鸦</div>
-                        <div class="yage-dimension">电量高 + 情绪低</div>
-                        <div class="yage-desc">你现在的能量满格，但选择了蛰伏。像一只在枝头安静待着的鸦，目光深远，随时可以展翅，但没有那个冲动。</div>
-                        <div class="yage-quote">
-                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
-                            <div class="quote-text">待机不是懈怠，是在等一个值得全力以赴的时刻。</div>
-                        </div>
-                        <div class="yage-suitable">
-                            <span class="suitable-icon">🎯</span>
-                            <span>适合：观察思考、等待时机、深度工作</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 行动爆发鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <div class="zone-badge awake">🌅 清醒区</div>
-                        <div class="yage-emoji-large">🔥</div>
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">行动爆发鸦</div>
-                        <div class="yage-dimension">电量高 + 行动高</div>
-                        <div class="yage-desc">你现在像一团刚被点燃的火，噼里啪啦地烧着。别人还在犹豫，你已经冲出去了；别人还在计划，你已经完成了一半。</div>
-                        <div class="yage-quote">
-                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
-                            <div class="quote-text">热情是好燃料，但记得系好安全带再踩油门。</div>
-                        </div>
-                        <div class="yage-suitable">
-                            <span class="suitable-icon">🎯</span>
-                            <span>适合：执行计划、创意输出、社交活跃</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="yage-grid" id="grid-awake"></div>
         </div>
 
-        <!-- ========== 假寐区 ========== -->
-        <div class="zone-section">
+        <!-- 假寐区 -->
+        <div class="zone-section" id="zone-blurry">
             <div class="zone-header">
-                <div class="zone-title blurry">🌫️ 假寐区</div>
-                <div class="zone-desc">电量平稳，不上不下，一切刚刚好</div>
+                <span class="zone-emoji">🌫️</span>
+                <span class="zone-name blurry">假寐区</span>
+                <span class="zone-count">5种鸦格</span>
             </div>
-            <div class="yage-grid">
-                <!-- 舒适咸鱼鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <div class="zone-badge blurry">🌫️ 假寐区</div>
-                        <div class="yage-emoji-large">🐟</div>
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">舒适咸鱼鸦</div>
-                        <div class="yage-dimension">电量中 + 情绪高 + 行动低</div>
-                        <div class="yage-desc">一切都刚刚好：不太累，不太饿，不太冷，不太热。就是……不太想动。这不是颓废，这是对自己辛勤工作的奖励。</div>
-                        <div class="yage-quote">
-                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
-                            <div class="quote-text">咸鱼也需要资格认证，你刚好是那个持证上岗的人。</div>
-                        </div>
-                        <div class="yage-suitable">
-                            <span class="suitable-icon">🎯</span>
-                            <span>适合：休息恢复、低强度娱乐、发呆放空</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 社交探索鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <div class="zone-badge blurry">🌫️ 假寐区</div>
-                        <div class="yage-emoji-large">🦜</div>
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">社交探索鸦</div>
-                        <div class="yage-dimension">电量中 + 情绪高 + 行动高</div>
-                        <div class="yage-desc">电量不算特别足，但心情好啊！脑子里冒出一堆想去的地方、想见的人、想做的事。今天你就是那只最闪亮的社交鸦。</div>
-                        <div class="yage-quote">
-                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
-                            <div class="quote-text">好心情是最好的燃料，一起出发才更带劲。</div>
-                        </div>
-                        <div class="yage-suitable">
-                            <span class="suitable-icon">🎯</span>
-                            <span>适合：组队活动、短途出行、社交聚会</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 电量中转鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <div class="zone-badge blurry">🌫️ 假寐区</div>
-                        <div class="yage-emoji-large">🚉</div>
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">电量中转鸦</div>
-                        <div class="yage-dimension">电量中 + 情绪中 + 行动高</div>
-                        <div class="yage-desc">你现在处于一个「正在转换」的节点。像站在中转站的鸦，等待自己的下一班列车。不用急着做决定，在这里停一停。</div>
-                        <div class="yage-quote">
-                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
-                            <div class="quote-text">中转站不是终点，是蓄力的好时候。</div>
-                        </div>
-                        <div class="yage-suitable">
-                            <span class="suitable-icon">🎯</span>
-                            <span>适合：整理思路、处理杂事、等待时机</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 迷雾探险鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <div class="zone-badge blurry">🌫️ 假寐区</div>
-                        <div class="yage-emoji-large">🌫️</div>
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">迷雾探险鸦</div>
-                        <div class="yage-dimension">电量中 + 情绪低/中 + 行动中 + 连接低/中</div>
-                        <div class="yage-desc">前方的路看不清，但你还是迈出了步子。迷茫说明你还在寻找，还没有放弃。迷雾会散的，路会明的。</div>
-                        <div class="yage-quote">
-                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
-                            <div class="quote-text">看不清路的时候，走本身就是答案。</div>
-                        </div>
-                        <div class="yage-suitable">
-                            <span class="suitable-icon">🎯</span>
-                            <span>适合：小范围试错、收集信息、聊天交流</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 伪装讨喜鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <div class="zone-badge blurry">🌫️ 假寐区</div>
-                        <div class="yage-emoji-large">🎭</div>
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">伪装讨喜鸦</div>
-                        <div class="yage-dimension">电量中/低 + 情绪低 + 连接高</div>
-                        <div class="yage-desc">你每天戴着「我很好」的面具，在人群里周旋。别人都觉得你游刃有余，只有你自己知道，摘下面具的那一刻有多疲惫。</div>
-                        <div class="yage-quote">
-                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
-                            <div class="quote-text">你不需要对所有人笑，有些人值得看你真实的眼泪。</div>
-                        </div>
-                        <div class="yage-suitable">
-                            <span class="suitable-icon">🎯</span>
-                            <span>适合：维持基本社交、必要应酬</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="yage-grid" id="grid-blurry"></div>
         </div>
 
-        <!-- ========== 沉睡区 ========== -->
-        <div class="zone-section">
+        <!-- 沉睡区 -->
+        <div class="zone-section" id="zone-asleep">
             <div class="zone-header">
-                <div class="zone-title asleep">🌑 沉睡区</div>
-                <div class="zone-desc">电量告急，需要休息和恢复</div>
+                <span class="zone-emoji">🌑</span>
+                <span class="zone-name asleep">沉睡区</span>
+                <span class="zone-count">4种鸦格</span>
             </div>
-            <div class="yage-grid">
-                <!-- 疗愈独处鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <div class="zone-badge asleep">🌑 沉睡区</div>
-                        <div class="yage-emoji-large">🌙</div>
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">疗愈独处鸦</div>
-                        <div class="yage-dimension">电量低 + 情绪高 + 行动中/低</div>
-                        <div class="yage-desc">电量快见底了，但心情居然还不错。像大雨后的晴天，有一点疲惫，但更多的是宁静和满足。这种自我疗愈的能力，是成年人的必修课。</div>
-                        <div class="yage-quote">
-                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
-                            <div class="quote-text">最好的疗愈，有时候就是什么都不做。</div>
-                        </div>
-                        <div class="yage-suitable">
-                            <span class="suitable-icon">🎯</span>
-                            <span>适合：安静休息、简单娱乐、独自恢复</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="yage-grid" id="grid-asleep"></div>
+        </div>
+    </div>
 
-                <!-- 电量透支鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <div class="zone-badge asleep">🌑 沉睡区</div>
-                        <div class="yage-emoji-large">⚡</div>
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">电量透支鸦</div>
-                        <div class="yage-dimension">电量低 + 情绪高 + 行动高</div>
-                        <div class="yage-desc">明明已经累到不行了，但心情却很亢奋。像一辆没油的车还在跑，靠的是最后的意志力。冷静下来，让身体休息。</div>
-                        <div class="yage-quote">
-                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
-                            <div class="quote-text">亢奋是最后的电量，且用且珍惜。</div>
-                        </div>
-                        <div class="yage-suitable">
-                            <span class="suitable-icon">🎯</span>
-                            <span>适合：紧急任务（慎用！）、必要坚持</span>
-                        </div>
-                    </div>
+    <!-- 弹窗 -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal()">×</button>
+                <div class="modal-emoji" id="modal-emoji"></div>
+                <div class="modal-name" id="modal-name"></div>
+                <div class="modal-zone" id="modal-zone"></div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <div class="modal-label">📊 维度条件</div>
+                    <div class="modal-dimension" id="modal-dimension"></div>
                 </div>
-
-                <!-- 燃尽冲刺鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <div class="zone-badge asleep">🌑 沉睡区</div>
-                        <div class="yage-emoji-large">💨</div>
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">燃尽冲刺鸦</div>
-                        <div class="yage-dimension">电量低 + 情绪低 + 行动高</div>
-                        <div class="yage-desc">已经很累了，但停不下来。可能是 deadline，可能是承诺没兑现，可能是单纯的不甘心。完成比完美重要。</div>
-                        <div class="yage-quote">
-                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
-                            <div class="quote-text">冲刺很好，但记得在耗尽前给自己留点余量。</div>
-                        </div>
-                        <div class="yage-suitable">
-                            <span class="suitable-icon">🎯</span>
-                            <span>适合：意志力对抗（慎用！）</span>
-                        </div>
-                    </div>
+                <div class="modal-section">
+                    <div class="modal-label">📝 状态描述</div>
+                    <div class="modal-desc" id="modal-desc"></div>
                 </div>
-
-                <!-- 破晓微光鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <div class="zone-badge asleep">🌑 沉睡区</div>
-                        <div class="yage-emoji-large">🌅</div>
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">破晓微光鸦</div>
-                        <div class="yage-dimension">电量低 + 情绪低 + 行动中/低</div>
-                        <div class="yage-desc">你刚刚经历了一些不太好的事，可能还没完全走出来。但你今天愿意面对自己，这本身就是一件很勇敢的事。</div>
-                        <div class="yage-quote">
-                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
-                            <div class="quote-text">最低谷的时候，往哪个方向走都是向上。</div>
-                        </div>
-                        <div class="yage-suitable">
-                            <span class="suitable-icon">🎯</span>
-                            <span>适合：低强度任务、陪伴治愈、自我觉察</span>
-                        </div>
-                    </div>
+                <div class="modal-section">
+                    <div class="modal-label">🐦‍⬛ 鸦鸦有话说</div>
+                    <div class="modal-quote" id="modal-quote"></div>
                 </div>
+                <div class="modal-section">
+                    <div class="modal-label">🎯 适合做什么</div>
+                    <div class="modal-suitable" id="modal-suitable"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="index.html" class="modal-btn">🏠 测测我的鸦格</a>
             </div>
         </div>
     </div>
 
-    <div class="footer">
-        <p>🐦‍⬛ 醒醒鸦 · 了解此刻的你</p>
-        <div class="footer-links"><a href="index.html">返回首页</a> · <a href="chat.html">聊天</a> · <a href="privacy.html">隐私政策</a></div>
-    </div>
-
-    <!-- 底部导航栏 -->
+    <!-- 底部导航 -->
     <div class="footer-nav">
         <a href="index.html" class="footer-nav-item">
             <span class="nav-icon">🏠</span>
@@ -692,16 +435,102 @@
         </a>
     </div>
 
+    <!-- 鸦格数据（内嵌避免额外请求） -->
+    <script src="js/yages.js"></script>
     <script>
-        function showOfflineToast() {
-            document.getElementById('offlineToast').classList.add('show');
+        // 鸦格分类
+        var zones = {
+            awake: [],
+            blurry: [],
+            asleep: []
+        };
+
+        // 根据维度条件判断分区
+        function getZoneClass(yage) {
+            if (yage.zone === '清醒区') return 'awake';
+            if (yage.zone === '假寐区') return 'blurry';
+            return 'asleep';
         }
-        function hideOfflineToast() {
-            document.getElementById('offlineToast').classList.remove('show');
+
+        // 获取分区emoji
+        function getZoneEmoji(zone) {
+            if (zone === '清醒区') return '🌅';
+            if (zone === '假寐区') return '🌫️';
+            return '🌑';
         }
-        window.addEventListener('online', hideOfflineToast);
-        window.addEventListener('offline', showOfflineToast);
-        if (!navigator.onLine) showOfflineToast();
+
+        // 初始化页面
+        function init() {
+            // 遍历鸦格数据，分区存放
+            for (var name in yages) {
+                var yage = yages[name];
+                var zoneClass = getZoneClass(yage);
+                zones[zoneClass].push({ name: name, ...yage });
+            }
+
+            // 渲染各分区卡片
+            renderZone('awake');
+            renderZone('blurry');
+            renderZone('asleep');
+        }
+
+        // 渲染分区卡片
+        function renderZone(zoneClass) {
+            var grid = document.getElementById('grid-' + zoneClass);
+            var cards = zones[zoneClass];
+
+            cards.forEach(function(yage) {
+                var card = document.createElement('div');
+                card.className = 'yage-card';
+                card.onclick = function() { openModal(yage, zoneClass); };
+
+                card.innerHTML = 
+                    '<div class="yage-img-area">' +
+                        '<span class="zone-tag ' + zoneClass + '">' + getZoneEmoji(yage.zone) + yage.zone + '</span>' +
+                        '<span class="yage-emoji">' + yage.emoji + '</span>' +
+                    '</div>' +
+                    '<div class="yage-info">' +
+                        '<div class="yage-name">' + yage.name + '</div>' +
+                        '<div class="yage-dimension">' + yage.dimension.replace(/\+/g, ' + ').replace(/\//g, '/') + '</div>' +
+                    '</div>';
+
+                grid.appendChild(card);
+            });
+        }
+
+        // 打开弹窗
+        function openModal(yage, zoneClass) {
+            document.getElementById('modal-emoji').textContent = yage.emoji;
+            document.getElementById('modal-name').textContent = yage.name;
+            document.getElementById('modal-zone').className = 'modal-zone ' + zoneClass;
+            document.getElementById('modal-zone').textContent = getZoneEmoji(yage.zone) + ' ' + yage.zone;
+            document.getElementById('modal-dimension').textContent = yage.dimension;
+            document.getElementById('modal-desc').textContent = yage.desc;
+            document.getElementById('modal-quote').textContent = '"' + yage.quote + '"';
+            document.getElementById('modal-suitable').textContent = yage.suitable;
+
+            document.getElementById('modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 关闭弹窗
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        // 点击遮罩关闭
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // ESC键关闭
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // 初始化
+        init();
     </script>
 </body>
 </html>
