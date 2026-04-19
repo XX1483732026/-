@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>鸦格社区 · 醒醒鸦</title>
     <link rel="icon" type="image/png" href="mengya.png">
-    <!-- SEO meta标签 -->
-    <meta name="description" content="鸦格社区 - 分享你的精神状态测试结果，看看大家的真实鸦格分布，发现志同道合的伙伴。">
+    <meta name="description" content="鸦格社区 - 探索12种精神状态，发现你此刻的真实心境。">
     <meta name="keywords" content="精神状态测试,鸦格社区,心理测试,醒醒鸦">
-    <!-- Open Graph 社交分享 -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://xingxingya.com/community.html">
     <meta property="og:title" content="鸦格社区 · 醒醒鸦">
-    <meta property="og:description" content="分享你的精神状态测试结果，看看大家的真实鸦格分布">
+    <meta property="og:description" content="探索12种鸦格图鉴，发现你此刻的真实心境">
     <meta property="og:image" content="https://xingxingya.com/mengya.png">
     <meta name="robots" content="index, follow">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -24,7 +22,7 @@
         }
         body {
             font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 50%, #3d3d5c 100%);
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #2d2d44 100%);
             min-height: 100vh;
             color: #fff;
         }
@@ -52,13 +50,13 @@
         .header h1 {
             font-size: 36px;
             font-weight: 700;
-            background: linear-gradient(90deg, #ffd4e5, #fff, #d4f0ff);
+            background: linear-gradient(90deg, #8b8b8b, #d4d4d4, #ffffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 12px;
         }
         .header p {
-            color: #b8b8d0;
+            color: #8892b0;
             font-size: 16px;
             line-height: 1.6;
         }
@@ -89,30 +87,73 @@
             background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
         }
         .nav-link.primary {
-            background: linear-gradient(135deg, #6b5b95, #8b7bab);
-            border: none;
+            background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
+            border: 2px solid #666;
         }
         .nav-link.primary:hover {
-            background: linear-gradient(135deg, #7b6ba5, #9b8bbb);
+            background: linear-gradient(135deg, #5a5a5a, #3d3d3d);
+            box-shadow: 0 6px 20px rgba(100, 100, 100, 0.4);
         }
-        .section {
-            padding: 40px 20px;
-        }
-        .section-title {
+        .intro-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border-radius: 24px;
+            padding: 40px;
+            margin: 0 auto 40px;
+            max-width: 800px;
             text-align: center;
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            color: #fff;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .section-title span {
-            background: linear-gradient(90deg, #ffd4e5, #d4f0ff);
+        .intro-section h2 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            background: linear-gradient(90deg, #aaa, #ddd, #fff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+        .intro-section p {
+            color: #8892b0;
+            line-height: 1.8;
+            font-size: 15px;
         }
         .container {
             max-width: 1000px;
             margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+        .zone-section {
+            margin-bottom: 60px;
+        }
+        .zone-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .zone-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .zone-title.awake {
+            background: linear-gradient(90deg, #ffd700, #ffed4a, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .zone-title.blurry {
+            background: linear-gradient(90deg, #a0a0c0, #c0c0d8, #e0e0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .zone-title.asleep {
+            background: linear-gradient(90deg, #4a4a6a, #6a6a8a, #8a8aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .zone-desc {
+            color: #6b7c93;
+            font-size: 14px;
         }
         .yage-grid {
             display: grid;
@@ -121,478 +162,118 @@
         }
         .yage-card {
             background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-            border-radius: 24px;
+            border-radius: 20px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.1);
             transition: all 0.4s ease;
         }
         .yage-card:hover {
             transform: translateY(-8px) scale(1.02);
-            border-color: rgba(255,200,220,0.3);
+            border-color: rgba(255,255,255,0.2);
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
         .yage-img-wrapper {
             position: relative;
             background: linear-gradient(135deg, #2a2a4a, #1a1a3a);
-            padding: 20px;
+            padding: 30px;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 200px;
         }
-        .yage-img {
-            width: 180px;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 16px;
-            transition: transform 0.3s ease;
+        .yage-emoji-large {
+            font-size: 100px;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
         }
-        .yage-card:hover .yage-img {
-            transform: scale(1.05);
+        .zone-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .zone-badge.awake {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 237, 74, 0.2));
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            color: #ffd700;
+        }
+        .zone-badge.blurry {
+            background: linear-gradient(135deg, rgba(160, 160, 192, 0.3), rgba(192, 192, 216, 0.2));
+            border: 1px solid rgba(160, 160, 192, 0.5);
+            color: #a0a0c0;
+        }
+        .zone-badge.asleep {
+            background: linear-gradient(135deg, rgba(74, 74, 106, 0.3), rgba(106, 106, 138, 0.2));
+            border: 1px solid rgba(74, 74, 106, 0.5);
+            color: #6a6a8a;
         }
         .yage-info {
             padding: 24px;
         }
         .yage-name {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
-        .yage-traits {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 14px;
-            flex-wrap: wrap;
-        }
-        .trait-tag {
-            background: linear-gradient(135deg, rgba(255,200,220,0.2), rgba(200,220,255,0.2));
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            color: #e0d0f0;
-            border: 1px solid rgba(255,255,255,0.1);
+        .yage-dimension {
+            font-size: 12px;
+            color: #8892b0;
+            margin-bottom: 12px;
+            padding: 6px 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            display: inline-block;
         }
         .yage-desc {
             font-size: 14px;
-            line-height: 1.8;
-            color: #a0a0c0;
-        }
-        .intro-section {
-            background: linear-gradient(135deg, rgba(107,91,149,0.2), rgba(139,123,171,0.1));
-            border-radius: 24px;
-            padding: 40px;
-            margin: 40px auto;
-            max-width: 800px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .intro-section h2 {
-            font-size: 28px;
+            line-height: 1.7;
+            color: #ccd6f6;
             margin-bottom: 16px;
-            background: linear-gradient(90deg, #ffd4e5, #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
-        .intro-section p {
-            color: #c0c0d8;
-            line-height: 1.8;
-            font-size: 15px;
+        .yage-quote {
+            background: rgba(100, 100, 100, 0.15);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            border-left: 3px solid rgba(255,255,255,0.2);
+        }
+        .quote-label {
+            font-size: 11px;
+            color: #8892b0;
+            margin-bottom: 6px;
+        }
+        .quote-text {
+            font-size: 13px;
+            color: #fff;
+            font-style: italic;
+        }
+        .yage-suitable {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #8892b0;
+        }
+        .suitable-icon {
+            font-size: 16px;
         }
         .footer {
             text-align: center;
             padding: 40px 20px;
-            color: #666;
+            color: #5a6a8a;
             font-size: 13px;
         }
         .footer a {
-            color: #888;
+            color: #8892b0;
             text-decoration: none;
         }
-        .decoration {
-            position: fixed;
-            pointer-events: none;
-            opacity: 0.1;
-            font-size: 100px;
-        }
-        .decoration-1 { top: 10%; left: 5%; }
-        .decoration-2 { top: 50%; right: 5%; }
-        .decoration-3 { bottom: 20%; left: 10%; }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <div class="mascot">
-            <img src="mengya.png" alt="小鸦">
-        </div>
-        <h1>鸦格社区</h1>
-        <p>发现你此刻的心境<br>每一种心境，都是此刻真实的你</p>
-    
-    <div class="intro-section">
-        <h2>什么是鸦格？</h2>
-        <p>鸦格是小鸦的12种心境状态，是你此刻内心的真实写照。<br>心境如云，时卷时舒。此刻的你，是哪一种心境？<br>测一测，发现你此刻的心境状态。</p>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link primary">🏠 测测你的鸦格</a>
-            <a href="chat.html" class="nav-link">💬 和小鸦聊天</a>
-        </div>
-    </div>
-    
-    <div class="section">
-        <div class="container">
-            <h2 class="section-title"><span>12种鸦格图鉴</span></h2>
-            <div class="yage-grid">
-                <!-- 振翅高飞鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_振翅高飞鸦.jpg" 
-                         data-src="yages/鸦格_振翅高飞鸦.jpg" 
-                         alt="振翅高飞鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="if(!this.dataset.loaded){this.dataset.loaded='1';this.style.filter='blur(2px)';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;this.style.filter='none';}.bind(this);}">
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">🌟 振翅高飞鸦</div>
-                        <div class="yage-traits">
-                            <span class="trait-tag">积极进取</span>
-                            <span class="trait-tag">目标明确</span>
-                        </div>
-                        <div class="yage-desc">此刻的你心中有火，眼里有光，每一步都在靠近想要的自己。风刚好，方向刚好，你也刚好。</div>
-                    </div>
-                </div>
-                
-                <!-- 巡天智者鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_巡天智者鸦.jpg" 
-                         data-src="yages/鸦格_巡天智者鸦.jpg" 
-                         alt="巡天智者鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="if(!this.dataset.loaded){this.dataset.loaded='1';this.style.filter='blur(2px)';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;this.style.filter='none';}.bind(this);}">
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">🔭 巡天智者鸦</div>
-                        <div class="yage-traits">
-                            <span class="trait-tag">沉静思考</span>
-                            <span class="trait-tag">俯瞰全局</span>
-                        </div>
-                        <div class="yage-desc">此刻的你选择旁观世界，不是冷漠，是懂得有些事看清比参与更重要。</div>
-                    </div>
-                </div>
-                
-                <!-- 蹲枝观望鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_蹲枝观望鸦.jpg" 
-                         data-src="yages/鸦格_蹲枝观望鸦.jpg" 
-                         alt="蹲枝观望鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="if(!this.dataset.loaded){this.dataset.loaded='1';this.style.filter='blur(2px)';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;this.style.filter='none';}.bind(this);}">
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">🪹 蹲枝观望鸦</div>
-                        <div class="yage-traits">
-                            <span class="trait-tag">犹豫不决</span>
-                            <span class="trait-tag">等待时机</span>
-                        </div>
-                        <div class="yage-desc">此刻的你选择等待，不是犹豫，是在等一个值得全力以赴的瞬间。风会来的，你要等。</div>
-                    </div>
-                </div>
-                
-                <!-- 迷雾盘旋鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_迷雾盘旋鸦.jpg" 
-                         data-src="yages/鸦格_迷雾盘旋鸦.jpg" 
-                         alt="迷雾盘旋鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="if(!this.dataset.loaded){this.dataset.loaded='1';this.style.filter='blur(2px)';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;this.style.filter='none';}.bind(this);}">
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">🌫️ 迷雾盘旋鸦</div>
-                        <div class="yage-traits">
-                            <span class="trait-tag">迷茫困惑</span>
-                            <span class="trait-tag">寻找方向</span>
-                        </div>
-                        <div class="yage-desc">此刻的你在迷雾中摸索前行，没关系，谁的成长不是从迷路开始的呢？</div>
-                    </div>
-                </div>
-                
-                <!-- 折翼停飞鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_折翼停飞鸦.jpg" 
-                         data-src="yages/鸦格_折翼停飞鸦.jpg" 
-                         alt="折翼停飞鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="if(!this.dataset.loaded){this.dataset.loaded='1';this.style.filter='blur(2px)';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;this.style.filter='none';}.bind(this);}">
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">🩹 折翼停飞鸦</div>
-                        <div class="yage-traits">
-                            <span class="trait-tag">受挫低落</span>
-                            <span class="trait-tag">需要疗愈</span>
-                        </div>
-                        <div class="yage-desc">此刻的你选择停下来喘息，没关系的。能承认自己累了，本身就是一种勇敢。</div>
-                    </div>
-                </div>
-                
-                <!-- 脱毛换羽鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_脱毛换羽鸦.jpg" 
-                         data-src="yages/鸦格_脱毛换羽鸦.jpg" 
-                         alt="脱毛换羽鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="if(!this.dataset.loaded){this.dataset.loaded='1';this.style.filter='blur(2px)';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;this.style.filter='none';}.bind(this);}">
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">🪶 脱毛换羽鸦</div>
-                        <div class="yage-traits">
-                            <span class="trait-tag">成长阵痛</span>
-                            <span class="trait-tag">自我更新</span>
-                        </div>
-                        <div class="yage-desc">此刻的你在新旧之间拉扯，有点狼狈。但每一根新羽毛，都是重生的证据。</div>
-                    </div>
-                </div>
-                
-                <!-- 漩涡坠落鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_漩涡坠落鸦.jpg" 
-                         data-src="yages/鸦格_漩涡坠落鸦.jpg" 
-                         alt="漩涡坠落鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="if(!this.dataset.loaded){this.dataset.loaded='1';this.style.filter='blur(2px)';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;this.style.filter='none';}.bind(this);}">
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">🌀 漩涡坠落鸦</div>
-                        <div class="yage-traits">
-                            <span class="trait-tag">焦虑纠结</span>
-                            <span class="trait-tag">思绪混乱</span>
-                        </div>
-                        <div class="yage-desc">此刻的你脑子停不下来，像有无数个自己在吵架。没关系，先让思绪飞一会儿吧。</div>
-                    </div>
-                </div>
-                
-                <!-- 洞穴隐居鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_洞穴隐居鸦.jpg" 
-                         data-src="yages/鸦格_洞穴隐居鸦.jpg" 
-                         alt="洞穴隐居鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="if(!this.dataset.loaded){this.dataset.loaded='1';this.style.filter='blur(2px)';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;this.style.filter='none';}.bind(this);}">
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">🕳️ 洞穴隐居鸦</div>
-                        <div class="yage-traits">
-                            <span class="trait-tag">内向充电</span>
-                            <span class="trait-tag">享受独处</span>
-                        </div>
-                        <div class="yage-desc">此刻的你只想一个人待着，没关系。世界偶尔也需要你缺席一下，休息是合法的。</div>
-                    </div>
-                </div>
-                
-                <!-- 夜游梦呓鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_夜游梦呓鸦.jpg" 
-                         data-src="yages/鸦格_夜游梦呓鸦.jpg" 
-                         alt="夜游梦呓鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="if(!this.dataset.loaded){this.dataset.loaded='1';this.style.filter='blur(2px)';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;this.style.filter='none';}.bind(this);}">
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">🌙 夜游梦呓鸦</div>
-                        <div class="yage-traits">
-                            <span class="trait-tag">灵感迸发</span>
-                            <span class="trait-tag">创意活跃</span>
-                        </div>
-                        <div class="yage-desc">此刻的你脑子里装满了星星，灵感在黑夜里跳舞。这是属于你的高光时刻，抓住它们。</div>
-                    </div>
-                </div>
-                
-                <!-- 失声静默鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_失声静默鸦.jpg" 
-                         data-src="yages/鸦格_失声静默鸦.jpg" 
-                         alt="失声静默鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="if(!this.dataset.loaded){this.dataset.loaded='1';this.style.filter='blur(2px)';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;this.style.filter='none';}.bind(this);}">
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">🤫 失声静默鸦</div>
-                        <div class="yage-traits">
-                            <span class="trait-tag">无言以对</span>
-                            <span class="trait-tag">内心丰富</span>
-                        </div>
-                        <div class="yage-desc">此刻的你选择闭口不言，心里却装着整个世界。有些话，留给懂的人听就好。</div>
-                    </div>
-                </div>
-                
-                <!-- 假寐装傻鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_假寐装傻鸦.jpg" 
-                         data-src="yages/鸦格_假寐装傻鸦.jpg" 
-                         alt="假寐装傻鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="if(!this.dataset.loaded){this.dataset.loaded='1';this.style.filter='blur(2px)';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;this.style.filter='none';}.bind(this);}">
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">😴 假寐装傻鸦</div>
-                        <div class="yage-traits">
-                            <span class="trait-tag">大智若愚</span>
-                            <span class="trait-tag">韬光养晦</span>
-                        </div>
-                        <div class="yage-desc">此刻的你睁一只眼闭一只眼，有些事情，看穿不说穿，也是一种温柔。</div>
-                    </div>
-                </div>
-                
-                <!-- 伪装讨喜鸦 -->
-                <div class="yage-card">
-                    <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_伪装讨喜鸦.jpg" 
-                         data-src="yages/鸦格_伪装讨喜鸦.jpg" 
-                         alt="伪装讨喜鸦" 
-                         class="yage-img"
-                         style="filter: blur(2px); transition: filter 0.3s ease;"
-                         onload="if(!this.dataset.loaded){this.dataset.loaded='1';this.style.filter='blur(2px)';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;this.style.filter='none';}.bind(this);}">
-                    </div>
-                    <div class="yage-info">
-                        <div class="yage-name">🥰 伪装讨喜鸦</div>
-                        <div class="yage-traits">
-                            <span class="trait-tag">社交面具</span>
-                            <span class="trait-tag">渴望认可</span>
-                        </div>
-                        <div class="yage-desc">此刻的你想要让所有人都满意，但最该被讨好的，其实是你自己呀。</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="footer">
-        <p>🐦‍⬛ 醒醒鸦 · 了解此刻的你</p>
-        <div class="footer-links"><a href="index.html">返回首页</a> · <a href="privacy.html">隐私政策</a></div>
-    </div>
-    <!-- 离线提示 -->
-    <div class="offline-toast" id="offlineToast">
-        📡 网络连接已断开，请检查网络设置
-        <button class="reconnect-btn" onclick="location.reload()">重新连接</button>
-    </div>
-    
-    <style>
-        .offline-toast {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+        .footer a:hover {
             color: #fff;
-            text-align: center;
-            padding: 12px 20px;
-            font-size: 14px;
-            z-index: 10000;
-            transform: translateY(-100%);
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
         }
-        .close-toast {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 24px;
-            cursor: pointer;
-            padding: 0;
-            line-height: 1;
-            transition: color 0.2s ease;
-        }
-        .close-toast:hover {
-            color: rgba(255, 255, 255, 0.8);
-        }
-        .offline-toast.show {
-            transform: translateY(0);
-        }
-        .offline-toast.show::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 10px solid #ee5a5a;
-        }
-        .offline-toast .reconnect-btn {
-            margin-left: 12px;
-            padding: 4px 12px;
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.4);
-            border-radius: 15px;
-            color: #fff;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .offline-toast .reconnect-btn:hover {
-            background: rgba(255,255,255,0.3);
-        }
-    </style>
-    
-    <script>
-        // 离线提示功能
-        window.addEventListener('online', function() {
-            var toast = document.getElementById('offlineToast');
-            if (toast) toast.classList.remove('show');
-        });
-        window.addEventListener('offline', function() {
-            var toast = document.getElementById('offlineToast');
-            if (toast) toast.classList.add('show');
-        });
-        if (!navigator.onLine) {
-            var toast = document.getElementById('offlineToast');
-            if (toast) toast.classList.add('show');
-        }
-    </script>
-    </script>
-    <!-- 底部导航栏 -->
-    <div class="footer-nav">
-        <a href="index.html" class="footer-nav-item">
-            <span class="nav-icon">🏠</span>
-            <span class="nav-label">首页</span>
-        </a>
-        <a href="chat.html" class="footer-nav-item">
-            <span class="nav-icon">💬</span>
-            <span class="nav-label">聊天</span>
-        </a>
-        <a href="community.html" class="footer-nav-item active">
-            <span class="nav-icon">📋</span>
-            <span class="nav-label">社区</span>
-        </a>
-        <a href="about.html" class="footer-nav-item">
-            <span class="nav-icon">📖</span>
-            <span class="nav-label">关于</span>
-        </a>
-    </div>
-    <style>
+        /* 底部导航栏 */
         .footer-nav {
             position: fixed;
             bottom: 0;
@@ -627,10 +308,400 @@
             font-size: 11px;
             margin-top: 2px;
         }
-        /* 社区页面底部留白 */
-        .community-container {
-            padding-bottom: 80px;
+        /* 离线提示 */
+        .offline-toast {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(26, 26, 46, 0.95);
+            color: #fff;
+            padding: 24px 32px;
+            border-radius: 16px;
+            font-size: 16px;
+            z-index: 10000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            align-items: center;
+            gap: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .offline-toast.show {
+            display: flex;
+        }
+        .offline-icon {
+            font-size: 28px;
+            animation: fly 1s ease-in-out infinite;
+        }
+        @keyframes fly {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(10deg); }
+        }
+        .reconnect-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .close-toast {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 24px;
+            cursor: pointer;
         }
     </style>
+</head>
+<body>
+    <!-- 离线提示 -->
+    <div class="offline-toast" id="offlineToast">
+        <button class="close-toast" onclick="hideOfflineToast()">×</button>
+        <span class="offline-icon">🐦‍⬛</span>
+        <span>小鸦飞去找网络了...</span>
+        <button class="reconnect-btn" onclick="location.reload()">重新连接</button>
+    </div>
+
+    <div class="header">
+        <div class="mascot">
+            <img src="mengya.png" alt="小鸦">
+        </div>
+        <h1>鸦格社区</h1>
+        <p>心境如云，不定义，只看见<br>每一种心境，都是此刻真实的你</p>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link primary">🏠 测测你的鸦格</a>
+            <a href="chat.html" class="nav-link">💬 和小鸦聊天</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro-section">
+            <h2>什么是鸦格？</h2>
+            <p>鸦格是醒醒鸦的12种心境状态，通过4个维度（电量、情绪、行动、连接）<br>计算出你此刻的精神状态。不是标签，是当下真实的你。</p>
+        </div>
+
+        <!-- ========== 清醒区 ========== -->
+        <div class="zone-section">
+            <div class="zone-header">
+                <div class="zone-title awake">🌅 清醒区</div>
+                <div class="zone-desc">电量充沛，状态在线，掌控感满满</div>
+            </div>
+            <div class="yage-grid">
+                <!-- 巡天智者鸦 -->
+                <div class="yage-card">
+                    <div class="yage-img-wrapper">
+                        <div class="zone-badge awake">🌅 清醒区</div>
+                        <div class="yage-emoji-large">🦅</div>
+                    </div>
+                    <div class="yage-info">
+                        <div class="yage-name">巡天智者鸦</div>
+                        <div class="yage-dimension">电量高 + 情绪高/中 + 连接高/中</div>
+                        <div class="yage-desc">此刻的你，像一只盘旋在高空中的鸦，看得见地面的拥堵，也看得见远方的旷野。你没有被忙碌淹没，也没有被焦虑吞噬。</div>
+                        <div class="yage-quote">
+                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
+                            <div class="quote-text">清醒不是冷漠，是看透后依然选择认真生活。</div>
+                        </div>
+                        <div class="yage-suitable">
+                            <span class="suitable-icon">🎯</span>
+                            <span>适合：做重要决策、处理复杂问题、深度交流</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 待机隐士鸦 -->
+                <div class="yage-card">
+                    <div class="yage-img-wrapper">
+                        <div class="zone-badge awake">🌅 清醒区</div>
+                        <div class="yage-emoji-large">🦅</div>
+                    </div>
+                    <div class="yage-info">
+                        <div class="yage-name">待机隐士鸦</div>
+                        <div class="yage-dimension">电量高 + 情绪低</div>
+                        <div class="yage-desc">你现在的能量满格，但选择了蛰伏。像一只在枝头安静待着的鸦，目光深远，随时可以展翅，但没有那个冲动。</div>
+                        <div class="yage-quote">
+                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
+                            <div class="quote-text">待机不是懈怠，是在等一个值得全力以赴的时刻。</div>
+                        </div>
+                        <div class="yage-suitable">
+                            <span class="suitable-icon">🎯</span>
+                            <span>适合：观察思考、等待时机、深度工作</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 行动爆发鸦 -->
+                <div class="yage-card">
+                    <div class="yage-img-wrapper">
+                        <div class="zone-badge awake">🌅 清醒区</div>
+                        <div class="yage-emoji-large">🔥</div>
+                    </div>
+                    <div class="yage-info">
+                        <div class="yage-name">行动爆发鸦</div>
+                        <div class="yage-dimension">电量高 + 行动高</div>
+                        <div class="yage-desc">你现在像一团刚被点燃的火，噼里啪啦地烧着。别人还在犹豫，你已经冲出去了；别人还在计划，你已经完成了一半。</div>
+                        <div class="yage-quote">
+                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
+                            <div class="quote-text">热情是好燃料，但记得系好安全带再踩油门。</div>
+                        </div>
+                        <div class="yage-suitable">
+                            <span class="suitable-icon">🎯</span>
+                            <span>适合：执行计划、创意输出、社交活跃</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== 假寐区 ========== -->
+        <div class="zone-section">
+            <div class="zone-header">
+                <div class="zone-title blurry">🌫️ 假寐区</div>
+                <div class="zone-desc">电量平稳，不上不下，一切刚刚好</div>
+            </div>
+            <div class="yage-grid">
+                <!-- 舒适咸鱼鸦 -->
+                <div class="yage-card">
+                    <div class="yage-img-wrapper">
+                        <div class="zone-badge blurry">🌫️ 假寐区</div>
+                        <div class="yage-emoji-large">🐟</div>
+                    </div>
+                    <div class="yage-info">
+                        <div class="yage-name">舒适咸鱼鸦</div>
+                        <div class="yage-dimension">电量中 + 情绪高 + 行动低</div>
+                        <div class="yage-desc">一切都刚刚好：不太累，不太饿，不太冷，不太热。就是……不太想动。这不是颓废，这是对自己辛勤工作的奖励。</div>
+                        <div class="yage-quote">
+                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
+                            <div class="quote-text">咸鱼也需要资格认证，你刚好是那个持证上岗的人。</div>
+                        </div>
+                        <div class="yage-suitable">
+                            <span class="suitable-icon">🎯</span>
+                            <span>适合：休息恢复、低强度娱乐、发呆放空</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 社交探索鸦 -->
+                <div class="yage-card">
+                    <div class="yage-img-wrapper">
+                        <div class="zone-badge blurry">🌫️ 假寐区</div>
+                        <div class="yage-emoji-large">🦜</div>
+                    </div>
+                    <div class="yage-info">
+                        <div class="yage-name">社交探索鸦</div>
+                        <div class="yage-dimension">电量中 + 情绪高 + 行动高</div>
+                        <div class="yage-desc">电量不算特别足，但心情好啊！脑子里冒出一堆想去的地方、想见的人、想做的事。今天你就是那只最闪亮的社交鸦。</div>
+                        <div class="yage-quote">
+                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
+                            <div class="quote-text">好心情是最好的燃料，一起出发才更带劲。</div>
+                        </div>
+                        <div class="yage-suitable">
+                            <span class="suitable-icon">🎯</span>
+                            <span>适合：组队活动、短途出行、社交聚会</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电量中转鸦 -->
+                <div class="yage-card">
+                    <div class="yage-img-wrapper">
+                        <div class="zone-badge blurry">🌫️ 假寐区</div>
+                        <div class="yage-emoji-large">🚉</div>
+                    </div>
+                    <div class="yage-info">
+                        <div class="yage-name">电量中转鸦</div>
+                        <div class="yage-dimension">电量中 + 情绪中 + 行动高</div>
+                        <div class="yage-desc">你现在处于一个「正在转换」的节点。像站在中转站的鸦，等待自己的下一班列车。不用急着做决定，在这里停一停。</div>
+                        <div class="yage-quote">
+                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
+                            <div class="quote-text">中转站不是终点，是蓄力的好时候。</div>
+                        </div>
+                        <div class="yage-suitable">
+                            <span class="suitable-icon">🎯</span>
+                            <span>适合：整理思路、处理杂事、等待时机</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 迷雾探险鸦 -->
+                <div class="yage-card">
+                    <div class="yage-img-wrapper">
+                        <div class="zone-badge blurry">🌫️ 假寐区</div>
+                        <div class="yage-emoji-large">🌫️</div>
+                    </div>
+                    <div class="yage-info">
+                        <div class="yage-name">迷雾探险鸦</div>
+                        <div class="yage-dimension">电量中 + 情绪低/中 + 行动中 + 连接低/中</div>
+                        <div class="yage-desc">前方的路看不清，但你还是迈出了步子。迷茫说明你还在寻找，还没有放弃。迷雾会散的，路会明的。</div>
+                        <div class="yage-quote">
+                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
+                            <div class="quote-text">看不清路的时候，走本身就是答案。</div>
+                        </div>
+                        <div class="yage-suitable">
+                            <span class="suitable-icon">🎯</span>
+                            <span>适合：小范围试错、收集信息、聊天交流</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 伪装讨喜鸦 -->
+                <div class="yage-card">
+                    <div class="yage-img-wrapper">
+                        <div class="zone-badge blurry">🌫️ 假寐区</div>
+                        <div class="yage-emoji-large">🎭</div>
+                    </div>
+                    <div class="yage-info">
+                        <div class="yage-name">伪装讨喜鸦</div>
+                        <div class="yage-dimension">电量中/低 + 情绪低 + 连接高</div>
+                        <div class="yage-desc">你每天戴着「我很好」的面具，在人群里周旋。别人都觉得你游刃有余，只有你自己知道，摘下面具的那一刻有多疲惫。</div>
+                        <div class="yage-quote">
+                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
+                            <div class="quote-text">你不需要对所有人笑，有些人值得看你真实的眼泪。</div>
+                        </div>
+                        <div class="yage-suitable">
+                            <span class="suitable-icon">🎯</span>
+                            <span>适合：维持基本社交、必要应酬</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== 沉睡区 ========== -->
+        <div class="zone-section">
+            <div class="zone-header">
+                <div class="zone-title asleep">🌑 沉睡区</div>
+                <div class="zone-desc">电量告急，需要休息和恢复</div>
+            </div>
+            <div class="yage-grid">
+                <!-- 疗愈独处鸦 -->
+                <div class="yage-card">
+                    <div class="yage-img-wrapper">
+                        <div class="zone-badge asleep">🌑 沉睡区</div>
+                        <div class="yage-emoji-large">🌙</div>
+                    </div>
+                    <div class="yage-info">
+                        <div class="yage-name">疗愈独处鸦</div>
+                        <div class="yage-dimension">电量低 + 情绪高 + 行动中/低</div>
+                        <div class="yage-desc">电量快见底了，但心情居然还不错。像大雨后的晴天，有一点疲惫，但更多的是宁静和满足。这种自我疗愈的能力，是成年人的必修课。</div>
+                        <div class="yage-quote">
+                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
+                            <div class="quote-text">最好的疗愈，有时候就是什么都不做。</div>
+                        </div>
+                        <div class="yage-suitable">
+                            <span class="suitable-icon">🎯</span>
+                            <span>适合：安静休息、简单娱乐、独自恢复</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电量透支鸦 -->
+                <div class="yage-card">
+                    <div class="yage-img-wrapper">
+                        <div class="zone-badge asleep">🌑 沉睡区</div>
+                        <div class="yage-emoji-large">⚡</div>
+                    </div>
+                    <div class="yage-info">
+                        <div class="yage-name">电量透支鸦</div>
+                        <div class="yage-dimension">电量低 + 情绪高 + 行动高</div>
+                        <div class="yage-desc">明明已经累到不行了，但心情却很亢奋。像一辆没油的车还在跑，靠的是最后的意志力。冷静下来，让身体休息。</div>
+                        <div class="yage-quote">
+                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
+                            <div class="quote-text">亢奋是最后的电量，且用且珍惜。</div>
+                        </div>
+                        <div class="yage-suitable">
+                            <span class="suitable-icon">🎯</span>
+                            <span>适合：紧急任务（慎用！）、必要坚持</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 燃尽冲刺鸦 -->
+                <div class="yage-card">
+                    <div class="yage-img-wrapper">
+                        <div class="zone-badge asleep">🌑 沉睡区</div>
+                        <div class="yage-emoji-large">💨</div>
+                    </div>
+                    <div class="yage-info">
+                        <div class="yage-name">燃尽冲刺鸦</div>
+                        <div class="yage-dimension">电量低 + 情绪低 + 行动高</div>
+                        <div class="yage-desc">已经很累了，但停不下来。可能是 deadline，可能是承诺没兑现，可能是单纯的不甘心。完成比完美重要。</div>
+                        <div class="yage-quote">
+                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
+                            <div class="quote-text">冲刺很好，但记得在耗尽前给自己留点余量。</div>
+                        </div>
+                        <div class="yage-suitable">
+                            <span class="suitable-icon">🎯</span>
+                            <span>适合：意志力对抗（慎用！）</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 破晓微光鸦 -->
+                <div class="yage-card">
+                    <div class="yage-img-wrapper">
+                        <div class="zone-badge asleep">🌑 沉睡区</div>
+                        <div class="yage-emoji-large">🌅</div>
+                    </div>
+                    <div class="yage-info">
+                        <div class="yage-name">破晓微光鸦</div>
+                        <div class="yage-dimension">电量低 + 情绪低 + 行动中/低</div>
+                        <div class="yage-desc">你刚刚经历了一些不太好的事，可能还没完全走出来。但你今天愿意面对自己，这本身就是一件很勇敢的事。</div>
+                        <div class="yage-quote">
+                            <div class="quote-label">🐦‍⬛ 鸦鸦有话说</div>
+                            <div class="quote-text">最低谷的时候，往哪个方向走都是向上。</div>
+                        </div>
+                        <div class="yage-suitable">
+                            <span class="suitable-icon">🎯</span>
+                            <span>适合：低强度任务、陪伴治愈、自我觉察</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>🐦‍⬛ 醒醒鸦 · 了解此刻的你</p>
+        <div class="footer-links"><a href="index.html">返回首页</a> · <a href="chat.html">聊天</a> · <a href="privacy.html">隐私政策</a></div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="footer-nav">
+        <a href="index.html" class="footer-nav-item">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">首页</span>
+        </a>
+        <a href="chat.html" class="footer-nav-item">
+            <span class="nav-icon">💬</span>
+            <span class="nav-label">聊天</span>
+        </a>
+        <a href="community.html" class="footer-nav-item active">
+            <span class="nav-icon">📋</span>
+            <span class="nav-label">社区</span>
+        </a>
+        <a href="about.html" class="footer-nav-item">
+            <span class="nav-icon">📖</span>
+            <span class="nav-label">关于</span>
+        </a>
+    </div>
+
+    <script>
+        function showOfflineToast() {
+            document.getElementById('offlineToast').classList.add('show');
+        }
+        function hideOfflineToast() {
+            document.getElementById('offlineToast').classList.remove('show');
+        }
+        window.addEventListener('online', hideOfflineToast);
+        window.addEventListener('offline', showOfflineToast);
+        if (!navigator.onLine) showOfflineToast();
+    </script>
 </body>
 </html>
