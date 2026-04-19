@@ -14,12 +14,10 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body {
             height: 100%;
-            overflow: hidden;
         }
         body {
             font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #2d2d44 100%);
-            min-height: 100vh;
             color: #fff;
             touch-action: pan-y;
         }
@@ -34,7 +32,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 12px 16px;
-            background: rgba(13, 13, 13, 0.9);
+            background: rgba(13, 13, 13, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
@@ -68,32 +66,50 @@
         /* 主阅读区域 */
         .reader-container {
             height: 100vh;
-            overflow-y: auto;
             display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            padding: 70px 16px 90px;
-            -webkit-overflow-scrolling: touch;
+            flex-direction: column;
+            padding-top: 60px;
         }
-        .page-wrapper {
-            max-width: 420px;
-            width: 100%;
+        /* 图片区域 */
+        .image-area {
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
+            padding: 16px;
+            min-height: 0;
+            overflow: hidden;
         }
-        .story-page {
+        .story-image {
             max-width: 100%;
-            width: 100%;
+            max-height: 100%;
+            width: auto;
             height: auto;
             border-radius: 12px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            object-fit: contain;
+            transition: opacity 0.3s ease;
         }
-        .story-page.fade-out {
-            opacity: 0;
-            transform: scale(0.95);
+        /* 文字区域 */
+        .text-area {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            padding: 20px 24px;
+            min-height: 80px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .story-title {
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .story-text {
+            font-size: 16px;
+            line-height: 1.8;
+            text-align: center;
+            color: #ccd6f6;
         }
         /* 翻页按钮 */
         .nav-btn {
@@ -134,18 +150,13 @@
             left: 0;
             right: 0;
             z-index: 100;
-            padding: 16px;
-            background: rgba(13, 13, 13, 0.9);
+            padding: 12px 16px;
+            background: rgba(13, 13, 13, 0.95);
             backdrop-filter: blur(10px);
             border-top: 1px solid rgba(255,255,255,0.1);
         }
-        .progress-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
         .progress-bar {
-            flex: 1;
+            width: 100%;
             height: 4px;
             background: rgba(255,255,255,0.1);
             border-radius: 2px;
@@ -157,54 +168,17 @@
             border-radius: 2px;
             transition: width 0.3s ease;
         }
-        .progress-text {
-            font-size: 12px;
-            color: #8892b0;
-            min-width: 40px;
-            text-align: right;
-        }
-        /* 缩略图导航 */
-        .thumbnails {
-            display: none;
-        }
-        /* 加载状态 */
-        .loading {
+        /* 触摸滑动提示 */
+        .swipe-hint {
             position: fixed;
-            top: 50%;
+            bottom: 70px;
             left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            z-index: 200;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #5a6a8a;
+            opacity: 0.6;
+            pointer-events: none;
         }
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        .loading-text {
-            font-size: 14px;
-            color: #8892b0;
-        }
-        /* 触摸反馈 */
-        .touch-area {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 25%;
-            z-index: 10;
-        }
-        .touch-area.left { left: 0; }
-        .touch-area.right { right: 0; }
-        /* 响应式 */
         @media (max-width: 480px) {
             .nav-btn {
                 width: 40px;
@@ -213,188 +187,133 @@
             }
             .nav-btn.prev { left: 8px; }
             .nav-btn.next { right: 8px; }
+            .story-text {
+                font-size: 15px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- 顶部导航 -->
-    <header class="header">
-        <a href="community.html" class="back-btn">
-            <span>←</span>
-            <span>返回</span>
-        </a>
-        <span class="header-title">小鸦的云朵心事</span>
-        <span class="page-indicator" id="pageIndicator">1/22</span>
-    </header>
+    <div class="header">
+        <a href="community.html" class="back-btn">← 返回</a>
+        <div class="header-title">小鸦的云朵心事</div>
+        <div class="page-indicator" id="pageIndicator">1 / 22</div>
+    </div>
 
     <!-- 主阅读区域 -->
     <div class="reader-container" id="readerContainer">
-        <div class="page-wrapper">
-            <img class="story-page" id="storyPage" src="story_images/page_01.jpg" alt="绘本页面">
+        <!-- 图片区域 -->
+        <div class="image-area">
+            <img class="story-image" id="storyImage" src="story_images/page_01.jpg" alt="绘本页面">
         </div>
-        <!-- 触摸区域 -->
-        <div class="touch-area left" id="touchPrev"></div>
-        <div class="touch-area right" id="touchNext"></div>
+        <!-- 文字区域 -->
+        <div class="text-area" id="textArea">
+            <div class="story-title" id="storyTitle">小鸦的云朵心事</div>
+            <div class="story-text" id="storyText"></div>
+        </div>
     </div>
 
     <!-- 翻页按钮 -->
-    <button class="nav-btn prev disabled" id="prevBtn" aria-label="上一页">‹</button>
-    <button class="nav-btn next" id="nextBtn" aria-label="下一页">›</button>
+    <button class="nav-btn prev disabled" id="prevBtn" onclick="prevPage()">←</button>
+    <button class="nav-btn next" id="nextBtn" onclick="nextPage()">→</button>
 
-    <!-- 底部进度 -->
+    <!-- 底部进度条 -->
     <div class="footer">
-        <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill" style="width: 4.55%"></div>
-            </div>
-            <span class="progress-text" id="progressText">1/22</span>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 4.5%"></div>
         </div>
     </div>
 
-    <!-- 加载状态 -->
-    <div class="loading" id="loading" style="display: none;">
-        <div class="loading-spinner"></div>
-        <span class="loading-text">加载中...</span>
-    </div>
+    <div class="swipe-hint">← 左右滑动翻页 →</div>
 
+    <script src="js/story_data.js"></script>
     <script>
-        // 绘本数据
-        const totalPages = 22;
         let currentPage = 1;
-        let isAnimating = false;
+        const totalPages = storyPages.length;
+
+        function updatePage() {
+            const pageData = storyPages[currentPage - 1];
+            
+            // 更新图片
+            const img = document.getElementById('storyImage');
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = `story_images/page_${String(currentPage).padStart(2, '0')}.jpg`;
+                img.style.opacity = 1;
+            }, 150);
+
+            // 更新文字
+            const titleEl = document.getElementById('storyTitle');
+            const textEl = document.getElementById('storyText');
+            
+            if (pageData.title) {
+                titleEl.textContent = pageData.title;
+                titleEl.style.display = 'block';
+            } else {
+                titleEl.style.display = 'none';
+            }
+            
+            textEl.textContent = pageData.text || '';
+
+            // 更新页码
+            document.getElementById('pageIndicator').textContent = `${currentPage} / ${totalPages}`;
+            
+            // 更新进度条
+            const progress = (currentPage / totalPages) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            // 更新按钮状态
+            document.getElementById('prevBtn').classList.toggle('disabled', currentPage === 1);
+            document.getElementById('nextBtn').classList.toggle('disabled', currentPage === totalPages);
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                updatePage();
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updatePage();
+            }
+        }
+
+        // 键盘翻页
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevPage();
+            if (e.key === 'ArrowRight') nextPage();
+        });
+
+        // 触摸滑动翻页
         let touchStartX = 0;
         let touchEndX = 0;
 
-        // DOM元素
-        const storyPage = document.getElementById('storyPage');
-        const pageIndicator = document.getElementById('pageIndicator');
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const loading = document.getElementById('loading');
-        const touchPrev = document.getElementById('touchPrev');
-        const touchNext = document.getElementById('touchNext');
-
-        // 预加载图片
-        function preloadImages() {
-            for (let i = 1; i <= totalPages; i++) {
-                const img = new Image();
-                img.src = `story_images/page_${String(i).padStart(2, '0')}.jpg`;
-            }
-        }
-
-        // 更新页面
-        function updatePage(newPage, direction) {
-            if (isAnimating || newPage < 1 || newPage > totalPages) return;
-            
-            isAnimating = true;
-            
-            // 淡出动画
-            storyPage.classList.add('fade-out');
-            
-            setTimeout(() => {
-                currentPage = newPage;
-                const imgPath = `story_images/page_${String(currentPage).padStart(2, '0')}.jpg`;
-                storyPage.src = imgPath;
-                
-                // 更新指示器
-                pageIndicator.textContent = `${currentPage}/${totalPages}`;
-                progressText.textContent = `${currentPage}/${totalPages}`;
-                progressFill.style.width = `${(currentPage / totalPages) * 100}%`;
-                
-                // 更新按钮状态
-                prevBtn.classList.toggle('disabled', currentPage === 1);
-                nextBtn.classList.toggle('disabled', currentPage === totalPages);
-                
-                // 淡入动画
-                storyPage.classList.remove('fade-out');
-                isAnimating = false;
-            }, 150);
-        }
-
-        // 上一页
-        function goPrev() {
-            if (currentPage > 1) {
-                updatePage(currentPage - 1, 'prev');
-            }
-        }
-
-        // 下一页
-        function goNext() {
-            if (currentPage < totalPages) {
-                updatePage(currentPage + 1, 'next');
-            }
-        }
-
-        // 事件监听
-        prevBtn.addEventListener('click', goPrev);
-        nextBtn.addEventListener('click', goNext);
-
-        // 触摸区域点击
-        touchPrev.addEventListener('click', goPrev);
-        touchNext.addEventListener('click', goNext);
-
-        // 触摸滑动
-        document.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].clientX;
+        document.getElementById('readerContainer').addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
         }, { passive: true });
 
-        document.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].clientX;
+        document.getElementById('readerContainer').addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
         }, { passive: true });
 
         function handleSwipe() {
             const diff = touchStartX - touchEndX;
-            const threshold = 50;
-            
-            if (Math.abs(diff) > threshold) {
+            if (Math.abs(diff) > 50) {
                 if (diff > 0) {
-                    // 左滑 - 下一页
-                    goNext();
+                    nextPage();
                 } else {
-                    // 右滑 - 上一页
-                    goPrev();
+                    prevPage();
                 }
             }
         }
 
-        // 键盘导航
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                goPrev();
-            } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                goNext();
-            }
-        });
-
-        // 鼠标滚轮
-        document.addEventListener('wheel', (e) => {
-            if (e.deltaY > 0) {
-                goNext();
-            } else {
-                goPrev();
-            }
-        }, { passive: true });
-
-        // 图片加载
-        storyPage.addEventListener('load', () => {
-            loading.style.display = 'none';
-        });
-
-        storyPage.addEventListener('error', () => {
-            console.error('图片加载失败');
-            loading.style.display = 'none';
-        });
-
         // 初始化
-        function init() {
-            preloadImages();
-            updatePage(1);
-        }
-
-        init();
+        updatePage();
     </script>
 </body>
 </html>
