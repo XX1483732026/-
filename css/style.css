@@ -300,10 +300,20 @@ body {
     text-align: center;
     padding: 32px 24px;
 }
-.result-emoji {
-    font-size: 80px;
-    margin-bottom: 12px;
-    animation: crowBounce 2s ease-in-out infinite;
+.result-image-wrap {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 12px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.result-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 @keyframes crowBounce {
     0%, 100% { transform: translateY(0); }
@@ -934,9 +944,20 @@ a:focus, button:focus {
     text-align: center;
     padding: 24px;
 }
-.share-emoji {
-    font-size: 60px;
-    margin-bottom: 8px;
+.share-image-wrap {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 8px;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.share-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .share-type {
     font-size: 24px;

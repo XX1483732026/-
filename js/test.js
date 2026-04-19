@@ -203,7 +203,7 @@ function showResult() {
         }));
         
         // 填充结果页面
-        document.getElementById('resultEmoji').textContent = currentResult.emoji;
+        document.getElementById('resultImage').src = currentResult.image;
         document.getElementById('resultType').textContent = yageName;
         document.getElementById('resultDesc').textContent = currentResult.desc;
         
@@ -262,7 +262,7 @@ function showResult() {
         }
         
         // 填充图片容器
-        document.getElementById('imgEmoji').textContent = currentResult.emoji;
+        document.getElementById('imgImage').src = currentResult.image;
         document.getElementById('imgType').textContent = yageName;
         document.getElementById('imgDesc').textContent = currentResult.desc;
         // 分享图片：维度进度条（带分数）
