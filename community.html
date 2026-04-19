@@ -46,21 +46,63 @@
         /* 简介区 */
         .intro-card {
             background: rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 24px;
+            border-radius: 20px;
+            padding: 28px 24px;
+            margin-bottom: 32px;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.1);
         }
-        .intro-card p {
+        .intro-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .intro-text {
             color: #8892b0;
             font-size: 14px;
-            line-height: 1.6;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .intro-zones {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .zone-pill {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .zone-pill.awake { background: rgba(255,215,0,0.15); color: #ffd700; border: 1px solid rgba(255,215,0,0.3); }
+        .zone-pill.blurry { background: rgba(160,160,192,0.15); color: #a0a0c0; border: 1px solid rgba(160,160,192,0.3); }
+        .zone-pill.asleep { background: rgba(74,74,106,0.15); color: #6a6a8a; border: 1px solid rgba(74,74,106,0.3); }
+        .intro-dimensions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .dimension-item {
+            font-size: 14px;
+            color: #ccd6f6;
+        }
+        .intro-hint {
+            color: #6b7c93;
+            font-size: 13px;
+            margin-bottom: 16px;
         }
         .intro-card a {
             display: inline-block;
-            margin-top: 16px;
-            padding: 12px 24px;
+            padding: 12px 28px;
             background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
             border: 1px solid #555;
             color: #fff;
@@ -347,7 +389,23 @@
 
     <div class="container">
         <div class="intro-card">
-            <p>12种鸦格状态，通过4个维度（电量、情绪、行动、连接）<br>计算出你此刻的精神状态。点击卡片查看详情~</p>
+            <div class="intro-title">🐦‍⬛ 什么是鸦格？</div>
+            <div class="intro-text">
+                鸦格不是人格标签，而是你此刻的心境状态。<br>
+                心境如云，时卷时舒。测一测，发现你此刻的真实状态。
+            </div>
+            <div class="intro-zones">
+                <span class="zone-pill awake">🌅 清醒区</span>
+                <span class="zone-pill blurry">🌫️ 假寐区</span>
+                <span class="zone-pill asleep">🌑 沉睡区</span>
+            </div>
+            <div class="intro-dimensions">
+                <span class="dimension-item">⚡ 电量</span>
+                <span class="dimension-item">💭 情绪</span>
+                <span class="dimension-item">🏃 行动</span>
+                <span class="dimension-item">🔗 连接</span>
+            </div>
+            <div class="intro-hint">点击卡片查看详情 ~</div>
             <a href="index.html">🏠 测测你的鸦格</a>
         </div>
 
@@ -356,7 +414,6 @@
             <div class="zone-header">
                 <span class="zone-emoji">🌅</span>
                 <span class="zone-name awake">清醒区</span>
-                <span class="zone-count">3种鸦格</span>
             </div>
             <div class="yage-grid" id="grid-awake"></div>
         </div>
@@ -366,7 +423,6 @@
             <div class="zone-header">
                 <span class="zone-emoji">🌫️</span>
                 <span class="zone-name blurry">假寐区</span>
-                <span class="zone-count">5种鸦格</span>
             </div>
             <div class="yage-grid" id="grid-blurry"></div>
         </div>
@@ -376,7 +432,6 @@
             <div class="zone-header">
                 <span class="zone-emoji">🌑</span>
                 <span class="zone-name asleep">沉睡区</span>
-                <span class="zone-count">4种鸦格</span>
             </div>
             <div class="yage-grid" id="grid-asleep"></div>
         </div>
