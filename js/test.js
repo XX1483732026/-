@@ -1,28 +1,64 @@
 /**
- * 醒醒鸦 · 测试流程逻辑
+ * 醒醒鸦 · 测试流程逻辑 v2.0
+ * 4维度计分 + 81种组合映射
  */
 
 // ========== 状态变量 ==========
 var currentQuestion = 0;
-var totalScore = 0;
-var answers = [];
-var currentResult = null;
+var answers = [];           // 记录每题答案 { answer: index, score: 3/2/1 }
+var currentResult = null;   // 当前测试结果
 var generatedImageBlob = null;
-var isTransitioning = false; // 防止重复点击
+var isTransitioning = false;
 
 // ========== DOM 元素缓存 ==========
-var cachedElements = {
-    progressFill: null,
-    questionCounter: null,
-    questionText: null,
-    optionsContainer: null
-};
+var cachedElements = {};
 
 function getCachedElement(id) {
     if (!cachedElements[id]) {
         cachedElements[id] = document.getElementById(id);
     }
     return cachedElements[id];
+}
+
+// ========== 维度计算 ==========
+function calculateDimensions() {
+    var scores = {
+        电量: 0,
+        情绪: 0,
+        行动: 0,
+        连接: 0
+    };
+    
+    for (var i = 0; i < answers.length; i++) {
+        if (answers[i] && questions[i]) {
+            var dim = questions[i].dimension;
+            if (scores.hasOwnProperty(dim)) {
+                scores[dim] += answers[i].score;
+            }
+        }
+    }
+    
+    return scores;
+}
+
+function getDimensionLevel(score) {
+    if (score >= 13) return "高";
+    if (score >= 9) return "中";
+    return "低";
+}
+
+function getZoneByYage(yageName) {
+    if (yages[yageName]) {
+        return yages[yageName].zone;
+    }
+    return "";
+}
+
+function getZoneText(zone) {
+    if (zone === "清醒区") return "🌅 清醒区";
+    if (zone === "假寐区") return "🌫️ 假寐区";
+    if (zone === "沉睡区") return "🌑 沉睡区";
+    return zone;
 }
 
 // ========== 核心函数 ==========
@@ -33,7 +69,6 @@ function startQuiz() {
     startPage.classList.add('hidden');
     quizPage.style.display = 'block';
     currentQuestion = 0;
-    totalScore = 0;
     answers = [];
     isTransitioning = false;
     showQuestion();
@@ -75,9 +110,7 @@ function updateNavButtons() {
 }
 
 function selectOption(index, score) {
-    if (isTransitioning) {
-        return;
-    }
+    if (isTransitioning) return;
     
     var options = document.querySelectorAll('.option');
     for (var i = 0; i < options.length; i++) {
@@ -85,13 +118,10 @@ function selectOption(index, score) {
     }
     options[index].classList.add('selected');
     
-    // 记录答案
     answers[currentQuestion] = { answer: index, score: score };
-    console.log('第' + (currentQuestion + 1) + '题答案已记录：', answers[currentQuestion]);
-    
+    console.log('第' + (currentQuestion + 1) + '题已记录：', answers[currentQuestion]);
     updateNavButtons();
     
-    // 判断是否是最后一题
     if (currentQuestion === questions.length - 1) {
         isTransitioning = true;
         setTimeout(function() {
@@ -121,10 +151,8 @@ function showResult() {
         var resultPage = document.getElementById('resultPage');
         var progressFill = document.getElementById('progressFill');
         
-        // 检查是否所有题目都答了
+        // 补齐未答题目
         if (answers.length < questions.length) {
-            console.log('答案不完整，当前数量：' + answers.length);
-            // 补齐未答的题目（默认给2分）
             for (var i = answers.length; i < questions.length; i++) {
                 answers[i] = { answer: 0, score: 2 };
             }
@@ -134,61 +162,74 @@ function showResult() {
         resultPage.style.display = 'block';
         progressFill.style.width = '100%';
         
-        // 计算总分
-        totalScore = 0;
-        for (var i = 0; i < answers.length; i++) {
-            if (answers[i] && answers[i].score !== undefined) {
-                totalScore += answers[i].score;
-            }
-        }
-        console.log('答题完成，总分：' + totalScore + '，答案数量：' + answers.length);
+        // 计算各维度分数
+        var scores = calculateDimensions();
+        console.log('维度分数：', scores);
         
-        // 确定分区
-        var zone, zoneText, resultPool;
-        if (totalScore >= 51) {
-            zone = 'awake';
-            zoneText = '🦅 清醒翱翔区';
-            resultPool = results.awake;
-        } else if (totalScore >= 36) {
-            zone = 'blurry';
-            zoneText = '🌫️ 迷雾盘旋区';
-            resultPool = results.blurry;
-        } else {
-            zone = 'asleep';
-            zoneText = '🌑 深渊蛰伏区';
-            resultPool = results.asleep;
-        }
-        console.log('分区：' + zone + '，结果池数量：' + resultPool.length);
+        // 获取各维度等级
+        var levels = {
+            电量: getDimensionLevel(scores.电量),
+            情绪: getDimensionLevel(scores.情绪),
+            行动: getDimensionLevel(scores.行动),
+            连接: getDimensionLevel(scores.连接)
+        };
+        console.log('维度等级：', levels);
         
-        // 随机选择一个结果
-        var resultIndex = Math.floor(Math.random() * resultPool.length);
-        currentResult = resultPool[resultIndex];
-        console.log('选中结果：', currentResult);
+        // 查找匹配鸦格
+        var mappingKey = levels.电量 + '-' + levels.情绪 + '-' + levels.行动 + '-' + levels.连接;
+        var yageName = yageMapping[mappingKey] || "迷雾探险鸦";
+        console.log('匹配键值：' + mappingKey + ' → ' + yageName);
         
-        // 保存测试结果到localStorage供聊天页面使用
+        // 获取鸦格详情
+        currentResult = yages[yageName];
+        var zoneText = getZoneText(currentResult.zone);
+        
+        // 构建维度得分显示
+        var dimensionText = '⚡' + scores.电量 + ' · 💭' + scores.情绪 + ' · 🏃' + scores.行动 + ' · 🔗' + scores.连接;
+        
+        // 保存到localStorage供聊天页面使用
         localStorage.setItem('xingxingya_test_result', JSON.stringify({
-            type: currentResult.type,
+            type: yageName,
+            emoji: currentResult.emoji,
             desc: currentResult.desc,
-            advice: currentResult.advice,
-            score: totalScore,
-            zone: zoneText
+            quote: currentResult.quote,
+            advice: currentResult.quote,
+            score: scores,
+            levels: levels,
+            zone: zoneText,
+            suitable: currentResult.suitable,
+            dimension: dimensionText
         }));
         
         // 填充结果页面
-        document.getElementById('resultEmoji').innerHTML = '<img loading="lazy" src="' + currentResult.image + '" alt="' + currentResult.type + '" style="max-width: 200px; border-radius: 20px;">';
-        document.getElementById('resultType').innerHTML = currentResult.type;
-        document.getElementById('resultDesc').innerHTML = currentResult.desc;
-        document.getElementById('scoreValue').innerHTML = totalScore + ' / 60';
-        document.getElementById('scoreZone').innerHTML = zoneText;
-        document.getElementById('adviceText').innerHTML = currentResult.advice;
+        document.getElementById('resultEmoji').textContent = currentResult.emoji;
+        document.getElementById('resultType').textContent = yageName;
+        document.getElementById('resultDesc').textContent = currentResult.desc;
+        
+        // 维度得分展示
+        var scoreValueEl = document.getElementById('scoreValue');
+        var scoreZoneEl = document.getElementById('scoreZone');
+        if (scoreValueEl) scoreValueEl.innerHTML = dimensionText;
+        if (scoreZoneEl) scoreZoneEl.textContent = zoneText;
+        
+        // 适合做什么
+        var adviceTextEl = document.getElementById('adviceText');
+        if (adviceTextEl) {
+            adviceTextEl.innerHTML = '<div style="margin-bottom:12px;">' + currentResult.quote + '</div>' +
+                '<div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:12px;margin-top:8px;">' +
+                '<div style="font-size:12px;color:#8892b0;margin-bottom:6px;">🎯 适合做什么</div>' +
+                '<div>' + currentResult.suitable + '</div></div>';
+        }
         
         // 填充图片容器
-        document.getElementById('imgEmoji').innerHTML = '<img loading="lazy" src="' + currentResult.image + '" alt="' + currentResult.type + '" style="max-width: 300px; border-radius: 20px;">';
-        document.getElementById('imgType').innerHTML = currentResult.type;
-        document.getElementById('imgDesc').innerHTML = currentResult.desc;
-        document.getElementById('imgScore').innerHTML = totalScore + ' / 60';
-        document.getElementById('imgZone').innerHTML = zoneText;
-        document.getElementById('imgAdvice').innerHTML = currentResult.advice;
+        document.getElementById('imgEmoji').textContent = currentResult.emoji;
+        document.getElementById('imgType').textContent = yageName;
+        document.getElementById('imgDesc').textContent = currentResult.desc;
+        document.getElementById('imgScore').innerHTML = dimensionText;
+        document.getElementById('imgZone').textContent = zoneText;
+        document.getElementById('imgAdvice').innerHTML = '<div>' + currentResult.quote + '</div>' +
+            '<div style="margin-top:8px;border-top:1px solid rgba(255,255,255,0.1);padding-top:8px;">' +
+            '<div style="font-size:12px;color:#8892b0;">🎯 ' + currentResult.suitable + '</div></div>';
         
         console.log('结果页面填充完成');
     } catch (error) {
@@ -204,7 +245,10 @@ function toggleShareOptions() {
 }
 
 function copyText() {
-    var shareText = '我的真实鸦格是「' + currentResult.type + '」！来测测你现在的真实鸦格吧～ xingxingya.com';
+    var shareText = '我的鸦格是「' + currentResult.emoji + ' ' + currentResult.zone + '的' + Object.keys(yages).find(k => yages[k] === currentResult) + '」' +
+        '\n' + currentResult.desc.substring(0, 50) + '...' +
+        '\n来测测你现在的真实鸦格吧～ xingxingya.com';
+    
     if (navigator.clipboard) {
         navigator.clipboard.writeText(shareText).then(function() {
             alert('✅ 已复制到剪贴板！\n嘎嘎 ~ 粘贴到朋友圈分享吧~');
@@ -263,7 +307,8 @@ function confirmDownload() {
     if (generatedImageBlob) {
         var link = document.createElement('a');
         link.href = URL.createObjectURL(generatedImageBlob);
-        link.download = '醒醒鸦-' + currentResult.type + '.png';
+        var yageName = Object.keys(yages).find(k => yages[k] === currentResult) || '鸦格';
+        link.download = '醒醒鸦-' + yageName + '.png';
         link.click();
         closePreview();
     }
@@ -285,7 +330,6 @@ function retryQuiz() {
     shareOptions.classList.remove('show');
     
     currentQuestion = 0;
-    totalScore = 0;
     answers = [];
     currentResult = null;
     generatedImageBlob = null;
@@ -301,7 +345,6 @@ function resetToHome() {
         quizPage.style.display = 'none';
         startPage.classList.remove('hidden');
         currentQuestion = 0;
-        totalScore = 0;
         answers = [];
         isTransitioning = false;
         progressFill.style.width = '0%';
@@ -330,7 +373,7 @@ function initEventListeners() {
     if (closePreviewBtn) closePreviewBtn.onclick = closePreview;
     if (backHomeBtn) backHomeBtn.onclick = resetToHome;
     
-    console.log('醒醒鸦测试已加载完成 · 嘎嘎');
+    console.log('醒醒鸦测试 v2.0 已加载完成 · 嘎嘎');
 }
 
 // ========== 离线提示功能 ==========
@@ -357,7 +400,6 @@ function initNetworkListener() {
         showOfflineToast();
     });
     
-    // 页面加载时检查初始网络状态
     if (!navigator.onLine) {
         showOfflineToast();
     }
