@@ -1,923 +1,184 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <!-- ========== SEO 优化项10: Meta标签 ========== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>醒醒鸦 · 精神状态自检</title>
     <meta name="description" content="2分钟测出你现在的真实精神状态，12种乌鸦人格，你是哪一种？">
     <meta name="keywords" content="精神状态,人格测试,乌鸦人格,心理测试,醒醒鸦">
-    <meta name="author" content="醒醒鸦">
-    
-    <!-- Open Graph 标签 -->
-    <meta property="og:title" content="醒醒鸦 · 精神状态自检">
-    <meta property="og:description" content="2分钟测出你现在的真实精神状态，12种乌鸦人格，你是哪一种？">
-    <meta property="og:image" content="https://xingxingya.com/logo.png">
-    <meta property="og:url" content="https://xingxingya.com">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="zh_CN">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="醒醒鸦 · 精神状态自检">
-    <meta name="twitter:description" content="2分钟测出你现在的真实精神状态，12种乌鸦人格，你是哪一种？">
-    
-    <!-- ========== SEO 优化项12: Favicon ========== -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" href="logo.png">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #2d2d44 100%);
-            min-height: 100vh;
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .start-page {
-            text-align: center;
-            animation: fadeIn 0.8s ease;
-        }
-
-        /* ========== 优化项3: Logo增强动画 ========== */
-        .logo {
-            margin-bottom: 16px;
-            animation: crowNod 3s ease-in-out infinite;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .logo:hover {
-            animation: crowNod 3s ease-in-out infinite, crowBlink 0.3s ease;
-        }
-
-        .logo:active {
-            animation: crowJump 0.4s ease;
-        }
-
-        .logo img {
-            width: 120px;
-            height: auto;
-            border-radius: 20px;
-        }
-
-        @keyframes crowNod {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-5deg); }
-            75% { transform: rotate(5deg); }
-        }
-
-        @keyframes crowBlink {
-            0%, 40%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.1) rotate(0deg); }
-        }
-
-        @keyframes crowJump {
-            0% { transform: translateY(0) scale(1); }
-            30% { transform: translateY(-15px) scale(1.05); }
-            50% { transform: translateY(-20px) scale(1.1); }
-            70% { transform: translateY(-10px) scale(1.05); }
-            100% { transform: translateY(0) scale(1); }
-        }
-
-        .main-title {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #8b8b8b, #d4d4d4, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: #8892b0;
-            margin-bottom: 16px;
-        }
-
-        .slogan {
-            font-size: 14px;
-            color: #6b7c93;
-            margin-bottom: 32px;
-            font-style: italic;
-            letter-spacing: 2px;
-        }
-
-        /* ========== UI优化项3: 首页引导形象 ========== */
-        .guidance-mascot {
-            margin: 20px auto;
-            animation: guidanceWave 2s ease-in-out infinite;
-        }
-
-        .guidance-mascot img {
-            width: 80px;
-            height: auto;
-        }
-
-        @keyframes guidanceWave {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-5px) rotate(-3deg); }
-            75% { transform: translateY(-5px) rotate(3deg); }
-        }
-
-        /* ========== UI优化项6: 波纹效果 ========== */
-        .start-btn, .share-btn, .nav-btn, .option {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(0);
-            animation: rippleEffect 0.6s ease-out;
-            pointer-events: none;
-        }
-
-        @keyframes rippleEffect {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-
-        .start-btn {
-            background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
-            border: 2px solid #666;
-            padding: 16px 48px;
-            font-size: 18px;
-            font-weight: 600;
-            color: #fff;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        .start-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(100, 100, 100, 0.3);
-            border-color: #888;
-        }
-
-        .features {
-            margin-top: 50px;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        .feature {
-            text-align: center;
-        }
-
-        .feature-icon {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-
-        .feature-text {
-            font-size: 12px;
-            color: #8892b0;
-        }
-
-        /* ========== 性能优化项8: 骨架屏 ========== */
-        .skeleton {
-            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            border-radius: 8px;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        .quiz-page {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .progress-bar {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            height: 6px;
-            margin-bottom: 30px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background: linear-gradient(90deg, #666, #999, #ccc);
-            height: 100%;
-            border-radius: 10px;
-            transition: width 0.3s ease;
-        }
-
-        .question-counter {
-            text-align: center;
-            font-size: 14px;
-            color: #8892b0;
-            margin-bottom: 20px;
-        }
-
-        .question-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 30px 24px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .question-text {
-            font-size: 18px;
-            font-weight: 500;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        /* ========== UI优化项4: 选项动画 ========== */
-        .option {
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            padding: 16px 20px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            font-size: 15px;
-            text-align: center;
-        }
-
-        .option:hover {
-            background: rgba(100, 100, 100, 0.3);
-            border-color: #888;
-            transform: scale(1.02);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .option.selected {
-            background: linear-gradient(135deg, rgba(100, 100, 100, 0.4), rgba(150, 150, 150, 0.3));
-            border-color: #aaa;
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(100, 100, 100, 0.4);
-            animation: bounceSelected 0.4s ease;
-        }
-
-        @keyframes bounceSelected {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-            100% { transform: scale(1.05); }
-        }
-
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 24px;
-            gap: 12px;
-        }
-
-        .nav-btn {
-            flex: 1;
-            padding: 12px 20px;
-            font-size: 14px;
-            font-weight: 500;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .nav-btn.prev {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #8892b0;
-        }
-
-        .nav-btn.prev:hover:not(:disabled) {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-        }
-
-        .nav-btn.prev:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .nav-btn.submit {
-            background: linear-gradient(135deg, #555, #333);
-            border: 2px solid #666;
-            color: #fff;
-        }
-
-        .nav-btn.submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(100, 100, 100, 0.3);
-        }
-
-        /* ========== UI优化项5: 结果页动画 ========== */
-        .result-page {
-            display: none;
-            text-align: center;
-        }
-
-        .result-page.show {
-            animation: resultSlideIn 0.8s ease;
-        }
-
-        @keyframes resultSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .result-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 40px 24px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 20px;
-        }
-
-        /* ========== UI优化项2: 结果页鸦格图 ========== */
-        .result-emoji {
-            margin-bottom: 16px;
-            animation: crowBounce 2s ease-in-out infinite;
-        }
-
-        .result-emoji img {
-            max-width: 200px;
-            border-radius: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .result-emoji img:hover {
-            transform: scale(1.05);
-        }
-
-        @keyframes crowBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .result-type {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #fff;
-            background: linear-gradient(90deg, #aaa, #ddd, #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* 备用：如果渐变文字不支持，显示白色 */
-        @supports not (-webkit-background-clip: text) {
-            .result-type {
-                -webkit-text-fill-color: #fff;
-                color: #fff;
-            }
-        }
-
-        .result-desc {
-            font-size: 15px;
-            line-height: 1.8;
-            color: #ccd6f6;
-            margin-bottom: 24px;
-        }
-
-        .score-section {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        .score-label {
-            font-size: 12px;
-            color: #8892b0;
-            margin-bottom: 8px;
-        }
-
-        .score-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .score-zone {
-            font-size: 14px;
-            color: #8892b0;
-            margin-top: 4px;
-        }
-
-        .advice-section {
-            background: rgba(100, 100, 100, 0.15);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 20px;
-        }
-
-        .advice-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #bbb;
-            margin-bottom: 8px;
-        }
-
-        .advice-text {
-            font-size: 14px;
-            color: #ccd6f6;
-            line-height: 1.6;
-        }
-
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .share-btn {
-            background: linear-gradient(135deg, #555, #333);
-            border: 2px solid #666;
-            padding: 14px 32px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #fff;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .share-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(100, 100, 100, 0.3);
-        }
-
-        .share-options {
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 12px;
-            animation: slideUp 0.3s ease;
-        }
-
-        .share-options.show {
-            display: flex;
-        }
-
-        .share-option-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 12px 20px;
-            font-size: 14px;
-            color: #fff;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .share-option-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .retry-btn {
-            background: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            padding: 12px 32px;
-            font-size: 14px;
-            color: #8892b0;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .retry-btn:hover {
-            border-color: rgba(255, 255, 255, 0.4);
-            color: #fff;
-        }
-
-        .footer-tip {
-            margin-top: 30px;
-            font-size: 12px;
-            color: #5a6a8a;
-        }
-        
-        .image-preview-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-        }
-
-        .image-preview-overlay.show {
-            display: flex;
-        }
-
-        .image-preview-container {
-            max-width: 400px;
-            width: 100%;
-            background: #1a1a2e;
-            border-radius: 16px;
-            overflow: hidden;
-        }
-
-        .image-preview-container img {
-            width: 100%;
-            display: block;
-        }
-
-        .image-preview-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .image-preview-actions button {
-            flex: 1;
-            padding: 12px;
-            font-size: 14px;
-            font-weight: 500;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .download-btn {
-            background: linear-gradient(135deg, #555, #333);
-            border: 2px solid #666;
-            color: #fff;
-        }
-
-        .close-preview-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #8892b0;
-        }
-
-        .result-image-container {
-            position: fixed;
-            left: -9999px;
-            top: 0;
-            width: 400px;
-            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #2d2d44 100%);
-            padding: 40px 30px;
-            font-family: 'Noto Sans SC', sans-serif;
-            color: #fff;
-            text-align: center;
-        }
-
-        .result-image-container .img-emoji {
-            margin-bottom: 16px;
-        }
-
-        .result-image-container .img-emoji img {
-            max-width: 300px;
-            border-radius: 20px;
-        }
-
-        .result-image-container .img-type {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, #aaa, #ddd, #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .result-image-container .img-desc {
-            font-size: 14px;
-            line-height: 1.8;
-            color: #ccd6f6;
-            margin-bottom: 24px;
-            padding: 0 10px;
-        }
-
-        .result-image-container .score-box {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
-        }
-
-        .result-image-container .score-num {
-            font-size: 28px;
-            font-weight: 700;
-            color: #bbb;
-        }
-
-        .result-image-container .score-zone-text {
-            font-size: 14px;
-            color: #8892b0;
-            margin-top: 4px;
-        }
-
-        .result-image-container .advice-box {
-            background: rgba(100, 100, 100, 0.15);
-            border-radius: 12px;
-            padding: 14px;
-            margin-bottom: 24px;
-        }
-
-        .result-image-container .advice-title-text {
-            font-size: 13px;
-            font-weight: 600;
-            color: #bbb;
-            margin-bottom: 6px;
-        }
-
-        .result-image-container .advice-content {
-            font-size: 13px;
-            color: #ccd6f6;
-        }
-
-        .result-image-container .img-footer {
-            font-size: 12px;
-            color: #5a6a8a;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 16px;
-        }
-
-        .result-image-container .logo-text {
-            font-size: 18px;
-            font-weight: 700;
-            background: linear-gradient(90deg, #aaa, #ddd, #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* ========== 性能优化项7: 图片懒加载 ========== */
-        .lazy-image {
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .lazy-image.loaded {
-            opacity: 1;
-        }
-    
-        /* 键盘导航焦点样式 */
-        .option:focus {
-            outline: none;
-            background: rgba(100, 100, 100, 0.4);
-            border-color: #aaa;
-            box-shadow: 0 0 0 3px rgba(170, 170, 170, 0.3);
-        }
-        .option.keyboard-nav {
-            border-color: #888;
-            transform: scale(1.02);
-        }
-
-    
-        /* 加载状态 */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(13, 13, 26, 0.95);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        .loading-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .loading-overlay .crow-icon {
-            font-size: 60px;
-            animation: bounce 1s ease-in-out infinite;
-        }
-        .loading-overlay p {
-            margin-top: 20px;
-            color: #b8b8d0;
-            font-size: 16px;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-    
-        /* 美化的错误提示 */
-        .error-toast {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-100px);
-            background: linear-gradient(135deg, rgba(139,69,69,0.95), rgba(180,80,80,0.95));
-            color: #fff;
-            padding: 14px 28px;
-            border-radius: 25px;
-            font-size: 14px;
-            z-index: 1003;
-            opacity: 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(139,69,69,0.4);
-            max-width: 90%;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .error-toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-        .error-toast .error-icon {
-            font-size: 18px;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans SC', sans-serif; background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #2d2d44 100%); min-height: 100vh; color: #fff; overflow-x: hidden; }
+        .container { max-width: 480px; margin: 0 auto; padding: 20px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        .start-page { text-align: center; animation: fadeIn 0.8s ease; }
+        .logo { margin-bottom: 16px; animation: crowNod 3s ease-in-out infinite; }
+        .logo img { width: 120px; height: auto; border-radius: 20px; }
+        @keyframes crowNod { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-5deg); } 75% { transform: rotate(5deg); } }
+        .main-title { font-size: 42px; font-weight: 700; margin-bottom: 10px; background: linear-gradient(90deg, #8b8b8b, #d4d4d4, #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .subtitle { font-size: 16px; color: #8892b0; margin-bottom: 16px; }
+        .slogan { font-size: 14px; color: #6b7c93; margin-bottom: 32px; font-style: italic; letter-spacing: 2px; }
+        .guidance-mascot { margin: 20px auto; animation: guidanceWave 2s ease-in-out infinite; }
+        .guidance-mascot img { width: 80px; height: auto; }
+        @keyframes guidanceWave { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .start-btn { background: linear-gradient(135deg, #4a4a4a, #2d2d2d); border: 2px solid #666; padding: 16px 48px; font-size: 18px; font-weight: 600; color: #fff; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+        .start-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(100,100,100,0.3); }
+        .features { margin-top: 50px; display: flex; justify-content: center; gap: 30px; }
+        .feature { text-align: center; }
+        .feature-icon { font-size: 24px; margin-bottom: 8px; }
+        .feature-text { font-size: 12px; color: #8892b0; }
+        .quiz-page { display: none; animation: fadeIn 0.5s ease; }
+        .progress-bar { background: rgba(255,255,255,0.1); border-radius: 10px; height: 6px; margin-bottom: 30px; overflow: hidden; }
+        .progress-fill { background: linear-gradient(90deg,#666,#999,#ccc); height: 100%; border-radius: 10px; transition: width 0.3s ease; }
+        .question-counter { text-align: center; font-size: 14px; color: #8892b0; margin-bottom: 16px; }
+        .dimension-tag { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; margin-bottom: 12px; background: rgba(255,255,255,0.1); }
+        .dimension-tag.电量 { background: rgba(255,200,0,0.2); color: #ffd700; }
+        .dimension-tag.情绪 { background: rgba(255,100,150,0.2); color: #ffb6c1; }
+        .dimension-tag.行动 { background: rgba(100,200,255,0.2); color: #87ceeb; }
+        .dimension-tag.连接 { background: rgba(180,130,255,0.2); color: #dda0dd; }
+        .question-card { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 30px 24px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .question-text { font-size: 18px; font-weight: 500; line-height: 1.6; margin-bottom: 24px; text-align: center; }
+        .options { display: flex; flex-direction: column; gap: 12px; }
+        .option { background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.1); padding: 16px 20px; border-radius: 12px; cursor: pointer; transition: all 0.3s cubic-bezier(0.175,0.885,0.32,1.275); font-size: 15px; text-align: center; }
+        .option:hover { background: rgba(100,100,100,0.3); border-color: #888; transform: scale(1.02); }
+        .option.selected { background: linear-gradient(135deg,rgba(100,100,100,0.4),rgba(150,150,150,0.3)); border-color: #aaa; transform: scale(1.05); box-shadow: 0 6px 20px rgba(100,100,100,0.4); }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 24px; gap: 12px; }
+        .nav-btn { flex: 1; padding: 12px 20px; font-size: 14px; font-weight: 500; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #8892b0; }
+        .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+        .result-page { display: none; text-align: center; }
+        .result-page.show { animation: resultSlideIn 0.8s ease; }
+        @keyframes resultSlideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .result-card { background: rgba(255,255,255,0.05); border-radius: 24px; padding: 40px 24px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; }
+        .result-emoji { margin-bottom: 16px; animation: crowBounce 2s ease-in-out infinite; }
+        .result-emoji img { max-width: 200px; border-radius: 20px; }
+        @keyframes crowBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        .result-type { font-size: 28px; font-weight: 700; margin-bottom: 12px; background: linear-gradient(90deg,#aaa,#ddd,#fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .result-zone { font-size: 14px; padding: 6px 16px; border-radius: 20px; display: inline-block; margin-bottom: 20px; }
+        .result-zone.清醒区 { background: rgba(255,215,0,0.2); color: #ffd700; }
+        .result-zone.假寐区 { background: rgba(150,150,200,0.2); color: #b8b8d0; }
+        .result-zone.沉睡区 { background: rgba(100,100,150,0.2); color: #8a8aaa; }
+        .result-desc { font-size: 15px; line-height: 1.8; color: #ccd6f6; margin-bottom: 24px; text-align: left; }
+        .dimension-scores { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-bottom: 20px; }
+        .dimension-score-item { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 12px; text-align: center; }
+        .dimension-score-item .dim-name { font-size: 12px; color: #8892b0; margin-bottom: 4px; }
+        .dimension-score-item .dim-value { font-size: 20px; font-weight: 700; }
+        .dimension-score-item .dim-level { font-size: 11px; margin-top: 2px; }
+        .dimension-score-item.高 .dim-value, .dimension-score-item.高 .dim-level { color: #ffd700; }
+        .dimension-score-item.中 .dim-value, .dimension-score-item.中 .dim-level { color: #b8b8d0; }
+        .dimension-score-item.低 .dim-value, .dimension-score-item.低 .dim-level { color: #8a8aaa; }
+        .advice-section { background: rgba(100,100,100,0.15); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .advice-title { font-size: 14px; font-weight: 600; color: #bbb; margin-bottom: 8px; }
+        .advice-text { font-size: 14px; color: #ccd6f6; line-height: 1.6; }
+        .suitable-section { background: rgba(255,200,100,0.1); border-radius: 12px; padding: 16px; margin-bottom: 20px; text-align: left; border: 1px solid rgba(255,200,100,0.2); }
+        .suitable-title { font-size: 14px; font-weight: 600; color: #ffd700; margin-bottom: 12px; }
+        .suitable-list { font-size: 14px; color: #ccd6f6; line-height: 1.8; }
+        .suitable-list li { margin-bottom: 6px; padding-left: 8px; list-style: none; }
+        .suitable-list li::before { content: "• "; color: #ffd700; }
+        .action-buttons { display: flex; flex-direction: column; gap: 12px; }
+        .share-btn { background: linear-gradient(135deg,#555,#333); border: 2px solid #666; padding: 14px 32px; font-size: 16px; font-weight: 600; color: #fff; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; }
+        .share-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(100,100,100,0.3); }
+        .share-options { display: none; flex-direction: column; gap: 10px; margin-top: 12px; }
+        .share-options.show { display: flex; }
+        .share-option-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 12px 20px; font-size: 14px; color: #fff; border-radius: 12px; cursor: pointer; }
+        .share-option-btn:hover { background: rgba(255,255,255,0.15); }
+        .chat-btn { background: linear-gradient(135deg,#4a4a6a,#3a3a5a); border: 2px solid #6a6a9a; padding: 14px 32px; font-size: 15px; font-weight: 500; color: #e0e0ff; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: block; text-align: center; }
+        .chat-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(106,106,154,0.4); }
+        .retry-btn { background: transparent; border: 2px solid rgba(255,255,255,0.2); padding: 12px 32px; font-size: 14px; color: #8892b0; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; }
+        .retry-btn:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
+        .footer-tip { margin-top: 30px; font-size: 12px; color: #5a6a8a; text-align: center; }
+        .image-preview-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; flex-direction: column; padding: 20px; }
+        .image-preview-overlay.show { display: flex; }
+        .image-preview-container { max-width: 400px; width: 100%; background: #1a1a2e; border-radius: 16px; overflow: hidden; }
+        .image-preview-container img { width: 100%; }
+        .image-preview-actions { display: flex; gap: 12px; margin-top: 16px; width: 100%; max-width: 400px; }
+        .image-preview-actions button { flex: 1; padding: 12px; font-size: 14px; border-radius: 12px; cursor: pointer; }
+        .download-btn { background: linear-gradient(135deg,#555,#333); border: 2px solid #666; color: #fff; }
+        .close-preview-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #8892b0; }
+        .result-image-container { position: fixed; left: -9999px; top: 0; width: 400px; background: linear-gradient(135deg,#0d0d0d,#1a1a2e,#2d2d44); padding: 40px 30px; font-family: 'Noto Sans SC', sans-serif; color: #fff; text-align: center; }
+        .result-image-container .img-type { font-size: 32px; font-weight: 700; margin-bottom: 10px; background: linear-gradient(90deg,#aaa,#ddd,#fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .result-image-container .img-zone { font-size: 13px; padding: 4px 14px; border-radius: 20px; display: inline-block; margin-bottom: 16px; }
+        .result-image-container .img-zone.清醒区 { background: rgba(255,215,0,0.2); color: #ffd700; }
+        .result-image-container .img-zone.假寐区 { background: rgba(150,150,200,0.2); color: #b8b8d0; }
+        .result-image-container .img-zone.沉睡区 { background: rgba(100,100,150,0.2); color: #8a8aaa; }
+        .result-image-container .img-desc { font-size: 14px; line-height: 1.8; color: #ccd6f6; margin-bottom: 16px; padding: 0 10px; text-align: left; }
+        .result-image-container .img-dims { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 16px; }
+        .result-image-container .img-dim-item { background: rgba(255,255,255,0.05); border-radius: 8px; padding: 8px; text-align: center; }
+        .result-image-container .img-dim-item .dim-name { font-size: 10px; color: #8892b0; }
+        .result-image-container .img-dim-item .dim-value { font-size: 16px; font-weight: 700; }
+        .result-image-container .img-dim-item.高 .dim-value { color: #ffd700; }
+        .result-image-container .img-dim-item.中 .dim-value { color: #b8b8d0; }
+        .result-image-container .img-dim-item.低 .dim-value { color: #8a8aaa; }
+        .result-image-container .advice-box { background: rgba(100,100,100,0.15); border-radius: 12px; padding: 14px; margin-bottom: 16px; text-align: left; }
+        .result-image-container .advice-title-text { font-size: 13px; font-weight: 600; color: #bbb; margin-bottom: 6px; }
+        .result-image-container .advice-content { font-size: 13px; color: #ccd6f6; line-height: 1.6; }
+        .result-image-container .img-suitable { background: rgba(255,200,100,0.1); border-radius: 10px; padding: 12px; margin-bottom: 16px; text-align: left; border: 1px solid rgba(255,200,100,0.2); }
+        .result-image-container .img-suitable-title { font-size: 12px; font-weight: 600; color: #ffd700; margin-bottom: 8px; }
+        .result-image-container .img-suitable-content { font-size: 12px; color: #ccd6f6; line-height: 1.6; }
+        .result-image-container .img-footer { display: flex; flex-direction: column; align-items: center; padding: 20px; margin-top: 16px; background: rgba(255,255,255,0.05); border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); }
+        .result-image-container .img-footer .footer-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+        .result-image-container .img-footer .footer-logo img { width: 28px; height: 28px; border-radius: 50%; }
+        .result-image-container .img-footer .footer-logo-text { font-size: 18px; font-weight: 700; background: linear-gradient(90deg,#aaa,#ddd,#fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .result-image-container .img-footer .footer-tagline { font-size: 13px; color: #8892b0; margin-bottom: 6px; }
+        .result-image-container .img-footer .footer-domain { font-size: 14px; color: #6b7c93; letter-spacing: 1px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .hidden { display: none !important; }
+        .loading-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(13,13,26,0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .loading-overlay.show { opacity: 1; visibility: visible; }
+        .loading-overlay .crow-icon { font-size: 60px; animation: bounce 1s ease-in-out infinite; }
+        .loading-overlay p { margin-top: 20px; color: #b8b8d0; font-size: 16px; }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 24px; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 1000; display: flex; align-items: center; justify-content: center; }
+        .back-to-top.visible { opacity: 1; visibility: visible; }
+        .back-to-top:hover { background: rgba(255,255,255,0.25); transform: translateY(-3px); }
     </style>
     <link rel="manifest" href="manifest.json">
-
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "醒醒鸦",
-        "description": "精神状态自检，12种乌鸦人格测试",
-        "url": "https://xingxingya.com",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://xingxingya.com/?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
-    }
-    
-        // 显示/隐藏加载状态
-        function showLoading() {
-            const overlay = document.getElementById('loadingOverlay');
-            if (overlay) overlay.classList.add('show');
-        }
-        function hideLoading() {
-            const overlay = document.getElementById('loadingOverlay');
-            if (overlay) overlay.classList.remove('show');
-        }
-        // 在提交测试时显示加载
-        function submitQuiz() {
-            showLoading();
-            // 原有的提交逻辑继续执行
-        }
-
-    
-        // 显示错误提示
-        function showError(message) {
-            const errorToast = document.getElementById('errorToast');
-            if (errorToast) {
-                errorToast.querySelector('.error-text').textContent = message;
-                errorToast.classList.add('show');
-                setTimeout(function() {
-                    errorToast.classList.remove('show');
-                }, 3000);
-            }
-        }
-
-    </script>
-
 </head>
 <body>
     <div class="container">
-        <!-- 开始页面 -->
         <div class="start-page" id="startPage">
-            <!-- UI优化项1: Logo替换为小鸦品牌形象图 -->
-            <div class="logo">
-                <img src="logo.png" alt="醒醒鸦" loading="eager">
-            </div>
+            <div class="logo"><img src="logo.png" alt="醒醒鸦"></div>
             <h1 class="main-title">醒醒鸦</h1>
             <p class="subtitle">嘎 —— 别装了，测测你现在的真实状态</p>
             <p class="slogan">心境如云，不定义，只看见</p>
-            
-            <!-- UI优化项3: 首页引导形象 -->
-            <div class="guidance-mascot">
-                <img src="guidance.png" alt="点击开始" loading="eager">
-            </div>
-            
+            <div class="guidance-mascot"><img src="guidance.png" alt="点击开始"></div>
             <button class="start-btn" id="startBtn">开始测试</button>
             <div class="features">
-                <div class="feature">
-                    <div class="feature-icon">⚡</div>
-                    <div class="feature-text">2分钟</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">📋</div>
-                    <div class="feature-text">20道题</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🦅</div>
-                    <div class="feature-text">嘎嘎预警</div>
-                </div>
+                <div class="feature"><div class="feature-icon">⚡</div><div class="feature-text">2分钟</div></div>
+                <div class="feature"><div class="feature-icon">📋</div><div class="feature-text">20道题</div></div>
+                <div class="feature"><div class="feature-icon">🦅</div><div class="feature-text">12种鸦格</div></div>
             </div>
         </div>
 
-        <!-- 答题页面 -->
         <div class="quiz-page" id="quizPage">
-            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
             <div class="question-counter" id="questionCounter">第 1 题 / 共 20 题</div>
-            <div class="question-card" role="group" aria-labelledby="questionLabel">
-                <div class="question-text" id="questionText" aria-labelledby="questionLabel"></div>
+            <div class="dimension-tag" id="dimensionTag">电量维度</div>
+            <div class="question-card">
+                <div class="question-text" id="questionText"></div>
                 <div class="options" id="optionsContainer"></div>
-                <div class="nav-buttons">
-                    <button class="nav-btn prev" id="prevBtn">← 上一题</button>
-                </div>
+                <div class="nav-buttons"><button class="nav-btn prev" id="prevBtn">← 上一题</button></div>
             </div>
         </div>
 
-        <!-- 结果页面 -->
         <div class="result-page" id="resultPage">
             <div class="result-card">
-                <!-- UI优化项2: 结果页鸦格图 -->
                 <div class="result-emoji" id="resultEmoji"></div>
                 <div class="result-type" id="resultType"></div>
+                <div class="result-zone" id="resultZone"></div>
                 <div class="result-desc" id="resultDesc"></div>
-                <div class="score-section">
-                    <div class="score-label">精神状态指数</div>
-                    <div class="score-value" id="scoreValue"></div>
-                    <div class="score-zone" id="scoreZone"></div>
-                </div>
+                <div class="dimension-scores" id="dimensionScores"></div>
                 <div class="advice-section">
-                    <div class="advice-title">🦅 鸦鸦有话说</div>
+                    <div class="advice-title">🦅 清醒语录</div>
                     <div class="advice-text" id="adviceText"></div>
+                </div>
+                <div class="suitable-section">
+                    <div class="suitable-title">💡 适合做什么</div>
+                    <div class="suitable-list" id="suitableList"></div>
                 </div>
             </div>
             <div class="action-buttons">
@@ -926,17 +187,13 @@
                     <button class="share-option-btn" id="copyTextBtn">📋 复制文字</button>
                     <button class="share-option-btn" id="downloadImgBtn">🖼️ 下载图片</button>
                 </div>
+                <a class="chat-btn" id="chatBtn">💬 跟小鸦聊聊你的测试结果</a>
                 <button class="retry-btn" id="retryBtn">🔄 重新测试</button>
             </div>
-            <div class="footer-tip">
-                xingxingya.com<br>
-                醒醒鸦 · 了解此刻的你<br>
-                心境如云，不定义，只看见
-            </div>
+            <div class="footer-tip">xingxingya.com<br>醒醒鸦 · 了解此刻的你<br>心境如云，不定义，只看见</div>
         </div>
     </div>
 
-    <!-- 图片预览弹窗 -->
     <div class="image-preview-overlay" id="imagePreviewOverlay">
         <div class="image-preview-container" id="imagePreviewContainer"></div>
         <div class="image-preview-actions">
@@ -945,566 +202,331 @@
         </div>
     </div>
 
-    <!-- 用于生成图片的隐藏容器 -->
     <div class="result-image-container" id="resultImageContainer">
         <div class="img-emoji" id="imgEmoji"></div>
         <div class="img-type" id="imgType"></div>
+        <div class="img-zone" id="imgZone"></div>
         <div class="img-desc" id="imgDesc"></div>
-        <div class="score-box">
-            <div class="score-num" id="imgScore"></div>
-            <div class="score-zone-text" id="imgZone"></div>
-        </div>
-        <div class="advice-box">
-            <div class="advice-title-text">🦅 鸦鸦有话说</div>
-            <div class="advice-content" id="imgAdvice"></div>
-        </div>
+        <div class="img-dims" id="imgDims"></div>
+        <div class="advice-box"><div class="advice-title-text">🦅 清醒语录</div><div class="advice-content" id="imgAdvice"></div></div>
+        <div class="img-suitable"><div class="img-suitable-title">💡 适合做什么</div><div class="img-suitable-content" id="imgSuitableContent"></div></div>
         <div class="img-footer">
-            <div class="logo-text">醒醒鸦</div>
-            <div style="margin-top: 6px;">xingxingya.com</div>
+            <div class="footer-logo"><img src="mengya.png" alt="醒醒鸦"><div class="footer-logo-text">醒醒鸦</div></div>
+            <div class="footer-tagline">了解此刻的你</div>
+            <div class="footer-domain">xingxingya.com</div>
         </div>
     </div>
 
-    <!-- ========== 优化项6: 优化CDN - 使用jsDelivr CDN ========== -->
-    <!-- html2canvas 库 -->
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    
     <script>
-        // ========== 显示/隐藏加载状态 ==========
-        function showLoading() {
-            const overlay = document.getElementById('loadingOverlay');
-            if (overlay) overlay.classList.add('show');
-        }
-        function hideLoading() {
-            const overlay = document.getElementById('loadingOverlay');
-            if (overlay) overlay.classList.remove('show');
-        }
+        // ========== 20道趣味测试题目（3选项版）==========
+        // A=3分, B=2分, C=1分 | 每维度5题,最高15分
+        // 分档: 高(13-15) / 中(9-12) / 低(5-8)
         
-        // 显示错误提示
-        function showError(message) {
-            const errorToast = document.getElementById('errorToast');
-            if (errorToast) {
-                errorToast.querySelector('.error-text').textContent = message;
-                errorToast.classList.add('show');
-                setTimeout(function() {
-                    errorToast.classList.remove('show');
-                }, 3000);
-            }
-        }
-    </script>
-    
-    <script>
-        // ========== 数据定义 ==========
         var questions = [
-            { text: "闹钟响了，你的第一反应是？", options: [{ text: "立刻起床，迎接新的一天 ✨", score: 3 }, { text: "再躺5分钟...就5分钟... 😴", score: 2 }, { text: "闹钟？我早就醒了，根本没睡 🌚", score: 1 }] },
-            { text: "周末有人约你出门，你的内心活动是？", options: [{ text: "好耶！出门透透气！🎉", score: 3 }, { text: "看情况吧，心情好再去 🤔", score: 2 }, { text: "别吧...让我再躺会儿...🛋️", score: 1 }] },
-            { text: "你的手机屏幕使用时间大概是？", options: [{ text: "4小时以内，我很克制 📱", score: 3 }, { text: "4-8小时，正常水平吧 😐", score: 2 }, { text: "不敢看，看了会焦虑 💀", score: 1 }] },
-            { text: "最近一次感到「活着真好」是什么时候？", options: [{ text: "今天/最近几天 ☀️", score: 3 }, { text: "好像...有一阵子了 🌥️", score: 2 }, { text: "想不起来了 🌫️", score: 1 }] },
-            { text: "如果可以用一个词形容你现在的状态？", options: [{ text: "活力满满 🔋", score: 3 }, { text: "还能撑 💪", score: 2 }, { text: "行尸走肉 🧟", score: 1 }] },
-            { text: "朋友群里有人发消息，你通常会？", options: [{ text: "积极回复，气氛担当 💬", score: 3 }, { text: "看心情，偶尔回一下 👀", score: 2 }, { text: "已读不回是常态 🔇", score: 1 }] },
-            { text: "有人请你帮忙做一件麻烦的事，你会？", options: [{ text: "能帮就帮，朋友嘛 🤝", score: 3 }, { text: "先评估一下值不值得 🧮", score: 2 }, { text: "表面答应，内心崩溃 😱", score: 1 }] },
-            { text: "你觉得自己在朋友眼中是？", options: [{ text: "靠谱的、能扛事的 💪", score: 3 }, { text: "存在感不太强的 👻", score: 2 }, { text: "那个「下次一定」的人 🙃", score: 1 }] },
-            { text: "最近一次主动联系朋友是什么时候？", options: [{ text: "这几天刚聊过 📞", score: 3 }, { text: "一两周前吧 📅", score: 2 }, { text: "让我想想...好像很久了 📆", score: 1 }] },
-            { text: "有人问「最近怎么样」，你的真实回答是？", options: [{ text: "挺好的呀！😊", score: 3 }, { text: "就那样吧，还能过 😐", score: 2 }, { text: "哈哈（没有然后了）😅", score: 1 }] },
-            { text: "周日晚上，想到明天要上班/上学，你的心情是？", options: [{ text: "期待新的一周！🌟", score: 3 }, { text: "正常，习惯了 📋", score: 2 }, { text: "开始胃痛/焦虑/想辞职退学 😣", score: 1 }] },
-            { text: "面对一项艰巨的任务，你的态度是？", options: [{ text: "干就完了！冲！🚀", score: 3 }, { text: "先做计划，慢慢推进 📝", score: 2 }, { text: "拖到最后一刻再疯狂赶工 ⏰", score: 1 }] },
-            { text: "你对目前的工作/学业的感受是？", options: [{ text: "有意义，在往目标前进 🎯", score: 3 }, { text: "还行，凑合着干吧 🤷", score: 2 }, { text: "每天都在怀疑人生 🌀", score: 1 }] },
-            { text: "你的待办事项列表通常是？", options: [{ text: "有条理，按计划执行 ✅", score: 3 }, { text: "有是有，但不一定照做 📋", score: 2 }, { text: "什么待办？全在脑子里乱成一团 🧠", score: 1 }] },
-            { text: "如果中了彩票不用工作了，你还会继续现在的工作吗？", options: [{ text: "会，我挺喜欢的 💼", score: 3 }, { text: "可能会换个方向 🔄", score: 2 }, { text: "跑！连夜跑！🏃💨", score: 1 }] },
-            { text: "独处的时候，你通常会？", options: [{ text: "做自己喜欢的事，很充实 🎨", score: 3 }, { text: "刷刷手机，打发时间 📱", score: 2 }, { text: "焦虑、胡思乱想、不知干啥 😰", score: 1 }] },
-            { text: "你觉得自己是一个怎样的人？", options: [{ text: "有目标、有行动力的人 🔥", score: 3 }, { text: "普通人，不功不过 🌿", score: 2 }, { text: "说不清楚，挺迷茫的 🌫️", score: 1 }] },
-            { text: "如果生活是一部剧，你觉得你是？", options: [{ text: "主角，剧情由我书写 🎬", score: 3 }, { text: "配角，但有自己的高光时刻 🎭", score: 2 }, { text: "路人甲，背景板 🎪", score: 1 }] },
-            { text: "你最近经常出现的情绪是？", options: [{ text: "平静、满足、开心 😌", score: 3 }, { text: "焦虑、疲惫、无聊 😫", score: 2 }, { text: "麻木、虚无、无所谓 😶", score: 1 }] },
-            { text: "如果要对现在的自己说一句话，你会说？", options: [{ text: "继续加油，你挺棒的！💪", score: 3 }, { text: "还可以再努力一点点 📈", score: 2 }, { text: "醒醒啊！！！🚨", score: 1 }] }
+            // ⚡ 电量维度 Q1-Q5
+            { dimension: '电量', text: "周末早上闹钟响了，你的第一反应是？", options: [
+                { text: "弹射起床！☀️ 新的一天冲冲冲", score: 3 },
+                { text: "再躺5分钟...就5分钟 😴", score: 2 },
+                { text: "闹钟？我早醒了，根本没睡 🌚", score: 1 }
+            ]},
+            { dimension: '电量', text: "终于完成一件超难的事，你现在的状态是？", options: [
+                { text: "我还能再战三百回合！🔥", score: 3 },
+                { text: "有点累，但成就感满满 ✨", score: 2 },
+                { text: "我是谁我在哪，脑子已下线 🧠💨", score: 1 }
+            ]},
+            { dimension: '电量', text: "如果每天多1小时，你会拿来干嘛？", options: [
+                { text: "卷死别人 / 做想做的事 💪", score: 3 },
+                { text: "补觉 or 吃顿好的 🍜", score: 2 },
+                { text: "躺着发呆，时间对我没意义 🫠", score: 1 }
+            ]},
+            { dimension: '电量', text: "你现在对咖啡/续命水的依赖程度？", options: [
+                { text: "不需要，本人体质特殊 ⚡", score: 3 },
+                { text: "偶尔来一杯，但不硬依赖 ☕", score: 2 },
+                { text: "喝了也没用，人已经麻了 💀", score: 1 }
+            ]},
+            { dimension: '电量', text: "回想过去一个月，"感觉自己超能打"的天数有？", options: [
+                { text: "超过15天，我状态一直在线 💯", score: 3 },
+                { text: "7-15天，起起伏伏还凑合 📊", score: 2 },
+                { text: "不到7天，每天都在渡劫 🚶💨", score: 1 }
+            ]},
+            // 💭 情绪维度 Q6-Q10
+            { dimension: '情绪', text: "最近三天情绪最上头的一次是因为？", options: [
+                { text: "好事！升职/加薪/脱单/抽到SSR 🎉", score: 3 },
+                { text: "小事，能消化那种 😑", score: 2 },
+                { text: "没什么大事，就是莫名烦躁 😤", score: 1 }
+            ]},
+            { dimension: '情绪', text: "有人问你"最近咋样"，你会？", options: [
+                { text: "真诚笑：挺好的呀！😊", score: 3 },
+                { text: "敷衍笑：还行吧... 😶", score: 2 },
+                { text: "心里累但表面演：哈哈挺好的 😮‍💨", score: 1 }
+            ]},
+            { dimension: '情绪', text: "你上一次觉得"生活真有意思"是？", options: [
+                { text: "今天/昨天！开心着呢 😄", score: 3 },
+                { text: "这周内，还不错 👍", score: 2 },
+                { text: "好久没这种感觉了... 🤔", score: 1 }
+            ]},
+            { dimension: '情绪', text: "遇到糟心事，你的心理活动是？", options: [
+                { text: "问题不大，我能搞定 😎", score: 3 },
+                { text: "烦一会儿，但能自己消化 🫤", score: 2 },
+                { text: "一件小事能让我郁闷一整天 😢", score: 1 }
+            ]},
+            { dimension: '情绪', text: "你现在对"明天"的期待程度？", options: [
+                { text: "有点东西！期待拉满 🌟", score: 3 },
+                { text: "又是普通一天，无所谓 😐", score: 2 },
+                { text: "不想面对，希望时间快进 ⏰😩", score: 1 }
+            ]},
+            // 🏃 行动维度 Q11-Q15
+            { dimension: '行动', text: "手头有件重要的事，你通常？", options: [
+                { text: "说干就干，冲了再说 🚀", score: 3 },
+                { text: "规划一下，然后慢慢搞 📝", score: 2 },
+                { text: "拖到最后一刻，deadline战神 ⏰😱", score: 1 }
+            ]},
+            { dimension: '行动', text: "这周的 to-do list 完成得咋样？", options: [
+                { text: "大部分搞定，效率王者 👑", score: 3 },
+                { text: "完成一半吧，勉强及格 📝", score: 2 },
+                { text: "什么list？我脑子一团浆糊 🧠💫", score: 1 }
+            ]},
+            { dimension: '行动', text: "突然有个超棒的想法，你会？", options: [
+                { text: "马上开干！冲鸭！🦆", score: 3 },
+                { text: "先记下来，有空再说 📝", score: 2 },
+                { text: "想了一下，然后...没有然后了 💭➡️❌", score: 1 }
+            ]},
+            { dimension: '行动', text: "你最近一次"说走就走"的行动是？", options: [
+                { text: "这周！想做什么就做什么 🏃", score: 3 },
+                { text: "上个月吧，偶尔冲动一下 📅", score: 2 },
+                { text: "记忆里没有这回事 🙈", score: 1 }
+            ]},
+            { dimension: '行动', text: "现在你的状态更像哪种动物？", options: [
+                { text: "永动机兔兔，停不下来 🐰💨", score: 3 },
+                { text: "随性猫猫，想动就动 🐱", score: 2 },
+                { text: "摆烂树懒，不想动弹 🦥", score: 1 }
+            ]},
+            // 🔗 连接维度 Q16-Q20
+            { dimension: '连接', text: "朋友群有人发消息，你通常？", options: [
+                { text: "秒回！气氛组担当 💬", score: 3 },
+                { text: "看心情，偶尔冒泡 👀", score: 2 },
+                { text: "已读不回，社恐发作中 😅", score: 1 }
+            ]},
+            { dimension: '连接', text: "最近有人主动来找你玩吗？", options: [
+                { text: "有！朋友很多的 😊", score: 3 },
+                { text: "偶尔有人想起我 🤏", score: 2 },
+                { text: "没有，我已经透明了 👻", score: 1 }
+            ]},
+            { dimension: '连接', text: "你上一次和人深度聊天是？", options: [
+                { text: "今天/昨天！聊得很嗨 😄", score: 3 },
+                { text: "这周内，聊过一两次 💭", score: 2 },
+                { text: "记不清了，好久没聊透 🔇", score: 1 }
+            ]},
+            { dimension: '连接', text: "你身边有可以说心里话的"重要的人"吗？", options: [
+                { text: "有好几个！被爱包围 💕", score: 3 },
+                { text: "有一两个知心的 👫", score: 2 },
+                { text: "好像没有...说不出口 😔", score: 1 }
+            ]},
+            { dimension: '连接', text: "心情不好的时候，你会？", options: [
+                { text: "找信任的人倾诉 💬", score: 3 },
+                { text: "发条动态暗示一下 📱", score: 2 },
+                { text: "自己消化，不想麻烦别人 😶‍🌫️", score: 1 }
+            ]}
         ];
 
-        // 乌鸦主题人格结果
-        var results = {
-            awake: [
-                { 
-                    image: "yages/鸦格v5_巡天智者鸦.jpg", 
-                    type: "巡天智者鸦", 
-                    desc: "你是那只在暴风雨来临前就感知到的乌鸦。你的眼光毒辣，总能提前看清形势，避开陷阱。别人觉得你「乌鸦嘴」，其实你只是比别人醒得早。生活给你发牌，你从来都是那个先知道底牌的人。", 
-                    advice: "嘎 —— 今天继续保持敏锐，但也别忘了，偶尔假装不知道，也是一种智慧。" 
-                },
-                { 
-                    image: "yages/鸦格v5_振翅高飞鸦.jpg", 
-                    type: "振翅高飞鸦", 
-                    desc: "曾经坠过落、淋过雨，但你重新展开了翅膀。现在的你，羽翼丰满，随时准备起飞。那些杀不死你的，真的让你更强了。你不是运气好，你是真的熬过来了。", 
-                    advice: "嘎嘎！今天飞得更高一点吧，天空很大，多看看。" 
-                }
-            ],
-            blurry: [
-                { 
-                    image: "yages/鸦格v5_迷雾盘旋鸦.jpg", 
-                    type: "迷雾盘旋鸦", 
-                    desc: "你在飞，但不知道飞往哪里。盘旋在半空，等风来，等信号，等一个不存在的答案。不是你飞不动，是你忘了目的地。迷雾不是别人给的，是你自己心里的。", 
-                    advice: "嘎...停下来歇会儿，问问自己：如果风一直不来，我要往哪飞？" 
-                },
-                { 
-                    image: "yages/鸦格v5_假寐装傻鸦.jpg", 
-                    type: "假寐装傻鸦", 
-                    desc: "你很聪明，聪明到知道怎么装傻。你嘴上说「不知道」「随便」，心里什么都门儿清。问题是，装久了，你自己都信了。乌鸦的眼睛是亮的，别让羽毛蒙住了。", 
-                    advice: "嘎！今天对自己诚实一次：你最清楚的那件事，去做了吗？" 
-                },
-                { 
-                    image: "yages/鸦格v5_蹲枝观望鸦.jpg", 
-                    type: "蹲枝观望鸦", 
-                    desc: "你蹲在树枝上很久了。看着别的乌鸦飞来飞去，你不动。不是懒，是怕飞错了方向。可是一直蹲着，树枝也会断的。观望，也是一种选择——但不是最好的那个。", 
-                    advice: "嘎嘎，试试换个树枝？或者，干脆飞一小段看看？" 
-                },
-                { 
-                    image: "yages/鸦格v5_脱毛换羽鸦.jpg", 
-                    type: "脱毛换羽鸦", 
-                    desc: "你正在蜕掉旧羽毛，新羽毛还没长齐。这个阶段最难熬：飞不快，飞不远，还容易被嘲笑。但换羽是必经之路，你只是在变成更好的自己。", 
-                    advice: "嘎...别急，慢慢来。新羽毛长好的那天，你会飞得更漂亮。" 
-                }
-            ],
-            asleep: [
-                { 
-                    image: "yages/鸦格v5_折翼停飞鸦.jpg", 
-                    type: "折翼停飞鸦", 
-                    desc: "你曾经飞过，现在不想飞了。不是飞不动，是觉得没意义。天空还在，但你不再抬头。这不是「佛系」，这是心已经落地。可你知道的，乌鸦天生就是要飞的。", 
-                    advice: "嘎...如果你愿意，先试着展开翅膀，哪怕不飞。" 
-                },
-                { 
-                    image: "yages/鸦格v5_洞穴隐居鸦.jpg", 
-                    type: "洞穴隐居鸦", 
-                    desc: "你躲进洞穴，不想被看见。外面太吵，太累，太多要求。你选择关灯、静音、消失。这是一种保护机制，但你不能住在洞里一辈子。乌鸦的光芒，是要飞出去才能看见的。", 
-                    advice: "嘎，洞穴很安全，但也很黑。今天试着走出去一小步？" 
-                },
-                { 
-                    image: "yages/鸦格v5_夜游梦呓鸦.jpg", 
-                    type: "夜游梦呓鸦", 
-                    desc: "你醒着，但像在做梦。白天黑夜对你来说没什么区别。你逃避现实，躲进自己的世界。那里很安全，但没有出口。梦再美，也要醒过来吃虫子的。", 
-                    advice: "嘎嘎...找一个具体的事做吧，比如喝一杯水，或者发一条消息。" 
-                },
-                { 
-                    image: "yages/鸦格v5_漩涡坠落鸦.jpg", 
-                    type: "漩涡坠落鸦", 
-                    desc: "你感觉自己在下坠，越挣扎越深。不是你不行，是你太累了。有些乌鸦需要有人拉一把，这不是丢人的事。坠落不可怕，可怕的是放弃展开翅膀。", 
-                    advice: "嘎...找个人聊聊吧，或者，先好好睡一觉，明天再说。" 
-                },
-                { 
-                    image: "yages/鸦格v5_失声静默鸦.jpg", 
-                    type: "失声静默鸦", 
-                    desc: "乌鸦的使命是嘎嘎叫，但你不想出声了。不是嗓子哑了，是觉得没人听。沉默是保护，但也是牢笼。你的声音，值得被听见。", 
-                    advice: "嘎！今天试着对一个人说一句真心话，哪怕很短。" 
-                },
-                { 
-                    image: "yages/鸦格v5_伪装讨喜鸦.jpg", 
-                    type: "伪装讨喜鸦", 
-                    desc: "你学会了像喜鹊一样讨好别人。乌鸦不受欢迎，所以你假装自己不是乌鸦。面具戴久了，你快忘了自己是谁。可是喜鹊有喜鹊的路，乌鸦有乌鸦的天。", 
-                    advice: "嘎嘎...今天做一件让真实的自己开心的事，不用管别人。" 
-                }
-            ]
+        // 12种鸦格数据
+        var YAGE_DATA = {
+            '巡天智者鸦': { zone: '清醒区', image: 'yages/鸦格v5_巡天智者鸦.jpg', type: '巡天智者鸦', desc: '此刻的你，像一只盘旋在高空中的鸦，看得见地面的拥堵，也看得见远方的旷野。你没有被忙碌淹没，也没有被焦虑吞噬。', advice: '清醒不是冷漠，是看透后依然选择认真生活。', suitable: '做重要决策、处理复杂问题、深度交流' },
+            '待机隐士鸦': { zone: '清醒区', image: 'yages/鸦格v5_洞穴隐居鸦.jpg', type: '待机隐士鸦', desc: '你现在的能量满格，但选择了蛰伏。像一只在枝头安静待着的鸦，目光深远，随时可以展翅，但没有那个冲动。', advice: '待机不是懈怠，是在等一个值得全力以赴的时刻。', suitable: '观察思考、等待时机、深度工作' },
+            '行动爆发鸦': { zone: '清醒区', image: 'yages/鸦格v5_振翅高飞鸦.jpg', type: '行动爆发鸦', desc: '你现在像一团刚被点燃的火，噼里啪啦地烧着。别人还在犹豫，你已经冲出去了；别人还在计划，你已经完成了一半。', advice: '热情是好燃料，但记得系好安全带再踩油门。', suitable: '执行计划、创意输出、社交活跃' },
+            '舒适咸鱼鸦': { zone: '假寐区', image: 'yages/鸦格v5_假寐装傻鸦.jpg', type: '舒适咸鱼鸦', desc: '一切都刚刚好：不太累，不太饿，不太冷，不太热。就是……不太想动。', advice: '咸鱼也需要资格认证，你刚好是那个持证上岗的人。', suitable: '休息恢复、低强度娱乐、发呆放空' },
+            '社交探索鸦': { zone: '假寐区', image: 'yages/鸦格v5_迷雾盘旋鸦.jpg', type: '社交探索鸦', desc: '电量不算特别足，但心情好啊！脑子里冒出一堆想去的地方、想见的人、想做的事。', advice: '好心情是最好的燃料，一起出发才更带劲。', suitable: '组队活动、短途出行、社交聚会' },
+            '电量中转鸦': { zone: '假寐区', image: 'yages/鸦格v5_蹲枝观望鸦.jpg', type: '电量中转鸦', desc: '你现在处于一个"正在转换"的节点。像站在中转站的鸦，等待自己的下一班列车。', advice: '中转站不是终点，是蓄力的好时候。', suitable: '整理思路、处理杂事、等待时机' },
+            '迷雾探险鸦': { zone: '假寐区', image: 'yages/鸦格v5_迷雾盘旋鸦.jpg', type: '迷雾探险鸦', desc: '前方的路看不清，但你还是迈出了步子。迷茫说明你还在寻找，还没有放弃。', advice: '看不清路的时候，走本身就是答案。', suitable: '小范围试错、收集信息、聊天交流' },
+            '伪装讨喜鸦': { zone: '假寐区', image: 'yages/鸦格v5_伪装讨喜鸦.jpg', type: '伪装讨喜鸦', desc: '你每天戴着"我很好"的面具，在人群里周旋。别人都觉得你游刃有余，只有你自己知道，摘下面具的那一刻，有多疲惫。', advice: '你不需要对所有人笑，有些人值得看你真实的眼泪。', suitable: '维持基本社交、必要应酬' },
+            '疗愈独处鸦': { zone: '沉睡区', image: 'yages/鸦格v5_洞穴隐居鸦.jpg', type: '疗愈独处鸦', desc: '电量快见底了，但心情居然还不错。像大雨后的晴天，有一点疲惫，但更多的是宁静和满足。', advice: '最好的疗愈，有时候就是什么都不做。', suitable: '安静休息、简单娱乐、独自恢复' },
+            '电量透支鸦': { zone: '沉睡区', image: 'yages/鸦格v5_漩涡坠落鸦.jpg', type: '电量透支鸦', desc: '明明已经累到不行了，但心情却很亢奋。像一辆没油的车还在跑，靠的是最后的意志力。', advice: '亢奋是最后的电量，且用且珍惜。', suitable: '紧急任务（慎用！）、必要坚持' },
+            '燃尽冲刺鸦': { zone: '沉睡区', image: 'yages/鸦格v5_折翼停飞鸦.jpg', type: '燃尽冲刺鸦', desc: '已经很累了，但停不下来。可能是 deadline，可能是承诺没兑现，可能是单纯的不甘心。', advice: '冲刺很好，但记得在耗尽前给自己留点余量。', suitable: '意志力对抗（慎用！）' },
+            '破晓微光鸦': { zone: '沉睡区', image: 'yages/鸦格v5_脱毛换羽鸦.jpg', type: '破晓微光鸦', desc: '你刚刚经历了一些不太好的事，可能还没完全走出来。但你今天愿意面对自己，这本身就是一件很勇敢的事。', advice: '最低谷的时候，往哪个方向走都是向上。', suitable: '低强度任务、陪伴治愈、自我觉察' }
+        };
+
+        // 81种组合映射表
+        var COMBO_MAP = {
+            '中_中_中_中': '迷雾探险鸦', '中_中_中_低': '迷雾探险鸦', '中_中_中_高': '迷雾探险鸦',
+            '中_中_高_中': '电量中转鸦', '中_中_高_低': '电量中转鸦', '中_中_低_中': '电量中转鸦', '中_中_低_低': '电量中转鸦',
+            '中_低_中_中': '迷雾探险鸦', '中_低_中_低': '迷雾探险鸦', '中_低_中_高': '伪装讨喜鸦',
+            '中_低_低_中': '伪装讨喜鸦', '中_低_低_低': '伪装讨喜鸦', '中_低_低_高': '伪装讨喜鸦',
+            '中_低_高_中': '伪装讨喜鸦', '中_低_高_低': '伪装讨喜鸦', '中_低_高_高': '伪装讨喜鸦',
+            '中_高_中_中': '社交探索鸦', '中_高_中_低': '社交探索鸦', '中_高_中_高': '社交探索鸦',
+            '中_高_低_中': '舒适咸鱼鸦', '中_高_低_低': '舒适咸鱼鸦', '中_高_低_高': '舒适咸鱼鸦',
+            '中_高_高_中': '社交探索鸦', '中_高_高_低': '社交探索鸦', '中_高_高_高': '社交探索鸦',
+            '低_中_中_中': '伪装讨喜鸦', '低_中_中_低': '伪装讨喜鸦', '低_中_中_高': '伪装讨喜鸦',
+            '低_中_低_中': '伪装讨喜鸦', '低_中_低_低': '伪装讨喜鸦', '低_中_低_高': '伪装讨喜鸦',
+            '低_中_高_中': '伪装讨喜鸦', '低_中_高_低': '伪装讨喜鸦', '低_中_高_高': '伪装讨喜鸦',
+            '低_低_中_中': '破晓微光鸦', '低_低_中_低': '破晓微光鸦', '低_低_中_高': '伪装讨喜鸦',
+            '低_低_低_中': '破晓微光鸦', '低_低_低_低': '破晓微光鸦', '低_低_低_高': '伪装讨喜鸦',
+            '低_低_高_中': '燃尽冲刺鸦', '低_低_高_低': '燃尽冲刺鸦', '低_低_高_高': '燃尽冲刺鸦',
+            '低_高_中_中': '疗愈独处鸦', '低_高_中_低': '疗愈独处鸦', '低_高_中_高': '伪装讨喜鸦',
+            '低_高_低_中': '疗愈独处鸦', '低_高_低_低': '疗愈独处鸦', '低_高_低_高': '伪装讨喜鸦',
+            '低_高_高_中': '疗愈独处鸦', '低_高_高_低': '电量透支鸦', '低_高_高_高': '电量透支鸦',
+            '高_中_中_中': '巡天智者鸦', '高_中_中_低': '巡天智者鸦', '高_中_中_高': '巡天智者鸦',
+            '高_中_低_中': '待机隐士鸦', '高_中_低_低': '待机隐士鸦', '高_中_低_高': '待机隐士鸦',
+            '高_中_高_中': '行动爆发鸦', '高_中_高_低': '行动爆发鸦', '高_中_高_高': '行动爆发鸦',
+            '高_低_中_中': '待机隐士鸦', '高_低_中_低': '待机隐士鸦', '高_低_中_高': '待机隐士鸦',
+            '高_低_低_中': '待机隐士鸦', '高_低_低_低': '待机隐士鸦', '高_低_低_高': '待机隐士鸦',
+            '高_低_高_中': '行动爆发鸦', '高_低_高_低': '行动爆发鸦', '高_低_高_高': '行动爆发鸦',
+            '高_高_中_中': '巡天智者鸦', '高_高_中_低': '行动爆发鸦', '高_高_中_高': '巡天智者鸦',
+            '高_高_低_中': '待机隐士鸦', '高_高_低_低': '巡天智者鸦', '高_高_低_高': '巡天智者鸦',
+            '高_高_高_中': '巡天智者鸦', '高_高_高_低': '行动爆发鸦', '高_高_高_高': '巡天智者鸦'
         };
 
         // ========== 状态变量 ==========
-        var currentQuestion = 0;
-        var totalScore = 0;
-        var answers = [];
-        var currentResult = null;
-        var generatedImageBlob = null;
-        var isTransitioning = false; // 防止重复点击
+        var currentQuestion = 0, answers = [], currentResult = null;
+        var dimensionScores = { '电量': 0, '情绪': 0, '行动': 0, '连接': 0 };
+        var levels = {}, generatedImageBlob = null, isTransitioning = false;
+        var STORAGE_KEY = 'xingxingya_quiz_progress_v3';
 
-        // ========== 功能优化项13: 进度保存 ==========
-        var STORAGE_KEY = 'xingxingya_quiz_progress';
-
-        function saveProgress() {
-            var progress = {
-                currentQuestion: currentQuestion,
-                answers: answers,
-                timestamp: Date.now()
-            };
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-            } catch (e) {
-                console.log('保存进度失败:', e);
-            }
+        // 分档函数: 13-15高分/9-12中/5-8低
+        function getLevel(score) {
+            if (score >= 13) return '高';
+            if (score >= 9) return '中';
+            return '低';
         }
 
+        function saveProgress() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ currentQuestion, answers, timestamp: Date.now() })); } catch(e) {} }
         function loadProgress() {
-            try {
-                var saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) {
-                    var progress = JSON.parse(saved);
-                    // 检查保存是否在24小时内
-                    if (Date.now() - progress.timestamp < 24 * 60 * 60 * 1000) {
-                        return progress;
-                    }
-                }
-            } catch (e) {
-                console.log('加载进度失败:', e);
-            }
+            try { var saved = localStorage.getItem(STORAGE_KEY); if (saved) { var p = JSON.parse(saved); if (Date.now() - p.timestamp < 86400000) return p; } } catch(e) {}
             return null;
         }
+        function clearProgress() { try { localStorage.removeItem(STORAGE_KEY); } catch(e) {} }
+        function preloadAllImages() { for (var k in YAGE_DATA) { var img = new Image(); img.src = YAGE_DATA[k].image; } }
 
-        function clearProgress() {
-            try {
-                localStorage.removeItem(STORAGE_KEY);
-            } catch (e) {
-                console.log('清除进度失败:', e);
-            }
-        }
-
-        // ========== 性能优化项7: 图片懒加载 ==========
-        function initLazyLoad() {
-            var lazyImages = document.querySelectorAll('img[data-src]');
-            
-            if ('IntersectionObserver' in window) {
-                var imageObserver = new IntersectionObserver(function(entries, observer) {
-                    entries.forEach(function(entry) {
-                        if (entry.isIntersecting) {
-                            var img = entry.target;
-                            img.src = img.dataset.src;
-                            img.classList.add('loaded');
-                            observer.unobserve(img);
-                        }
-                    });
-                }, {
-                    rootMargin: '50px 0px',
-                    threshold: 0.1
-                });
-
-                lazyImages.forEach(function(img) {
-                    imageObserver.observe(img);
-                });
-            } else {
-                // 降级处理：直接加载
-                lazyImages.forEach(function(img) {
-                    img.src = img.dataset.src;
-                    img.classList.add('loaded');
-                });
-            }
-        }
-
-        // ========== 优化项4: 鸦格图预加载 ==========
-        function preloadAllImages() {
-            // 预加载所有可能的结果图片（12张鸦格图）
-            var allImages = [];
-            for (var zone in results) {
-                results[zone].forEach(function(result) {
-                    allImages.push(result.image);
-                });
-            }
-            
-            var loadedCount = 0;
-            var totalCount = allImages.length;
-            
-            allImages.forEach(function(src) {
-                var img = new Image();
-                img.onload = function() {
-                    loadedCount++;
-                    console.log('预加载进度: ' + loadedCount + '/' + totalCount);
-                };
-                img.onerror = function() {
-                    loadedCount++;
-                    console.log('预加载失败: ' + src);
-                };
-                img.src = src;
-            });
-            
-            console.log('开始预加载 ' + totalCount + ' 张鸦格图...');
-        }
-        
-        // 优化项4: 优化WebP图片加载
-        function supportsWebP() {
-            var canvas = document.createElement('canvas');
-            if (canvas.getContext && canvas.getContext('2d')) {
-                return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
-            }
-            return false;
-        }
-        
-        function initImages() {
-            // 根据浏览器支持情况选择WebP或PNG
-            if (supportsWebP()) {
-                var logoImg = document.querySelector('.logo img');
-                var guidanceImg = document.querySelector('.guidance-mascot img');
-                if (logoImg) logoImg.src = 'logo.webp';
-                if (guidanceImg) guidanceImg.src = 'guidance.webp';
-                console.log('使用WebP图片格式');
-            } else {
-                console.log('使用PNG图片格式');
-            }
-        }
-
-        // ========== UI优化项6: 波纹效果 ==========
-        function addRippleEffect(element) {
-            element.addEventListener('click', function(e) {
-                var rect = element.getBoundingClientRect();
-                var x = e.clientX - rect.left;
-                var y = e.clientY - rect.top;
-                
-                var ripple = document.createElement('span');
-                ripple.className = 'ripple';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-                
-                element.appendChild(ripple);
-                
-                setTimeout(function() {
-                    ripple.remove();
-                }, 600);
-            });
-        }
-
-        // ========== DOM 元素获取 ==========
-        var startPage = document.getElementById('startPage');
-        var quizPage = document.getElementById('quizPage');
-        var resultPage = document.getElementById('resultPage');
-        var startBtn = document.getElementById('startBtn');
-        var prevBtn = document.getElementById('prevBtn');
-        var shareBtn = document.getElementById('shareBtn');
-        var shareOptions = document.getElementById('shareOptions');
-        var copyTextBtn = document.getElementById('copyTextBtn');
-        var downloadImgBtn = document.getElementById('downloadImgBtn');
-        var retryBtn = document.getElementById('retryBtn');
-        var progressFill = document.getElementById('progressFill');
-        var questionCounter = document.getElementById('questionCounter');
-        var questionText = document.getElementById('questionText');
+        var startPage = document.getElementById('startPage'), quizPage = document.getElementById('quizPage');
+        var resultPage = document.getElementById('resultPage'), startBtn = document.getElementById('startBtn');
+        var prevBtn = document.getElementById('prevBtn'), shareBtn = document.getElementById('shareBtn');
+        var shareOptions = document.getElementById('shareOptions'), copyTextBtn = document.getElementById('copyTextBtn');
+        var downloadImgBtn = document.getElementById('downloadImgBtn'), retryBtn = document.getElementById('retryBtn');
+        var progressFill = document.getElementById('progressFill'), questionCounter = document.getElementById('questionCounter');
+        var dimensionTag = document.getElementById('dimensionTag'), questionText = document.getElementById('questionText');
         var optionsContainer = document.getElementById('optionsContainer');
         var imagePreviewOverlay = document.getElementById('imagePreviewOverlay');
         var imagePreviewContainer = document.getElementById('imagePreviewContainer');
-        var confirmDownloadBtn = document.getElementById('confirmDownloadBtn');
-        var closePreviewBtn = document.getElementById('closePreviewBtn');
+        var confirmDownloadBtn = document.getElementById('confirmDownloadBtn'), closePreviewBtn = document.getElementById('closePreviewBtn');
 
-        // ========== 核心函数 ==========
         function startQuiz() {
-            // 功能优化项13: 检查是否有保存的进度
-            var savedProgress = loadProgress();
-            
-            startPage.classList.add('hidden');
-            quizPage.style.display = 'block';
-            
-            if (savedProgress && savedProgress.answers && savedProgress.answers.length > 0) {
-                // 恢复进度
-                currentQuestion = savedProgress.currentQuestion || 0;
-                answers = savedProgress.answers;
-                // 计算之前的总分
-                totalScore = 0;
-                for (var i = 0; i < answers.length; i++) {
-                    if (answers[i] && answers[i].score !== undefined) {
-                        totalScore += answers[i].score;
-                    }
-                }
-            } else {
-                // 新开始
-                currentQuestion = 0;
-                totalScore = 0;
-                answers = [];
-            }
-            
-            isTransitioning = false;
-            showQuestion();
-            
-            // 优化项4: 开始预加载12张鸦格图
-            preloadAllImages();
+            var saved = loadProgress();
+            startPage.classList.add('hidden'); quizPage.style.display = 'block';
+            if (saved && saved.answers && saved.answers.length > 0) { currentQuestion = saved.currentQuestion || 0; answers = saved.answers; }
+            else { currentQuestion = 0; answers = []; }
+            isTransitioning = false; showQuestion(); preloadAllImages();
         }
 
         function showQuestion() {
-            var question = questions[currentQuestion];
+            var q = questions[currentQuestion];
             questionCounter.textContent = '第 ' + (currentQuestion + 1) + ' 题 / 共 ' + questions.length + ' 题';
-            progressFill.style.width = ((currentQuestion) / questions.length * 100) + '%';
-            questionText.textContent = question.text;
-
+            progressFill.style.width = (currentQuestion / questions.length * 100) + '%';
+            dimensionTag.textContent = q.dimension + '维度';
+            dimensionTag.className = 'dimension-tag ' + q.dimension;
+            questionText.textContent = q.text;
             optionsContainer.innerHTML = '';
-
-            for (var i = 0; i < question.options.length; i++) {
-                (function(index) {
-                    var option = question.options[index];
-                    var optionEl = document.createElement('div');
-                    optionEl.className = 'option';
-                    if (answers[currentQuestion] !== undefined && answers[currentQuestion].answer === index) {
-                        optionEl.classList.add('selected');
-                    }
-                    optionEl.textContent = option.text;
-                    optionEl.onclick = function() {
-                        selectOption(index, option.score);
-                    };
-                    
-                    // UI优化项6: 添加波纹效果
-                    addRippleEffect(optionEl);
-                    
-                    optionsContainer.appendChild(optionEl);
+            for (var i = 0; i < q.options.length; i++) {
+                (function(idx) {
+                    var opt = q.options[idx];
+                    var el = document.createElement('div');
+                    el.className = 'option';
+                    if (answers[currentQuestion] !== undefined && answers[currentQuestion].answer === idx) el.classList.add('selected');
+                    el.textContent = opt.text;
+                    el.onclick = function() { selectOption(idx, opt.score, q.dimension); };
+                    optionsContainer.appendChild(el);
                 })(i);
             }
-
-            updateNavButtons();
-            
-            // 性能优化项9: 预加载下一题
-            preloadNextQuestionImage();
-            
-            // 功能优化项13: 保存当前进度
+            prevBtn.disabled = currentQuestion === 0;
             saveProgress();
         }
 
-        function updateNavButtons() {
-            prevBtn.disabled = currentQuestion === 0;
+        function selectOption(idx, score, dimension) {
+            if (isTransitioning) return;
+            var opts = document.querySelectorAll('.option');
+            for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
+            opts[idx].classList.add('selected');
+            answers[currentQuestion] = { answer: idx, score: score, dimension: dimension };
+            if (currentQuestion === questions.length - 1) { isTransitioning = true; setTimeout(function() { showResult(); isTransitioning = false; }, 400); }
+            else { isTransitioning = true; setTimeout(function() { currentQuestion++; showQuestion(); isTransitioning = false; }, 400); }
         }
 
-        function selectOption(index, score) {
-            // 防止重复点击
-            if (isTransitioning) {
-                return;
-            }
-            
-            var options = document.querySelectorAll('.option');
-            for (var i = 0; i < options.length; i++) {
-                options[i].classList.remove('selected');
-            }
-            options[index].classList.add('selected');
-            
-            // 记录答案
-            answers[currentQuestion] = { answer: index, score: score };
-            console.log('第' + (currentQuestion + 1) + '题答案已记录：', answers[currentQuestion]);
-            
-            // 更新按钮状态
-            updateNavButtons();
-            
-            // 判断是否是最后一题
-            if (currentQuestion === questions.length - 1) {
-                // 最后一题答完，自动跳结果页
-                isTransitioning = true;
-                setTimeout(function() {
-                    showResult();
-                    isTransitioning = false;
-                }, 400);
-            } else {
-                // 非最后一题，自动跳转下一题
-                isTransitioning = true;
-                setTimeout(function() {
-                    currentQuestion++;
-                    showQuestion();
-                    isTransitioning = false;
-                }, 400);
-            }
-        }
-
-        function prevQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                showQuestion();
-            }
-        }
+        function prevQuestion() { if (currentQuestion > 0) { currentQuestion--; showQuestion(); } }
 
         function showResult() {
-            try {
-                // 先检查是否所有题目都答了
-                if (answers.length < questions.length) {
-                    console.log('答案不完整，当前数量：' + answers.length);
-                    // 补齐未答的题目（默认给2分）
-                    for (var i = answers.length; i < questions.length; i++) {
-                        answers[i] = { answer: 0, score: 2 };
-                    }
+            dimensionScores = { '电量': 0, '情绪': 0, '行动': 0, '连接': 0 };
+            for (var i = 0; i < answers.length; i++) {
+                if (answers[i] && answers[i].score !== undefined) {
+                    var dim = answers[i].dimension;
+                    if (dim && dimensionScores.hasOwnProperty(dim)) dimensionScores[dim] += answers[i].score;
                 }
-                
-                quizPage.style.display = 'none';
-                resultPage.style.display = 'block';
-                
-                // UI优化项5: 结果页动画
-                resultPage.classList.add('show');
-                
-                progressFill.style.width = '100%';
-
-                // 计算总分
-                totalScore = 0;
-                for (var i = 0; i < answers.length; i++) {
-                    if (answers[i] && answers[i].score !== undefined) {
-                        totalScore += answers[i].score;
-                    }
-                }
-                
-                console.log('答题完成，总分：' + totalScore + '，答案数量：' + answers.length);
-
-                // 确定分区
-                var zone, zoneText, resultPool;
-                if (totalScore >= 51) {
-                    zone = 'awake';
-                    zoneText = '🦅 清醒翱翔区';
-                    resultPool = results.awake;
-                } else if (totalScore >= 36) {
-                    zone = 'blurry';
-                    zoneText = '🌫️ 迷雾盘旋区';
-                    resultPool = results.blurry;
-                } else {
-                    zone = 'asleep';
-                    zoneText = '🌑 深渊蛰伏区';
-                    resultPool = results.asleep;
-                }
-                
-                console.log('分区：' + zone + '，结果池数量：' + resultPool.length);
-
-                // 随机选择一个结果
-                var resultIndex = Math.floor(Math.random() * resultPool.length);
-                currentResult = resultPool[resultIndex];
-                
-                console.log('选中结果：', currentResult);
-
-                // 填充结果页面 - UI优化项2: 使用鸦格图
-                document.getElementById('resultEmoji').innerHTML = '<img src="' + currentResult.image + '" alt="' + currentResult.type + '" style="max-width: 200px; border-radius: 20px;" loading="lazy" class="lazy-image" onload="this.classList.add(\'loaded\')">';
-                document.getElementById('resultType').innerHTML = currentResult.type;
-                document.getElementById('resultDesc').innerHTML = currentResult.desc;
-                document.getElementById('scoreValue').innerHTML = totalScore + ' / 60';
-                document.getElementById('scoreZone').innerHTML = zoneText;
-                document.getElementById('adviceText').innerHTML = currentResult.advice;
-
-                // 填充图片容器
-                document.getElementById('imgEmoji').innerHTML = '<img src="' + currentResult.image + '" alt="' + currentResult.type + '" style="max-width: 300px; border-radius: 20px;">';
-                document.getElementById('imgType').innerHTML = currentResult.type;
-                document.getElementById('imgDesc').innerHTML = currentResult.desc;
-                document.getElementById('imgScore').innerHTML = totalScore + ' / 60';
-                document.getElementById('imgZone').innerHTML = zoneText;
-                document.getElementById('imgAdvice').innerHTML = currentResult.advice;
-                
-                console.log('结果页面填充完成');
-                
-                // 功能优化项13: 清除进度（测试完成）
-                clearProgress();
-            } catch (error) {
-                console.error('显示结果时出错：', error);
-                alert('显示结果时出错：' + error.message);
             }
+            levels = { '电量': getLevel(dimensionScores['电量']), '情绪': getLevel(dimensionScores['情绪']), '行动': getLevel(dimensionScores['行动']), '连接': getLevel(dimensionScores['连接']) };
+            var comboKey = levels['电量'] + '_' + levels['情绪'] + '_' + levels['行动'] + '_' + levels['连接'];
+            var yageName = COMBO_MAP[comboKey] || '伪装讨喜鸦';
+            currentResult = YAGE_DATA[yageName];
+            quizPage.style.display = 'none'; resultPage.style.display = 'block'; resultPage.classList.add('show');
+            progressFill.style.width = '100%';
+            document.getElementById('resultEmoji').innerHTML = '<img src="' + currentResult.image + '" alt="' + yageName + '" style="max-width: 200px; border-radius: 20px;">';
+            document.getElementById('resultType').innerHTML = yageName;
+            var zoneEl = document.getElementById('resultZone');
+            zoneEl.textContent = currentResult.zone;
+            zoneEl.className = 'result-zone ' + currentResult.zone;
+            document.getElementById('resultDesc').innerHTML = currentResult.desc.replace(/\n/g, '<br>');
+            document.getElementById('adviceText').innerHTML = currentResult.advice;
+            var dimsContainer = document.getElementById('dimensionScores');
+            dimsContainer.innerHTML = '';
+            for (var dim in dimensionScores) {
+                var lv = levels[dim];
+                var item = document.createElement('div');
+                item.className = 'dimension-score-item ' + lv;
+                item.innerHTML = '<div class="dim-name">' + dim + '</div><div class="dim-value">' + dimensionScores[dim] + '/15</div><div class="dim-level">' + (lv === '高' ? '↑ 充沛' : lv === '中' ? '→ 平稳' : '↓ 告急') + '</div>';
+                dimsContainer.appendChild(item);
+            }
+            var suitableList = document.getElementById('suitableList');
+            suitableList.innerHTML = '';
+            currentResult.suitable.split('、').forEach(function(it) {
+                var li = document.createElement('li');
+                li.textContent = it.trim();
+                suitableList.appendChild(li);
+            });
+            // 图片容器
+            document.getElementById('imgEmoji').innerHTML = '<img src="' + currentResult.image + '" alt="' + yageName + '" style="max-width: 300px; border-radius: 20px;">';
+            document.getElementById('imgType').innerHTML = yageName;
+            var imgZoneEl = document.getElementById('imgZone');
+            imgZoneEl.textContent = currentResult.zone;
+            imgZoneEl.className = 'img-zone ' + currentResult.zone;
+            document.getElementById('imgDesc').innerHTML = currentResult.desc.replace(/\n/g, '<br>');
+            document.getElementById('imgAdvice').innerHTML = currentResult.advice;
+            var imgDimsContainer = document.getElementById('imgDims');
+            imgDimsContainer.innerHTML = '';
+            for (var dim in dimensionScores) {
+                var lv = levels[dim];
+                var item = document.createElement('div');
+                item.className = 'img-dim-item ' + lv;
+                item.innerHTML = '<div class="dim-name">' + dim + '</div><div class="dim-value">' + dimensionScores[dim] + '</div>';
+                imgDimsContainer.appendChild(item);
+            }
+            document.getElementById('imgSuitableContent').innerHTML = currentResult.suitable.replace(/、/g, ' · ');
+            clearProgress();
         }
 
-        function toggleShareOptions() {
-            shareOptions.classList.toggle('show');
-        }
+        function toggleShareOptions() { shareOptions.classList.toggle('show'); }
 
         function copyText() {
-            var shareText = '我测出来是「' + currentResult.type + '」！\n精神状态指数：' + totalScore + ' / 60\n' + document.getElementById('scoreZone').textContent + '\n\n嘎 —— 来测测你是什么鸦！\nxingxingya.com';
-
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(shareText).then(function() {
-                    alert('✅ 已复制到剪贴板！\n嘎嘎 ~ 粘贴到朋友圈分享吧~');
-                }).catch(function() {
-                    fallbackCopy(shareText);
-                });
-            } else {
-                fallbackCopy(shareText);
-            }
+            var dimText = '';
+            for (var dim in dimensionScores) { dimText += dim + ': ' + dimensionScores[dim] + '/15 (' + (levels[dim] === '高' ? '充沛' : levels[dim] === '中' ? '平稳' : '告急') + ') '; }
+            var shareText = '我测出来是「' + currentResult.type + '」！\n' + dimText + '\n\n' + currentResult.zone + '\n\n' + currentResult.advice + '\n\n嘎 —— 来测测你是什么鸦！\nxingxingya.com';
+            if (navigator.clipboard) navigator.clipboard.writeText(shareText).then(function() { alert('✅ 已复制到剪贴板！\n嘎嘎 ~ 粘贴到朋友圈分享吧~'); }).catch(function() { fallbackCopy(shareText); });
+            else fallbackCopy(shareText);
         }
 
-        function fallbackCopy(text) {
-            var textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            alert('✅ 已复制到剪贴板！\n嘎嘎 ~ 粘贴到朋友圈分享吧~');
-        }
+        function fallbackCopy(text) { var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); alert('✅ 已复制到剪贴板！'); }
 
         function downloadImage() {
             shareOptions.classList.remove('show');
             var container = document.getElementById('resultImageContainer');
-
             if (typeof html2canvas !== 'undefined') {
-                html2canvas(container, {
-                    backgroundColor: null,
-                    scale: 2,
-                    useCORS: true
-                }).then(function(canvas) {
+                html2canvas(container, { backgroundColor: null, scale: 2, useCORS: true }).then(function(canvas) {
                     canvas.toBlob(function(blob) {
                         generatedImageBlob = blob;
                         var img = document.createElement('img');
@@ -1513,46 +535,23 @@
                         imagePreviewContainer.appendChild(img);
                         imagePreviewOverlay.classList.add('show');
                     }, 'image/png');
-                }).catch(function(error) {
-                    console.error('生成图片失败:', error);
-                    alert('生成图片失败，请重试');
                 });
-            } else {
-                alert('图片生成库加载失败，请刷新页面重试');
             }
         }
 
-        function confirmDownload() {
-            if (generatedImageBlob) {
-                var link = document.createElement('a');
-                link.href = URL.createObjectURL(generatedImageBlob);
-                link.download = '醒醒鸦-' + currentResult.type + '.png';
-                link.click();
-                closePreview();
-            }
-        }
-
-        function closePreview() {
-            imagePreviewOverlay.classList.remove('show');
-        }
+        function confirmDownload() { if (generatedImageBlob) { var link = document.createElement('a'); link.href = URL.createObjectURL(generatedImageBlob); link.download = '醒醒鸦-' + currentResult.type + '.png'; link.click(); closePreview(); } }
+        function closePreview() { imagePreviewOverlay.classList.remove('show'); }
 
         function retryQuiz() {
-            resultPage.style.display = 'none';
-            resultPage.classList.remove('show');
-            startPage.classList.remove('hidden');
-            shareOptions.classList.remove('show');
-            currentQuestion = 0;
-            totalScore = 0;
-            answers = [];
-            currentResult = null;
-            generatedImageBlob = null;
-            isTransitioning = false;
-            
-            // 功能优化项13: 清除保存的进度
+            resultPage.style.display = 'none'; resultPage.classList.remove('show');
+            startPage.classList.remove('hidden'); shareOptions.classList.remove('show');
+            currentQuestion = 0; answers = []; currentResult = null;
+            dimensionScores = { '电量': 0, '情绪': 0, '行动': 0, '连接': 0 };
+            generatedImageBlob = null; isTransitioning = false;
             clearProgress();
         }
 
-        // ========== 事件绑定 ==========
+        // 事件绑定
         startBtn.onclick = startQuiz;
         prevBtn.onclick = prevQuestion;
         shareBtn.onclick = toggleShareOptions;
@@ -1562,30 +561,23 @@
         confirmDownloadBtn.onclick = confirmDownload;
         closePreviewBtn.onclick = closePreview;
 
-        // ========== 初始化 ==========
-        // 优化项4+6: 初始化WebP图片和预加载
-        document.addEventListener('DOMContentLoaded', function() {
-            initImages();  // 优化项3: WebP图片加载
-            initLazyLoad();
-            // 可选：预加载鸦格图（在开始测试时预加载，而非页面加载时）
-        });
+        // 跟小鸦聊聊按钮
+        document.getElementById('chatBtn').onclick = function() {
+            if (currentResult) {
+                try { localStorage.setItem('xingxingya_test_result', JSON.stringify({ yageName: currentResult.type, zone: currentResult.zone, dimensionScores: dimensionScores, advice: currentResult.advice, desc: currentResult.desc })); } catch(e) {}
+            }
+            window.location.href = 'chat.html';
+        };
 
-        console.log('醒醒鸦测试已加载完成 · 嘎嘎');
-
+        console.log('醒醒鸦测试已加载完成 · 嘎嘎 (v3.0 趣味3选项版)');
     </script>
 
-    <!-- 加载状态 -->
-    <div id="loadingOverlay" class="loading-overlay">
-        <span class="crow-icon">🪶</span>
-        <p>小鸦在努力思考中...</p>
-    </div>
-
-    
-    <!-- 错误提示 -->
-    <div id="errorToast" class="error-toast">
-        <span class="error-icon">⚠️</span>
-        <span class="error-text"></span>
-    </div>
-
-    </body>
+    <div id="loadingOverlay" class="loading-overlay"><span class="crow-icon">🪶</span><p>小鸦在努力思考中...</p></div>
+    <button id="backToTop" class="back-to-top">↑</button>
+    <script>
+        var backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() { backToTopBtn.classList.toggle('visible', window.scrollY > 300); });
+        backToTopBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    </script>
+</body>
 </html>
