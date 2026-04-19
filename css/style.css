@@ -284,20 +284,25 @@ body {
 /* ========== 结果页 ========== */
 .result-page {
     display: none;
-    text-align: center;
     animation: fadeIn 0.8s ease;
 }
+/* 通用卡片样式 */
 .result-card {
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: 40px 24px;
+    border-radius: 20px;
+    padding: 24px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+}
+/* 鸦格卡片 */
+.yage-card {
+    text-align: center;
+    padding: 32px 24px;
 }
 .result-emoji {
-    font-size: 72px;
-    margin-bottom: 16px;
+    font-size: 80px;
+    margin-bottom: 12px;
     animation: crowBounce 2s ease-in-out infinite;
 }
 @keyframes crowBounce {
@@ -307,12 +312,12 @@ body {
 .result-type {
     font-size: 28px;
     font-weight: 700;
-    margin-bottom: 8px;
     color: #fff;
     background: linear-gradient(90deg, #aaa, #ddd, #fff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    margin-bottom: 12px;
 }
 @supports not (-webkit-background-clip: text) {
     .result-type {
@@ -320,13 +325,13 @@ body {
         color: #fff;
     }
 }
-/* 分区标签放大 */
+/* 分区标签 */
 .result-zone {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
-    margin-bottom: 20px;
-    padding: 6px 16px;
-    border-radius: 20px;
+    margin-bottom: 16px;
+    padding: 8px 20px;
+    border-radius: 24px;
     display: inline-block;
 }
 .result-zone.awake {
@@ -346,59 +351,43 @@ body {
 }
 .result-desc {
     font-size: 15px;
-    line-height: 1.8;
+    line-height: 1.7;
     color: #ccd6f6;
-    margin-bottom: 24px;
 }
-/* 按钮统一样式 */
-.result-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+/* 引用卡片 */
+.quote-card {
+    text-align: left;
 }
-.explore-link, .chat-link-btn {
-    display: inline-block;
-    padding: 12px 28px;
-    font-size: 14px;
+.quote-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+.quote-label {
+    font-size: 12px;
+    color: #8892b0;
+    margin-bottom: 8px;
+}
+.quote-text {
+    font-size: 16px;
     color: #fff;
-    text-decoration: none;
-    border-radius: 25px;
-    transition: all 0.3s ease;
+    line-height: 1.6;
+    font-style: italic;
 }
-.explore-link {
-    background: linear-gradient(135deg, #8b6b9a, #6b5b95);
+/* 指数卡片 */
+.score-card {
+    text-align: left;
 }
-.explore-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(107, 91, 149, 0.5);
-}
-.chat-link-btn {
-    background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
-    border: 1px solid #555;
-}
-.chat-link-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(100, 100, 100, 0.4);
-}
-/* 指针式进度条 */
-.score-section {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 20px;
-    margin-bottom: 20px;
-}
-.score-label {
-    font-size: 14px;
+.card-title {
+    font-size: 16px;
     font-weight: 600;
     color: #fff;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
+/* 指针式进度条 */
 .dimension-gauges {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    text-align: left;
+    gap: 18px;
 }
 .dimension-gauge {
     display: flex;
@@ -462,22 +451,84 @@ body {
     color: #5a6a8a;
     margin-top: 4px;
 }
-.advice-section {
-    background: rgba(100, 100, 100, 0.15);
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 20px;
+/* 建议卡片 */
+.suitable-card {
+    text-align: left;
 }
-.advice-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: #bbb;
-    margin-bottom: 8px;
-}
-.advice-text {
-    font-size: 14px;
+.suitable-text {
+    font-size: 15px;
     color: #ccd6f6;
     line-height: 1.6;
+}
+/* 按钮区 */
+.result-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.btn-primary, .btn-secondary, .btn-outline {
+    display: block;
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+.btn-primary {
+    background: linear-gradient(135deg, #8b6b9a, #6b5b95);
+    color: #fff;
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(107, 91, 149, 0.5);
+}
+.btn-secondary {
+    background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
+    border: 1px solid #555;
+    color: #fff;
+}
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(100, 100, 100, 0.4);
+}
+.btn-outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #8892b0;
+}
+.btn-outline:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #fff;
+}
+/* 分享选项 */
+.share-options {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    animation: slideUp 0.3s ease;
+}
+.share-options.show {
+    display: flex;
+}
+.share-option-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+.share-option-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
 }
 .action-buttons {
     display: flex;
