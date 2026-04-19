@@ -95,10 +95,26 @@
             font-size: 14px;
             color: #ccd6f6;
         }
-        .intro-hint {
-            color: #6b7c93;
+        .intro-story-hint {
+            color: #8892b0;
             font-size: 13px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .test-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #3a3a5a, #2a2a4a);
+            padding: 14px 36px;
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+        .test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
         /* 小鸦的故事版块 */
         .story-section {
@@ -240,11 +256,16 @@
         }
         .yage-img-area {
             position: relative;
-            height: 100px;
+            height: 130px;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #2a2a4a, #1a1a3a);
+            overflow: hidden;
+        }
+        .yage-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .yage-emoji {
             font-size: 56px;
@@ -492,8 +513,8 @@
                 <span class="dimension-item">🏃 行动</span>
                 <span class="dimension-item">🔗 连接</span>
             </div>
-            <div class="intro-hint">点击卡片查看详情 ~</div>
-            <a href="index.html">🏠 测测你的鸦格</a>
+            <div class="intro-story-hint">下滑到底查看小鸦的故事 ↓</div>
+            <a href="index.html" class="test-btn">🏠 测测你的鸦格</a>
         </div>
 
         <!-- 清醒区 -->
@@ -655,7 +676,7 @@
                 card.innerHTML = 
                     '<div class="yage-img-area">' +
                         '<span class="zone-tag ' + zoneClass + '">' + getZoneEmoji(yage.zone) + yage.zone + '</span>' +
-                        '<span class="yage-emoji">' + yage.emoji + '</span>' +
+                        '<img class="yage-image" src="' + yages[yage.name].image + '" alt="' + yage.name + '" loading="lazy">' +
                     '</div>' +
                     '<div class="yage-info">' +
                         '<div class="yage-name">' + yage.name + '</div>' +
@@ -668,14 +689,22 @@
 
         // 打开弹窗
         function openModal(yage, zoneClass) {
+            var yageData = yages[yage.name];
             document.getElementById('modal-emoji').textContent = yage.emoji;
             document.getElementById('modal-name').textContent = yage.name;
             document.getElementById('modal-zone').className = 'modal-zone ' + zoneClass;
             document.getElementById('modal-zone').textContent = getZoneEmoji(yage.zone) + ' ' + yage.zone;
             document.getElementById('modal-dimension').textContent = yage.dimension;
-            document.getElementById('modal-desc').textContent = yage.desc;
-            document.getElementById('modal-quote').textContent = '"' + yage.quote + '"';
-            document.getElementById('modal-suitable').textContent = yage.suitable;
+            document.getElementById('modal-desc').textContent = yageData.desc;
+            document.getElementById('modal-quote').textContent = '"' + yageData.quote + '"';
+            document.getElementById('modal-suitable').textContent = yageData.suitable;
+            
+            // 更新图片
+            var modalImage = document.getElementById('modal-image');
+            if (modalImage && yageData.image) {
+                modalImage.src = yageData.image;
+                modalImage.style.display = 'block';
+            }
 
             document.getElementById('modal').classList.add('show');
             document.body.style.overflow = 'hidden';
