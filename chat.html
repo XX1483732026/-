@@ -345,6 +345,70 @@
             box-shadow: 0 4px 15px rgba(107, 91, 149, 0.4);
         }
 
+        /* 优化项5: 表情选择器样式 */
+        .emotion-picker {
+            display: none;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .emotion-picker.show {
+            display: block;
+            animation: slideDown 0.2s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .emotion-grid {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .emotion-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            padding: 0;
+        }
+        .emotion-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .emotion-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .emotion-toggle-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 10px 18px;
+            color: #a8b2d1;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 8px;
+        }
+        .emotion-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        .emotion-toggle-btn.active {
+            background: rgba(107, 91, 149, 0.4);
+            border-color: rgba(107, 91, 149, 0.6);
+            color: #fff;
+        }
+
     </style>
 </head>
 <body>
@@ -368,6 +432,18 @@
         </div>
 
         <div class="chat-input-area">
+            <!-- 优化项5: 小鸦表情选择器 -->
+            <button class="emotion-toggle-btn" id="emotionToggleBtn" onclick="toggleEmotionPicker()">😊 小鸦表情</button>
+            <div class="emotion-picker" id="emotionPicker">
+                <div class="emotion-grid">
+                    <button class="emotion-btn" onclick="selectEmotion('emotions/xiaoya_emotion_0.jpg', '开心')" title="开心"><img src="emotions/xiaoya_emotion_0.jpg" alt="开心"></button>
+                    <button class="emotion-btn" onclick="selectEmotion('emotions/xiaoya_emotion_1.jpg', '生气')" title="生气"><img src="emotions/xiaoya_emotion_1.jpg" alt="生气"></button>
+                    <button class="emotion-btn" onclick="selectEmotion('emotions/xiaoya_emotion_2.jpg', '难过')" title="难过"><img src="emotions/xiaoya_emotion_2.jpg" alt="难过"></button>
+                    <button class="emotion-btn" onclick="selectEmotion('emotions/xiaoya_emotion_3.jpg', '惊讶')" title="惊讶"><img src="emotions/xiaoya_emotion_3.jpg" alt="惊讶"></button>
+                    <button class="emotion-btn" onclick="selectEmotion('emotions/xiaoya_emotion_4.jpg', '困了')" title="困了"><img src="emotions/xiaoya_emotion_4.jpg" alt="困了"></button>
+                    <button class="emotion-btn" onclick="selectEmotion('emotions/xiaoya_emotion_5.jpg', '爱心')" title="爱心"><img src="emotions/xiaoya_emotion_5.jpg" alt="爱心"></button>
+                </div>
+            </div>
             <div class="quick-actions">
                 <button class="quick-btn" onclick="sendQuickMessage('今天有点emo')">今天有点emo</button>
                 <button class="quick-btn" onclick="sendQuickMessage('去做个测试？')">去做个测试？</button>
@@ -540,6 +616,33 @@
                 document.getElementById('sendBtn').disabled = false;
             }
         }
+
+        // 优化项5: 表情选择器功能
+        function toggleEmotionPicker() {
+            const picker = document.getElementById('emotionPicker');
+            const toggleBtn = document.getElementById('emotionToggleBtn');
+            picker.classList.toggle('show');
+            toggleBtn.classList.toggle('active');
+        }
+
+        function selectEmotion(imageSrc, emotionText) {
+            const chatInput = document.getElementById('chatInput');
+            chatInput.value = '[' + emotionText + ']';
+            chatInput.focus();
+            // 隐藏表情选择器
+            document.getElementById('emotionPicker').classList.remove('show');
+            document.getElementById('emotionToggleBtn').classList.remove('active');
+        }
+
+        // 点击其他地方关闭表情选择器
+        document.addEventListener('click', function(e) {
+            const picker = document.getElementById('emotionPicker');
+            const toggleBtn = document.getElementById('emotionToggleBtn');
+            if (!picker.contains(e.target) && !toggleBtn.contains(e.target)) {
+                picker.classList.remove('show');
+                toggleBtn.classList.remove('active');
+            }
+        });
 
         function sendQuickMessage(message) {
             document.getElementById('chatInput').value = message;

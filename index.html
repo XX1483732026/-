@@ -60,10 +60,20 @@
             animation: fadeIn 0.8s ease;
         }
 
-        /* ========== UI优化项1: Logo替换 ========== */
+        /* ========== 优化项3: Logo增强动画 ========== */
         .logo {
             margin-bottom: 16px;
             animation: crowNod 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .logo:hover {
+            animation: crowNod 3s ease-in-out infinite, crowBlink 0.3s ease;
+        }
+
+        .logo:active {
+            animation: crowJump 0.4s ease;
         }
 
         .logo img {
@@ -76,6 +86,19 @@
             0%, 100% { transform: rotate(0deg); }
             25% { transform: rotate(-5deg); }
             75% { transform: rotate(5deg); }
+        }
+
+        @keyframes crowBlink {
+            0%, 40%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(0deg); }
+        }
+
+        @keyframes crowJump {
+            0% { transform: translateY(0) scale(1); }
+            30% { transform: translateY(-15px) scale(1.05); }
+            50% { transform: translateY(-20px) scale(1.1); }
+            70% { transform: translateY(-10px) scale(1.05); }
+            100% { transform: translateY(0) scale(1); }
         }
 
         .main-title {
@@ -941,9 +964,12 @@
         </div>
     </div>
 
+    <!-- ========== 优化项6: 优化CDN - 使用jsDelivr CDN ========== -->
     <!-- html2canvas 库 -->
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js">
-        // 显示/隐藏加载状态
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    
+    <script>
+        // ========== 显示/隐藏加载状态 ==========
         function showLoading() {
             const overlay = document.getElementById('loadingOverlay');
             if (overlay) overlay.classList.add('show');
@@ -952,13 +978,7 @@
             const overlay = document.getElementById('loadingOverlay');
             if (overlay) overlay.classList.remove('show');
         }
-        // 在提交测试时显示加载
-        function submitQuiz() {
-            showLoading();
-            // 原有的提交逻辑继续执行
-        }
-
-    
+        
         // 显示错误提示
         function showError(message) {
             const errorToast = document.getElementById('errorToast');
@@ -970,7 +990,6 @@
                 }, 3000);
             }
         }
-
     </script>
     
     <script>
@@ -1159,17 +1178,9 @@
             }
         }
 
-        // ========== 性能优化项9: 资源预加载 ==========
-        function preloadNextQuestionImage() {
-            var nextQ = currentQuestion + 1;
-            if (nextQ < questions.length) {
-                // 预加载下一题的选项图片（如果需要）
-                // 这里可以添加自定义的图片预加载逻辑
-            }
-        }
-
-        function preloadResultImages() {
-            // 预加载所有可能的结果图片
+        // ========== 优化项4: 鸦格图预加载 ==========
+        function preloadAllImages() {
+            // 预加载所有可能的结果图片（12张鸦格图）
             var allImages = [];
             for (var zone in results) {
                 results[zone].forEach(function(result) {
@@ -1177,10 +1188,45 @@
                 });
             }
             
+            var loadedCount = 0;
+            var totalCount = allImages.length;
+            
             allImages.forEach(function(src) {
                 var img = new Image();
+                img.onload = function() {
+                    loadedCount++;
+                    console.log('预加载进度: ' + loadedCount + '/' + totalCount);
+                };
+                img.onerror = function() {
+                    loadedCount++;
+                    console.log('预加载失败: ' + src);
+                };
                 img.src = src;
             });
+            
+            console.log('开始预加载 ' + totalCount + ' 张鸦格图...');
+        }
+        
+        // 优化项4: 优化WebP图片加载
+        function supportsWebP() {
+            var canvas = document.createElement('canvas');
+            if (canvas.getContext && canvas.getContext('2d')) {
+                return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+            }
+            return false;
+        }
+        
+        function initImages() {
+            // 根据浏览器支持情况选择WebP或PNG
+            if (supportsWebP()) {
+                var logoImg = document.querySelector('.logo img');
+                var guidanceImg = document.querySelector('.guidance-mascot img');
+                if (logoImg) logoImg.src = 'logo.webp';
+                if (guidanceImg) guidanceImg.src = 'guidance.webp';
+                console.log('使用WebP图片格式');
+            } else {
+                console.log('使用PNG图片格式');
+            }
         }
 
         // ========== UI优化项6: 波纹效果 ==========
@@ -1252,8 +1298,8 @@
             isTransitioning = false;
             showQuestion();
             
-            // 性能优化项9: 开始预加载结果图片
-            preloadResultImages();
+            // 优化项4: 开始预加载12张鸦格图
+            preloadAllImages();
         }
 
         function showQuestion() {
@@ -1517,40 +1563,14 @@
         closePreviewBtn.onclick = closePreview;
 
         // ========== 初始化 ==========
-        // 性能优化项7: 初始化懒加载
+        // 优化项4+6: 初始化WebP图片和预加载
         document.addEventListener('DOMContentLoaded', function() {
+            initImages();  // 优化项3: WebP图片加载
             initLazyLoad();
+            // 可选：预加载鸦格图（在开始测试时预加载，而非页面加载时）
         });
 
         console.log('醒醒鸦测试已加载完成 · 嘎嘎');
-    
-        // 显示/隐藏加载状态
-        function showLoading() {
-            const overlay = document.getElementById('loadingOverlay');
-            if (overlay) overlay.classList.add('show');
-        }
-        function hideLoading() {
-            const overlay = document.getElementById('loadingOverlay');
-            if (overlay) overlay.classList.remove('show');
-        }
-        // 在提交测试时显示加载
-        function submitQuiz() {
-            showLoading();
-            // 原有的提交逻辑继续执行
-        }
-
-    
-        // 显示错误提示
-        function showError(message) {
-            const errorToast = document.getElementById('errorToast');
-            if (errorToast) {
-                errorToast.querySelector('.error-text').textContent = message;
-                errorToast.classList.add('show');
-                setTimeout(function() {
-                    errorToast.classList.remove('show');
-                }, 3000);
-            }
-        }
 
     </script>
 
