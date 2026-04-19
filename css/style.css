@@ -467,6 +467,7 @@ body {
     gap: 12px;
     margin-bottom: 16px;
 }
+/* 按钮通用样式 */
 .btn-primary, .btn-secondary, .btn-outline {
     display: block;
     width: 100%;
@@ -479,6 +480,12 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     border: none;
+    margin-top: 16px;
+}
+/* 卡片内的全宽按钮 */
+.btn-block {
+    margin-top: 16px;
+    width: 100%;
 }
 .btn-primary {
     background: linear-gradient(135deg, #8b6b9a, #6b5b95);
