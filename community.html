@@ -2,8 +2,22 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>鸦格社区 · 醒醒鸦</title>
+    <!-- SEO meta标签 -->
+    <meta name="description" content="鸦格社区 - 分享你的精神状态测试结果，探索12种不同鸦格类型的含义与特点。与其他"鸦友"交流，发现有趣的精神状态解读。">
+    <meta name="keywords" content="鸦格测试,精神状态,心理测试,社区,分享,心理自测">
+    <!-- Open Graph 社交分享 -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xingxingya.com/community.html">
+    <meta property="og:title" content="鸦格社区 · 醒醒鸦">
+    <meta property="og:description" content="分享你的精神状态测试结果，探索12种不同鸦格类型的含义与特点">
+    <meta property="og:image" content="https://xingxingya.com/mengya.png">
+    <!-- Twitter分享 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="鸦格社区 · 醒醒鸦">
+    <meta name="twitter:description" content="分享你的精神状态测试结果，探索12种鸦格">
     <link rel="icon" type="image/png" href="mengya.png">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -210,12 +224,30 @@
         .decoration-1 { top: 10%; left: 5%; }
         .decoration-2 { top: 50%; right: 5%; }
         .decoration-3 { bottom: 20%; left: 10%; }
+    
+        /* 键盘导航焦点样式 - 优化10 */
+        *:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+        *:focus-visible {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        a:focus, button:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        
     </style>
 </head>
 <body>
     <div class="header">
         <div class="mascot">
-            <img src="mengya.png" alt="小鸦">
+            <img loading="lazy" src="mengya.png" alt="醒醒鸦吉祥物小鸦，黑白配色的可爱乌鸦形象">
         </div>
         <h1>鸦格社区</h1>
         <p>发现你此刻的心境<br>每一种心境，都是此刻真实的你</p>
@@ -236,7 +268,7 @@
                 <!-- 振翅高飞鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_振翅高飞鸦.jpg" 
+                        <img loading="lazy" src="yages/thumbs/鸦格_振翅高飞鸦.jpg" 
                          data-src="yages/鸦格_振翅高飞鸦.jpg" 
                          alt="振翅高飞鸦" 
                          class="yage-img"
@@ -256,7 +288,7 @@
                 <!-- 巡天智者鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_巡天智者鸦.jpg" 
+                        <img loading="lazy" src="yages/thumbs/鸦格_巡天智者鸦.jpg" 
                          data-src="yages/鸦格_巡天智者鸦.jpg" 
                          alt="巡天智者鸦" 
                          class="yage-img"
@@ -276,7 +308,7 @@
                 <!-- 蹲枝观望鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_蹲枝观望鸦.jpg" 
+                        <img loading="lazy" src="yages/thumbs/鸦格_蹲枝观望鸦.jpg" 
                          data-src="yages/鸦格_蹲枝观望鸦.jpg" 
                          alt="蹲枝观望鸦" 
                          class="yage-img"
@@ -296,7 +328,7 @@
                 <!-- 迷雾盘旋鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_迷雾盘旋鸦.jpg" 
+                        <img loading="lazy" src="yages/thumbs/鸦格_迷雾盘旋鸦.jpg" 
                          data-src="yages/鸦格_迷雾盘旋鸦.jpg" 
                          alt="迷雾盘旋鸦" 
                          class="yage-img"
@@ -316,7 +348,7 @@
                 <!-- 折翼停飞鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_折翼停飞鸦.jpg" 
+                        <img loading="lazy" src="yages/thumbs/鸦格_折翼停飞鸦.jpg" 
                          data-src="yages/鸦格_折翼停飞鸦.jpg" 
                          alt="折翼停飞鸦" 
                          class="yage-img"
@@ -336,7 +368,7 @@
                 <!-- 脱毛换羽鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_脱毛换羽鸦.jpg" 
+                        <img loading="lazy" src="yages/thumbs/鸦格_脱毛换羽鸦.jpg" 
                          data-src="yages/鸦格_脱毛换羽鸦.jpg" 
                          alt="脱毛换羽鸦" 
                          class="yage-img"
@@ -356,7 +388,7 @@
                 <!-- 漩涡坠落鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_漩涡坠落鸦.jpg" 
+                        <img loading="lazy" src="yages/thumbs/鸦格_漩涡坠落鸦.jpg" 
                          data-src="yages/鸦格_漩涡坠落鸦.jpg" 
                          alt="漩涡坠落鸦" 
                          class="yage-img"
@@ -376,7 +408,7 @@
                 <!-- 洞穴隐居鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_洞穴隐居鸦.jpg" 
+                        <img loading="lazy" src="yages/thumbs/鸦格_洞穴隐居鸦.jpg" 
                          data-src="yages/鸦格_洞穴隐居鸦.jpg" 
                          alt="洞穴隐居鸦" 
                          class="yage-img"
@@ -396,7 +428,7 @@
                 <!-- 夜游梦呓鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_夜游梦呓鸦.jpg" 
+                        <img loading="lazy" src="yages/thumbs/鸦格_夜游梦呓鸦.jpg" 
                          data-src="yages/鸦格_夜游梦呓鸦.jpg" 
                          alt="夜游梦呓鸦" 
                          class="yage-img"
@@ -416,7 +448,7 @@
                 <!-- 失声静默鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_失声静默鸦.jpg" 
+                        <img loading="lazy" src="yages/thumbs/鸦格_失声静默鸦.jpg" 
                          data-src="yages/鸦格_失声静默鸦.jpg" 
                          alt="失声静默鸦" 
                          class="yage-img"
@@ -436,7 +468,7 @@
                 <!-- 假寐装傻鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_假寐装傻鸦.jpg" 
+                        <img loading="lazy" src="yages/thumbs/鸦格_假寐装傻鸦.jpg" 
                          data-src="yages/鸦格_假寐装傻鸦.jpg" 
                          alt="假寐装傻鸦" 
                          class="yage-img"
@@ -456,7 +488,7 @@
                 <!-- 伪装讨喜鸦 -->
                 <div class="yage-card">
                     <div class="yage-img-wrapper">
-                        <img src="yages/thumbs/鸦格_伪装讨喜鸦.jpg" 
+                        <img loading="lazy" src="yages/thumbs/鸦格_伪装讨喜鸦.jpg" 
                          data-src="yages/鸦格_伪装讨喜鸦.jpg" 
                          alt="伪装讨喜鸦" 
                          class="yage-img"
@@ -545,9 +577,27 @@
         .offline-toast .reconnect-btn:hover {
             background: rgba(255,255,255,0.3);
         }
+    
+        /* 键盘导航焦点样式 - 优化10 */
+        *:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+        *:focus-visible {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        a:focus, button:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        
     </style>
     
-    <script>
+    <script defer>
         // 离线提示功能
         window.addEventListener('online', function() {
             var toast = document.getElementById('offlineToast');
@@ -621,6 +671,24 @@
         .community-container {
             padding-bottom: 80px;
         }
+    
+        /* 键盘导航焦点样式 - 优化10 */
+        *:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+        *:focus-visible {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        a:focus, button:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        
     </style>
 </body>
 </html>

@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>关于我们 · 醒醒鸦</title>
     <!-- 社交分享SEO优化 -->
     <meta name="description" content="了解醒醒鸦团队，我们是专注于年轻人心理健康的AI助手，致力于用温暖的方式陪伴每一位需要帮助的用户。">
@@ -182,13 +183,31 @@
             margin-top: 10px;
             font-size: 12px;
         }
+    
+        /* 键盘导航焦点样式 - 优化10 */
+        *:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+        *:focus-visible {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        a:focus, button:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <div class="mascot">
-                <img src="mengya.png" alt="小鸦">
+                <img loading="lazy" src="mengya.png" alt="小鸦">
             </div>
             <h1>关于我们</h1>
             <p class="subtitle">发现你此刻的心境 · 嘎~</p>
@@ -274,7 +293,7 @@
         </div>
     </div>
     
-    <script>
+    <script defer>
         // 离线提示功能
         document.addEventListener('DOMContentLoaded', function() {
             var toast = document.createElement('div');
@@ -355,7 +374,43 @@
         .offline-toast .reconnect-btn:hover {
             background: rgba(255,255,255,0.3);
         }
+    
+        /* 键盘导航焦点样式 - 优化10 */
+        *:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+        *:focus-visible {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        a:focus, button:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        
     </style>
+    
+        /* 键盘导航焦点样式 - 优化10 */
+        *:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+        *:focus-visible {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        a:focus, button:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        
     </style>
     <!-- 底部导航栏 -->
     <div class="footer-nav">
@@ -415,6 +470,24 @@
         .container {
             padding-bottom: 80px;
         }
+    
+        /* 键盘导航焦点样式 - 优化10 */
+        *:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+        *:focus-visible {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        a:focus, button:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        
     </style>
 </body>
 </html>

@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <link rel="preload" href="mengya.png" as="image" type="image/png">
@@ -768,6 +769,24 @@
         .container {
             padding-bottom: 70px;
         }
+    
+        /* 键盘导航焦点样式 - 优化10 */
+        *:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+        *:focus-visible {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        a:focus, button:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        
     </style>
 </head>
 <body>
@@ -781,7 +800,7 @@
     <div class="container">
         <div class="start-page" id="startPage">
             <div class="logo">
-                <img src="mengya_thumb.png" data-src="mengya.png" alt="小鸦" class="logo-img" onclick="location.href='chat.html'" style="cursor: pointer;" onload="if(!this.dataset.loaded){this.dataset.loaded='1';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;}.bind(this);}">
+                <img loading="lazy" src="mengya_thumb.png" data-src="mengya.png" alt="醒醒鸦吉祥物小鸦，黑白配色的可爱乌鸦形象" class="logo-img" onclick="location.href='chat.html'" style="cursor: pointer;" onload="if(!this.dataset.loaded){this.dataset.loaded='1';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;}.bind(this);}">
                 <a href="chat.html" class="chat-bubble">嘎~有本事戳我和我聊天</a>
             </div>
             <h1 class="main-title">醒醒鸦</h1>
@@ -875,8 +894,8 @@
             <div style="margin-top: 6px;">xingxingya.com</div>
         </div>
     </div>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script>
+    <script defer src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script defer>
         // ========== 数据定义 ==========
         var questions = [
             { text: "闹钟响了，你的第一反应是？", options: [{ text: "立刻起床，迎接新的一天 ✨", score: 3 }, { text: "再躺5分钟...就5分钟... 😴", score: 2 }, { text: "闹钟？我早就醒了，根本没睡 🌚", score: 1 }] },
@@ -1146,14 +1165,14 @@
                 console.log('选中结果：', currentResult);
                 // 保存测试结果到localStorage供聊天页面使用                localStorage.setItem('xingxingya_test_result', JSON.stringify({                    type: currentResult.type,                    desc: currentResult.desc,                    advice: currentResult.advice,                    score: totalScore,                    zone: zoneText                }));
                 // 填充结果页面
-                document.getElementById('resultEmoji').innerHTML = '<img src="' + currentResult.image + '" alt="' + currentResult.type + '" style="max-width: 200px; border-radius: 20px;">';
+                document.getElementById('resultEmoji').innerHTML = '<img loading="lazy" src="' + currentResult.image + '" alt="' + currentResult.type + '" style="max-width: 200px; border-radius: 20px;">';
                 document.getElementById('resultType').innerHTML = currentResult.type;
                 document.getElementById('resultDesc').innerHTML = currentResult.desc;
                 document.getElementById('scoreValue').innerHTML = totalScore + ' / 60';
                 document.getElementById('scoreZone').innerHTML = zoneText;
                 document.getElementById('adviceText').innerHTML = currentResult.advice;
                 // 填充图片容器
-                document.getElementById('imgEmoji').innerHTML = '<img src="' + currentResult.image + '" alt="' + currentResult.type + '" style="max-width: 300px; border-radius: 20px;">';
+                document.getElementById('imgEmoji').innerHTML = '<img loading="lazy" src="' + currentResult.image + '" alt="' + currentResult.type + '" style="max-width: 300px; border-radius: 20px;">';
                 document.getElementById('imgType').innerHTML = currentResult.type;
                 document.getElementById('imgDesc').innerHTML = currentResult.desc;
                 document.getElementById('imgScore').innerHTML = totalScore + ' / 60';

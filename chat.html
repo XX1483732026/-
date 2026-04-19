@@ -2,8 +2,22 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>和小鸦聊天 · 醒醒鸦</title>
+    <!-- SEO meta标签 -->
+    <meta name="description" content="和小鸦聊天 - 你的专属AI精神状态顾问，24小时随时陪伴，分享你的困惑与想法，获取有趣的精神状态分析和建议。">
+    <meta name="keywords" content="AI聊天,精神状态,小鸦,情绪陪伴,心理倾诉">
+    <!-- Open Graph 社交分享 -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xingxingya.com/chat.html">
+    <meta property="og:title" content="和小鸦聊天 · 醒醒鸦">
+    <meta property="og:description" content="你的专属AI精神状态顾问，24小时随时陪伴，分享困惑获取有趣分析">
+    <meta property="og:image" content="https://xingxingya.com/mengya.png">
+    <!-- Twitter分享 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="和小鸦聊天 · 醒醒鸦">
+    <meta name="twitter:description" content="你的专属AI精神状态顾问，24小时随时陪伴">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -374,6 +388,24 @@
             .quick-btn { font-size: 12px; padding: 8px 14px; }
             .message-images img, .user-image-preview img { max-width: 150px; max-height: 150px; }
         }
+    
+        /* 键盘导航焦点样式 - 优化10 */
+        *:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+        *:focus-visible {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        a:focus, button:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        
     </style>
 </head>
 <body>
@@ -381,7 +413,7 @@
         <button class="back-btn" onclick="window.location.href='/'">←</button>
         <div style="flex: 1;"></div>
         <button class="clear-btn" onclick="clearChat()" title="清空对话">🗑️</button>
-        <div class="bot-avatar"><img src="mengya.png" style="width:28px;height:28px;border-radius:50%;"></div>
+        <div class="bot-avatar"><img loading="lazy" src="mengya.png" style="width:28px;height:28px;border-radius:50%;"></div>
         <div class="bot-info">
             <h1>小鸦</h1>
             <p>毒舌又暖心的鸦鸦助手</p>
@@ -394,7 +426,7 @@
         
         <div class="chat-messages" id="chatMessages">
             <div class="message bot">
-                <div class="message-avatar"><img src="mengya.png" style="width:28px;height:28px;border-radius:50%;"></div>
+                <div class="message-avatar"><img loading="lazy" src="mengya.png" style="width:28px;height:28px;border-radius:50%;"></div>
                 <div class="message-content">嘎——来了？有什么想唠的，说说呗。心情不好、想吐槽、还是就是无聊想找人扯两句，小鸦都接着。</div>
             </div>
         </div>
@@ -418,12 +450,12 @@
     <!-- 图片预览弹窗 -->
     <div class="image-preview-modal" id="imagePreviewModal" onclick="closeImagePreview()">
         <button class="close-btn" onclick="closeImagePreview()">×</button>
-        <img id="previewImage" src="" alt="预览">
+        <img loading="lazy" id="previewImage" src="" alt="预览">
     </div>
     
     <div id="toast" class="toast"></div>
 
-<script>
+<script defer>
     const API_URL = '/api/chat';
     let sessionId = 'chat_' + Date.now();
     let testResult = null;
@@ -475,18 +507,18 @@
             if (isUser) {
                 // 用户图片样式
                 imagesHtml = '<div class="user-image-preview">' + 
-                    images.map(img => `<img src="${img}" alt="图片">`).join('') +
+                    images.map(img => `<img loading="lazy" src="${img}" alt="图片">`).join('') +
                     '</div>';
             } else {
                 // AI图片样式（可点击预览）
                 imagesHtml = '<div class="message-images">' + 
-                    images.map(img => `<img src="${img}" alt="图片" onclick="openImagePreview('${img}')">`).join('') +
+                    images.map(img => `<img loading="lazy" src="${img}" alt="图片" onclick="openImagePreview('${img}')">`).join('') +
                     '</div>';
             }
         }
         
         messageDiv.innerHTML = `
-            <div class="message-avatar">${isUser ? '👤' : '<img src="mengya.png" style="width:28px;height:28px;border-radius:50%;">'}</div>
+            <div class="message-avatar">${isUser ? '👤' : '<img loading="lazy" src="mengya.png" style="width:28px;height:28px;border-radius:50%;">'}</div>
             <div class="message-content">${escapeHtml(content)}${imagesHtml}<div class="message-time">${timeStr}</div></div>
         `;
         messagesDiv.appendChild(messageDiv);
@@ -547,7 +579,7 @@
         
         container.innerHTML = pendingImages.map((img, index) => `
             <div class="pending-image-item">
-                <img src="${img}" alt="待发送">
+                <img loading="lazy" src="${img}" alt="待发送">
                 <button class="remove-btn" onclick="removePendingImage(${index})">×</button>
             </div>
         `).join('');
@@ -581,7 +613,7 @@
         typingDiv.className = 'message bot typing';
         typingDiv.id = 'typingIndicator';
         typingDiv.innerHTML = `
-            <div class="message-avatar"><img src="mengya.png" style="width:28px;height:28px;border-radius:50%;"></div>
+            <div class="message-avatar"><img loading="lazy" src="mengya.png" style="width:28px;height:28px;border-radius:50%;"></div>
             <div class="typing-indicator"><span></span><span></span><span></span></div>
         `;
         messagesDiv.appendChild(typingDiv);
@@ -671,7 +703,7 @@
         const timeStr = new Date().getHours().toString().padStart(2, "0") + ":" + new Date().getMinutes().toString().padStart(2, "0");
         messagesDiv.innerHTML = `
             <div class="message bot">
-                <div class="message-avatar"><img src="mengya.png" style="width:28px;height:28px;border-radius:50%;"></div>
+                <div class="message-avatar"><img loading="lazy" src="mengya.png" style="width:28px;height:28px;border-radius:50%;"></div>
                 <div class="message-content">嘎——对话清空了。有啥想聊的继续说。<div class="message-time">${timeStr}</div></div>
             </div>
         `;
