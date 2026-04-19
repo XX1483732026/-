@@ -9,19 +9,96 @@
     <meta property="og:title" content="小鸦的云朵心事 · 醒醒鸦">
     <meta property="og:description" content="治愈系绘本，陪你度过每一个情绪时刻">
     <meta property="og:type" content="website">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body {
             height: 100%;
+            overflow: hidden;
         }
         body {
-            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #2d2d44 100%);
+            font-family: 'Noto Serif SC', 'Songti SC', serif;
+            background: #0a0a0a;
             color: #fff;
             touch-action: pan-y;
         }
-        /* 顶部导航 */
+        /* 主容器 */
+        .page-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        /* 图片区域 */
+        .image-area {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, #1a1a2e 0%, #2d2d44 100%);
+        }
+        .story-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: opacity 0.3s ease;
+        }
+        /* 封面标题层 */
+        .cover-title-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px 24px 24px;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
+            display: none;
+        }
+        .cover-title-layer.show {
+            display: block;
+        }
+        .cover-title {
+            font-size: 28px;
+            font-weight: 600;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+        .cover-subtitle {
+            font-size: 14px;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+        }
+        /* 文字区域 */
+        .text-area {
+            background: #faf8f5;
+            padding: 24px 20px;
+            min-height: 100px;
+            max-height: 35vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .text-area.hidden {
+            display: none;
+        }
+        .story-text {
+            font-size: 16px;
+            line-height: 1.9;
+            text-align: center;
+            color: #2c3e50;
+            letter-spacing: 0.5px;
+        }
+        /* 页码 */
+        .page-num {
+            position: absolute;
+            right: 20px;
+            bottom: 12px;
+            font-size: 12px;
+            color: #999;
+        }
+        /* 顶部导航栏 */
         .header {
             position: fixed;
             top: 0;
@@ -31,98 +108,40 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 16px;
-            background: rgba(13, 13, 13, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 10px 16px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
         }
         .back-btn {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             color: #fff;
             text-decoration: none;
             font-size: 14px;
-            padding: 8px 12px;
+            padding: 6px 12px;
             border-radius: 20px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
             transition: background 0.3s;
         }
         .back-btn:hover {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.25);
         }
-        .header-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #fff;
-        }
-        .page-indicator {
-            font-size: 14px;
-            color: #8892b0;
-            background: rgba(255,255,255,0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
-        }
-        /* 主阅读区域 */
-        .reader-container {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            padding-top: 60px;
-        }
-        /* 图片区域 */
-        .image-area {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            min-height: 0;
-            overflow: hidden;
-        }
-        .story-image {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-            object-fit: contain;
-            transition: opacity 0.3s ease;
-        }
-        /* 文字区域 */
-        .text-area {
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-            padding: 20px 24px;
-            min-height: 80px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        .story-title {
-            font-size: 20px;
-            font-weight: 600;
-            text-align: center;
-            color: #fff;
-            margin-bottom: 8px;
-        }
-        .story-text {
-            font-size: 16px;
-            line-height: 1.8;
-            text-align: center;
-            color: #ccd6f6;
+        .header-right {
+            width: 80px;
         }
         /* 翻页按钮 */
         .nav-btn {
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.2);
+            border: none;
             color: #fff;
-            font-size: 20px;
+            font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -132,7 +151,7 @@
             backdrop-filter: blur(10px);
         }
         .nav-btn:hover {
-            background: rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.35);
         }
         .nav-btn:active {
             transform: translateY(-50%) scale(0.95);
@@ -142,53 +161,36 @@
         .nav-btn.disabled {
             opacity: 0.3;
             cursor: not-allowed;
+            pointer-events: none;
         }
         /* 底部进度条 */
-        .footer {
+        .progress-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            z-index: 100;
-            padding: 12px 16px;
-            background: rgba(13, 13, 13, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        .progress-bar {
-            width: 100%;
-            height: 4px;
+            height: 3px;
             background: rgba(255,255,255,0.1);
-            border-radius: 2px;
-            overflow: hidden;
+            z-index: 100;
         }
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #8b8b8b, #d4d4d4);
-            border-radius: 2px;
+            background: rgba(255,255,255,0.6);
             transition: width 0.3s ease;
-        }
-        /* 触摸滑动提示 */
-        .swipe-hint {
-            position: fixed;
-            bottom: 70px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 12px;
-            color: #5a6a8a;
-            opacity: 0.6;
-            pointer-events: none;
         }
         @media (max-width: 480px) {
             .nav-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
             }
             .nav-btn.prev { left: 8px; }
             .nav-btn.next { right: 8px; }
             .story-text {
                 font-size: 15px;
+            }
+            .cover-title {
+                font-size: 24px;
             }
         }
     </style>
@@ -197,20 +199,24 @@
     <!-- 顶部导航 -->
     <div class="header">
         <a href="community.html" class="back-btn">← 返回</a>
-        <div class="header-title">小鸦的云朵心事</div>
-        <div class="page-indicator" id="pageIndicator">1 / 22</div>
+        <div class="header-right"></div>
     </div>
 
-    <!-- 主阅读区域 -->
-    <div class="reader-container" id="readerContainer">
+    <!-- 主容器 -->
+    <div class="page-container" id="pageContainer">
         <!-- 图片区域 -->
         <div class="image-area">
             <img class="story-image" id="storyImage" src="story_images/page_01.jpg" alt="绘本页面">
+            <!-- 封面标题层 -->
+            <div class="cover-title-layer" id="coverTitleLayer">
+                <div class="cover-title">小鸦的云朵心事</div>
+                <div class="cover-subtitle">醒醒鸦</div>
+            </div>
         </div>
         <!-- 文字区域 -->
         <div class="text-area" id="textArea">
-            <div class="story-title" id="storyTitle">小鸦的云朵心事</div>
             <div class="story-text" id="storyText"></div>
+            <div class="page-num" id="pageNum"></div>
         </div>
     </div>
 
@@ -219,13 +225,9 @@
     <button class="nav-btn next" id="nextBtn" onclick="nextPage()">→</button>
 
     <!-- 底部进度条 -->
-    <div class="footer">
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill" style="width: 4.5%"></div>
-        </div>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 4.5%"></div>
     </div>
-
-    <div class="swipe-hint">← 左右滑动翻页 →</div>
 
     <script src="js/story_data.js"></script>
     <script>
@@ -243,22 +245,27 @@
                 img.style.opacity = 1;
             }, 150);
 
-            // 更新文字
-            const titleEl = document.getElementById('storyTitle');
-            const textEl = document.getElementById('storyText');
+            // 封面页特殊处理
+            const coverTitleLayer = document.getElementById('coverTitleLayer');
+            const textArea = document.getElementById('textArea');
+            const pageNum = document.getElementById('pageNum');
             
-            if (pageData.title) {
-                titleEl.textContent = pageData.title;
-                titleEl.style.display = 'block';
+            if (currentPage === 1) {
+                // 封面页：显示标题层，隐藏文字区域
+                coverTitleLayer.classList.add('show');
+                textArea.classList.add('hidden');
+            } else if (currentPage === totalPages) {
+                // 封底页：隐藏标题层和文字区域
+                coverTitleLayer.classList.remove('show');
+                textArea.classList.add('hidden');
             } else {
-                titleEl.style.display = 'none';
+                // 内容页：显示文字区域
+                coverTitleLayer.classList.remove('show');
+                textArea.classList.remove('hidden');
+                document.getElementById('storyText').textContent = pageData.text || '';
+                pageNum.textContent = `${currentPage - 1} / ${totalPages - 2}`;
             }
-            
-            textEl.textContent = pageData.text || '';
 
-            // 更新页码
-            document.getElementById('pageIndicator').textContent = `${currentPage} / ${totalPages}`;
-            
             // 更新进度条
             const progress = (currentPage / totalPages) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
@@ -292,11 +299,11 @@
         let touchStartX = 0;
         let touchEndX = 0;
 
-        document.getElementById('readerContainer').addEventListener('touchstart', function(e) {
+        document.getElementById('pageContainer').addEventListener('touchstart', function(e) {
             touchStartX = e.changedTouches[0].screenX;
         }, { passive: true });
 
-        document.getElementById('readerContainer').addEventListener('touchend', function(e) {
+        document.getElementById('pageContainer').addEventListener('touchend', function(e) {
             touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
         }, { passive: true });
