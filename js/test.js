@@ -265,7 +265,37 @@ function showResult() {
         document.getElementById('imgEmoji').textContent = currentResult.emoji;
         document.getElementById('imgType').textContent = yageName;
         document.getElementById('imgDesc').textContent = currentResult.desc;
-        document.getElementById('imgScore').innerHTML = '⚡' + scores.电量 + ' · 💭' + scores.情绪 + ' · 🏃' + scores.行动 + ' · 🔗' + scores.连接;
+        // 分享图片：维度进度条（带分数）
+        var imgScoreEl = document.getElementById('imgScore');
+        if (imgScoreEl) {
+            var imgGaugeHtml = '<div class="share-dimension-gauges">';
+            for (var dim in scores) {
+                if (scores.hasOwnProperty(dim)) {
+                    var score = scores[dim];
+                    var pos = ((score - 5) / 10) * 100;
+                    imgGaugeHtml += 
+                        '<div class="share-dimension-gauge">' +
+                            '<div class="share-gauge-header">' +
+                                '<span class="share-gauge-label">' + dimensionIcons[dim] + ' ' + dim + '</span>' +
+                                '<span class="share-gauge-score">' + score + '分</span>' +
+                            '</div>' +
+                            '<div class="share-gauge-bar">' +
+                                '<div class="share-gauge-track">' +
+                                    '<div class="share-gauge-segment low"></div>' +
+                                    '<div class="share-gauge-segment mid"></div>' +
+                                    '<div class="share-gauge-segment high"></div>' +
+                                '</div>' +
+                                '<div class="share-gauge-pointer" style="left: ' + pos + '%"></div>' +
+                            '</div>' +
+                            '<div class="share-gauge-labels">' +
+                                '<span>低</span><span>中</span><span>高</span>' +
+                            '</div>' +
+                        '</div>';
+                }
+            }
+            imgGaugeHtml += '</div>';
+            imgScoreEl.innerHTML = imgGaugeHtml;
+        }
         document.getElementById('imgZone').textContent = zoneText;
         document.getElementById('imgQuote').textContent = '"' + currentResult.quote + '"';
         document.getElementById('imgSuitable').textContent = currentResult.suitable;

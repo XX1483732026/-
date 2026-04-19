@@ -358,15 +358,6 @@ body {
 .quote-card {
     text-align: left;
 }
-.quote-icon {
-    font-size: 32px;
-    margin-bottom: 8px;
-}
-.quote-label {
-    font-size: 12px;
-    color: #8892b0;
-    margin-bottom: 8px;
-}
 .quote-text {
     font-size: 16px;
     color: #fff;
@@ -1025,6 +1016,73 @@ a:focus, button:focus {
     font-size: 14px;
     color: #ccd6f6;
     line-height: 1.6;
+}
+/* 分享图片中的维度进度条 */
+.share-dimension-gauges {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.share-dimension-gauge {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.share-gauge-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.share-gauge-label {
+    font-size: 13px;
+    color: #fff;
+    font-weight: 500;
+}
+.share-gauge-score {
+    font-size: 12px;
+    color: #8892b0;
+}
+.share-gauge-bar {
+    position: relative;
+    height: 7px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: visible;
+}
+.share-gauge-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+}
+.share-gauge-segment {
+    flex: 1;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+.share-gauge-segment:last-child {
+    border-right: none;
+}
+.share-gauge-segment.low { background: rgba(107, 91, 149, 0.3); }
+.share-gauge-segment.mid { background: rgba(139, 123, 171, 0.3); }
+.share-gauge-segment.high { background: rgba(180, 160, 200, 0.3); }
+.share-gauge-pointer {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+.share-gauge-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #5a6a8a;
+    margin-top: 3px;
 }
 /* 建议卡片 */
 .share-suitable-card {
