@@ -35,10 +35,20 @@ export default async function handler(req, res) {
 
         // 如果有测试结果，添加到上下文
         if (testResult && hasContext) {
+            const score = testResult.score || {};
+            const totalScore = (score.电量 || 0) + (score.情绪 || 0) + (score.行动 || 0) + (score.连接 || 0);
+            
             const contextMessage = `【用户刚完成了精神状态测试】
-测试结果：${testResult.emoji} ${testResult.type}
-精神状态指数：${testResult.score} / 60
+测试结果：${testResult.emoji || '🐦‍⬛'} ${testResult.type}
+心境状态指数：
+- 电量：${score.电量 || 0}分
+- 情绪：${score.情绪 || 0}分  
+- 行动：${score.行动 || 0}分
+- 连接：${score.连接 || 0}分
+- 总分：${totalScore} / 60
+
 所属区域：${testResult.zone}
+状态描述：${testResult.desc || ''}
 
 请在聊天时根据这个测试结果，给予用户更针对性的心理支持和建议。用户可能需要被理解和陪伴。`;
 
