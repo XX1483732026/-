@@ -229,7 +229,7 @@
     <!-- 主阅读区域 -->
     <div class="reader-container" id="readerContainer">
         <div class="page-wrapper">
-            <img class="story-page" id="storyPage" src="../绘本/小鸦的云朵心事/page_01.jpg" alt="绘本页面">
+            <img class="story-page" id="storyPage" src="story_images/page_01.jpg" alt="绘本页面">
         </div>
         <!-- 触摸区域 -->
         <div class="touch-area left" id="touchPrev"></div>
@@ -294,7 +294,7 @@
             
             setTimeout(() => {
                 currentPage = newPage;
-                const imgPath = `../绘本/小鸦的云朵心事/page_${String(currentPage).padStart(2, '0')}.jpg`;
+                const imgPath = `story_images/page_${String(currentPage).padStart(2, '0')}.jpg`;
                 storyPage.src = imgPath;
                 
                 // 更新指示器
