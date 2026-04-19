@@ -249,22 +249,16 @@ function showResult() {
             scoreValueEl.innerHTML = gaugeHtml;
         }
         
-        // 适合做什么 + 按钮
-        var adviceTextEl = document.getElementById('adviceText');
-        if (adviceTextEl) {
-            adviceTextEl.innerHTML = 
-                '<div class="yage-quote" style="background:rgba(100,100,100,0.15);border-radius:12px;padding:14px 16px;margin-bottom:16px;border-left:3px solid rgba(255,255,255,0.2);">' +
-                    '<div style="font-size:12px;color:#8892b0;margin-bottom:6px;">🐦‍⬛ 鸦鸦有话说</div>' +
-                    '<div style="font-size:14px;color:#fff;">' + currentResult.quote + '</div>' +
-                '</div>' +
-                '<div style="margin-bottom:16px;">' +
-                    '<div style="font-size:12px;color:#8892b0;margin-bottom:8px;">🎯 适合做什么</div>' +
-                    '<div style="font-size:14px;color:#ccd6f6;">' + currentResult.suitable + '</div>' +
-                '</div>' +
-                '<div class="result-buttons">' +
-                    '<a href="community.html" class="explore-link">🔍 探索详情</a>' +
-                    '<a href="chat.html" class="chat-link-btn">💬 找小鸦聊聊</a>' +
-                '</div>';
+        // 鸦鸦有话说
+        var quoteTextEl = document.getElementById('quoteText');
+        if (quoteTextEl) {
+            quoteTextEl.textContent = '"' + currentResult.quote + '"';
+        }
+        
+        // 适合做什么
+        var suitableTextEl = document.getElementById('suitableText');
+        if (suitableTextEl) {
+            suitableTextEl.textContent = currentResult.suitable;
         }
         
         // 填充图片容器
