@@ -72,7 +72,7 @@
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 16px;
+            margin-bottom: 6px;
             flex-wrap: wrap;
         }
         .zone-pill {
@@ -84,16 +84,28 @@
         .zone-pill.awake { background: rgba(255,215,0,0.15); color: #ffd700; border: 1px solid rgba(255,215,0,0.3); }
         .zone-pill.blurry { background: rgba(160,160,192,0.15); color: #a0a0c0; border: 1px solid rgba(160,160,192,0.3); }
         .zone-pill.asleep { background: rgba(74,74,106,0.15); color: #6a6a8a; border: 1px solid rgba(74,74,106,0.3); }
+        .intro-zones-desc {
+            font-size: 12px;
+            color: #6a7a9a;
+            text-align: center;
+            margin-bottom: 16px;
+        }
         .intro-dimensions {
             display: flex;
             justify-content: center;
             gap: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 6px;
             flex-wrap: wrap;
         }
         .dimension-item {
             font-size: 14px;
             color: #ccd6f6;
+        }
+        .intro-dimensions-desc {
+            font-size: 12px;
+            color: #6a7a9a;
+            text-align: center;
+            margin-bottom: 20px;
         }
         .intro-story-hint {
             color: #8892b0;
@@ -529,11 +541,17 @@
                 <span class="zone-pill blurry">🌫️ 假寐区</span>
                 <span class="zone-pill asleep">🌑 沉睡区</span>
             </div>
+            <div class="intro-zones-desc">
+                精神状态的三个层次，从清醒到沉睡
+            </div>
             <div class="intro-dimensions">
                 <span class="dimension-item">⚡ 电量</span>
                 <span class="dimension-item">💭 情绪</span>
                 <span class="dimension-item">🏃 行动</span>
                 <span class="dimension-item">🔗 连接</span>
+            </div>
+            <div class="intro-dimensions-desc">
+                测评四大维度，定位你的真实状态
             </div>
             <a href="index.html" class="test-btn">🏠 测测你的鸦格</a>
             <div class="intro-story-hint">下滑到底查看小鸦的故事 ↓</div>
