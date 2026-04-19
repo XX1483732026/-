@@ -267,9 +267,13 @@ function showResult() {
         document.getElementById('imgDesc').textContent = currentResult.desc;
         document.getElementById('imgScore').innerHTML = '⚡' + scores.电量 + ' · 💭' + scores.情绪 + ' · 🏃' + scores.行动 + ' · 🔗' + scores.连接;
         document.getElementById('imgZone').textContent = zoneText;
-        document.getElementById('imgAdvice').innerHTML = '<div>' + currentResult.quote + '</div>' +
-            '<div style="margin-top:8px;border-top:1px solid rgba(255,255,255,0.1);padding-top:8px;">' +
-            '<div style="font-size:12px;color:#8892b0;">🎯 ' + currentResult.suitable + '</div></div>';
+        document.getElementById('imgQuote').textContent = '"' + currentResult.quote + '"';
+        document.getElementById('imgSuitable').textContent = currentResult.suitable;
+        // 为分区标签添加样式类
+        var imgZoneEl = document.getElementById('imgZone');
+        if (imgZoneEl) {
+            imgZoneEl.className = 'share-zone ' + zoneClass;
+        }
         
         console.log('结果页面填充完成');
     } catch (error) {

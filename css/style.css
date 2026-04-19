@@ -921,3 +921,132 @@ a:focus, button:focus {
     transform: translateY(-3px);
     box-shadow: 0 4px 12px rgba(100, 181, 246, 0.4);
 }
+
+/* ========== 分享图片样式 ========== */
+.result-image-container {
+    width: 360px;
+    padding: 20px;
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #2d2d44 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+/* 通用卡片 */
+.share-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+/* 鸦格卡片 */
+.share-yage-card {
+    text-align: center;
+    padding: 24px;
+}
+.share-emoji {
+    font-size: 60px;
+    margin-bottom: 8px;
+}
+.share-type {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(90deg, #aaa, #ddd, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+}
+@supports not (-webkit-background-clip: text) {
+    .share-type {
+        -webkit-text-fill-color: #fff;
+    }
+}
+.share-zone {
+    font-size: 14px;
+    padding: 4px 12px;
+    border-radius: 16px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+.share-zone.awake {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 237, 74, 0.1));
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    color: #ffd700;
+}
+.share-zone.blurry {
+    background: linear-gradient(135deg, rgba(160, 160, 192, 0.2), rgba(192, 192, 216, 0.1));
+    border: 1px solid rgba(160, 160, 192, 0.4);
+    color: #c0c0d8;
+}
+.share-zone.asleep {
+    background: linear-gradient(135deg, rgba(74, 74, 106, 0.2), rgba(106, 106, 138, 0.1));
+    border: 1px solid rgba(74, 74, 106, 0.4);
+    color: #a0a0c0;
+}
+.share-desc {
+    font-size: 14px;
+    color: #ccd6f6;
+    line-height: 1.6;
+    margin-top: 12px;
+}
+/* 引用卡片 */
+.share-quote-card {
+    text-align: left;
+    padding: 20px;
+}
+.share-quote-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+.share-quote-label {
+    font-size: 12px;
+    color: #8892b0;
+    margin-bottom: 8px;
+}
+.share-quote-text {
+    font-size: 14px;
+    color: #fff;
+    font-style: italic;
+    line-height: 1.6;
+}
+/* 指数卡片 */
+.share-score-card {
+    text-align: left;
+    padding: 20px;
+}
+.share-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 12px;
+}
+.share-dimension {
+    font-size: 14px;
+    color: #ccd6f6;
+    line-height: 1.6;
+}
+/* 建议卡片 */
+.share-suitable-card {
+    text-align: left;
+    padding: 20px;
+}
+.share-suitable {
+    font-size: 14px;
+    color: #ccd6f6;
+    line-height: 1.6;
+}
+/* 底部 */
+.share-footer {
+    text-align: center;
+    padding: 16px;
+}
+.share-logo {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 4px;
+}
+.share-url {
+    font-size: 12px;
+    color: #8892b0;
+}

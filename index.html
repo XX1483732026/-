@@ -156,20 +156,37 @@
         </div>
     </div>
     <div class="result-image-container" id="resultImageContainer">
-        <div class="img-emoji" id="imgEmoji"></div>
-        <div class="img-type" id="imgType"></div>
-        <div class="img-desc" id="imgDesc"></div>
-        <div class="score-box">
-            <div class="score-num" id="imgScore"></div>
-            <div class="score-zone-text" id="imgZone"></div>
+        <!-- 鸦格卡片 -->
+        <div class="share-card share-yage-card">
+            <div class="share-emoji" id="imgEmoji"></div>
+            <div class="share-type" id="imgType"></div>
+            <div class="share-zone" id="imgZone"></div>
+            <div class="share-desc" id="imgDesc"></div>
         </div>
-        <div class="advice-box">
-            <div class="advice-title-text">🐦‍⬛ 鸦鸦有话说</div>
-            <div class="advice-content" id="imgAdvice"></div>
+        
+        <!-- 引用卡片 -->
+        <div class="share-card share-quote-card">
+            <div class="share-quote-icon">🐦‍⬛</div>
+            <div class="share-quote-label">鸦鸦有话说</div>
+            <div class="share-quote-text" id="imgQuote"></div>
         </div>
-        <div class="img-footer">
-            <div class="logo-text">醒醒鸦</div>
-            <div style="margin-top: 6px;">xingxingya.com</div>
+        
+        <!-- 指数卡片 -->
+        <div class="share-card share-score-card">
+            <div class="share-card-title">📊 心境状态指数</div>
+            <div class="share-dimension" id="imgScore"></div>
+        </div>
+        
+        <!-- 建议卡片 -->
+        <div class="share-card share-suitable-card">
+            <div class="share-card-title">🎯 适合做什么</div>
+            <div class="share-suitable" id="imgSuitable"></div>
+        </div>
+        
+        <!-- 底部 -->
+        <div class="share-footer">
+            <div class="share-logo">🐦‍⬛ 醒醒鸦</div>
+            <div class="share-url">xingxingya.com</div>
         </div>
     </div>
     <script defer src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
