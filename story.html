@@ -232,6 +232,15 @@
     <script src="js/story_data.js"></script>
     <script>
         let currentPage = 1;
+        // WebP支持检测
+        const supportsWebP = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0;
+        
+        function getStoryImagePath(pageNum) {
+            const pageStr = String(pageNum).padStart(2, '0');
+            return supportsWebP 
+                ? `story_images/page_${pageStr}.webp` 
+                : `story_images/page_${pageStr}.jpg`;
+        }
         const totalPages = storyPages.length;
 
         function updatePage() {
@@ -241,7 +250,7 @@
             const img = document.getElementById('storyImage');
             img.style.opacity = 0;
             setTimeout(() => {
-                img.src = `story_images/page_${String(currentPage).padStart(2, '0')}.jpg`;
+                img.src = getStoryImagePath(currentPage);
                 img.style.opacity = 1;
             }, 150);
 
