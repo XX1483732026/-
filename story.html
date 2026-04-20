@@ -6,30 +6,21 @@
     <title>小鸦的云朵心事 · 醒醒鸦</title>
     <link rel="icon" type="image/png" href="mengya.png">
     <meta name="description" content="小鸦的云朵心事 - 22页治愈系绘本，陪你度过每一个情绪时刻">
-    <meta property="og:title" content="小鸦的云朵心事 · 醒醒鸦">
-    <meta property="og:description" content="治愈系绘本，陪你度过每一个情绪时刻">
-    <meta property="og:type" content="website">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body {
-            height: 100%;
-            overflow: hidden;
-        }
+        html, body { height: 100%; overflow: hidden; }
         body {
             font-family: 'Noto Serif SC', 'Songti SC', serif;
             background: #0a0a0a;
             color: #fff;
             touch-action: pan-y;
         }
-        /* 主容器 */
         .page-container {
             height: 100vh;
             display: flex;
             flex-direction: column;
             position: relative;
         }
-        /* 图片区域 */
         .image-area {
             flex: 1;
             position: relative;
@@ -41,9 +32,7 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-            transition: opacity 0.3s ease;
         }
-        /* 封面标题层 */
         .cover-title-layer {
             position: absolute;
             bottom: 0;
@@ -53,9 +42,7 @@
             background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
             display: none;
         }
-        .cover-title-layer.show {
-            display: block;
-        }
+        .cover-title-layer.show { display: block; }
         .cover-title {
             font-size: 28px;
             font-weight: 600;
@@ -69,7 +56,6 @@
             text-align: center;
             color: rgba(255,255,255,0.7);
         }
-        /* 文字区域 */
         .text-area {
             background: #faf8f5;
             padding: 24px 20px;
@@ -80,9 +66,7 @@
             flex-direction: column;
             justify-content: center;
         }
-        .text-area.hidden {
-            display: none;
-        }
+        .text-area.hidden { display: none; }
         .story-text {
             font-size: 16px;
             line-height: 1.9;
@@ -90,7 +74,6 @@
             color: #2c3e50;
             letter-spacing: 0.5px;
         }
-        /* 页码 */
         .page-num {
             position: absolute;
             right: 20px;
@@ -98,7 +81,6 @@
             font-size: 12px;
             color: #999;
         }
-        /* 顶部导航栏 */
         .header {
             position: fixed;
             top: 0;
@@ -122,15 +104,7 @@
             border-radius: 20px;
             background: rgba(255,255,255,0.15);
             backdrop-filter: blur(10px);
-            transition: background 0.3s;
         }
-        .back-btn:hover {
-            background: rgba(255,255,255,0.25);
-        }
-        .header-right {
-            width: 80px;
-        }
-        /* 翻页按钮 */
         .nav-btn {
             position: fixed;
             top: 50%;
@@ -146,24 +120,12 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s;
             z-index: 50;
             backdrop-filter: blur(10px);
         }
-        .nav-btn:hover {
-            background: rgba(255,255,255,0.35);
-        }
-        .nav-btn:active {
-            transform: translateY(-50%) scale(0.95);
-        }
         .nav-btn.prev { left: 12px; }
         .nav-btn.next { right: 12px; }
-        .nav-btn.disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-        /* 底部进度条 */
+        .nav-btn.disabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
         .progress-bar {
             position: fixed;
             bottom: 0;
@@ -178,79 +140,76 @@
             background: rgba(255,255,255,0.6);
             transition: width 0.3s ease;
         }
-        @media (max-width: 480px) {
-            .nav-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 14px;
-            }
-            .nav-btn.prev { left: 8px; }
-            .nav-btn.next { right: 8px; }
-            .story-text {
-                font-size: 15px;
-            }
-            .cover-title {
-                font-size: 24px;
-            }
-        }
     </style>
-
-    <!-- 性能优化：资源预加载 -->
-    <link rel="preload" href="css/style.min.css" as="style">
 </head>
 <body>
-    <!-- 顶部导航 -->
     <div class="header">
         <a href="community.html" class="back-btn">← 返回</a>
-        <div class="header-right"></div>
     </div>
 
-    <!-- 主容器 -->
     <div class="page-container" id="pageContainer">
-        <!-- 图片区域 -->
         <div class="image-area">
-            <img class="story-image" id="storyImage" src="story_images/page_01.jpg"  alt="绘本页面">
-            <!-- 封面标题层 -->
-            <div class="cover-title-layer" id="coverTitleLayer">
+            <img class="story-image" id="storyImage" src="story_images/page_01.jpg" alt="绘本页面">
+            <div class="cover-title-layer show" id="coverTitleLayer">
                 <div class="cover-title">小鸦的云朵心事</div>
                 <div class="cover-subtitle">醒醒鸦</div>
             </div>
         </div>
-        <!-- 文字区域 -->
-        <div class="text-area" id="textArea">
+        <div class="text-area hidden" id="textArea">
             <div class="story-text" id="storyText"></div>
             <div class="page-num" id="pageNum"></div>
         </div>
     </div>
 
-    <!-- 翻页按钮 -->
-    <button class="nav-btn prev disabled" id="prevBtn" onclick="prevPage()">←</button>
-    <button class="nav-btn next" id="nextBtn" onclick="nextPage()">→</button>
+    <button class="nav-btn prev disabled" id="prevBtn">←</button>
+    <button class="nav-btn next" id="nextBtn">→</button>
 
-    <!-- 底部进度条 -->
     <div class="progress-bar">
         <div class="progress-fill" id="progressFill" style="width: 4.5%"></div>
     </div>
 
-    <script src="js/story_data.min.js"></script>
     <script>
+        const storyPages = [
+            {page:1,text:"",title:"小鸦的云朵心事"},
+            {page:2,text:"清晨，小鸦从一团灰蒙蒙的雾气中醒来，感觉身体沉甸甸的。"},
+            {page:3,text:"我怎么了？小鸦问池塘，池塘只回以轻柔的水波声。"},
+            {page:4,text:"它决定出去走走，也许会找到答案。森林安静得像在沉睡。"},
+            {page:5,text:"走了很久，小鸦遇见了一只飘在空中的小幽灵。"},
+            {page:6,text:"你也感到累了，对吗？小幽灵的声音很轻，像一阵风。"},
+            {page:7,text:"小鸦点点头。小幽灵笑了：累没关系，休息本身就是一种力量。"},
+            {page:8,text:"小鸦第一次觉得，疲惫也可以被温柔对待。"},
+            {page:9,text:"告别小幽灵后，小鸦继续向前。天空好像变亮了一点。"},
+            {page:10,text:"走着走着，小鸦遇见了一只晒太阳的狐狸。"},
+            {page:11,text:"来坐坐吧，狐狸说，这里的光刚刚好。"},
+            {page:12,text:"小鸦很久没有这样，什么都不做，只是感受阳光了。"},
+            {page:13,text:"有时候，我们需要慢下来，才能看清自己。"},
+            {page:14,text:"前面是一片蒲公英田。小鸦从来没见过这么多蒲公英。"},
+            {page:15,text:"它轻轻吹了一口——呼，种子们像小伞一样飞了起来。"},
+            {page:16,text:"小鸦突然想跑起来，身体好像变轻了。"},
+            {page:17,text:"它跑到了山顶。原来这片森林这么美。"},
+            {page:18,text:"小鸦抬头看天。那些云在慢慢变化，没有固定的形状。"},
+            {page:19,text:"就像心情，小鸦轻声说，没有固定的样子。"},
+            {page:20,text:"我接纳此刻的自己，无论是灰暗还是明亮。"},
+            {page:21,text:"心境如云，不定义，只看见。这，就是小鸦的云朵心事。"},
+            {page:22,text:""}
+        ];
+
         let currentPage = 1;
         const totalPages = storyPages.length;
+        const img = document.getElementById('storyImage');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
 
         function updatePage() {
             const pageData = storyPages[currentPage - 1];
+            const pageNum = String(currentPage).padStart(2, '0');
             
             // 更新图片
-            const img = document.getElementById('storyImage');
-            const newSrc = 'story_images/page_' + String(currentPage).padStart(2, '0') + '.jpg';
-            
-            console.log("切换到第" + currentPage + "页, 图片路径: " + newSrc);
-            img.src = newSrc;
+            img.src = 'story_images/page_' + pageNum + '.jpg';
 
             // 封面页特殊处理
             const coverTitleLayer = document.getElementById('coverTitleLayer');
             const textArea = document.getElementById('textArea');
-            const pageNum = document.getElementById('pageNum');
             
             if (currentPage === 1) {
                 coverTitleLayer.classList.add('show');
@@ -262,7 +221,7 @@
                 coverTitleLayer.classList.remove('show');
                 textArea.classList.remove('hidden');
                 document.getElementById('storyText').textContent = pageData.text || '';
-                pageNum.textContent = (currentPage - 1) + ' / ' + (totalPages - 2);
+                document.getElementById('pageNum').textContent = (currentPage - 1) + ' / ' + (totalPages - 2);
             }
 
             // 更新进度条
@@ -270,8 +229,8 @@
             document.getElementById('progressFill').style.width = progress + '%';
 
             // 更新按钮状态
-            document.getElementById('prevBtn').classList.toggle('disabled', currentPage === 1);
-            document.getElementById('nextBtn').classList.toggle('disabled', currentPage === totalPages);
+            prevBtn.classList.toggle('disabled', currentPage === 1);
+            nextBtn.classList.toggle('disabled', currentPage === totalPages);
         }
 
         function prevPage() {
@@ -288,38 +247,28 @@
             }
         }
 
+        prevBtn.addEventListener('click', prevPage);
+        nextBtn.addEventListener('click', nextPage);
+
         // 键盘翻页
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowLeft') prevPage();
             if (e.key === 'ArrowRight') nextPage();
         });
 
-        // 触摸滑动翻页
+        // 触摸滑动
         let touchStartX = 0;
-        let touchEndX = 0;
-
         document.getElementById('pageContainer').addEventListener('touchstart', function(e) {
             touchStartX = e.changedTouches[0].screenX;
         }, { passive: true });
 
         document.getElementById('pageContainer').addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, { passive: true });
-
-        function handleSwipe() {
-            const diff = touchStartX - touchEndX;
+            const diff = touchStartX - e.changedTouches[0].screenX;
             if (Math.abs(diff) > 50) {
-                if (diff > 0) {
-                    nextPage();
-                } else {
-                    prevPage();
-                }
+                if (diff > 0) nextPage();
+                else prevPage();
             }
-        }
-
-        // 初始化
-        updatePage();
+        }, { passive: true });
     </script>
 </body>
 </html>
