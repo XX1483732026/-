@@ -1233,3 +1233,33 @@ a:focus, button:focus {
     margin-bottom: 8px;
     letter-spacing: 2px;
 }
+
+/* 详情弹窗分享按钮 */
+.modal-btn.share {
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.modal-btn.share:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+.modal-footer {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-footer .modal-btn {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}

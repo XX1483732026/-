@@ -640,6 +640,8 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button class="modal-btn share" onclick="shareCurrentYage()">📤 分享</button>
+                <a href="index.html" class="modal-btn">🏠 测测我的鸦格</a>
                 <a href="index.html" class="modal-btn">🏠 测测我的鸦格</a>
             </div>
         </div>
@@ -745,8 +747,16 @@
                 modalImage.src = yageData.image;
             }
 
+            currentYageData = { name: yage.name, zone: yage.zone, dimension: yage.dimension };
             document.getElementById('modal').classList.add('show');
             document.body.style.overflow = 'hidden';
+        }
+
+        // 关闭弹窗
+        function shareCurrentYage() {
+            if (currentYageData) {
+                shareYage(currentYageData.name, [currentYageData.zone, currentYageData.dimension]);
+            }
         }
 
         // 关闭弹窗
@@ -789,6 +799,7 @@
     
     <script>
     var currentShareYage = '';
+    var currentYageData = null;
     
     function shareYage(name, traits) {
         currentShareYage = name;
@@ -825,12 +836,6 @@
         setTimeout(function() { toast.classList.remove('show'); }, 2000);
     }
     
-    // 点击卡片触发分享
-    document.querySelectorAll('.yage-card').forEach(function(card) {
-        card.addEventListener('click', function() {
-            var name = this.querySelector('.yage-name')?.textContent || '';
-            var traits = Array.from(this.querySelectorAll('.trait-tag')).map(function(t) { return t.textContent; });
-            shareYage(name, traits);
         });
     });
     
