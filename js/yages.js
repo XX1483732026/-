@@ -1,3 +1,17 @@
+
+// WebP支持检测
+var supportsWebP = false;
+(function() {
+    var canvas = document.createElement('canvas');
+    supportsWebP = canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+})();
+
+// 图片路径WebP替换函数
+function getWebPImagePath(jpgPath) {
+    if (!supportsWebP) return jpgPath;
+    return jpgPath.replace('.jpg', '.webp').replace('yages/', 'yages/webp/');
+}
+
 /**
  * 醒醒鸦 · 鸦格结果数据 v2.0
  * 12种鸦格：清醒区/假寐区/沉睡区
@@ -9,7 +23,7 @@ var yages = {
         zoneEmoji: "🌅",
         dimension: "电量高 + 情绪高/中 + 连接高/中",
         emoji: "🦅",
-        image: "yages/巡天智者鸦.jpg",
+        image: "yages/webp/巡天智者鸦.jpg".replace(".jpg", ".webp"),
         desc: "此刻的你，像一只盘旋在高空中的鸦，看得见地面的拥堵，也看得见远方的旷野。你没有被忙碌淹没，也没有被焦虑吞噬。这种状态不是天赋，是一次次摔打后的清醒。你学会了和自己的情绪相处，学会了在行动前先问「为什么」。",
         quote: "清醒不是冷漠，是看透后依然选择认真生活。",
         suitable: "做重要决策、处理复杂问题、深度交流"
@@ -19,7 +33,7 @@ var yages = {
         zoneEmoji: "🌅",
         dimension: "电量高 + 情绪低",
         emoji: "🦅",
-        image: "yages/待机隐士鸦.jpg",
+        image: "yages/webp/待机隐士鸦.jpg".replace(".jpg", ".webp"),
         desc: "你现在的能量满格，但选择了蛰伏。像一只在枝头安静待着的鸦，目光深远，随时可以展翅，但没有那个冲动。这种状态不是懈怠，是在等一个值得全力以赴的时刻。",
         quote: "待机不是懈怠，是在等一个值得全力以赴的时刻。",
         suitable: "观察思考、等待时机、深度工作"
@@ -29,7 +43,7 @@ var yages = {
         zoneEmoji: "🌅",
         dimension: "电量高 + 行动高",
         emoji: "🔥",
-        image: "yages/行动爆发鸦.jpg",
+        image: "yages/webp/行动爆发鸦.jpg".replace(".jpg", ".webp"),
         desc: "你现在像一团刚被点燃的火，噼里啪啦地烧着。别人还在犹豫，你已经冲出去了；别人还在计划，你已经完成了一半。火太旺容易烧到自己。记得偶尔停下来喝口水，确认一下方向还在。",
         quote: "热情是好燃料，但记得系好安全带再踩油门。",
         suitable: "执行计划、创意输出、社交活跃"
@@ -41,7 +55,7 @@ var yages = {
         zoneEmoji: "🌫️",
         dimension: "电量中 + 情绪高 + 行动低",
         emoji: "🐟",
-        image: "yages/舒适咸鱼鸦.jpg",
+        image: "yages/webp/舒适咸鱼鸦.jpg".replace(".jpg", ".webp"),
         desc: "一切都刚刚好：不太累，不太饿，不太冷，不太热。就是……不太想动。这不是颓废，这是对自己辛勤工作的奖励。偶尔咸鱼一下，是为了更好地出发。",
         quote: "咸鱼也需要资格认证，你刚好是那个持证上岗的人。",
         suitable: "休息恢复、低强度娱乐、发呆放空"
@@ -51,7 +65,7 @@ var yages = {
         zoneEmoji: "🌫️",
         dimension: "电量中 + 情绪高 + 行动高",
         emoji: "🦜",
-        image: "yages/社交探索鸦.jpg",
+        image: "yages/webp/社交探索鸦.jpg".replace(".jpg", ".webp"),
         desc: "电量不算特别足，但心情好啊！脑子里冒出一堆想去的地方、想见的人、想做的事。今天你就是那只最闪亮的社交鸦，走到哪里都是焦点。",
         quote: "好心情是最好的燃料，一起出发才更带劲。",
         suitable: "组队活动、短途出行、社交聚会"
@@ -61,7 +75,7 @@ var yages = {
         zoneEmoji: "🌫️",
         dimension: "电量中 + 情绪中 + 行动高",
         emoji: "🚉",
-        image: "yages/电量中转鸦.jpg",
+        image: "yages/webp/电量中转鸦.jpg".replace(".jpg", ".webp"),
         desc: "你现在处于一个「正在转换」的节点。像站在中转站的鸦，等待自己的下一班列车。不用急着做决定，在这里停一停，听听自己的想法。",
         quote: "中转站不是终点，是蓄力的好时候。",
         suitable: "整理思路、处理杂事、等待时机"
@@ -71,7 +85,7 @@ var yages = {
         zoneEmoji: "🌫️",
         dimension: "电量中 + 情绪低/中 + 行动中 + 连接低/中",
         emoji: "🌫️",
-        image: "yages/迷雾探险鸦.jpg",
+        image: "yages/webp/迷雾探险鸦.jpg".replace(".jpg", ".webp"),
         desc: "前方的路看不清，但你还是迈出了步子。迷茫说明你还在寻找，还没有放弃。迷雾会散的，路会明的。重要的是你在走，不是在等。",
         quote: "看不清路的时候，走本身就是答案。",
         suitable: "小范围试错、收集信息、聊天交流"
@@ -81,7 +95,7 @@ var yages = {
         zoneEmoji: "🌫️",
         dimension: "电量中/低 + 情绪低 + 连接高",
         emoji: "🎭",
-        image: "yages/伪装讨喜鸦.jpg",
+        image: "yages/webp/伪装讨喜鸦.jpg".replace(".jpg", ".webp"),
         desc: "你每天戴着「我很好」的面具，在人群里周旋。别人都觉得你游刃有余，只有你自己知道，摘下面具的那一刻，有多疲惫。真正关心你的人，不会因为你偶尔的脆弱而离开。",
         quote: "你不需要对所有人笑，有些人值得看你真实的眼泪。",
         suitable: "维持基本社交、必要应酬"
@@ -93,7 +107,7 @@ var yages = {
         zoneEmoji: "🌑",
         dimension: "电量低 + 情绪高 + 行动中/低",
         emoji: "🌙",
-        image: "yages/疗愈独处鸦.jpg",
+        image: "yages/webp/疗愈独处鸦.jpg".replace(".jpg", ".webp"),
         desc: "电量快见底了，但心情居然还不错。像大雨后的晴天，有一点疲惫，但更多的是宁静和满足。这种自我疗愈的能力，是成年人的必修课。",
         quote: "最好的疗愈，有时候就是什么都不做。",
         suitable: "安静休息、简单娱乐、独自恢复"
@@ -103,7 +117,7 @@ var yages = {
         zoneEmoji: "🌑",
         dimension: "电量低 + 情绪高 + 行动高",
         emoji: "⚡",
-        image: "yages/电量透支鸦.jpg",
+        image: "yages/webp/电量透支鸦.jpg".replace(".jpg", ".webp"),
         desc: "明明已经累到不行了，但心情却很亢奋。像一辆没油的车还在跑，靠的是最后的意志力。冷静下来，让身体休息。",
         quote: "亢奋是最后的电量，且用且珍惜。",
         suitable: "紧急任务（慎用！）、必要坚持"
@@ -113,7 +127,7 @@ var yages = {
         zoneEmoji: "🌑",
         dimension: "电量低 + 情绪低 + 行动高",
         emoji: "💨",
-        image: "yages/燃尽冲刺鸦.jpg",
+        image: "yages/webp/燃尽冲刺鸦.jpg".replace(".jpg", ".webp"),
         desc: "已经很累了，但停不下来。可能是 deadline，可能是承诺没兑现，可能是单纯的不甘心。完成比完美重要。停下来歇一歇，天不会塌下来的。",
         quote: "冲刺很好，但记得在耗尽前给自己留点余量。",
         suitable: "意志力对抗（慎用！）"
@@ -123,7 +137,7 @@ var yages = {
         zoneEmoji: "🌑",
         dimension: "电量低 + 情绪低 + 行动中/低",
         emoji: "🌅",
-        image: "yages/破晓微光鸦.jpg",
+        image: "yages/webp/破晓微光鸦.jpg".replace(".jpg", ".webp"),
         desc: "你刚刚经历了一些不太好的事，可能还没完全走出来。但你今天愿意面对自己，这本身就是一件很勇敢的事。别急着想「变好」，先允许自己「还没好」。",
         quote: "最低谷的时候，往哪个方向走都是向上。",
         suitable: "低强度任务、陪伴治愈、自我觉察"

@@ -522,6 +522,10 @@
             margin: 0;
         }
     </style>
+
+    <!-- 性能优化：资源预加载 -->
+    <link rel="preload" href="css/style.min.css" as="style">
+    <link rel="prefetch" href="story.html">
 </head>
 <body>
     <div class="header">
@@ -666,7 +670,7 @@
     </div>
 
     <!-- 鸦格数据（内嵌避免额外请求） -->
-    <script src="js/yages.js"></script>
+    <script src="js/yages.min.js"></script>
     <script>
         // 鸦格分类
         var zones = {

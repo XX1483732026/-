@@ -194,6 +194,9 @@
             }
         }
     </style>
+
+    <!-- 性能优化：资源预加载 -->
+    <link rel="preload" href="css/style.min.css" as="style">
 </head>
 <body>
     <!-- 顶部导航 -->
@@ -206,7 +209,7 @@
     <div class="page-container" id="pageContainer">
         <!-- 图片区域 -->
         <div class="image-area">
-            <img class="story-image" id="storyImage" src="story_images/page_01.jpg" alt="绘本页面">
+            <img class="story-image" id="storyImage" src="story_images/page_01.jpg" onload="if(supportsWebP)this.src=getStoryImagePath(1)" alt="绘本页面">
             <!-- 封面标题层 -->
             <div class="cover-title-layer" id="coverTitleLayer">
                 <div class="cover-title">小鸦的云朵心事</div>
@@ -229,7 +232,7 @@
         <div class="progress-fill" id="progressFill" style="width: 4.5%"></div>
     </div>
 
-    <script src="js/story_data.js"></script>
+    <script src="js/story_data.min.js"></script>
     <script>
         let currentPage = 1;
         const totalPages = storyPages.length;
@@ -239,7 +242,7 @@
             
             // 更新图片
             const img = document.getElementById('storyImage');
-            const newSrc = 'story_images/page_' + String(currentPage).padStart(2, '0') + '.jpg';
+            const newSrc = getStoryImagePath(currentPage);
             
             img.style.opacity = 0;
             setTimeout(function() {

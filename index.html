@@ -26,7 +26,12 @@
     </script>
     <link rel="icon" type="image/png" href="mengya.png">
     <link rel="apple-touch-icon" href="mengya.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+<script>
+// WebP支持检测并添加class到html
+document.documentElement.className += (' ' + (document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0 ? 'webp' : 'no-webp'));
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
     
@@ -51,7 +56,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     
     <!-- 外部CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.min.css">
+
+    <!-- 性能优化：资源预加载 -->
+    <link rel="preload" href="css/style.min.css" as="style">
+    <link rel="preload" href="js/questions.min.js" as="script">
+    <link rel="preload" href="mengya_thumb.png" as="image">
+    <link rel="prefetch" href="chat.html">
+    <link rel="prefetch" href="community.html">
 </head>
 <body>
     <!-- 离线提示 -->
@@ -195,9 +207,9 @@
     </div>
     <script defer src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <!-- 外部JS -->
-    <script src="js/questions.js"></script>
-    <script src="js/yages.js"></script>
-    <script src="js/test.js"></script>
+    <script defer src="js/questions.min.js"></script>
+    <script defer src="js/yages.min.js"></script>
+    <script defer src="js/test.min.js"></script>
     <!-- 底部导航栏 -->
     <div class="footer-nav">
         <a href="index.html" class="footer-nav-item active">

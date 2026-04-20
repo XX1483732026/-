@@ -1,0 +1,64 @@
+# ========== 醒醒鸦 · 性能优化配置 ==========
+
+# 启用Gzip压缩
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# 浏览器缓存策略
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # 图片缓存1年
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    
+    # CSS/JS缓存1周
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    
+    # HTML缓存1小时
+    ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# 缓存控制头
+<IfModule mod_headers.c>
+    # 图片资源缓存1年
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    
+    # CSS/JS缓存1周
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=604800"
+    </FilesMatch>
+    
+    # HTML不缓存
+    <FilesMatch "\.html$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+    </FilesMatch>
+    
+    # 预检请求
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+# 安全头
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# 禁止访问敏感目录
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(\.git|backups|api)/ - [F,L]
+    RewriteRule \.bak$ - [F,L]
+</IfModule>
