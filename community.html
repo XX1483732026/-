@@ -709,26 +709,49 @@
             renderZone('asleep');
         }
 
+        // 渐进式图片加载
+        function createProgressiveImage(yageName, fullImagePath) {
+            var thumbPath = 'yages/thumbs/鸦格_' + yageName + '.jpg';
+            var img = document.createElement('img');
+            img.className = 'yage-image';
+            img.alt = yageName;
+            img.loading = 'lazy';
+            img.src = thumbPath;
+            img.style.filter = 'blur(5px)';
+            img.style.transition = 'filter 0.3s ease';
+            var fullImg = new Image();
+            fullImg.onload = function() {
+                img.src = fullImagePath;
+                img.style.filter = 'blur(0)';
+            };
+            fullImg.onerror = function() {
+                img.style.filter = 'blur(0)';
+            };
+            fullImg.src = fullImagePath;
+            return img;
+        }
+
         // 渲染分区卡片
         function renderZone(zoneClass) {
             var grid = document.getElementById('grid-' + zoneClass);
             var cards = zones[zoneClass];
-
             cards.forEach(function(yage) {
                 var card = document.createElement('div');
                 card.className = 'yage-card';
                 card.onclick = function() { openModal(yage, zoneClass); };
-
-                card.innerHTML = 
-                    '<div class="yage-img-area">' +
-                        '<span class="zone-tag ' + zoneClass + '">' + getZoneEmoji(yage.zone) + yage.zone + '</span>' +
-                        '<img class="yage-image" src="' + yages[yage.name].image + '" alt="' + yage.name + '" loading="lazy">' +
-                    '</div>' +
-                    '<div class="yage-info">' +
-                        '<div class="yage-name">' + yage.name + '</div>' +
-                        '<div class="yage-dimension">' + yage.dimension.replace(/\+/g, ' + ').replace(/\//g, '/') + '</div>' +
-                    '</div>';
-
+                var imgArea = document.createElement('div');
+                imgArea.className = 'yage-img-area';
+                var zoneTag = document.createElement('span');
+                zoneTag.className = 'zone-tag ' + zoneClass;
+                zoneTag.textContent = getZoneEmoji(yage.zone) + yage.zone;
+                imgArea.appendChild(zoneTag);
+                var img = createProgressiveImage(yage.name, yages[yage.name].image);
+                imgArea.appendChild(img);
+                var infoDiv = document.createElement('div');
+                infoDiv.className = 'yage-info';
+                infoDiv.innerHTML = '<div class="yage-name">' + yage.name + '</div><div class="yage-dimension">' + yage.dimension.replace(/\+/g, ' + ').replace(/\//g, '/') + '</div>';
+                card.appendChild(imgArea);
+                card.appendChild(infoDiv);
                 grid.appendChild(card);
             });
         }
