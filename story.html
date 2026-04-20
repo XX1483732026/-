@@ -205,7 +205,7 @@
             const pageNum = String(currentPage).padStart(2, '0');
             
             // 更新图片
-            img.src = 'story_images/page_' + pageNum + '.jpg';
+            img.src = 'story_images/page_' + pageNum + '.jpg?v=' + Date.now();
 
             // 封面页特殊处理
             const coverTitleLayer = document.getElementById('coverTitleLayer');
