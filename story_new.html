@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>小鸦的云朵心事 · 醒醒鸦</title>
+    <link rel="icon" type="image/png" href="mengya.png">
+    <meta name="description" content="小鸦的云朵心事 - 22页治愈系绘本，陪你度过每一个情绪时刻">
+    <meta property="og:title" content="小鸦的云朵心事 · 醒醒鸦">
+    <meta property="og:description" content="治愈系绘本，陪你度过每一个情绪时刻">
+    <meta property="og:type" content="website">
+    
+    <!-- 基础样式 -->
+    <link rel="stylesheet" href="css/base.css">
+    <!-- 页面专属样式 -->
+    <link rel="stylesheet" href="css/modules/story.css">
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="header">
+        <a href="community.html" class="back-btn">← 返回</a>
+    </div>
+
+    <!-- 主容器 -->
+    <div class="page-container" id="pageContainer">
+        <!-- 图片区域 -->
+        <div class="image-area">
+            <img class="story-image" id="storyImage" src="story_images/page_01.jpg" alt="绘本页面">
+            <div class="cover-title-layer show" id="coverTitleLayer">
+                <div class="cover-title">小鸦的云朵心事</div>
+                <div class="cover-subtitle">醒醒鸦</div>
+            </div>
+        </div>
+        <!-- 文字区域 -->
+        <div class="text-area hidden" id="textArea">
+            <div class="story-text" id="storyText"></div>
+            <div class="page-num" id="pageNum"></div>
+        </div>
+    </div>
+
+    <!-- 翻页按钮 -->
+    <button class="nav-btn prev disabled" id="prevBtn">←</button>
+    <button class="nav-btn next" id="nextBtn">→</button>
+
+    <!-- 底部进度条 -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 4.5%"></div>
+    </div>
+
+    <!-- 全局配置 -->
+    <script src="js/config.js"></script>
+    <!-- 页面逻辑 -->
+    <script src="js/modules/story.js"></script>
+</body>
+</html>
