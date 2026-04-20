@@ -643,7 +643,6 @@
                 <button class="modal-btn share" onclick="shareCurrentYage()">📤 分享</button>
                 <a href="index.html" class="modal-btn">🏠 测测我的鸦格</a>
                 <a href="index.html" class="modal-btn">🏠 测测我的鸦格</a>
-            </div>
         </div>
     </div>
 
@@ -671,6 +670,7 @@
     <script src="js/yages.js"></script>
     <script>
         // 鸦格分类
+        var currentYageData = null;
         var zones = {
             awake: [],
             blurry: [],
@@ -799,7 +799,6 @@
     
     <script>
     var currentShareYage = '';
-    var currentYageData = null;
     
     function shareYage(name, traits) {
         currentShareYage = name;
