@@ -5,7 +5,12 @@
     <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
+    <!-- 预连接关键域名 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- 预加载首屏图片 -->
     <link rel="preload" href="mengya.png" as="image" type="image/png">
+    <link rel="preload" href="mengya_thumb.png" as="image">
 
     <script type="application/ld+json">
     {
@@ -48,7 +53,9 @@
 
     <title>醒醒鸦 · 鸦格TI</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"></noscript>
     
     <!-- 外部CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -63,8 +70,249 @@
     </div>
     <div class="container">
         <div class="start-page" id="startPage">
-            <div class="logo">
-                <img loading="lazy" src="mengya_thumb.png" data-src="mengya.png" alt="醒醒鸦吉祥物小鸦，黑白配色的可爱乌鸦形象" class="logo-img" onclick="location.href='chat.html'" style="cursor: pointer;" onload="if(!this.dataset.loaded){this.dataset.loaded='1';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;}.bind(this);}">
+            <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">
+                <img loading="lazy" src="mengya_thumb.png" data-src="mengya.png" alt="醒醒鸦吉祥物小鸦，黑白配色的可爱乌鸦形象" class="logo-img" onload="if(!this.dataset.loaded){this.dataset.loaded='1';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;}.bind(this);}">
+                <a href="chat.html" class="chat-bubble">嘎~有本事戳我和我聊天</a>
+            </div>
+            <h1 class="main-title">醒醒鸦</h1>
+            <p class="subtitle">嘎 —— 别装了，测测你现在的真实鸦格</p>
+            <p class="slogan">心境如云，不定义，只看见</p>
+            <button class="start-btn" id="startBtn">开始测试</button>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-text">2分钟</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📋</div>
+                    <div class="feature-text">20道题</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🐦‍⬛</div>
+                    <div class="feature-text">嘎嘎预警</div>
+                </div>
+            </div>
+            <a href="community.html" class="chat-link">鸦格社区——来探索小鸦的不同鸦格吧</a>
+        </div>
+        <div class="quiz-page" id="quizPage">
+            <button class="back-home-btn" id="backHomeBtn" title="返回首页">← 退出</button>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="question-counter" id="questionCounter">第 1 题 / 共 20 题</div>
+            <div class="question-card">
+                <div class="question-text" id="questionText"></div>
+                <div class="options" id="optionsContainer"></div>
+                <div class="nav-buttons">
+                    <button class="nav-btn prev" id="prevBtn">← 上一题</button>
+                </div>
+            </div>
+        </div>
+        <div class="result-page" id="resultPage">
+            <!-- 鸦格卡片 -->
+            <div class="result-card yage-card">
+                <div class="result-image-wrap">
+                    <img class="result-image" id="resultImage" src="" alt="你的鸦格">
+                </div>
+                <div class="result-type" id="resultType"></div>
+                <div class="result-zone" id="scoreZone"></div>
+                <div class="result-desc" id="resultDesc"></div>
+                <a href="community.html" class="btn-primary btn-block">🔍 探索详情</a>
+            </div>
+            
+            <!-- 鸦鸦有话说 -->
+            <div class="result-card quote-card">
+                <div class="quote-icon">🐦‍⬛</div>
+                <div class="quote-label">鸦鸦有话说</div>
+                <div class="quote-text" id="quoteText"></div>
+                <a href="chat.html" class="btn-secondary btn-block">💬 找小鸦聊聊</a>
+            </div>
+            
+            <!-- 心境状态指数 -->
+            <div class="result-card score-card">
+                <div class="card-title" id="scoreValue"></div>
+            </div>
+            
+            <!-- 适合做什么 -->
+            <div class="result-card suitable-card">
+                <div class="card-title">🎯 适合做什么</div>
+                <div class="suitable-text" id="suitableText"></div>
+            </div>
+            
+            <!-- 按钮区（只保留分享和重试） -->
+            <div class="result-buttons">
+                <button class="btn-secondary btn-block" id="shareBtn">📤 分享结果</button>
+                <div class="share-options" id="shareOptions">
+                    <button class="share-option-btn" id="copyTextBtn">📋 复制文字</button>
+                    <button class="share-option-btn" id="downloadImgBtn">🖼️ 下载图片</button>
+                </div>
+                <button class="btn-outline btn-block" id="retryBtn">🔄 重新测试</button>
+            </div>
+            
+            <div class="footer-tip">
+                <div>关注「醒醒鸦」公众号 · 嘎嘎陪你每一天</div>
+                <div class="footer-links">
+                    <a href="about.html">关于我们</a> · <a href="privacy.html">隐私政策</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="image-preview-overlay" id="imagePreviewOverlay">
+        <div class="image-preview-container" id="imagePreviewContainer"></div>
+        <div class="image-preview-actions">
+            <button class="download-btn" id="confirmDownloadBtn">💾 保存图片</button>
+            <button class="close-preview-btn" id="closePreviewBtn">关闭</button>
+        </div>
+    </div>
+    <div class="result-image-container" id="resultImageContainer">
+        <!-- 鸦格卡片 -->
+        <div class="share-card share-yage-card">
+            <div class="share-image-wrap">
+                <img class="share-image" id="imgImage" src="" alt="你的鸦格">
+            </div>
+            <div class="share-type" id="imgType"></div>
+            <div class="share-zone" id="imgZone"></div>
+            <div class="share-desc" id="imgDesc"></div>
+        </div>
+        
+        <!-- 引用卡片 -->
+        <div class="share-card share-quote-card">
+            <div class="share-card-title">🐦‍⬛ 鸦鸦有话说</div>
+            <div class="share-quote-text" id="imgQuote"></div>
+        </div>
+        
+        <!-- 指数卡片 -->
+        <div class="share-card share-score-card">
+            <div class="share-card-title">📊 心境状态指数</div>
+            <div class="share-gauges" id="imgScore"></div>
+        </div>
+        
+        <!-- 建议卡片 -->
+        <div class="share-card share-suitable-card">
+            <div class="share-card-title">🎯 适合做什么</div>
+            <div class="share-suitable" id="imgSuitable"></div>
+        </div>
+        
+        <!-- 底部 -->
+        <div class="share-footer">
+            <div class="share-logo">🐦‍⬛ 醒醒鸦</div>
+            <div class="share-url">xingxingya.com</div>
+        </div>
+    </div>
+    <script defer src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <!-- 外部JS -->
+    <script src="js/questions.js"></script>
+    <script src="js/yages.js"></script>
+    <script src="js/test.js"></script>
+    <!-- 底部导航栏 -->
+    <div class="footer-nav">
+        <a href="index.html" class="footer-nav-item active">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">首页</span>
+        </a>
+        <a href="chat.html" class="footer-nav-item">
+            <span class="nav-icon">💬</span>
+            <span class="nav-label">聊天</span>
+        </a>
+        <a href="community.html" class="footer-nav-item">
+            <span class="nav-icon">📋</span>
+            <span class="nav-label">社区</span>
+        </a>
+        <a href="about.html" class="footer-nav-item">
+            <span class="nav-icon">📖</span>
+            <span class="nav-label">关于</span>
+        </a>
+    </div>
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="back-to-top">↑</button>
+    <script>
+    window.addEventListener("scroll", function() {
+        var btn = document.getElementById("backToTop");
+        if (window.scrollY > 300) {
+            btn.style.display = "flex";
+        } else {
+            btn.style.display = "none";
+        }
+    });
+    document.getElementById("backToTop").addEventListener("click", function() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    </script>
+</body>
+</html>PE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- 预连接关键域名 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- 预加载首屏图片 -->
+    <link rel="preload" href="mengya.png" as="image" type="image/png">
+    <link rel="preload" href="mengya_thumb.png" as="image">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "醒醒鸦 · 鸦格TI",
+        "description": "精神状态自检测试，2分钟20道题，发现你的真实精神状态",
+        "url": "https://xingxingya.com",
+        "image": "https://xingxingya.com/mengya.png",
+        "applicationCategory": "EntertainmentApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        }
+    }
+    </script>
+    <link rel="icon" type="image/png" href="mengya.png">
+    <link rel="apple-touch-icon" href="mengya.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+    
+    <meta name="description" content="醒醒鸦 - 精神状态自检测试。嘎~ 别装了，测测你现在的真实鸦格！2分钟20道题，发现你的真实精神状态。">
+    <meta name="keywords" content="精神状态测试,心理测试,状态检测,醒醒鸦,心理自测,精神状态自检">
+    <meta name="author" content="醒醒鸦">
+    
+    <!-- Open Graph / 社交分享 -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xingxingya.com">
+    <meta property="og:title" content="醒醒鸦 · 鸦格TI">
+    <meta property="og:description" content="嘎~ 别装了，测测你现在的真实鸦格！2分钟发现你的精神状态">
+    <meta property="og:image" content="https://xingxingya.com/mengya.png">
+    
+    <!-- Twitter分享 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="醒醒鸦 · 鸦格TI">
+    <meta name="twitter:description" content="嘎~ 别装了，测测你现在的真实鸦格！">
+
+    <title>醒醒鸦 · 鸦格TI</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- 外部CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 离线提示 -->
+    <div class="offline-toast" id="offlineToast">
+        <button class="close-toast" onclick="hideOfflineToast()">×</button>
+        <span class="offline-icon">🐦‍⬛</span>
+        <span class="offline-text">小鸦飞去找网络了<span class="dots">...</span></span>
+        <button class="reconnect-btn" onclick="location.reload()">重新连接</button>
+    </div>
+    <div class="container">
+        <div class="start-page" id="startPage">
+            <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">
+                <img loading="lazy" src="mengya_thumb.png" data-src="mengya.png" alt="醒醒鸦吉祥物小鸦，黑白配色的可爱乌鸦形象" class="logo-img" onload="if(!this.dataset.loaded){this.dataset.loaded='1';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;}.bind(this);}">
                 <a href="chat.html" class="chat-bubble">嘎~有本事戳我和我聊天</a>
             </div>
             <h1 class="main-title">醒醒鸦</h1>
