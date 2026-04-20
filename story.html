@@ -244,11 +244,8 @@
             const img = document.getElementById('storyImage');
             const newSrc = 'story_images/page_' + String(currentPage).padStart(2, '0') + '.jpg';
             
-            img.style.opacity = 0;
-            setTimeout(function() {
-                img.src = newSrc;
-                img.style.opacity = 1;
-            }, 150);
+            console.log("切换到第" + currentPage + "页, 图片路径: " + newSrc);
+            img.src = newSrc;
 
             // 封面页特殊处理
             const coverTitleLayer = document.getElementById('coverTitleLayer');
