@@ -209,7 +209,7 @@
     <div class="page-container" id="pageContainer">
         <!-- 图片区域 -->
         <div class="image-area">
-            <img class="story-image" id="storyImage" src="story_images/page_01.jpg" onload="if(supportsWebP)this.src=getStoryImagePath(1)" alt="绘本页面">
+            <img class="story-image" id="storyImage" src="story_images/page_01.jpg"  alt="绘本页面">
             <!-- 封面标题层 -->
             <div class="cover-title-layer" id="coverTitleLayer">
                 <div class="cover-title">小鸦的云朵心事</div>
@@ -242,7 +242,7 @@
             
             // 更新图片
             const img = document.getElementById('storyImage');
-            const newSrc = getStoryImagePath(currentPage);
+            const newSrc = 'story_images/page_' + String(currentPage).padStart(2, '0') + '.jpg';
             
             img.style.opacity = 0;
             setTimeout(function() {
