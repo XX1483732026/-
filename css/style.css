@@ -192,6 +192,14 @@ body {
     border-radius: 10px;
     transition: width 0.3s ease;
 }
+.quiz-brand {
+    text-align: center;
+    font-size: 13px;
+    color: #6b7a99;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
 .question-counter {
     text-align: center;
     font-size: 14px;
