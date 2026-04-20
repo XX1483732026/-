@@ -181,7 +181,7 @@
             if (pageNumStr.length === 1) pageNumStr = '0' + pageNumStr;
             
             // 更新图片 - 使用setAttribute强制更新
-            var newSrc = 'story_images/page_' + pageNumStr + '.jpg';
+            var newSrc = 'story_images/page_' + pageNumStr + '.jpg?t=' + new Date().getTime();
             img.setAttribute('src', newSrc);
 
             // 封面页特殊处理
