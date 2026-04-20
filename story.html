@@ -239,9 +239,11 @@
             
             // 更新图片
             const img = document.getElementById('storyImage');
+            const newSrc = 'story_images/page_' + String(currentPage).padStart(2, '0') + '.jpg';
+            
             img.style.opacity = 0;
-            setTimeout(() => {
-                img.src = `story_images/page_${String(currentPage).padStart(2, '0')}.jpg`;
+            setTimeout(function() {
+                img.src = newSrc;
                 img.style.opacity = 1;
             }, 150);
 
@@ -251,19 +253,16 @@
             const pageNum = document.getElementById('pageNum');
             
             if (currentPage === 1) {
-                // 封面页：显示标题层，隐藏文字区域
                 coverTitleLayer.classList.add('show');
                 textArea.classList.add('hidden');
             } else if (currentPage === totalPages) {
-                // 封底页：隐藏标题层和文字区域
                 coverTitleLayer.classList.remove('show');
                 textArea.classList.add('hidden');
             } else {
-                // 内容页：显示文字区域
                 coverTitleLayer.classList.remove('show');
                 textArea.classList.remove('hidden');
                 document.getElementById('storyText').textContent = pageData.text || '';
-                pageNum.textContent = `${currentPage - 1} / ${totalPages - 2}`;
+                pageNum.textContent = (currentPage - 1) + ' / ' + (totalPages - 2);
             }
 
             // 更新进度条
