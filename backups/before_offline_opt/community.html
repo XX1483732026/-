@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鸦格社区 · 醒醒鸦</title>
+    <link rel="icon" type="image/png" href="mengya.png">
+    <meta name="description" content="鸦格社区 - 探索12种精神状态，发现你此刻的真实心境。">
+    <meta name="keywords" content="精神状态测试,鸦格社区,心理测试,醒醒鸦">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xingxingya.com/community.html">
+    <meta property="og:title" content="鸦格社区 · 醒醒鸦">
+    <meta property="og:description" content="探索12种鸦格图鉴，发现你此刻的真实心境">
+    <meta property="og:image" content="https://xingxingya.com/mengya.png">
+    <meta name="robots" content="index, follow">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #2d2d44 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 20px 30px;
+        }
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #8b8b8b, #d4d4d4, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        .header p {
+            color: #8892b0;
+            font-size: 14px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 16px 100px;
+        }
+        /* 简介区 */
+        .intro-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 28px 24px;
+            margin-bottom: 32px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .intro-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .intro-text {
+            color: #8892b0;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .intro-zones {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+        .zone-pill {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .zone-pill.awake { background: rgba(255,215,0,0.15); color: #ffd700; border: 1px solid rgba(255,215,0,0.3); }
+        .zone-pill.blurry { background: rgba(160,160,192,0.15); color: #a0a0c0; border: 1px solid rgba(160,160,192,0.3); }
+        .zone-pill.asleep { background: rgba(74,74,106,0.15); color: #6a6a8a; border: 1px solid rgba(74,74,106,0.3); }
+        .intro-zones-desc {
+            font-size: 12px;
+            color: #6a7a9a;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .intro-dimensions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+        .dimension-item {
+            font-size: 14px;
+            color: #ccd6f6;
+        }
+        .intro-dimensions-desc {
+            font-size: 12px;
+            color: #6a7a9a;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .intro-story-hint {
+            color: #8892b0;
+            font-size: 13px;
+            margin-top: 12px;
+            text-align: center;
+        }
+        .test-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #3a3a5a, #2a2a4a);
+            padding: 14px 36px;
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+        .test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        /* 小鸦的故事版块 */
+        .story-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            padding: 28px 24px;
+            margin-top: 16px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .story-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .story-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .story-desc {
+            color: #8892b0;
+            font-size: 14px;
+        }
+        .story-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .story-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        .story-cover {
+            position: relative;
+            width: 80px;
+            height: 112px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .story-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .story-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .story-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .story-info p {
+            font-size: 13px;
+            color: #8892b0;
+        }
+        .intro-card a {
+            display: inline-block;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
+            border: 1px solid #555;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .intro-card a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(100,100,100,0.4);
+        }
+        /* 分区标题 */
+        .zone-section { margin-bottom: 16px; }
+        .zone-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .zone-emoji { font-size: 24px; }
+        .zone-name {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .zone-name.awake { color: #ffd700; }
+        .zone-name.blurry { color: #a0a0c0; }
+        .zone-name.asleep { color: #6a6a8a; }
+        .zone-count {
+            font-size: 12px;
+            color: #5a6a8a;
+            margin-left: auto;
+        }
+        /* 卡片网格 */
+        .yage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+        }
+        /* 精简卡片 */
+        .yage-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .yage-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+        }
+        .yage-card:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+        .yage-img-area {
+            position: relative;
+            height: 130px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .yage-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .yage-emoji {
+            font-size: 56px;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+        }
+        .zone-tag {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        .zone-tag.awake {
+            background: rgba(255,215,0,0.2);
+            border: 1px solid rgba(255,215,0,0.4);
+            color: #ffd700;
+        }
+        .zone-tag.blurry {
+            background: rgba(160,160,192,0.2);
+            border: 1px solid rgba(160,160,192,0.4);
+            color: #a0a0c0;
+        }
+        .zone-tag.asleep {
+            background: rgba(74,74,106,0.2);
+            border: 1px solid rgba(74,74,106,0.4);
+            color: #6a6a8a;
+        }
+        .yage-info {
+            padding: 12px;
+            text-align: center;
+        }
+        .yage-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .yage-dimension {
+            font-size: 11px;
+            color: #8892b0;
+            line-height: 1.4;
+        }
+        /* 弹窗 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-overlay.show { display: flex; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #2d2d44);
+            border-radius: 24px;
+            max-width: 400px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .modal-header {
+            position: relative;
+            padding: 40px 20px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #2a2a4a, #1a1a3a);
+        }
+        .modal-image-wrap {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 12px;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .modal-close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .modal-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .modal-zone {
+            font-size: 14px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .modal-zone.awake { background: rgba(255,215,0,0.2); color: #ffd700; }
+        .modal-zone.blurry { background: rgba(160,160,192,0.2); color: #a0a0c0; }
+        .modal-zone.asleep { background: rgba(74,74,106,0.2); color: #6a6a8a; }
+        .modal-body {
+            padding: 20px;
+        }
+        .modal-section {
+            margin-bottom: 20px;
+        }
+        .modal-label {
+            font-size: 12px;
+            color: #8892b0;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .modal-dimension {
+            font-size: 13px;
+            color: #ccd6f6;
+            background: rgba(255,255,255,0.05);
+            padding: 10px 14px;
+            border-radius: 10px;
+        }
+        .modal-desc {
+            font-size: 14px;
+            color: #ccd6f6;
+            line-height: 1.7;
+        }
+        .modal-quote {
+            background: rgba(100,100,100,0.15);
+            border-radius: 12px;
+            padding: 14px 16px;
+            border-left: 3px solid rgba(255,255,255,0.2);
+            font-style: italic;
+            color: #fff;
+            line-height: 1.6;
+        }
+        .modal-suitable {
+            font-size: 14px;
+            color: #ccd6f6;
+            line-height: 1.6;
+        }
+        .modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .modal-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
+            border: 1px solid #555;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(100,100,100,0.4);
+        }
+        /* 底部导航 */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(13,13,26,0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 100;
+        }
+        .footer-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #8892b0;
+            padding: 4px 12px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        .footer-nav-item:hover, .footer-nav-item.active {
+            color: #fff;
+            background: rgba(255,255,255,0.1);
+        }
+        .nav-icon { font-size: 20px; }
+        .nav-label { font-size: 11px; margin-top: 2px; }
+        /* 品牌签名 */
+        .footer {
+            text-align: center;
+            padding: 30px 20px 20px;
+        }
+        .footer-url {
+            font-size: 12px;
+            color: #aaa;
+            margin: 0 0 6px 0;
+        }
+        .footer-brand {
+            font-size: 14px;
+            color: #888;
+            margin: 0 0 4px 0;
+        }
+        .footer-slogan {
+            font-size: 12px;
+            color: #aaa;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>鸦格社区</h1>
+        <p>心境如云，不定义，只看见</p>
+    </div>
+
+    <div class="container">
+        <div class="intro-card">
+            <div class="intro-title">🐦‍⬛ 什么是鸦格？</div>
+            <div class="intro-text">
+                鸦格不是人格标签，而是你此刻的心境状态。<br>
+                心境如云，时卷时舒。测一测，发现你此刻的真实状态。
+            </div>
+            <div class="intro-zones">
+                <span class="zone-pill awake">🌅 清醒区</span>
+                <span class="zone-pill blurry">🌫️ 假寐区</span>
+                <span class="zone-pill asleep">🌑 沉睡区</span>
+            </div>
+            <div class="intro-zones-desc">
+                心境状态的三个层次，从清醒到沉睡
+            </div>
+            <div class="intro-dimensions">
+                <span class="dimension-item">⚡ 电量</span>
+                <span class="dimension-item">💭 情绪</span>
+                <span class="dimension-item">🏃 行动</span>
+                <span class="dimension-item">🔗 连接</span>
+            </div>
+            <div class="intro-dimensions-desc">
+                测评四大维度，定位你的真实状态
+            </div>
+            <a href="index.html" class="test-btn">🏠 测测你的鸦格</a>
+            <div class="intro-story-hint">下滑到底查看小鸦的故事 ↓</div>
+        </div>
+
+        <!-- 清醒区 -->
+        <div class="zone-section" id="zone-awake">
+            <div class="zone-header">
+                <span class="zone-emoji">🌅</span>
+                <span class="zone-name awake">清醒区</span>
+            </div>
+            <div class="yage-grid" id="grid-awake"></div>
+        </div>
+
+        <!-- 假寐区 -->
+        <div class="zone-section" id="zone-blurry">
+            <div class="zone-header">
+                <span class="zone-emoji">🌫️</span>
+                <span class="zone-name blurry">假寐区</span>
+            </div>
+            <div class="yage-grid" id="grid-blurry"></div>
+        </div>
+
+        <!-- 沉睡区 -->
+        <div class="zone-section" id="zone-asleep">
+            <div class="zone-header">
+                <span class="zone-emoji">🌑</span>
+                <span class="zone-name asleep">沉睡区</span>
+            </div>
+            <div class="yage-grid" id="grid-asleep"></div>
+        </div>
+
+        <!-- 小鸦的故事版块 -->
+        <div class="story-section">
+            <div class="story-header">
+                <h2>📖 小鸦的故事</h2>
+                <p class="story-desc">治愈系绘本，陪你度过每一个情绪时刻</p>
+            </div>
+            <div class="story-card" onclick="openStoryViewer()">
+                <div class="story-cover">
+                    <img src="story_images/page_01.jpg" alt="小鸦的云朵心事" loading="lazy">
+                    <div class="story-play-btn">▶</div>
+                </div>
+                <div class="story-info">
+                    <h3>小鸦的云朵心事</h3>
+                    <p>22页治愈系绘本</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 品牌签名 -->
+        <div class="footer">
+            <p class="footer-url">xingxingya.com</p>
+            <p class="footer-brand">醒醒鸦 · 了解此刻的你</p>
+            <p class="footer-slogan">心境如云，不定义，只看见</p>
+        </div>
+    </div>
+
+    <!-- 弹窗 -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal()">×</button>
+                <div class="modal-image-wrap">
+                    <img class="modal-image" id="modal-image" src="" alt="鸦格">
+                </div>
+                <div class="modal-name" id="modal-name"></div>
+                <div class="modal-zone" id="modal-zone"></div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <div class="modal-label">📊 维度条件</div>
+                    <div class="modal-dimension" id="modal-dimension"></div>
+                </div>
+                <div class="modal-section">
+                    <div class="modal-label">📝 状态描述</div>
+                    <div class="modal-desc" id="modal-desc"></div>
+                </div>
+                <div class="modal-section">
+                    <div class="modal-label">🐦‍⬛ 鸦鸦有话说</div>
+                    <div class="modal-quote" id="modal-quote"></div>
+                </div>
+                <div class="modal-section">
+                    <div class="modal-label">🎯 适合做什么</div>
+                    <div class="modal-suitable" id="modal-suitable"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="index.html" class="modal-btn">🏠 测测我的鸦格</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <div class="footer-nav">
+        <a href="index.html" class="footer-nav-item">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">首页</span>
+        </a>
+        <a href="chat.html" class="footer-nav-item">
+            <span class="nav-icon">💬</span>
+            <span class="nav-label">聊天</span>
+        </a>
+        <a href="community.html" class="footer-nav-item active">
+            <span class="nav-icon">📋</span>
+            <span class="nav-label">社区</span>
+        </a>
+        <a href="about.html" class="footer-nav-item">
+            <span class="nav-icon">📖</span>
+            <span class="nav-label">关于</span>
+        </a>
+    </div>
+
+    <!-- 鸦格数据（内嵌避免额外请求） -->
+    <script src="js/yages.js"></script>
+    <script>
+        // 鸦格分类
+        var zones = {
+            awake: [],
+            blurry: [],
+            asleep: []
+        };
+
+        // 根据维度条件判断分区
+        function getZoneClass(yage) {
+            if (yage.zone === '清醒区') return 'awake';
+            if (yage.zone === '假寐区') return 'blurry';
+            return 'asleep';
+        }
+
+        // 获取分区emoji
+        function getZoneEmoji(zone) {
+            if (zone === '清醒区') return '🌅';
+            if (zone === '假寐区') return '🌫️';
+            return '🌑';
+        }
+
+        // 初始化页面
+        function init() {
+            // 遍历鸦格数据，分区存放
+            for (var name in yages) {
+                var yage = yages[name];
+                var zoneClass = getZoneClass(yage);
+                zones[zoneClass].push({ name: name, ...yage });
+            }
+
+            // 渲染各分区卡片
+            renderZone('awake');
+            renderZone('blurry');
+            renderZone('asleep');
+        }
+
+        // 渲染分区卡片
+        function renderZone(zoneClass) {
+            var grid = document.getElementById('grid-' + zoneClass);
+            var cards = zones[zoneClass];
+
+            cards.forEach(function(yage) {
+                var card = document.createElement('div');
+                card.className = 'yage-card';
+                card.onclick = function() { openModal(yage, zoneClass); };
+
+                card.innerHTML = 
+                    '<div class="yage-img-area">' +
+                        '<span class="zone-tag ' + zoneClass + '">' + getZoneEmoji(yage.zone) + yage.zone + '</span>' +
+                        '<img class="yage-image" src="' + yages[yage.name].image + '" alt="' + yage.name + '" loading="lazy">' +
+                    '</div>' +
+                    '<div class="yage-info">' +
+                        '<div class="yage-name">' + yage.name + '</div>' +
+                        '<div class="yage-dimension">' + yage.dimension.replace(/\+/g, ' + ').replace(/\//g, '/') + '</div>' +
+                    '</div>';
+
+                grid.appendChild(card);
+            });
+        }
+
+        // 打开弹窗
+        function openModal(yage, zoneClass) {
+            var yageData = yages[yage.name];
+            document.getElementById('modal-name').textContent = yage.name;
+            document.getElementById('modal-zone').className = 'modal-zone ' + zoneClass;
+            document.getElementById('modal-zone').textContent = getZoneEmoji(yage.zone) + ' ' + yage.zone;
+            document.getElementById('modal-dimension').textContent = yage.dimension;
+            document.getElementById('modal-desc').textContent = yageData.desc;
+            document.getElementById('modal-quote').textContent = '"' + yageData.quote + '"';
+            document.getElementById('modal-suitable').textContent = yageData.suitable;
+            
+            // 更新图片
+            var modalImage = document.getElementById('modal-image');
+            if (modalImage && yageData.image) {
+                modalImage.src = yageData.image;
+            }
+
+            document.getElementById('modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 关闭弹窗
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        // 点击遮罩关闭
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // ESC键关闭
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // 初始化
+        init();
+
+        // 打开故事阅读器
+        function openStoryViewer() {
+            window.location.href = 'story.html';
+        }
+    </script>
+</body>
+</html>

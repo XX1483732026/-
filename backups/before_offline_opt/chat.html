@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>和小鸦聊天 · 醒醒鸦</title>
+    <!-- SEO meta标签 -->
+    <meta name="description" content="和小鸦聊天 - 你的专属AI精神状态顾问，24小时随时陪伴，分享你的困惑与想法，获取有趣的精神状态分析和建议。">
+    <meta name="keywords" content="AI聊天,精神状态,小鸦,情绪陪伴,心理倾诉">
+    <!-- Open Graph 社交分享 -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xingxingya.com/chat.html">
+    <meta property="og:title" content="和小鸦聊天 · 醒醒鸦">
+    <meta property="og:description" content="你的专属AI精神状态顾问，24小时随时陪伴，分享困惑获取有趣分析">
+    <meta property="og:image" content="https://xingxingya.com/mengya.png">
+    <!-- Twitter分享 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="和小鸦聊天 · 醒醒鸦">
+    <meta name="twitter:description" content="你的专属AI精神状态顾问，24小时随时陪伴">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #2d2d44 100%);
+            min-height: 100vh;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .back-btn, .clear-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .clear-btn { font-size: 16px; }
+        .clear-btn:hover { background: rgba(255, 100, 100, 0.2); color: #ff6b6b; }
+        .back-btn:hover { background: rgba(255, 255, 255, 0.2); }
+        .bot-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #333, #555);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bot-info h1 { font-size: 16px; font-weight: 600; }
+        .bot-info p { font-size: 12px; color: #8892b0; }
+        .chat-container {
+            flex: 1;
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding-bottom: 70px;
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .message {
+            display: flex;
+            gap: 12px;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .message.user { flex-direction: row-reverse; }
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #333, #555);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .message.user .message-avatar { background: linear-gradient(135deg, #4a4a4a, #666); }
+        .message-content { position: relative; max-width: 80%; }
+        
+        /* 用户发送的图片预览 */
+        .user-image-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .user-image-preview img {
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+        
+        /* AI回复的图片 */
+        .message-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .message-images img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .message-images img:hover { transform: scale(1.02); }
+        
+        .message-time {
+            font-size: 11px;
+            color: #5a6a8a;
+            margin-top: 4px;
+            text-align: right;
+        }
+        .message.user .message-time { text-align: left; }
+        
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 16px;
+        }
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #8892b0;
+            animation: typing 1.4s infinite;
+        }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 100% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-4px); }
+        }
+        
+        .chat-input-area {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 20px;
+        }
+        .input-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+        
+        /* 发送图片按钮 */
+        .image-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #8892b0;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .image-btn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
+        
+        .chat-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 12px 20px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+            min-height: 48px;
+            max-height: 120px;
+            resize: none;
+        }
+        .chat-input:focus {
+            border-color: #888;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .chat-input::placeholder { color: #8892b0; }
+        
+        .send-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #555, #333);
+            border: 2px solid #666;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .send-btn:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(100, 100, 100, 0.3); }
+        .send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        
+        /* 待发送图片预览 */
+        .pending-images {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+            padding: 0 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .pending-image-item {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        .pending-image-item img {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .pending-image-item .remove-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            border: none;
+            color: #fff;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .quick-btn {
+            background: linear-gradient(135deg, rgba(74, 74, 74, 0.4), rgba(45, 45, 45, 0.4));
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 10px 18px;
+            color: #a8b2d1;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .quick-btn:hover {
+            background: linear-gradient(135deg, rgba(74, 74, 74, 0.6), rgba(45, 45, 45, 0.6));
+            color: #fff;
+            transform: translateY(-1px);
+        }
+        
+        /* 图片预览弹窗 */
+        .image-preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .image-preview-modal.active { display: flex; }
+        .image-preview-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+        .image-preview-modal .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        /* Toast提示 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: rgba(255, 80, 80, 0.95);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            z-index: 1001;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            max-width: 90%;
+            text-align: center;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .toast.success { background: rgba(80, 200, 80, 0.95); }
+        
+        /* 底部导航 */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(13, 13, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 100;
+        }
+        .footer-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #8892b0;
+            padding: 4px 12px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        .footer-nav-item:hover, .footer-nav-item.active {
+            color: #fff;
+            background: rgba(255,255,255,0.1);
+        }
+        .nav-icon { font-size: 20px; }
+        .nav-label { font-size: 11px; margin-top: 2px; }
+        
+        @media (max-width: 480px) {
+            .chat-input { font-size: 16px; }
+            .quick-btn { font-size: 12px; padding: 8px 14px; }
+            .message-images img, .user-image-preview img { max-width: 150px; max-height: 150px; }
+        }
+    
+        /* 键盘导航焦点样式 - 优化10 */
+        *:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+        *:focus-visible {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        a:focus, button:focus {
+            outline: 2px solid #64b5f6;
+            outline-offset: 2px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="chat-header">
+        <button class="back-btn" onclick="window.location.href='/'">←</button>
+        <div style="flex: 1;"></div>
+        <button class="clear-btn" onclick="clearChat()" title="清空对话">🗑️</button>
+        <div class="bot-avatar"><img loading="lazy" src="mengya.png" style="width:28px;height:28px;border-radius:50%;"></div>
+        <div class="bot-info">
+            <h1>小鸦</h1>
+            <p>毒舌又暖心的鸦鸦助手</p>
+        </div>
+    </div>
+
+    <div class="chat-container">
+        <!-- 待发送图片预览 -->
+        <div class="pending-images" id="pendingImages"></div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">
+                <div class="message-avatar"><img loading="lazy" src="mengya.png" style="width:28px;height:28px;border-radius:50%;"></div>
+                <div class="message-content">嘎——来了？有什么想唠的，说说呗。心情不好、想吐槽、还是就是无聊想找人扯两句，小鸦都接着。</div>
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <div class="quick-actions">
+                <button class="quick-btn" onclick="sendQuickMessage('今天有点emo')">今天有点emo</button>
+                <button class="quick-btn" onclick="sendQuickMessage('去做个测试？')">去做个测试？</button>
+                <button class="quick-btn" onclick="sendQuickMessage('心里堵得慌')">心里堵得慌</button>
+            </div>
+            <div class="input-wrapper">
+                <!-- 图片选择按钮 -->
+                <button class="image-btn" onclick="selectImage()" title="发送图片">📷</button>
+                <input type="file" id="imageInput" accept="image/*" multiple style="display:none" onchange="handleImageSelect(event)">
+                <textarea class="chat-input" id="chatInput" placeholder="和小鸦聊聊..." rows="1" onkeypress="handleKeyPress(event)" oninput="autoResize(this)"></textarea>
+                <button class="send-btn" id="sendBtn" onclick="sendMessage()">→</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 图片预览弹窗 -->
+    <div class="image-preview-modal" id="imagePreviewModal" onclick="closeImagePreview()">
+        <button class="close-btn" onclick="closeImagePreview()">×</button>
+        <img loading="lazy" id="previewImage" src="" alt="预览">
+    </div>
+    
+    <div id="toast" class="toast"></div>
+
+<script defer>
+    const API_URL = '/api/chat';
+    let sessionId = 'chat_' + Date.now();
+    let testResult = null;
+    let hasSentContext = false;
+    let isLoading = false;
+    let pendingImages = []; // 待发送的图片
+
+    window.addEventListener('load', function() {
+        isLoading = false;
+        document.getElementById('sendBtn').disabled = false;
+    });
+
+    var storedResult = localStorage.getItem("xingxingya_test_result");
+    if (storedResult) testResult = JSON.parse(storedResult);
+    
+    // 加载聊天历史（支持图片）
+    function loadChatHistory() {
+        const history = localStorage.getItem('xingxingya_chat_history');
+        if (history) {
+            try {
+                const messages = JSON.parse(history);
+                messages.forEach(msg => {
+                    addMessageToDOM(msg.content, msg.isUser, msg.images);
+                });
+            } catch (e) {
+                console.error('加载聊天历史失败:', e);
+            }
+        }
+    }
+    
+    // 保存消息（支持图片）
+    function saveMessage(content, isUser, images = []) {
+        const history = JSON.parse(localStorage.getItem('xingxingya_chat_history') || '[]');
+        history.push({ content, isUser, images, time: Date.now() });
+        if (history.length > 50) history.shift();
+        localStorage.setItem('xingxingya_chat_history', JSON.stringify(history));
+    }
+    
+    // 渲染消息到DOM（支持图片）
+    function addMessageToDOM(content, isUser, images = []) {
+        const messagesDiv = document.getElementById('chatMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+        const timeStr = new Date().getHours().toString().padStart(2, '0') + ':' + new Date().getMinutes().toString().padStart(2, '0');
+        
+        // 图片HTML
+        let imagesHtml = '';
+        if (images && images.length > 0) {
+            if (isUser) {
+                // 用户图片样式
+                imagesHtml = '<div class="user-image-preview">' + 
+                    images.map(img => `<img loading="lazy" src="${img}" alt="图片">`).join('') +
+                    '</div>';
+            } else {
+                // AI图片样式（可点击预览）
+                imagesHtml = '<div class="message-images">' + 
+                    images.map(img => `<img loading="lazy" src="${img}" alt="图片" onclick="openImagePreview('${img}')">`).join('') +
+                    '</div>';
+            }
+        }
+        
+        messageDiv.innerHTML = `
+            <div class="message-avatar">${isUser ? '👤' : '<img loading="lazy" src="mengya.png" style="width:28px;height:28px;border-radius:50%;">'}</div>
+            <div class="message-content">${escapeHtml(content)}${imagesHtml}<div class="message-time">${timeStr}</div></div>
+        `;
+        messagesDiv.appendChild(messageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+    
+    // 添加消息并保存（修复：AI回复也保存）
+    function addMessage(content, isUser, images = []) {
+        addMessageToDOM(content, isUser, images);
+        saveMessage(content, isUser, images);
+    }
+    
+    function escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    // 图片选择
+    function selectImage() {
+        document.getElementById('imageInput').click();
+    }
+    
+    // 处理选择的图片
+    function handleImageSelect(event) {
+        const files = event.target.files;
+        if (!files || files.length === 0) return;
+        
+        // 限制最多4张图
+        if (pendingImages.length + files.length > 4) {
+            showToast('最多只能发送4张图片', false);
+            return;
+        }
+        
+        for (let file of files) {
+            if (!file.type.startsWith('image/')) continue;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                pendingImages.push(e.target.result);
+                renderPendingImages();
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // 清空input，允许重复选择同一张图
+        event.target.value = '';
+    }
+    
+    // 渲染待发送图片
+    function renderPendingImages() {
+        const container = document.getElementById('pendingImages');
+        if (pendingImages.length === 0) {
+            container.innerHTML = '';
+            return;
+        }
+        
+        container.innerHTML = pendingImages.map((img, index) => `
+            <div class="pending-image-item">
+                <img loading="lazy" src="${img}" alt="待发送">
+                <button class="remove-btn" onclick="removePendingImage(${index})">×</button>
+            </div>
+        `).join('');
+    }
+    
+    // 移除待发送图片
+    function removePendingImage(index) {
+        pendingImages.splice(index, 1);
+        renderPendingImages();
+    }
+    
+    // 图片预览
+    function openImagePreview(src) {
+        document.getElementById('previewImage').src = src;
+        document.getElementById('imagePreviewModal').classList.add('active');
+    }
+    
+    function closeImagePreview() {
+        document.getElementById('imagePreviewModal').classList.remove('active');
+    }
+    
+    // 自动调整输入框高度
+    function autoResize(textarea) {
+        textarea.style.height = 'auto';
+        textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+    }
+
+    function addTypingIndicator() {
+        const messagesDiv = document.getElementById('chatMessages');
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message bot typing';
+        typingDiv.id = 'typingIndicator';
+        typingDiv.innerHTML = `
+            <div class="message-avatar"><img loading="lazy" src="mengya.png" style="width:28px;height:28px;border-radius:50%;"></div>
+            <div class="typing-indicator"><span></span><span></span><span></span></div>
+        `;
+        messagesDiv.appendChild(typingDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+        const typingDiv = document.getElementById('typingIndicator');
+        if (typingDiv) typingDiv.remove();
+    }
+
+    async function sendMessage() {
+        const input = document.getElementById('chatInput');
+        const message = input.value.trim();
+        
+        // 必须有文字或图片
+        if (!message && pendingImages.length === 0) return;
+        if (isLoading) return;
+
+        input.value = '';
+        autoResize(input);
+        
+        // 保存用户消息
+        addMessage(message, true, [...pendingImages]);
+        
+        // 清空待发送图片
+        const imagesToSend = [...pendingImages];
+        pendingImages = [];
+        renderPendingImages();
+        
+        isLoading = true;
+        document.getElementById('sendBtn').disabled = true;
+        addTypingIndicator();
+
+        try {
+            let requestBody = {
+                message: message,
+                sessionId: sessionId,
+                images: imagesToSend  // 发送图片
+            };
+
+            if (testResult && !hasSentContext) {
+                requestBody.testResult = testResult;
+                requestBody.hasContext = true;
+                hasSentContext = true;
+            }
+
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestBody)
+            });
+
+            removeTypingIndicator();
+
+            if (!response.ok) throw new Error('请求失败');
+
+            const data = await response.json();
+
+            if (data.success) {
+                // 显示AI回复（包含图片）
+                const aiImages = data.images || [];
+                addMessage(data.content, false, aiImages);
+            } else {
+                addMessage('❌ 小鸦走神了，再试一次？', false);
+                showToast('小鸦走神了，请重试', false);
+            }
+
+        } catch (error) {
+            removeTypingIndicator();
+            console.error('错误:', error);
+            addMessage('❌ 网络开小差了，换个姿势再试？', false);
+            showToast('网络开小差了，请检查网络后重试', false);
+        } finally {
+            isLoading = false;
+            document.getElementById('sendBtn').disabled = false;
+        }
+    }
+
+    function sendQuickMessage(message) {
+        document.getElementById('chatInput').value = message;
+        sendMessage();
+    }
+
+    function clearChat() {
+        const messagesDiv = document.getElementById("chatMessages");
+        const timeStr = new Date().getHours().toString().padStart(2, "0") + ":" + new Date().getMinutes().toString().padStart(2, "0");
+        messagesDiv.innerHTML = `
+            <div class="message bot">
+                <div class="message-avatar"><img loading="lazy" src="mengya.png" style="width:28px;height:28px;border-radius:50%;"></div>
+                <div class="message-content">嘎——对话清空了。有啥想聊的继续说。<div class="message-time">${timeStr}</div></div>
+            </div>
+        `;
+        sessionId = "chat_" + Date.now();
+        document.getElementById("chatInput").value = "";
+        pendingImages = [];
+        renderPendingImages();
+        localStorage.removeItem('xingxingya_chat_history');
+    }
+
+    function showToast(message, isSuccess = false) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast' + (isSuccess ? ' success' : '');
+        toast.classList.add('show');
+        setTimeout(function() { toast.classList.remove('show'); }, 3000);
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            sendMessage();
+        }
+    }
+    
+    loadChatHistory();
+</script>
+
+    <!-- 底部导航栏 -->
+    <div class="footer-nav">
+        <a href="index.html" class="footer-nav-item"><span class="nav-icon">🏠</span><span class="nav-label">首页</span></a>
+        <a href="chat.html" class="footer-nav-item active"><span class="nav-icon">💬</span><span class="nav-label">聊天</span></a>
+        <a href="community.html" class="footer-nav-item"><span class="nav-icon">📋</span><span class="nav-label">社区</span></a>
+        <a href="about.html" class="footer-nav-item"><span class="nav-icon">📖</span><span class="nav-label">关于</span></a>
+    </div>
+</body>
+</html>
