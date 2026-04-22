@@ -1,3 +1,5 @@
+import mammoth from 'mammoth';
+
 export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -18,20 +20,28 @@ export default async function handler(req, res) {
     try {
         const { message, sessionId, testResult, hasContext, images, files } = req.body;
 
-        // 处理文件：TXT直接提取文本
+        // 处理文件
         let fileText = '';
         if (files && files.length > 0) {
             for (const file of files) {
-                if (file.name.endsWith('.txt')) {
-                    try {
-                        const base64Data = file.content.split(',')[1];
-                        const text = Buffer.from(base64Data, 'base64').toString('utf-8');
+                try {
+                    const base64Data = file.content.split(',')[1];
+                    const buffer = Buffer.from(base64Data, 'base64');
+                    
+                    if (file.name.endsWith('.txt')) {
+                        // TXT直接读取
+                        const text = buffer.toString('utf-8');
                         fileText += `\n【文件：${file.name}】\n${text}\n`;
-                    } catch (e) {
-                        console.error('解析TXT失败:', e);
+                    } else if (file.name.endsWith('.docx')) {
+                        // Word用mammoth解析
+                        const result = await mammoth.extractRawText({ buffer });
+                        fileText += `\n【文件：${file.name}】\n${result.value}\n`;
+                    } else {
+                        fileText += `\n[用户上传了 ${file.name}，暂只支持Word/TXT]`;
                     }
-                } else {
-                    fileText += `\n[用户上传了 ${file.name}，暂只支持TXT文件]`;
+                } catch (e) {
+                    console.error('解析文件失败:', e);
+                    fileText += `\n[文件 ${file.name} 解析失败]`;
                 }
             }
         }
