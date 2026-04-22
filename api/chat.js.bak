@@ -16,48 +16,16 @@ export default async function handler(req, res) {
     const PROJECT_ID = '7627880092177301550';
 
     try {
-        const { message, sessionId, testResult, hasContext, images, files } = req.body;
-
-        // 构建 prompt 数组
-        let promptArray = [];
-        
-        // 添加文本消息
-        if (message) {
-            promptArray.push({
-                type: 'text',
-                content: { text: message }
-            });
-        }
-        
-        // 添加图片（如果有）
-        if (images && images.length > 0) {
-            for (const img of images) {
-                promptArray.push({
-                    type: 'image',
-                    content: { image_url: img }
-                });
-            }
-        }
-        
-        // 添加文件（如果有）
-        if (files && files.length > 0) {
-            for (const file of files) {
-                promptArray.push({
-                    type: 'file',
-                    content: {
-                        file_name: file.name,
-                        file_type: file.type,
-                        file_data: file.content
-                    }
-                });
-            }
-        }
+        const { message, sessionId, testResult, hasContext } = req.body;
 
         // 构建请求体
         let requestBody = {
             content: {
                 query: {
-                    prompt: promptArray
+                    prompt: [{
+                        type: 'text',
+                        content: { text: message }
+                    }]
                 }
             },
             type: 'query',
@@ -84,6 +52,7 @@ export default async function handler(req, res) {
 
 请在聊天时根据这个测试结果，给予用户更针对性的心理支持和建议。用户可能需要被理解和陪伴。`;
 
+            // 添加到 additional_messages
             requestBody.content.query.additional_messages = [{
                 role: 'user',
                 content: contextMessage,
@@ -122,16 +91,19 @@ export default async function handler(req, res) {
                     try {
                         const data = JSON.parse(line.slice(5));
                         
+                        // 拼接 answer 增量内容
                         if (data.type === 'answer' && data.content?.answer) {
                             result += data.content.answer;
                         }
                         
+                        // 获取 message_end 的 token 统计
                         if (data.type === 'message_end' && data.content?.message_end) {
                             tokenCost = data.content.message_end.token_cost;
                         }
                         
+                        // 处理错误
                         if (data.type === 'error' && data.content?.error) {
-                            errorMsg = data.content.message_end?.error_msg || data.content.error.error_msg;
+                            errorMsg = data.content.error.error_msg;
                         }
                     } catch (e) {}
                 }
