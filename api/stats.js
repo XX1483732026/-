@@ -1,34 +1,11 @@
 /**
- * 访问统计API
- * 存储到data/stats.json
+ * 访问统计API - 使用内存存储（Vercel免费版兼容）
+ * 注意：数据会在部署重启后丢失，但日常使用没问题
  */
-const fs = require('fs');
-const path = require('path');
 
-// 数据文件路径
-const DATA_FILE = path.join(process.cwd(), 'data', 'stats.json');
-
-// 确保data目录存在
-function ensureDataDir() {
-    const dir = path.join(process.cwd(), 'data');
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-    }
-}
-
-// 读取统计数据
-function readStats() {
-    ensureDataDir();
-    if (fs.existsSync(DATA_FILE)) {
-        return JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
-    }
-    return { daily: {}, pages: {}, devices: { mobile: 0, desktop: 0 }, records: [] };
-}
-
-// 写入统计数据
-function writeStats(stats) {
-    ensureDataDir();
-    fs.writeFileSync(DATA_FILE, JSON.stringify(stats, null, 2));
+// 全局内存存储
+if (!global.statsData) {
+    global.statsData = { daily: {}, pages: {}, devices: { mobile: 0, desktop: 0 }, records: [] };
 }
 
 export default function handler(req, res) {
@@ -49,8 +26,8 @@ export default function handler(req, res) {
                 data = JSON.parse(data);
             }
             
-            const stats = readStats();
-            const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+            const stats = global.statsData;
+            const today = new Date().toISOString().split('T')[0];
             const page = data.page || '/';
             
             // 更新每日访问量
@@ -79,18 +56,14 @@ export default function handler(req, res) {
             });
             stats.records = stats.records.slice(0, 100);
             
-            writeStats(stats);
-            
-            return res.status(200).json({ success: true });
+            return res.status(200).json({ success: true, pv: stats.daily[today].pv });
         } catch (e) {
             return res.status(500).json({ error: e.message });
         }
     }
     
     if (req.method === 'GET') {
-        // 返回统计数据（用于展示页面）
-        const stats = readStats();
-        return res.status(200).json(stats);
+        return res.status(200).json(global.statsData);
     }
     
     return res.status(405).json({ error: 'Method not allowed' });
