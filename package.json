@@ -2,6 +2,7 @@
   "name": "xingxingya",
   "version": "1.0.0",
   "dependencies": {
-    "mammoth": "^1.6.0"
+    "mammoth": "^1.6.0",
+    "pdf-parse": "^1.1.1"
   }
 }

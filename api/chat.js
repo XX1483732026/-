@@ -1,4 +1,5 @@
 import mammoth from 'mammoth';
+import pdfParse from 'pdf-parse';
 
 export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -36,8 +37,12 @@ export default async function handler(req, res) {
                         // Word用mammoth解析
                         const result = await mammoth.extractRawText({ buffer });
                         fileText += `\n【文件：${file.name}】\n${result.value}\n`;
+                    } else if (file.name.endsWith('.pdf')) {
+                        // PDF用pdf-parse解析
+                        const data = await pdfParse(buffer);
+                        fileText += `\n【文件：${file.name}】\n${data.text}\n`;
                     } else {
-                        fileText += `\n[用户上传了 ${file.name}，暂只支持Word/TXT]`;
+                        fileText += `\n[用户上传了 ${file.name}，暂只支持Word/PDF/TXT]`;
                     }
                 } catch (e) {
                     console.error('解析文件失败:', e);

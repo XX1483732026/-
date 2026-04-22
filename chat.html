@@ -493,7 +493,7 @@
                 <button class="image-btn" onclick="selectImage()" title="发送图片">📷</button>
                 <input type="file" id="imageInput" accept="image/*" multiple style="display:none" onchange="handleImageSelect(event)">
                 <button class="file-btn" onclick="selectFile()" title="上传Word/TXT文件（限5MB）">📎</button>
-                <input type="file" id="fileInput" accept=".txt,.docx" style="display:none" onchange="handleFileSelect(event)">
+                <input type="file" id="fileInput" accept=".txt,.docx,.pdf" style="display:none" onchange="handleFileSelect(event)">
                 <textarea class="chat-input" id="chatInput" placeholder="和小鸦聊聊..." rows="1" onkeypress="handleKeyPress(event)" oninput="autoResize(this)"></textarea>
                 <button class="send-btn" id="sendBtn" onclick="sendMessage()">→</button>
             </div>
@@ -611,10 +611,10 @@
             }
             
             // 检查文件类型
-            const validTypes = ['text/plain', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+            const validTypes = ['text/plain', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'];
             const ext = file.name.split('.').pop().toLowerCase();
-            if (!validTypes.includes(file.type) && !['txt', 'docx'].includes(ext)) {
-                showToast('只支持Word/TXT文件', false);
+            if (!validTypes.includes(file.type) && !['txt', 'docx', 'pdf'].includes(ext)) {
+                showToast('只支持Word/PDF/TXT文件', false);
                 continue;
             }
             
