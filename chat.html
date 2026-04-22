@@ -181,6 +181,49 @@
             align-items: flex-end;
         }
         
+        
+        /* 文件上传按钮 */
+        .file-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255,255,255,0.1);
+            color: #8892b0;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .file-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+        
+        /* 文件预览 */
+        .file-preview {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 10px 15px;
+            margin: 5px 0;
+        }
+        .file-preview .file-icon { font-size: 24px; }
+        .file-preview .file-info { flex: 1; }
+        .file-preview .file-name { font-size: 14px; color: #fff; }
+        .file-preview .file-size { font-size: 12px; color: #8892b0; }
+        .file-preview .file-remove { 
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255,100,100,0.2);
+            color: #ff6b6b;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .file-preview .file-remove:hover { background: rgba(255,100,100,0.3); }
+
         /* 发送图片按钮 */
         .image-btn {
             width: 48px;
@@ -423,6 +466,8 @@
     <div class="chat-container">
         <!-- 待发送图片预览 -->
         <div class="pending-images" id="pendingImages"></div>
+        <!-- 待发送文件预览 -->
+        <div class="pending-files" id="pendingFiles"></div>
         
         <div class="chat-messages" id="chatMessages">
             <div class="message bot">
@@ -441,6 +486,8 @@
                 <!-- 图片选择按钮 -->
                 <button class="image-btn" onclick="selectImage()" title="发送图片">📷</button>
                 <input type="file" id="imageInput" accept="image/*" multiple style="display:none" onchange="handleImageSelect(event)">
+                <button class="file-btn" onclick="selectFile()" title="上传文件（Word/PDF，限5MB）">📎</button>
+                <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.txt" style="display:none" onchange="handleFileSelect(event)">
                 <textarea class="chat-input" id="chatInput" placeholder="和小鸦聊聊..." rows="1" onkeypress="handleKeyPress(event)" oninput="autoResize(this)"></textarea>
                 <button class="send-btn" id="sendBtn" onclick="sendMessage()">→</button>
             </div>
@@ -539,6 +586,74 @@
     }
     
     // 图片选择
+    
+    // 待发送文件
+    let pendingFiles = [];
+    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+    
+    function selectFile() {
+        document.getElementById('fileInput').click();
+    }
+    
+    function handleFileSelect(event) {
+        const files = event.target.files;
+        for (let file of files) {
+            // 检查文件大小
+            if (file.size > MAX_FILE_SIZE) {
+                showToast('文件太大，限制5MB以内', false);
+                continue;
+            }
+            
+            // 检查文件类型
+            const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain'];
+            const ext = file.name.split('.').pop().toLowerCase();
+            if (!validTypes.includes(file.type) && !['pdf', 'doc', 'docx', 'txt'].includes(ext)) {
+                showToast('只支持PDF、Word、TXT文件', false);
+                continue;
+            }
+            
+            // 读取文件
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                pendingFiles.push({
+                    name: file.name,
+                    size: file.size,
+                    type: file.type || 'application/' + ext,
+                    content: e.target.result
+                });
+                renderPendingFiles();
+            };
+            reader.readAsDataURL(file);
+        }
+        event.target.value = '';
+    }
+    
+    function renderPendingFiles() {
+        const container = document.getElementById('pendingFiles');
+        container.innerHTML = pendingFiles.map((file, index) => {
+            const sizeStr = file.size < 1024 ? file.size + 'B' : 
+                           file.size < 1024*1024 ? (file.size/1024).toFixed(1) + 'KB' :
+                           (file.size/1024/1024).toFixed(1) + 'MB';
+            const icon = file.name.endsWith('.pdf') ? '📄' : 
+                        file.name.endsWith('.doc') || file.name.endsWith('.docx') ? '📝' : '📃';
+            return `
+                <div class="file-preview">
+                    <span class="file-icon">${icon}</span>
+                    <div class="file-info">
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-size">${sizeStr}</div>
+                    </div>
+                    <button class="file-remove" onclick="removeFile(${index})">×</button>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    function removeFile(index) {
+        pendingFiles.splice(index, 1);
+        renderPendingFiles();
+    }
+
     function selectImage() {
         document.getElementById('imageInput').click();
     }
@@ -630,7 +745,7 @@
         const message = input.value.trim();
         
         // 必须有文字或图片
-        if (!message && pendingImages.length === 0) return;
+        if (!message && pendingImages.length === 0 && pendingFiles.length === 0) return;
         if (isLoading) return;
 
         input.value = '';
@@ -652,8 +767,11 @@
             let requestBody = {
                 message: message,
                 sessionId: sessionId,
-                images: imagesToSend  // 发送图片
+                images: imagesToSend,  // 发送图片
+                files: [...pendingFiles]  // 发送文件
             };
+            pendingFiles = [];
+            renderPendingFiles();
 
             if (testResult && !hasSentContext) {
                 requestBody.testResult = testResult;
