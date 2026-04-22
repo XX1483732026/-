@@ -5,7 +5,8 @@
     <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <link rel="preload" href="mengya.png" as="image" type="image/png">
+    <link rel="preload" href="mengya.webp" as="image" type="image/webp">
+    <link rel="preload" href="mengya.webp" as="image" type="image/webp" imagesrcset="mengya.webp">
 
     <script type="application/ld+json">
     {
@@ -24,8 +25,8 @@
         }
     }
     </script>
-    <link rel="icon" type="image/png" href="mengya.png">
-    <link rel="apple-touch-icon" href="mengya.png">
+    <link rel="icon" type="image/webp" href="mengya.webp">
+    <link rel="apple-touch-icon" href="mengya.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
@@ -39,7 +40,7 @@
     <meta property="og:url" content="https://xingxingya.com">
     <meta property="og:title" content="醒醒鸦 · 鸦格TI">
     <meta property="og:description" content="嘎~ 别装了，测测你现在的真实鸦格！2分钟发现你的精神状态">
-    <meta property="og:image" content="https://xingxingya.com/mengya.png">
+    <meta property="og:image" content="https://xingxingya.com/mengya.webp">
     
     <!-- Twitter分享 -->
     <meta name="twitter:card" content="summary_large_image">
@@ -57,7 +58,10 @@
     <div class="container">
         <div class="start-page" id="startPage">
             <div class="logo">
-                <img loading="lazy" src="mengya_thumb.png" data-src="mengya.png" alt="醒醒鸦吉祥物小鸦，黑白配色的可爱乌鸦形象" class="logo-img" onclick="location.href='chat.html'" style="cursor: pointer;" onload="if(!this.dataset.loaded){this.dataset.loaded='1';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;}.bind(this);}">
+                <picture>
+                    <source srcset="mengya.webp" type="image/webp">
+                    <img loading="lazy" src="mengya.png" data-src="mengya.png" alt="醒醒鸦吉祥物小鸦，黑白配色的可爱乌鸦形象" class="logo-img" onclick="location.href='chat.html'" style="cursor: pointer;" onload="if(!this.dataset.loaded){this.dataset.loaded='1';var hd=new Image();hd.src=this.dataset.src;hd.onload=function(){this.src=hd.src;}.bind(this);}">
+                </picture>
                 <a href="chat.html" class="chat-bubble">嘎~有本事戳我和我聊天</a>
             </div>
             <h1 class="main-title">醒醒鸦</h1>
