@@ -123,6 +123,15 @@
             border-radius: 12px;
             object-fit: cover;
         }
+        .sent-file-preview {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+        }
         
         /* AI回复的图片 */
         .message-images {
@@ -531,7 +540,7 @@
             try {
                 const messages = JSON.parse(history);
                 messages.forEach(msg => {
-                    addMessageToDOM(msg.content, msg.isUser, msg.images);
+                    addMessageToDOM(msg.content, msg.isUser, msg.images, msg.files);
                 });
             } catch (e) {
                 console.error('加载聊天历史失败:', e);
@@ -540,15 +549,15 @@
     }
     
     // 保存消息（支持图片）
-    function saveMessage(content, isUser, images = []) {
+    function saveMessage(content, isUser, images = [], files = []) {
         const history = JSON.parse(localStorage.getItem('xingxingya_chat_history') || '[]');
-        history.push({ content, isUser, images, time: Date.now() });
+        history.push({ content, isUser, images, files, time: Date.now() });
         if (history.length > 50) history.shift();
         localStorage.setItem('xingxingya_chat_history', JSON.stringify(history));
     }
     
     // 渲染消息到DOM（支持图片）
-    function addMessageToDOM(content, isUser, images = []) {
+    function addMessageToDOM(content, isUser, images = [], files = []) {
         const messagesDiv = document.getElementById('chatMessages');
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
@@ -558,30 +567,42 @@
         let imagesHtml = '';
         if (images && images.length > 0) {
             if (isUser) {
-                // 用户图片样式
                 imagesHtml = '<div class="user-image-preview">' + 
                     images.map(img => `<img loading="lazy" src="${img}" alt="图片">`).join('') +
                     '</div>';
             } else {
-                // AI图片样式（可点击预览）
                 imagesHtml = '<div class="message-images">' + 
                     images.map(img => `<img loading="lazy" src="${img}" alt="图片" onclick="openImagePreview('${img}')">`).join('') +
                     '</div>';
             }
         }
         
+        // 文件HTML
+        let filesHtml = '';
+        if (files && files.length > 0) {
+            filesHtml = '<div class="user-image-preview" style="flex-direction:column;">' + 
+                files.map(file => {
+                    const icon = file.name.endsWith('.pdf') ? '📄' : file.name.endsWith('.docx') ? '📝' : '📃';
+                    const sizeStr = file.size < 1024 ? file.size + 'B' : 
+                                   file.size < 1024*1024 ? (file.size/1024).toFixed(1) + 'KB' :
+                                   (file.size/1024/1024).toFixed(1) + 'MB';
+                    return `<div class="sent-file-preview"><span>${icon}</span><span>${file.name}</span><span style="color:#8892b0;font-size:12px;">${sizeStr}</span></div>`;
+                }).join('') +
+                '</div>';
+        }
+        
         messageDiv.innerHTML = `
             <div class="message-avatar">${isUser ? '👤' : '<img loading="lazy" src="mengya.png" style="width:28px;height:28px;border-radius:50%;">'}</div>
-            <div class="message-content">${escapeHtml(content)}${imagesHtml}<div class="message-time">${timeStr}</div></div>
+            <div class="message-content">${escapeHtml(content)}${imagesHtml}${filesHtml}<div class="message-time">${timeStr}</div></div>
         `;
         messagesDiv.appendChild(messageDiv);
         messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
     
     // 添加消息并保存（修复：AI回复也保存）
-    function addMessage(content, isUser, images = []) {
-        addMessageToDOM(content, isUser, images);
-        saveMessage(content, isUser, images);
+    function addMessage(content, isUser, images = [], files = []) {
+        addMessageToDOM(content, isUser, images, files);
+        saveMessage(content, isUser, images, files);
     }
     
     function escapeHtml(text) {
@@ -758,7 +779,7 @@
         autoResize(input);
         
         // 保存用户消息
-        addMessage(message, true, [...pendingImages]);
+        addMessage(message, true, [...pendingImages], [...pendingFiles]);
         
         // 清空待发送图片
         const imagesToSend = [...pendingImages];
