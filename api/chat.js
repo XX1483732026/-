@@ -18,18 +18,34 @@ export default async function handler(req, res) {
     try {
         const { message, sessionId, testResult, hasContext, images, files } = req.body;
 
-        // 构建 prompt 数组
+        // 处理文件：TXT直接提取文本
+        let fileText = '';
+        if (files && files.length > 0) {
+            for (const file of files) {
+                if (file.name.endsWith('.txt')) {
+                    try {
+                        const base64Data = file.content.split(',')[1];
+                        const text = Buffer.from(base64Data, 'base64').toString('utf-8');
+                        fileText += `\n【文件：${file.name}】\n${text}\n`;
+                    } catch (e) {
+                        console.error('解析TXT失败:', e);
+                    }
+                } else {
+                    fileText += `\n[用户上传了 ${file.name}，暂只支持TXT文件]`;
+                }
+            }
+        }
+
+        let fullMessage = (message || '') + fileText;
+
         let promptArray = [];
-        
-        // 添加文本消息
-        if (message) {
+        if (fullMessage) {
             promptArray.push({
                 type: 'text',
-                content: { text: message }
+                content: { text: fullMessage }
             });
         }
         
-        // 添加图片（如果有）
         if (images && images.length > 0) {
             for (const img of images) {
                 promptArray.push({
@@ -38,22 +54,7 @@ export default async function handler(req, res) {
                 });
             }
         }
-        
-        // 添加文件（如果有）
-        if (files && files.length > 0) {
-            for (const file of files) {
-                promptArray.push({
-                    type: 'file',
-                    content: {
-                        file_name: file.name,
-                        file_type: file.type,
-                        file_data: file.content
-                    }
-                });
-            }
-        }
 
-        // 构建请求体
         let requestBody = {
             content: {
                 query: {
@@ -65,28 +66,13 @@ export default async function handler(req, res) {
             project_id: PROJECT_ID
         };
 
-        // 如果有测试结果，添加到上下文
         if (testResult && hasContext) {
             const score = testResult.score || {};
             const totalScore = (score.电量 || 0) + (score.情绪 || 0) + (score.行动 || 0) + (score.连接 || 0);
             
-            const contextMessage = `【用户刚完成了精神状态测试】
-测试结果：${testResult.emoji || '🐦‍⬛'} ${testResult.type}
-心境状态指数：
-- 电量：${score.电量 || 0}分
-- 情绪：${score.情绪 || 0}分  
-- 行动：${score.行动 || 0}分
-- 连接：${score.连接 || 0}分
-- 总分：${totalScore} / 60
-
-所属区域：${testResult.zone}
-状态描述：${testResult.desc || ''}
-
-请在聊天时根据这个测试结果，给予用户更针对性的心理支持和建议。用户可能需要被理解和陪伴。`;
-
             requestBody.content.query.additional_messages = [{
                 role: 'user',
-                content: contextMessage,
+                content: `【用户刚完成精神状态测试】\n结果：${testResult.emoji || '🐦‍⬛'} ${testResult.type}\n总分：${totalScore}/60\n区域：${testResult.zone}`,
                 content_type: 'text'
             }];
         }
@@ -121,15 +107,12 @@ export default async function handler(req, res) {
                 if (line.startsWith('data:')) {
                     try {
                         const data = JSON.parse(line.slice(5));
-                        
                         if (data.type === 'answer' && data.content?.answer) {
                             result += data.content.answer;
                         }
-                        
                         if (data.type === 'message_end' && data.content?.message_end) {
                             tokenCost = data.content.message_end.token_cost;
                         }
-                        
                         if (data.type === 'error' && data.content?.error) {
                             errorMsg = data.content.message_end?.error_msg || data.content.error.error_msg;
                         }
