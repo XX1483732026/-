@@ -548,6 +548,28 @@
             transform: translateY(-3px);
             box-shadow: 0 4px 12px rgba(100, 181, 246, 0.4);
         }
+        
+        /* 移动端适配 */
+        @media (max-width: 480px) {
+            .header h1 { font-size: 26px; }
+            .header p { font-size: 13px; }
+            .intro-title { font-size: 18px; }
+            .intro-text { font-size: 13px; }
+            .yage-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+            .yage-name { font-size: 13px; }
+            .story-card { flex-direction: column; text-align: center; padding: 20px 16px; }
+            .story-cover { width: 100px; height: 140px; }
+            .story-info h3 { font-size: 15px; }
+            .story-info p { font-size: 12px; }
+            .modal-content { max-height: 90vh; border-radius: 16px; }
+            .modal-name { font-size: 20px; }
+            .modal-image-wrap { width: 100px; height: 100px; }
+            .footer-nav-item { padding: 8px 8px; }
+            .nav-icon { font-size: 22px; }
+            .nav-label { font-size: 10px; }
+            .zone-name { font-size: 18px; }
+            .test-btn { padding: 12px 28px; font-size: 14px; }
+        }
     </style>
 </head>
 <body>
