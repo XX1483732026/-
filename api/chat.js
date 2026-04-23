@@ -15,8 +15,13 @@ export default async function handler(req, res) {
     }
 
     const API_URL = 'https://s98st93z8d.coze.site/stream_run';
-    const API_TOKEN = 'eyJhbGciOiJSUzI1NiIsImtpZCI6ImU4MmE0YjNkLWQzNTctNDgwZC05ZDIwLWEyNjk1MThiYzI0MyJ9.eyJpc3MiOiJodHRwczovL2FwaS5jb3plLmNuIiwiYXVkIjpbImhwQlk2S05Fd2FGUnBJYlNHWktlbnBpMGM1Q2xFaHJMIl0sImV4cCI6ODIxMDI2Njg3Njc5OSwiaWF0IjoxNzc2MDEyODMyLCJzdWIiOiJzcGlmZmU6Ly9hcGkuY296ZS5jbi93b3JrbG9hZF9pZGVudGl0eS9pZDo3NjI3ODg1MzM1NjU3MDU0MjM0Iiwic3JjIjoiaW5ib3VuZF9hdXRoX2FjY2Vzc190b2tlbl9pZDo3NjI3OTE3MDMzODQ1MjkzMDk3In0.PcsjkYRAPJeGFl_gDv7Q8GT9iNRaVTFw3Ap8CGkZS9gNDdawT6QymWW3oVDI6RXzPl4VzEqTQYeRP3UcrX344ACTH8di_bR3MBQ5q9ysfTUifOP_7hsuYEd0_iW75fMpIHjx2ATA-3sw4HpoAaNXVKVUM1OZ7TqkHiNTrubneAOqbILZatj1AS_7Pm1OweAxYnpt79BddpiSjYFH7neS2QvcUzg7LbLsrsJfNbXgHUh1E6xtk-wXzhkpvWW-jgXJUxndXtpgDmBJLx27nb3SmKrxMJggaJSAwBmlcYT4TUXoAQMB0lLCXECy2IA1wWiCLNO9ooCDdV7POiHBp2slcw';
-    const PROJECT_ID = '7627880092177301550';
+    const API_TOKEN = process.env.COZE_API_TOKEN;
+    const PROJECT_ID = process.env.COZE_PROJECT_ID || '7627880092177301550';
+    
+    // 验证Token是否存在
+    if (!API_TOKEN) {
+        return res.status(500).json({ error: 'API Token未配置' });
+    }
 
     try {
         const { message, sessionId, testResult, hasContext, images, files } = req.body;
