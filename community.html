@@ -549,6 +549,119 @@
             box-shadow: 0 4px 12px rgba(100, 181, 246, 0.4);
         }
         
+        /* 搜索框样式 */
+        .search-section {
+            margin-bottom: 24px;
+        }
+        .search-wrapper {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .search-input {
+            width: 100%;
+            padding: 14px 44px 14px 44px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 25px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .search-input::placeholder {
+            color: #6a7a9a;
+        }
+        .search-input:focus {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.05);
+        }
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6a7a9a;
+            font-size: 16px;
+            pointer-events: none;
+        }
+        .search-clear {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #8892b0;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .search-clear.show {
+            display: flex;
+        }
+        .search-clear:hover {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+        .search-hint {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #5a6a8a;
+        }
+        .search-hint span {
+            background: rgba(255,255,255,0.05);
+            padding: 3px 10px;
+            border-radius: 10px;
+            margin: 0 3px;
+        }
+        /* 无搜索结果提示 */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            display: none;
+        }
+        .no-results.show {
+            display: block;
+        }
+        .no-results-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+            opacity: 0.6;
+        }
+        .no-results-text {
+            font-size: 16px;
+            color: #8892b0;
+            margin-bottom: 8px;
+        }
+        .no-results-hint {
+            font-size: 13px;
+            color: #5a6a8a;
+        }
+        /* 搜索高亮 */
+        .yage-card.hidden {
+            display: none;
+        }
+        .yage-card.highlight {
+            animation: highlightPulse 0.5s ease;
+        }
+        @keyframes highlightPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); box-shadow: 0 8px 20px rgba(255,255,255,0.15); }
+            100% { transform: scale(1); }
+        }
+        .zone-section.hidden {
+            display: none;
+        }
         /* 移动端适配 */
         @media (max-width: 480px) {
             .header h1 { font-size: 26px; }
@@ -569,6 +682,13 @@
             .nav-label { font-size: 10px; }
             .zone-name { font-size: 18px; }
             .test-btn { padding: 12px 28px; font-size: 14px; }
+            .search-section { margin-bottom: 20px; }
+            .search-input { padding: 12px 40px 12px 40px; font-size: 14px; }
+            .search-hint { font-size: 11px; }
+            .no-results { padding: 40px 20px; }
+            .no-results-icon { font-size: 48px; }
+            .no-results-text { font-size: 14px; }
+            .no-results-hint { font-size: 12px; }
         }
     </style>
 </head>
@@ -578,7 +698,21 @@
         <p>心境如云，不定义，只看见</p>
     </div>
 
+    <!-- 搜索框 -->
     <div class="container">
+        <div class="search-section">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="searchInput" placeholder="搜索鸦格名称或描述...">
+                <button class="search-clear" id="searchClear" onclick="clearSearch()">×</button>
+            </div>
+            <div class="search-hint">
+                可搜索：<span>名称</span><span>描述</span><span>维度</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="padding-top: 0;">
         <div class="intro-card">
             <div class="intro-title">🐦‍⬛ 什么是鸦格？</div>
             <div class="intro-text">
@@ -657,6 +791,13 @@
             <p class="footer-brand">醒醒鸦 · 了解此刻的你</p>
             <p class="footer-slogan">心境如云，不定义，只看见</p>
         </div>
+
+        <!-- 无搜索结果提示 -->
+        <div class="no-results" id="noResults">
+            <div class="no-results-icon">🐦‍⬛</div>
+            <div class="no-results-text">没有找到匹配的鸦格</div>
+            <div class="no-results-hint">试试换个关键词，或清空搜索框查看全部</div>
+        </div>
     </div>
 
     <!-- 弹窗 -->
@@ -727,6 +868,103 @@
             asleep: []
         };
 
+        // Debounce 工具函数
+        function debounce(func, wait) {
+            var timeout;
+            return function() {
+                var context = this;
+                var args = arguments;
+                clearTimeout(timeout);
+                timeout = setTimeout(function() {
+                    func.apply(context, args);
+                }, wait);
+            };
+        }
+
+        // 搜索功能
+        function performSearch(keyword) {
+            var cards = document.querySelectorAll('.yage-card');
+            var zones = document.querySelectorAll('.zone-section');
+            var noResults = document.getElementById('noResults');
+            var visibleCount = 0;
+            keyword = keyword.trim().toLowerCase();
+
+            // 清空搜索框显示状态
+            var clearBtn = document.getElementById('searchClear');
+            if (keyword) {
+                clearBtn.classList.add('show');
+            } else {
+                clearBtn.classList.remove('show');
+            }
+
+            // 隐藏/显示卡片
+            cards.forEach(function(card) {
+                var name = card.querySelector('.yage-name').textContent.toLowerCase();
+                var dimension = card.querySelector('.yage-dimension').textContent.toLowerCase();
+                
+                // 获取完整描述（从yage数据中）
+                var yageName = name;
+                var yageData = yages[yageName];
+                var desc = yageData ? yageData.desc.toLowerCase() : '';
+
+                var match = !keyword || 
+                    name.includes(keyword) || 
+                    dimension.includes(keyword) || 
+                    desc.includes(keyword);
+
+                if (match) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // 隐藏/显示分区（如果分区内的卡片全部隐藏，也隐藏分区）
+            zones.forEach(function(zone) {
+                var grid = zone.querySelector('.yage-grid');
+                var visibleCards = grid.querySelectorAll('.yage-card:not(.hidden)');
+                if (visibleCards.length === 0 && keyword) {
+                    zone.classList.add('hidden');
+                } else {
+                    zone.classList.remove('hidden');
+                }
+            });
+
+            // 显示/隐藏无结果提示
+            if (visibleCount === 0 && keyword) {
+                noResults.classList.add('show');
+            } else {
+                noResults.classList.remove('show');
+            }
+        }
+
+        // 清空搜索
+        function clearSearch() {
+            var searchInput = document.getElementById('searchInput');
+            searchInput.value = '';
+            searchInput.focus();
+            performSearch('');
+        }
+
+        // 初始化搜索事件（带debounce）
+        function initSearch() {
+            var searchInput = document.getElementById('searchInput');
+            var debouncedSearch = debounce(function() {
+                performSearch(searchInput.value);
+            }, 200);
+
+            searchInput.addEventListener('input', debouncedSearch);
+            
+            // 回车键直接搜索
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    performSearch(searchInput.value);
+                }
+            });
+        }
+
         // 根据维度条件判断分区
         function getZoneClass(yage) {
             if (yage.zone === '清醒区') return 'awake';
@@ -754,6 +992,9 @@
             renderZone('awake');
             renderZone('blurry');
             renderZone('asleep');
+
+            // 初始化搜索功能
+            initSearch();
         }
 
         // 渲染分区卡片
