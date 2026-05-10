@@ -26,8 +26,15 @@ export default async function handler(req, res) {
     try {
         const { message, sessionId, testResult, hasContext, images, files } = req.body;
 
-        // 处理文件
-        let fileText = '';
+        // ========== 核心修复：使用正确的 Coze API 格式 ==========
+        
+        // 1. 构建消息内容数组 (object_string 格式)
+        let messageContent = [];
+        
+        // 添加文本内容
+        let textContent = message || '';
+        
+        // 处理文件 - 尝试解析为文本
         if (files && files.length > 0) {
             for (const file of files) {
                 try {
@@ -35,64 +42,108 @@ export default async function handler(req, res) {
                     const buffer = Buffer.from(base64Data, 'base64');
                     
                     if (file.name.endsWith('.txt')) {
-                        // TXT直接读取
                         const text = buffer.toString('utf-8');
-                        fileText += `\n【文件：${file.name}】\n${text}\n`;
+                        textContent += `\n\n【文件：${file.name}】\n${text}`;
                     } else if (file.name.endsWith('.docx')) {
-                        // Word用mammoth解析
                         const result = await mammoth.extractRawText({ buffer });
-                        fileText += `\n【文件：${file.name}】\n${result.value}\n`;
+                        textContent += `\n\n【文件：${file.name}】\n${result.value}`;
                     } else if (file.name.endsWith('.pdf')) {
-                        // PDF用pdf-parse解析
                         const data = await pdfParse(buffer);
-                        fileText += `\n【文件：${file.name}】\n${data.text}\n`;
+                        textContent += `\n\n【文件：${file.name}】\n${data.text}`;
                     } else {
-                        fileText += `\n[用户上传了 ${file.name}，暂只支持Word/PDF/TXT]`;
+                        textContent += `\n\n[用户上传了 ${file.name}，暂只支持Word/PDF/TXT]`;
                     }
                 } catch (e) {
                     console.error('解析文件失败:', e);
-                    fileText += `\n[文件 ${file.name} 解析失败]`;
+                    textContent += `\n\n[文件 ${file.name} 解析失败]`;
                 }
             }
-        }
-
-        let fullMessage = (message || '') + fileText;
-
-        let promptArray = [];
-        if (fullMessage) {
-            promptArray.push({
-                type: 'text',
-                content: { text: fullMessage }
-            });
         }
         
+        // 添加文本到消息内容
+        messageContent.push({
+            type: 'text',
+            text: textContent
+        });
+        
+        // 2. 处理图片 - 需要上传到 Coze 获取 file_id
         if (images && images.length > 0) {
-            for (const img of images) {
-                promptArray.push({
-                    type: 'image',
-                    content: { image_url: img }
-                });
+            for (const imgDataUrl of images) {
+                try {
+                    // 提取 base64 数据和 MIME 类型
+                    const matches = imgDataUrl.match(/^data:([^;]+);base64,(.+)$/);
+                    if (matches) {
+                        const mimeType = matches[1];
+                        const base64Data = matches[2];
+                        const buffer = Buffer.from(base64Data, 'base64');
+                        
+                        // 上传到 Coze
+                        const formData = new FormData();
+                        formData.append('file', new Blob([buffer], { type: mimeType }), 'image.png');
+                        
+                        const uploadRes = await fetch('https://api.coze.cn/v1/files/upload', {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${API_TOKEN}`
+                            },
+                            body: formData
+                        });
+                        
+                        const uploadData = await uploadRes.json();
+                        
+                        if (uploadData.code === 0 && uploadData.data?.id) {
+                            messageContent.push({
+                                type: 'image',
+                                file_id: uploadData.data.id
+                            });
+                        } else {
+                            console.error('图片上传失败:', uploadData);
+                            // 上传失败则附加到文本说明
+                            textContent += '\n\n[用户发送了一张图片，但上传失败]';
+                        }
+                    }
+                } catch (e) {
+                    console.error('处理图片失败:', e);
+                    textContent += '\n\n[用户发送了一张图片，但处理失败]';
+                }
             }
         }
+        
+        // 重新构建消息内容（如果文本被修改）
+        if (messageContent[0].text !== textContent) {
+            messageContent[0].text = textContent;
+        }
 
+        // ========== 构建符合 Coze API 标准的请求体 ==========
         let requestBody = {
-            content: {
-                query: {
-                    prompt: promptArray
-                }
-            },
+            content: JSON.stringify(messageContent),  // 必须是 JSON 字符串
             type: 'query',
             session_id: sessionId || 'chat_' + Date.now(),
             project_id: PROJECT_ID
         };
 
+        // 如果有测试结果，添加到 additional_messages
         if (testResult && hasContext) {
             const score = testResult.score || {};
             const totalScore = (score.电量 || 0) + (score.情绪 || 0) + (score.行动 || 0) + (score.连接 || 0);
             
-            requestBody.content.query.additional_messages = [{
+            const contextMessage = `【用户刚完成了精神状态测试】
+测试结果：${testResult.emoji || '🐦‍⬛'} ${testResult.type}
+心境状态指数：
+- 电量：${score.电量 || 0}分
+- 情绪：${score.情绪 || 0}分  
+- 行动：${score.行动 || 0}分
+- 连接：${score.连接 || 0}分
+- 总分：${totalScore} / 60
+
+所属区域：${testResult.zone}
+状态描述：${testResult.desc || ''}
+
+请在聊天时根据这个测试结果，给予用户更针对性的心理支持和建议。`;
+
+            requestBody.additional_messages = [{
                 role: 'user',
-                content: `【用户刚完成精神状态测试】\n结果：${testResult.emoji || '🐦‍⬛'} ${testResult.type}\n总分：${totalScore}/60\n区域：${testResult.zone}`,
+                content: contextMessage,
                 content_type: 'text'
             }];
         }
@@ -127,6 +178,7 @@ export default async function handler(req, res) {
                 if (line.startsWith('data:')) {
                     try {
                         const data = JSON.parse(line.slice(5));
+                        
                         if (data.type === 'answer' && data.content?.answer) {
                             result += data.content.answer;
                         }
@@ -134,7 +186,7 @@ export default async function handler(req, res) {
                             tokenCost = data.content.message_end.token_cost;
                         }
                         if (data.type === 'error' && data.content?.error) {
-                            errorMsg = data.content.message_end?.error_msg || data.content.error.error_msg;
+                            errorMsg = data.content.error.error_msg;
                         }
                     } catch (e) {}
                 }
