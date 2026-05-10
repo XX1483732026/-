@@ -202,6 +202,13 @@
                 font-size: 24px;
             }
         }
+        /* 键盘导航焦点样式 */
+        *:focus { outline: 2px solid #64b5f6; outline-offset: 2px; }
+        *:focus:not(:focus-visible) { outline: none; }
+        *:focus-visible { outline: 2px solid #64b5f6; outline-offset: 2px; }
+        a:focus-visible, button:focus-visible { outline: 2px solid #64b5f6; outline-offset: 3px; }
+        input:focus-visible, textarea:focus-visible { outline: 2px solid #64b5f6; outline-offset: 2px; border-color: #64b5f6; }
+        .footer-nav-item:focus-visible { outline: 2px solid #64b5f6; outline-offset: 2px; background: rgba(100, 181, 246, 0.15); }
     </style>
 </head>
 <body>
