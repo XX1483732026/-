@@ -55,6 +55,38 @@
             object-position: center;
             transition: opacity 0.3s ease;
         }
+        /* 加载动画 */
+        .loading-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(10,10,10,0.6);
+            z-index: 10;
+        }
+        .loading-overlay.show {
+            display: flex;
+        }
+        .loading-spinner {
+            width: 36px; height: 36px;
+            border: 3px solid rgba(255,255,255,0.2);
+            border-top-color: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .loading-text {
+            position: absolute;
+            bottom: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-size: 13px;
+            margin-top: 12px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
         /* 封面标题层 */
         .cover-title-layer {
             position: absolute;
@@ -226,6 +258,10 @@
         <!-- 图片区域 -->
         <div class="image-area">
             <img class="story-image" id="storyImage" src="story_images/page_01.jpg" alt="绘本页面">
+            <!-- 加载动画 -->
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="loading-spinner"></div>
+            </div>
             <!-- 封面标题层 -->
             <div class="cover-title-layer" id="coverTitleLayer">
                 <div class="cover-title">小鸦的云朵心事</div>
@@ -264,14 +300,28 @@
 
         function updatePage() {
             const pageData = storyPages[currentPage - 1];
-            
-            // 更新图片
             const img = document.getElementById('storyImage');
+            const loading = document.getElementById('loadingOverlay');
+            
+            // 立即显示加载动画，隐藏当前图片
             img.style.opacity = 0;
-            setTimeout(() => {
-                img.src = getStoryImagePath(currentPage);
+            loading.classList.add('show');
+            
+            // 预加载新图片，加载完成后才显示
+            const newSrc = getStoryImagePath(currentPage);
+            const preload = new Image();
+            preload.onload = function() {
+                img.src = newSrc;
                 img.style.opacity = 1;
-            }, 150);
+                loading.classList.remove('show');
+            };
+            preload.onerror = function() {
+                // 加载失败也移除加载动画，避免卡死
+                img.src = newSrc;
+                img.style.opacity = 1;
+                loading.classList.remove('show');
+            };
+            preload.src = newSrc;
 
             // 封面页特殊处理
             const coverTitleLayer = document.getElementById('coverTitleLayer');
